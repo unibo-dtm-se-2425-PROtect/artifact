@@ -1,3 +1,5 @@
+import os
+
 from dbconfig import dbconfig 
 
 from rich import print as printc 
