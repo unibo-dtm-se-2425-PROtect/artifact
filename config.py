@@ -1,5 +1,6 @@
 import os
 from getpass import getpass
+import string
 
 from dbconfig import dbconfig 
 
