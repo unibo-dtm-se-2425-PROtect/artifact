@@ -9,7 +9,7 @@ def dbconfig():
       user="pm",
       passw="password"
       )
-except Exception as e:
+  except Exception as e:
     console.print_exception(show_locals=True)
 
 return db
