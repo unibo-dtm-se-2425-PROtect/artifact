@@ -1,5 +1,6 @@
 import mysql.connector 
 from rich.console import Console 
+from rich import print as printc
 console = Console()
 
 def dbconfig(): 
