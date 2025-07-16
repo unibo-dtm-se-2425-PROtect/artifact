@@ -26,7 +26,7 @@ def config():
 
   query = "CREATE TABLE PROtect.entries (sitename TEXT NOT NULL, siteurl TEXT NOT NULL, email TEXT, username TEXT, password TEXT NOT NULL)" 
   res = cursor.execute(query) 
-  printc("[green][+][/green] Table "entries" created")
+  printc("[green][+][/green] Table 'entries' created")
 
   PROtect=""
   while l:
