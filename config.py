@@ -2,6 +2,7 @@ import os
 from getpass import getpass
 import string
 import random
+import hashlib
 
 from dbconfig import dbconfig 
 
