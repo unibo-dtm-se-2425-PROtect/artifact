@@ -1,0 +1,4 @@
+include requirements.txt
+include .python-version
+include LICENSE
+excluse test/*
