@@ -31,4 +31,4 @@ def addEntry(mp, ds, sitename, siteurl, email, username):
   cursor.execute(query, val)
   db.commit()
 
-printc("[green][+][/green] Added entry ")
+  printc("[green][+][/green] Added entry ")
