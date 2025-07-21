@@ -4,3 +4,10 @@ from utils.dbconfig import dbconfig #needed to establish connection with the dat
 from rich import print as printc
 from rich.console import Console
 from rich.table import Table
+
+from getpass import getpass
+from Crypto.Protocol.KDF import PBKDF2
+from Crypto.hash import SHA512
+from Crypto.random import get_random_bytes
+
+import utils.aesutil
