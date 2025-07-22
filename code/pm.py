@@ -7,10 +7,10 @@ import pyperclip
 
 from rich import print as printc
 
-import utils.add
-import utils.retrieve
-import utils.generate
-from utils.dbconfig import dbconfig
+import add
+import retrieve
+import generate
+from dbconfig import dbconfig
 
 parser = argparse.ArgumentParser(description='Description')
 
