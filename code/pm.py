@@ -58,7 +58,7 @@ def main():
 
 		res = inputAndValidateMasterPassword()
 		if res is not None:
-			utils.add.addEntry(res[0],res[1],args.name,args.url,args.email,args.login)
+			add.addEntry(res[0],res[1],args.name,args.url,args.email,args.login)
 
 
 	if args.option in ["extract","e"]:
