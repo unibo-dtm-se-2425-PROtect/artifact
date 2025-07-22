@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "unibo-dtm-se-2425-PROtect"
-version = 1.0.0
+version = 0.1.0
 description = "A password manager to collect, retrieve, memorize passwords related to different websites/applications. It's a project for the Software Engineering course at the University of Bologna"
 authors = ["Alberto Antonello <alberto.antonello2@studio.unibo.it>", "Filippo Bonaldo <filippo.bonaldo@studio.unibo.it>", "Francesca Gaeta <francesca.gaeta2@studio.unibo.it>"]
 license = MIT
