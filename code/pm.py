@@ -79,7 +79,7 @@ def main():
 			search["username"] = args.login
 
 		if res is not None:
-			utils.retrieve.retrieveEntries(res[0],res[1],search,decryptPassword = args.copy)
+			retrieve.retrieveEntries(res[0],res[1],search,decryptPassword = args.copy)
 
 
 	if args.option in ["generate","g"]:
