@@ -4,15 +4,15 @@ from rich import print as printc
 console = Console()
 
 def dbconfig(): 
-  try: 
-    db = mysql.connector.connect(
-      host="localhost",
-      user="pm",
-      passw="password"
-      )
-  except Exception as e:
-    console.print_exception(show_locals=True)
+    try: 
+        db = mysql.connector.connect(
+          host="localhost",
+          user="pm",
+          passw="password"
+          )
+    except Exception as e:
+        console.print_exception(show_locals=True)
 
-  return db
+    return db
 
 
