@@ -37,7 +37,7 @@ def config():
     PROtect=""
     while l:
         PROtect=getpass("Choose a MASTER PASSWORD: ")
-        if PROtect!=getpass("Write the password again: ") and PROtect!="":
+        if PROtect==getpass("Write the password again: ") and PROtect!="":
             break
         printc("[yellow][-] Please try again [/yellow]") 
 
