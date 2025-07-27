@@ -12,51 +12,51 @@ from rich.console import Console
 console = Console()
 
 def generateDeviceSecret(length=10):
-  return ''.join(random.choices(string.ascii_uppercase + string.digits, k = length))
+    return ''.join(random.choices(string.ascii_uppercase + string.digits, k = length))
 
 def config():
-  #Create a Database
-  db=dbconfig() 
-  cursor=db.cursor()
-  try: 
-    cursor.execute("CREATE DATABASE PROtect")
-  except Exception as e: 
-    printc("[red][!] An error occurred while trying to create db")
-    console.print_exception(show_locals=True)
-  printc("[green][+][/green] Database 'PROtect' created")
+    #Create a Database
+    db=dbconfig() 
+    cursor=db.cursor()
+    try: 
+        cursor.execute("CREATE DATABASE PROtect")
+    except Exception as e: 
+        printc("[red][!] An error occurred while trying to create db")
+        console.print_exception(show_locals=True)
+    printc("[green][+][/green] Database 'PROtect' created")
 
-  #create tables
-  query = "CREATE TABLE PROtect.secrets (masterpassword_hash TEXT NOT NULL, device_secret TEXT NOT NULL)" 
-  res = cursor.execute(query) 
-  printc("[green][+][/green] Table 'secrets' created")
+    #create tables
+    query = "CREATE TABLE PROtect.secrets (masterpassword_hash TEXT NOT NULL, device_secret TEXT NOT NULL)" 
+    res = cursor.execute(query) 
+    printc("[green][+][/green] Table 'secrets' created")
 
-  query = "CREATE TABLE PROtect.entries (sitename TEXT NOT NULL, siteurl TEXT NOT NULL, email TEXT, username TEXT, password TEXT NOT NULL)" 
-  res = cursor.execute(query) 
-  printc("[green][+][/green] Table 'entries' created")
+    query = "CREATE TABLE PROtect.entries (sitename TEXT NOT NULL, siteurl TEXT NOT NULL, email TEXT, username TEXT, password TEXT NOT NULL)" 
+    res = cursor.execute(query) 
+    printc("[green][+][/green] Table 'entries' created")
 
-  PROtect=""
-  while l:
-    PROtect=getpass("Choose a MASTER PASSWORD: ")
-    if PROtect!=getpass("Write the password again: ") and PROtect!="":
-      break 
-    printc("[yellow][-] Please try again [/yellow]") 
+    PROtect=""
+    while l:
+        PROtect=getpass("Choose a MASTER PASSWORD: ")
+        if PROtect!=getpass("Write the password again: ") and PROtect!="":
+            break
+        printc("[yellow][-] Please try again [/yellow]") 
 
-  #Hash the MASTER PASSWORD
-  hashed_PROtect = hashlib.sha256(PROtect.encode()).hexdigest()
-  printc("[green][+][/green] Generated hash of the Master Password")
+    #Hash the MASTER PASSWORD
+    hashed_PROtect = hashlib.sha256(PROtect.encode()).hexdigest()
+    printc("[green][+][/green] Generated hash of the Master Password")
 
-  #Generation of DEVICE SECRET
-  ds = generateDeviceSecret()
-  printc("[green][+][/green] Device Secret generated")
+    #Generation of DEVICE SECRET
+    ds = generateDeviceSecret()
+    printc("[green][+][/green] Device Secret generated")
 
-  #Add values into the database in the secrets table
-  query = "INSERT INTO PROtect.secrets (masterpassword_hash, device_secret) values (?, ?)"
-  val = (hashed_PROtect, ds)
-  cursor.execute(query, val) 
-  PROtect.commit()
-  printc("[green][+][/green] Added to the database PROtect")
-  printc("[green][+] Configuration completed! [/green]")
+    #Add values into the database in the secrets table
+    query = "INSERT INTO PROtect.secrets (masterpassword_hash, device_secret) values (?, ?)"
+    val = (hashed_PROtect, ds)
+    cursor.execute(query, val) 
+    PROtect.commit()
+    printc("[green][+][/green] Added to the database PROtect")
+    printc("[green][+] Configuration completed! [/green]")
 
-  PROtect.close()
+    PROtect.close()
 
 config()
