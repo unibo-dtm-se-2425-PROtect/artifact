@@ -35,7 +35,7 @@ def config():
     printc("[green][+][/green] Table 'entries' created")
 
     PROtect=""
-    while l:
+    while 1:
         PROtect=getpass("Choose a MASTER PASSWORD: ")
         if PROtect==getpass("Write the password again: ") and PROtect!="":
             break
