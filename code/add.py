@@ -18,7 +18,15 @@ def computeMasterKey(mp,ds):
     return key
 
 def checkEntry(sitename, siteurl, email, username):
+    db = dbconfig()
+    cursor = db.cursor()
+    query = f"SELECT * FROM PROtect.entries where sitename = '{sitename}' and siteurl = '{siteurl}' AND email = '{email}' AND username = '{username}'"
+    cursor.execute(query)
+    results = cursor.fetchall()
 
+    if len(results)!=0:
+        return True
+    return False
 
 
 def addEntry(mp, ds, sitename, siteurl, email, username): 
