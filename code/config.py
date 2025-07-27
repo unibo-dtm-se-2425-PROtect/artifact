@@ -11,6 +11,17 @@ from rich.console import Console
 
 console = Console()
 
+def checkConfig(): 
+    db = dbconfig()
+    cursor = db.cursor()
+    query = "SELECT SCHEMA_NAME FROM INFORMATION_SCHEMA.SCHEMATA  WHERE SCHEMA_NAME = 'pm'"
+    cursor.execute(query)
+    results = cursor.fetchall()
+    db.close()
+    if len(results)!=0:
+        return True
+    return False
+
 def generateDeviceSecret(length=10):
     return ''.join(random.choices(string.ascii_uppercase + string.digits, k = length))
 
