@@ -34,15 +34,15 @@ def config():
     res = cursor.execute(query) 
     printc("[green][+][/green] Table 'entries' created")
 
-    PROtect=""
+    mp=""
     while 1:
-        PROtect=getpass("Choose a MASTER PASSWORD: ")
-        if PROtect==getpass("Write the password again: ") and PROtect!="":
+        mp=getpass("Choose a MASTER PASSWORD: ")
+        if mp==getpass("Write the password again: ") and mp!="":
             break
         printc("[yellow][-] Please try again [/yellow]") 
 
     #Hash the MASTER PASSWORD
-    hashed_PROtect = hashlib.sha256(PROtect.encode()).hexdigest()
+    hashed_mp = hashlib.sha256(mp.encode()).hexdigest()
     printc("[green][+][/green] Generated hash of the Master Password")
 
     #Generation of DEVICE SECRET
@@ -51,7 +51,7 @@ def config():
 
     #Add values into the database in the secrets table
     query = "INSERT INTO PROtect.secrets (masterpassword_hash, device_secret) values (?, ?)"
-    val = (hashed_PROtect, ds)
+    val = (hashed_mp, ds)
     cursor.execute(query, val) 
     PROtect.commit()
     printc("[green][+][/green] Added to the database PROtect")
