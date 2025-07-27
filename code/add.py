@@ -37,7 +37,7 @@ def addEntry(mp, ds, sitename, siteurl, email, username):
     #get the password
     password = getpass("Password: ")
 
-    mk = computeMasterKey(mp,ds): #mk stands for masterKey
+    mk = computeMasterKey(mp,ds) #to compute the master key
 
     #using imported aesutil function to encrypt the mk 
     #this should return the encrypted password in base 64 encoded format
