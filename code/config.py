@@ -26,7 +26,11 @@ def generateDeviceSecret(length=10):
     return ''.join(random.choices(string.ascii_uppercase + string.digits, k = length))
 
 def config():
-    #Create a Database
+    if checkConfig():
+        printc("[red][!] Already Configured! [/red]")
+        return 
+    
+    #Create Database
     db=dbconfig() 
     cursor=db.cursor()
     try: 
