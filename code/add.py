@@ -4,6 +4,7 @@ from Crypto.Protocol.KDF import PBKDF2
 from Crypto.Hash import SHA512
 from Crypto.Random import get_random_bytes
 from rich import print as printc
+from rich.console import console
 import base64
 
 import AES256util
