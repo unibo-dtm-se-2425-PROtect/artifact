@@ -28,8 +28,12 @@ def checkEntry(sitename, siteurl, email, username):
         return True
     return False
 
-
 def addEntry(mp, ds, sitename, siteurl, email, username): 
+    #check if the entry already exists
+    if checkEntry(sitename, siteurl, email, username):
+        printc("[yellow][-][/yellow] This entry already exists")
+        return
+    
     #get the password
     password = getpass("Password: ")
 
