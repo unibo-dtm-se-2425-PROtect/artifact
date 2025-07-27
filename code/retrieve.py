@@ -1,4 +1,4 @@
-from utils.dbconfig import dbconfig #needed to establish connection with the database
+from dbconfig import dbconfig #needed to establish connection with the database
 
 #modules to be used in order to display the search results in a table-shaped format to the user
 from rich import print as printc
@@ -7,10 +7,10 @@ from rich.table import Table
 
 from getpass import getpass
 from Crypto.Protocol.KDF import PBKDF2
-from Crypto.hash import SHA512
-from Crypto.random import get_random_bytes
+from Crypto.Hash import SHA512
+from Crypto.Random import get_random_bytes
 
-import utils.aesutil
+import AES256util
 import pyperclip
 
 def retrieveEntries(mp, ds, search, decryptPassword = False):
@@ -61,7 +61,7 @@ def retrieveEntries(mp, ds, search, decryptPassword = False):
     #in order to do this, we need the mp, the ds, and the mk. Since we've already included the values for mp and ds as arguments to our function,
     #we would just have to compute the mk and hence decrypt the password. This is done vie the same function that are used in the add.py file. 
     mk = computeMasterKey(mp, ds)
-    decrypted = utils.aesutil.decrypt(key=mk, source=results[0][4], keyType = "bytes")
+    decrypted = AES256util.decrypt(key=mk, source=results[0][4], keyType = "bytes")
 
     pyperclip.copy(decrypted.decode()) #this module is used to copy the decrypted password to the clipboard, after it has been decrypted and decoded
     printc("[green][+][/green] Password copied to clipboard")
