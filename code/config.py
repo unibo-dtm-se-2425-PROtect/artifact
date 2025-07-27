@@ -68,10 +68,10 @@ def config():
     query = "INSERT INTO PROtect.secrets (masterpassword_hash, device_secret) values (?, ?)"
     val = (hashed_mp, ds)
     cursor.execute(query, val) 
-    PROtect.commit()
+    db.commit()
     printc("[green][+][/green] Added to the database PROtect")
     printc("[green][+] Configuration completed! [/green]")
 
-    PROtect.close()
+    db.close()
 
 config()
