@@ -47,7 +47,7 @@ def addEntry(mp, ds, sitename, siteurl, email, username):
     db = dbconfig()
     cursor = db.cursor()
     query = "INSERT INTO pm.entries (sitename, siteurl, email, username, password) values (%s, %s, %s, %s, %s)"
-    val = (sitename.siteurl,email.username.encrypted)
+    val = (sitename,siteurl,email,username,encrypted)
     cursor.execute(query, val)
     db.commit()
 
