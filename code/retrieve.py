@@ -28,7 +28,7 @@ def retrieveEntries(mp, ds, search, decryptPassword = False):
     else: 
         query = "SELECT * FROM pm.entries WHERE "
         for i in search: #in case the user specifies queries, this loop will create a dictionary that will include all conditions desired by the user
-            query+= f"{i} = '{search{i}}' AND "
+            query+= f"{i} = '{search[i]}' AND "
         query = query[:-5] #this will output the ultimate query, eliminating the repeating AND conjunction, that would otherwise yield a sql syntax error
 
     cursor.execute(query)
