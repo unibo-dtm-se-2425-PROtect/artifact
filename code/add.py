@@ -3,7 +3,7 @@ from Crypto.Protocol.KDF import PBKDF2
 from Crypto.hash import SHA512
 from Crypto.random import get_random_bytes
 
-import utils.aesutil
+import AES256util
 
 #function to comupute the masterkey from the masterPassword (mp) and the the deviceSecret (ds)
 def computeMasterKey(mp,ds): 
