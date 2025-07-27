@@ -1,4 +1,5 @@
 from dbconfig import dbconfig #needed to establish connection with the database
+from add import computeMasterKey
 
 #modules to be used in order to display the search results in a table-shaped format to the user
 from rich import print as printc
@@ -60,7 +61,7 @@ def retrieveEntries(mp, ds, search, decryptPassword = False):
         #since the user also wants to see the password as decrypted, we would also have to actually decrypt the retrieved password 
         #in order to do this, we need the mp, the ds, and the mk. Since we've already included the values for mp and ds as arguments to our function,
         #we would just have to compute the mk and hence decrypt the password. This is done vie the same function that are used in the add.py file. 
-        mk = computeMasterKey(mp, ds)
+        mk = computeMasterKey(mp,ds)
         decrypted = AES256util.decrypt(key=mk, source=results[0][4], keyType = "bytes")
 
         pyperclip.copy(decrypted.decode()) #this module is used to copy the decrypted password to the clipboard, after it has been decrypted and decoded
