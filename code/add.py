@@ -25,7 +25,7 @@ def addEntry(mp, ds, sitename, siteurl, email, username):
 
   #using imported aesutil function to encrypt the mk 
   #this should return the encrypted password in base 64 encoded format
-  encrypted = utils.aesutil.encrypt(key=mk, source=password, keyType="bytes")
+  encrypted = AES256util.encrypt(key=mk, source=password, keyType="bytes")
 
   #add the new password to the database
   db = dbconfig()
