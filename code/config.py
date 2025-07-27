@@ -14,7 +14,7 @@ console = Console()
 def checkConfig(): 
     db = dbconfig()
     cursor = db.cursor()
-    query = "SELECT SCHEMA_NAME FROM INFORMATION_SCHEMA.SCHEMATA  WHERE SCHEMA_NAME = 'pm'"
+    query = "SELECT SCHEMA_NAME FROM INFORMATION_SCHEMA.SCHEMATA  WHERE SCHEMA_NAME = 'PROtect'"
     cursor.execute(query)
     results = cursor.fetchall()
     db.close()
