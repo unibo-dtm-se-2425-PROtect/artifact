@@ -1,6 +1,5 @@
 #If we use tools like Poetry, we could also not include a requirements.txt file because Poetry does it itself
 
-python>=3.12
 kivy==2.3.0
 pytest>=8.4
 pyperclip>=1.9
