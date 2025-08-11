@@ -66,3 +66,13 @@ def test_config_already_configured(mock_console, mock_printc, mock_generate, moc
     mock_printc.assert_any_call("[red][!] Already Configured [/red]")
     mock_dbconfig.assert_not_called()
 
+@patch("code.config.checkConfig")
+@patch("code.config.dbconfig")
+@patch("code.config.getpass")
+@patch("code.config.generateDeviceSecret")
+@patch("code.config.printc")
+@patch("code.config.console")
+def test_config_flow(mock_console, mock_printc, mock_generate, mock_getpass, mock_dbconfig, mock_checkConfig):
+    mock_checkConfig.return_value == False 
+
+
