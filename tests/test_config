@@ -122,4 +122,9 @@ def test_config_failure(mock_console, mock_printc, mock_dbconfig, mock_checkConf
         return None
     mock_cursor.execute.side_effect=raise_exc
 
-    
+    #we patch getpass and generateDeviceSecret minimally for this test
+    with patch("code.config.getpass", side_effect=["pw", "pw"]), \
+         patch("code.config.generateDeviceSecret", return_value="SECRET"):
+        
+        config()
+
