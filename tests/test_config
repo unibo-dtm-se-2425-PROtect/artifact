@@ -30,5 +30,7 @@ def test_checkConfig_schema_missing(mock_dbconfig):
 #ASSERT allows simple comparisons, quick to read and easy to understand and it shows detailed info whether assert fails
 # In this way we can avoid using plenty of different methods from the library 
 
-
+def test_generateDeviceSecret_length():
+    secret=generateDeviceSecret(15)
+    assert len(secret)==15
 
