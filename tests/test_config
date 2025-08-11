@@ -1,5 +1,5 @@
 import unittest
-from unittest.mock import patch, MagickMock
+from unittest.mock import patch, MagicMock
 import string
 import hashlib
 
@@ -7,8 +7,8 @@ from code.config import checkConfig, config, generateDeviceSecret
 
 @patch ("code.config.dbconfig")
 def test_checkConfig_schema_exists(mock_dbconfig):
-    mock_db=MagickMock()
-    mock_cursor=MagickMock()
+    mock_db=MagicMock()
+    mock_cursor=MagicMock()
     mock_cursor.fetchall.return_value=[("PROtect",)]
     mock_db.cursor.return_value=mock_cursor
     mock_dbconfig.return_value=mock_db
@@ -19,8 +19,8 @@ def test_checkConfig_schema_exists(mock_dbconfig):
 
 @patch ("code.config.dbconfig")
 def test_checkConfig_schema_missing(mock_dbconfig):
-    mock_db=MagickMock()
-    mock_cursor=MagickMock()
+    mock_db=MagicMock()
+    mock_cursor=MagicMock()
     mock_cursor.fetchall.return_value=[]
     mock_db.cursor.return_value=mock_cursor
     mock_dbconfig.return_value=mock_db
