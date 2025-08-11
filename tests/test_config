@@ -115,4 +115,11 @@ def test_config_failure(mock_console, mock_printc, mock_dbconfig, mock_checkConf
     mock_db.cursor.return_value=mock_cursor
     mock_dbconfig.return_value=mock_db
 
+    #simulate exception on CREATE DATABASE
+    def raise_exc(query):
+        if query=="CREATE DATABASE PROtect":
+            raise Exception("DB exists")
+        return None
+    mock_cursor.execute.side_effect=raise_exc
+
     
