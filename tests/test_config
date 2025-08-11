@@ -75,4 +75,7 @@ def test_config_already_configured(mock_console, mock_printc, mock_generate, moc
 def test_config_flow(mock_console, mock_printc, mock_generate, mock_getpass, mock_dbconfig, mock_checkConfig):
     mock_checkConfig.return_value == False 
 
-
+    mock_db=MagicMock
+    mock_cursor=MagicMock
+    mock_db.cursor.return_value=mock_cursor
+    mock_dbconfig.return_value=mock_db
