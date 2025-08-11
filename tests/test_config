@@ -7,8 +7,8 @@ from code.config import checkConfig, config, generateDeviceSecret
 
 @patch ("code.config.dbconfig")
 def test_checkConfig_schema_exists(mock_dbconfig):
-    mock_db=MagickMock
-    mock_cursor=MagickMock
+    mock_db=MagickMock()
+    mock_cursor=MagickMock()
     mock_cursor.fetchall.return_value=[("PROtect",)]
     mock_db.cursor.return_value=mock_cursor
     mock_dbconfig.return_value=mock_db
@@ -17,8 +17,16 @@ def test_checkConfig_schema_exists(mock_dbconfig):
                                  #and that the DB currently contains a schema named PROtect (returns True when the schema exists)
     mock_cursor.execute.assert_called_once() 
 
+@patch ("code.config.dbconfig")
+def test_checkConfig_schema_missing(mock_dbconfig):
+    mock_db=MagickMock()
+    mock_cursor=MagickMock()
+    mock_cursor.fetchall.return_value=[]
+    mock_db.cursor.return_value=mock_cursor
+    mock_dbconfig.return_value=mock_db
 
-    
+    assert checkConfig() is False
+ 
 #ASSERT allows simple comparisons, quick to read and easy to understand and it shows detailed info whether assert fails
 # In this way we can avoid using plenty of different methods from the library 
 
