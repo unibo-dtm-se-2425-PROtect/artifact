@@ -5,6 +5,7 @@ import hashlib
 
 from code.config import checkConfig, config, generateDeviceSecret
 
+#Checking CHECKCONFIG()
 @patch ("code.config.dbconfig")
 def test_checkConfig_schema_exists(mock_dbconfig):
     mock_db=MagicMock()
@@ -30,6 +31,7 @@ def test_checkConfig_schema_missing(mock_dbconfig):
 #ASSERT allows simple comparisons, quick to read and easy to understand and it shows detailed info whether assert fails
 # In this way we can avoid using plenty of different methods from the library 
 
+#Checking GENERATEDEVICESECRET()
 def test_generateDeviceSecret_length():
     secret=generateDeviceSecret(15)
     assert len(secret)==15
@@ -48,3 +50,5 @@ def test_generateDeviceSecret_randomness():
     assert len(secrets) > 90 
     #generates 100 random secrets and expects at least 90 to be unique so that randomness is not broken
 
+
+#Checking CONFIG()
