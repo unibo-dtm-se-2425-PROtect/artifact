@@ -79,3 +79,10 @@ def test_config_flow(mock_console, mock_printc, mock_generate, mock_getpass, moc
     mock_cursor=MagicMock
     mock_db.cursor.return_value=mock_cursor
     mock_dbconfig.return_value=mock_db
+
+    #mock getpass to simulate matching passwords on second try
+    mock_getpass.side_effect=["password", "nomatch", "password", "password"]
+
+    mock_generate.return_value="SECRET12345"
+
+    config()
