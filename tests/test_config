@@ -127,4 +127,7 @@ def test_config_failure(mock_console, mock_printc, mock_dbconfig, mock_checkConf
          patch("code.config.generateDeviceSecret", return_value="SECRET"):
         
         config()
-
+    
+    #Ensure error message printed after DB creation failure
+    mock_printc.assert_any_call("[red][!] An error occurred while trying to create the Database. Maybe it already exists? [/red]")
+    mock_console.print_exception.assert_called_once()
