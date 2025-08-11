@@ -96,4 +96,7 @@ def test_config_flow(mock_console, mock_printc, mock_generate, mock_getpass, moc
     hashed = hashlib.sha256("password".encode()).hexdigest()
     mock_cursor.execute.assert_any_call=("INSERT INTO PROtect.secrets (masterpassword_hash, device_secret) values (?,?)", (hashed, "SECRET12345"))
 
-    
+    #commit and close called
+    mock_db.commit.assert_called_once()
+    mock_db.close.assert_called_once()
+
