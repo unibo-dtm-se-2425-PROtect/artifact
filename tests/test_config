@@ -3,10 +3,10 @@ from unittest.mock import patch, MagicMock
 import string
 import hashlib
 
-from code.config import checkConfig, config, generateDeviceSecret
+from project.config import checkConfig, config, generateDeviceSecret
 
 #Checking CHECKCONFIG()
-@patch ("code.config.dbconfig")
+@patch ("project.config.dbconfig")
 def test_checkConfig_schema_exists(mock_dbconfig):
     mock_db=MagicMock()
     mock_cursor=MagicMock()
@@ -18,7 +18,7 @@ def test_checkConfig_schema_exists(mock_dbconfig):
                                  #and that the DB currently contains a schema named PROtect (returns True when the schema exists)
     mock_cursor.execute.assert_called_once() 
 
-@patch ("code.config.dbconfig")
+@patch ("project.config.dbconfig")
 def test_checkConfig_schema_missing(mock_dbconfig):
     mock_db=MagicMock()
     mock_cursor=MagicMock()
@@ -52,12 +52,12 @@ def test_generateDeviceSecret_randomness():
 
 
 #Checking CONFIG()
-@patch("code.config.checkConfig")
-@patch("code.config.dbconfig")
-@patch("code.config.getpass")
-@patch("code.config.generateDeviceSecret")
-@patch("code.config.printc")
-@patch("code.config.console")
+@patch("project.config.checkConfig")
+@patch("project.config.dbconfig")
+@patch("project.config.getpass")
+@patch("project.config.generateDeviceSecret")
+@patch("project.config.printc")
+@patch("project.config.console")
 def test_config_already_configured(mock_console, mock_printc, mock_generate, mock_getpass, mock_dbconfig, mock_checkConfig):
     mock_checkConfig.return_value == True
 
@@ -66,12 +66,12 @@ def test_config_already_configured(mock_console, mock_printc, mock_generate, moc
     mock_printc.assert_any_call("[red][!] Already Configured [/red]")
     mock_dbconfig.assert_not_called()
 
-@patch("code.config.checkConfig")
-@patch("code.config.dbconfig")
-@patch("code.config.getpass")
-@patch("code.config.generateDeviceSecret")
-@patch("code.config.printc")
-@patch("code.config.console")
+@patch("project.config.checkConfig")
+@patch("project.config.dbconfig")
+@patch("project.config.getpass")
+@patch("project.config.generateDeviceSecret")
+@patch("project.config.printc")
+@patch("project.config.console")
 def test_config_flow(mock_console, mock_printc, mock_generate, mock_getpass, mock_dbconfig, mock_checkConfig):
     mock_checkConfig.return_value == False 
 
@@ -103,10 +103,10 @@ def test_config_flow(mock_console, mock_printc, mock_generate, mock_getpass, moc
     #output printed indicating success
     mock_printc.assert_any_call("[green][+] Configuration Completed! [/green]")
 
-@patch("code.config.checkConfig")
-@patch("code.config.dbconfig")
-@patch("code.config.printc")
-@patch("code.config.console")
+@patch("project.config.checkConfig")
+@patch("project.config.dbconfig")
+@patch("project.config.printc")
+@patch("project.config.console")
 def test_config_failure(mock_console, mock_printc, mock_dbconfig, mock_checkConfig):
     mock_checkConfig.return_value=False
 
@@ -123,8 +123,8 @@ def test_config_failure(mock_console, mock_printc, mock_dbconfig, mock_checkConf
     mock_cursor.execute.side_effect=raise_exc
 
     #we patch getpass and generateDeviceSecret minimally for this test
-    with patch("code.config.getpass", side_effect=["pw", "pw"]), \
-         patch("code.config.generateDeviceSecret", return_value="SECRET"):
+    with patch("project.config.getpass", side_effect=["pw", "pw"]), \
+         patch("project.config.generateDeviceSecret", return_value="SECRET"):
         
         config()
     
