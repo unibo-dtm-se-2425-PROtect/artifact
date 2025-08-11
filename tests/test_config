@@ -38,3 +38,7 @@ def test_generateDeviceSecret_defaukt_length():
     secret=generateDeviceSecret()
     assert len(secret)==10
 
+def test_generateDeviceSecret_characters(): 
+    secret=generateDeviceSecret(50)
+    allowed_chars=set(string.ascii_uppercase+string.digits)
+    assert all(c in allowed_chars for c in secret)
