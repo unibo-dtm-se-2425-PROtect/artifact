@@ -59,7 +59,7 @@ def test_generateDeviceSecret_randomness():
 @patch("code.config.printc")
 @patch("code.config.console")
 def test_config_already_configured(mock_console, mock_printc, mock_generate, mock_getpass, mock_dbconfig, mock_checkConfig):
-    mock_checkConfig.return_value == False 
+    mock_checkConfig.return_value == True
 
     config()
 
