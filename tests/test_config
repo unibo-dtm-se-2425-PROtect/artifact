@@ -1,8 +1,9 @@
 import unittest
 from unittest.mock import patch, MagickMock
 import string
-from code import config
 import hashlib
+
+from code.config import checkConfig, config, generateDeviceSecret
 
 
 def test_checkConfig():
