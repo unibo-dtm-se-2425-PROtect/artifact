@@ -5,3 +5,5 @@ from config.py import generateDeviceSecret, config
 import hashlib
 
 
+def test_checkConfig():
+    assert checkConfig()==True 
