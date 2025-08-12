@@ -1,1 +1,1 @@
-#empty file to recognize it as a package 
+#empty file to recognize "project" as a package 
