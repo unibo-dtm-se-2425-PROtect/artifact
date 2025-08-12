@@ -54,15 +54,16 @@ def test_generateDeviceSecret_characters():
     allowed_chars=set(string.ascii_uppercase+string.digits)
     assert all(c in allowed_chars for c in secret)
 
+def test_generateDeviceSecret_length_and_chars():
+    secret=generateDeviceSecret(12)
+    assert len(secret)==12
+    assert all(c in string.ascii_uppercase + string.digits for c in secret)
+    
 def test_generateDeviceSecret_randomness():
     secrets={generateDeviceSecret(20) for i in range(100)}
     assert len(secrets) > 90 
     #generates 100 random secrets and expects at least 90 to be unique so that randomness is not broken
 
-def test_generateDeviceSecret_length_and_chars():
-    secret=generateDeviceSecret(12)
-    assert len(secret)==12
-    assert all(c in string.ascii_uppercase + string.digits for c in secret)
 
 #Checking CONFIG()
 @patch("project.config.checkConfig")
