@@ -106,7 +106,7 @@ def test_config_failure(mock_dbconfig_call, mock_console, mock_printc, mock_chec
     mock_db.cursor.return_value=mock_cursor 
 
     #simulate exception on CREATE DATABASE
-    def raise_exc(query):
+    def raise_exc(query, *args, **kwargs):
         if query=="CREATE DATABASE PROtect":
             raise Exception("DB exists")
         return None
