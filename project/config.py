@@ -4,7 +4,7 @@ import string
 import random
 import hashlib
 
-from dbconfig import dbconfig 
+import dbconfig 
 
 from rich import print as printc 
 from rich.console import Console
