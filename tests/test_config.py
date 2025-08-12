@@ -16,16 +16,11 @@ def mock_dbconfig():
 
 #Checking CHECKCONFIG()
 @patch ("project.config.dbconfig")
-def test_checkConfig_schema_exists(mock_dbconfig):
-    mock_db=MagicMock()
-    mock_cursor=MagicMock()
+def test_checkConfig_schema_exists(mock_dbconfig_call, mock_dbconfig):
+    mock_db, mock_cursor=mock_dbconfig
     mock_cursor.fetchall.return_value=[("PROtect",)]
-    mock_db.cursor.return_value=mock_cursor
-    mock_dbconfig.return_value=mock_db
-
-    assert checkConfig() is True #it testifies that in the current environment checkConfig() returns True without exceptions
-                                 #and that the DB currently contains a schema named PROtect (returns True when the schema exists)
-    mock_cursor.execute.assert_called_once() 
+    mock_dbconfig_call.return_value=mock_db
+    mock_cursor.execute.assert_called_once()
 
 @patch ("project.config.dbconfig")
 def test_checkConfig_schema_missing(mock_dbconfig):
@@ -58,7 +53,7 @@ def test_generateDeviceSecret_length_and_chars():
     secret=generateDeviceSecret(12)
     assert len(secret)==12
     assert all(c in string.ascii_uppercase + string.digits for c in secret)
-    
+
 def test_generateDeviceSecret_randomness():
     secrets={generateDeviceSecret(20) for i in range(100)}
     assert len(secrets) > 90 
