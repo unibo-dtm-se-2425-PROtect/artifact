@@ -9,10 +9,10 @@ from project.config import checkConfig, config, generateDeviceSecret
 @pytest.fixture
 def mock_dbconfig():
     #Fixture to mock the DB connection + cursor
-    mock_conn=MagicMock()
+    mock_db=MagicMock()
     mock_cursor=MagicMock()
-    mock_conn.cursor.return_value=mock_cursor
-    return mock_conn, mock_cursor
+    mock_db.cursor.return_value=mock_cursor
+    return mock_db, mock_cursor
 
 #Checking CHECKCONFIG()
 @patch ("project.config.dbconfig")
