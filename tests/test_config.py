@@ -96,17 +96,14 @@ def test_config_flow(mock_console, mock_printc, mock_dbconfig_call, mock_secret,
     #output printed indicating success
     mock_printc.assert_any_call("[green][+] Configuration Completed! [/green]")
 
-@patch("project.config.checkConfig")
-@patch("project.config.dbconfig")
+@patch("project.config.checkConfig", return_value=False)
 @patch("project.config.printc")
 @patch("project.config.console")
-def test_config_failure(mock_console, mock_printc, mock_dbconfig, mock_checkConfig):
-    mock_checkConfig.return_value=False
-
-    mock_db=MagicMock()
-    mock_cursor=MagicMock()
-    mock_db.cursor.return_value=mock_cursor
-    mock_dbconfig.return_value=mock_db
+@patch("project.config.dbconfig")
+def test_config_failure(mock_dbconfig_call, mock_console, mock_printc, mock_dbconfig, mock_checkConfig):
+    mock_db, mock_cursor=MagicMock(), MagicMock()
+    mock_dbconfig_call.return_value=mock_db
+    mock_db.cursor.return_value=mock_cursor 
 
     #simulate exception on CREATE DATABASE
     def raise_exc(query):
