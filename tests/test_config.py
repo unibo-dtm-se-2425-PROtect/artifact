@@ -100,7 +100,7 @@ def test_config_flow(mock_console, mock_printc, mock_dbconfig_call, mock_secret,
 @patch("project.config.printc")
 @patch("project.config.console")
 @patch("project.config.dbconfig")
-def test_config_failure(mock_dbconfig_call, mock_console, mock_printc, mock_dbconfig, mock_checkConfig):
+def test_config_failure(mock_dbconfig_call, mock_console, mock_printc, mock_checkConfig):
     mock_db, mock_cursor=MagicMock(), MagicMock()
     mock_dbconfig_call.return_value=mock_db
     mock_db.cursor.return_value=mock_cursor 
