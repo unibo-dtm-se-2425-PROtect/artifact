@@ -59,21 +59,15 @@ def test_generateDeviceSecret_randomness():
 
 
 #Checking CONFIG()
-@patch("project.config.checkConfig")
+@patch("project.config.checkConfig", return_value=True)
 @patch("project.config.dbconfig")
-@patch("project.config.getpass")
-@patch("project.config.generateDeviceSecret")
 @patch("project.config.printc")
-@patch("project.config.console")
-def test_config_already_configured(mock_console, mock_printc, mock_generate, mock_getpass, mock_dbconfig, mock_checkConfig):
-    mock_checkConfig.return_value == True
-
+def test_config_already_configured(mock_printc, mock_dbconfig_call, mock_checkConfig):
     config()
-
     mock_printc.assert_any_call("[red][!] Already Configured [/red]")
-    mock_dbconfig.assert_not_called()
+    mock_dbconfig_call.assert_not_called()
 
-@patch("project.config.checkConfig")
+@patch("project.config.checkConfig", return_value=False)
 @patch("project.config.dbconfig")
 @patch("project.config.getpass")
 @patch("project.config.generateDeviceSecret")
