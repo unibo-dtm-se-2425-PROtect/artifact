@@ -5,6 +5,15 @@ import hashlib
 
 from project.config import checkConfig, config, generateDeviceSecret
 
+# Using FIXTURES to build a reusable setup to avoid repetitions 
+@pytest.fixture
+def mock_dbconfig():
+    #Fixture to mock the DB connection + cursor
+    mock_conn=MagicMock()
+    mock_cursor=MagicMock()
+    mock_conn.cursor.return_value=mock_cursor
+    return mock_conn, mock_cursor
+
 #Checking CHECKCONFIG()
 @patch ("project.config.dbconfig")
 def test_checkConfig_schema_exists(mock_dbconfig):
