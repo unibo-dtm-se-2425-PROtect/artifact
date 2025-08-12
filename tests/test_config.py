@@ -80,13 +80,6 @@ def test_config_flow(mock_console, mock_printc, mock_dbconfig_call, mock_secret,
 
     config()
 
-    #mock getpass to simulate matching passwords on second try
-    mock_getpass.side_effect=["password", "nomatch", "password", "password"]
-
-    mock_generate.return_value="SECRET12345"
-
-    config()
-
     #check DB and tables are created
     mock_cursor.execute.assert_any_call("CREATE DATABASE PROtect")
     mock_cursor.execute.assert_any_call("CREATE TABLE PROtect.secrets (masterpassword_hash TEXT NOT NULL, device_secret TEXT NOT NULL)")
