@@ -9,4 +9,11 @@ def test_dbconfig_success(mock_connect):
 
     db=dbmod.dbconfig()
 
+    mock_connect.assert_called_once_with(
+        host="localhost",
+        user="pm",
+        password="password"
+    )
+    assert db is mock_db
+
     
