@@ -68,18 +68,17 @@ def test_config_already_configured(mock_printc, mock_dbconfig_call, mock_checkCo
     mock_dbconfig_call.assert_not_called()
 
 @patch("project.config.checkConfig", return_value=False)
+@patch("project.config.getpass", side_effect=["password", "nomatch", "password", "password"])
+@patch("project.config.generateDeviceSecret", return_value="SECRET12345")
 @patch("project.config.dbconfig")
-@patch("project.config.getpass")
-@patch("project.config.generateDeviceSecret")
 @patch("project.config.printc")
 @patch("project.config.console")
-def test_config_flow(mock_console, mock_printc, mock_generate, mock_getpass, mock_dbconfig, mock_checkConfig):
-    mock_checkConfig.return_value == False 
-
-    mock_db=MagicMock()
-    mock_cursor=MagicMock()
+def test_config_flow(mock_console, mock_printc, mock_dbconfig_call, mock_secret, mock_getpass, mock_checkConfig):
+    mock_db, mock_cursor=MagicMock(), MagicMock()
+    mock_dbconfig_call.return_value=mock_db
     mock_db.cursor.return_value=mock_cursor
-    mock_dbconfig.return_value=mock_db
+
+    config()
 
     #mock getpass to simulate matching passwords on second try
     mock_getpass.side_effect=["password", "nomatch", "password", "password"]
