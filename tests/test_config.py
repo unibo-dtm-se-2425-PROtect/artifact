@@ -23,13 +23,10 @@ def test_checkConfig_schema_exists(mock_dbconfig_call, mock_dbconfig):
     mock_cursor.execute.assert_called_once()
 
 @patch ("project.config.dbconfig")
-def test_checkConfig_schema_missing(mock_dbconfig):
-    mock_db=MagicMock()
-    mock_cursor=MagicMock()
+def test_checkConfig_schema_missing(mock_dbconfig_call, mock_dbconfig):
+    mock_db, mock_cursor=mock_dbconfig
     mock_cursor.fetchall.return_value=[]
-    mock_db.cursor.return_value=mock_cursor
-    mock_dbconfig.return_value=mock_db
-
+    mock_dbconfig_call.return_value=mock_db
     assert checkConfig() is False
  
 #ASSERT allows simple comparisons, quick to read and easy to understand and it shows detailed info whether assert fails
