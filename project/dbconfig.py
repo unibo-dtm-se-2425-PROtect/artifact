@@ -4,6 +4,7 @@ from rich import print as printc
 console = Console()
 
 def dbconfig(): 
+    db=None
     try: 
         db = mysql.connector.connect(
           host="localhost",
