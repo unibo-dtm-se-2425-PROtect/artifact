@@ -16,4 +16,9 @@ def test_dbconfig_success(mock_connect):
     )
     assert db is mock_db
 
-    
+@patch("project.dbconfig.mysql.connector.connect", side_effect=Exception("DB connection failed"))
+@patch("project.dbconfig.console.print_exception")
+def test_dbconfig_failure(mock_connect):
+    db=dbmod.dbconfig()
+    assert db is None #assuming the function returns None on failure
+    mock_print_exception.assert_called_once()
