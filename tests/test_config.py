@@ -20,6 +20,7 @@ def test_checkConfig_schema_exists(mock_dbconfig_call, mock_dbconfig):
     mock_db, mock_cursor=mock_dbconfig
     mock_cursor.fetchall.return_value=[("PROtect",)]
     mock_dbconfig_call.return_value=mock_db
+    assert checkConfig() is True
     mock_cursor.execute.assert_called_once()
 
 @patch ("project.config.dbconfig")
