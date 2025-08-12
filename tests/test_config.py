@@ -87,7 +87,7 @@ def test_config_flow(mock_console, mock_printc, mock_generate, mock_getpass, moc
 
     config()
 
-    #check DB calls
+    #check DB and tables are created
     mock_cursor.execute.assert_any_call=("CREATE DATABASE PROtect")
     mock_cursor.execute.assert_any_call=("CREATE TABLE PROtect.secrets (masterpassword_hash TEXT NOT NULL, device_secret TEXT NOT NULL)")
     mock_cursor.execute.assert_any_call=("CREATE TABLE PROtect.entries (sitename TEXT NOT NULL, siteurl TEXT NOT NULL, email TEXT , username TEXT, password TEXT NOT NULL)")
