@@ -29,6 +29,21 @@ args = parser.parse_args()
 
 def inputAndValidateMasterPassword():
 	mp = getpass("MASTER PASSWORD: ")
+	#Password policy checks
+	if len(mp)<8:
+		print("[!] Password must be at least 8 characters long.")
+		return None
+	if not any(c.isupper() for c in mp):
+		print("[!] Password must contain at least one uppercase letter.")
+		return None
+	if not any(c.isdigit() for c in mp):
+		print("[!] Password must contain at least one number.")
+		return None
+	if not any(c in string.punctuation for c in mp):
+		print("[!] Password must contain at least one special character.")
+		return None
+	
+	#If all policies are observed
 	hashed_mp = hashlib.sha256(mp.encode()).hexdigest()
 
 	db = dbconfig()
