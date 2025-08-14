@@ -3,7 +3,7 @@ import string
 import random
 import hashlib
 
-from project import dbconfig 
+from project.dbconfig import dbconfig 
 
 from rich import print as printc 
 from rich.console import Console
