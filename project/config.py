@@ -73,4 +73,6 @@ def config():
 
     db.close()
 
-config()
+if __name__=="__main__":
+    config()
+    
