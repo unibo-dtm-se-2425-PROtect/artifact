@@ -60,3 +60,13 @@ try:
 except Exception:
     pyperclip=None
 
+#DATABASE HELPERS: bridge between GUI and underlying db so that the user does not need to manage SQL queries directly
+def get_db():
+    db=dbconfig()
+    if db is None:
+        raise RuntimeError("Unable to connect to database. Check dbconfig.py and DB server")
+    return db
+
+SCHEMA_CANDIDATES = ["PROtect", "pm"]
+
+
