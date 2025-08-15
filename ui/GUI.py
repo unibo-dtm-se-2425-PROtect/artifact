@@ -32,3 +32,14 @@ try:
 except Exception as e: 
     raise SystemExit("dbconfig.py not found or import error: " +str(e))
 
+try: 
+    from project.add import computeMasterKey
+except Exception:
+    #useful whether the user has not imported its own add.py which includes the PBKDF2 implementation 
+    # so we use a local one directly imported from PyCryptodome
+    from Crypto.Protocol.KDF import PBKDF2
+    from Crypto.Hash import SHA256
+    def computeMasterKey(mp, ds):
+        return PBKDF2(mp.encode(), ds.encode(), 32, count=1_000_000, hmac_hash_module=SHA256)
+    
+
