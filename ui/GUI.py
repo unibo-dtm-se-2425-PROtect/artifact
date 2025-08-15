@@ -10,3 +10,19 @@
   # -First-time Setup (GUI wrapper for config): create DB/tables + set master password
   # -Import/Export JSON (optional convenience)
 
+from __future__ import allocations
+import json
+import os
+import sys
+import threading
+import time
+from dataclasses import asdict, dataclass
+from typing import List, Optional, Tuple
+
+import tkinter as tk
+from tkinter import filedialog, messagebox
+from tkinter import StringVar, IntVar
+
+import ttkbootstrap as tb
+from ttkbootstrap.constants import *
+
