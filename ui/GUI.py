@@ -69,4 +69,16 @@ def get_db():
 
 SCHEMA_CANDIDATES = ["PROtect", "pm"]
 
+def detect_schema() -> Optional[str]:
+    db=get_db()
+    cur=db.cursor()
+    for s in SCHEMA_CANDIDATES:
+        cur.execute("SELECT SCHEMA_NAME FROM INFORMATION_SCHEMA.SCHEMATA WHERE SCHEMA_NAME = %s", (s,))
+        if cur.fetchall():
+            db.close()
+            return s 
+        db.close()
+        return None
+    
+    
 
