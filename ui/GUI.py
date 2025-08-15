@@ -55,4 +55,8 @@ except Exception:
         return ''.join(random.choice(string.ascii_letters + string.digits + string.punctuation) for num in range(n))
     generate = type('G', (), {'generatePassword': staticmethod(generatePassword)})
 
+try:
+    import pyperclip
+except Exception:
+    pyperclip=None
 
