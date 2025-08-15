@@ -47,4 +47,12 @@ try:
 except Exception as e:
     raise SystemExit("AES256util.py not found or import error: " + str(e))
 
+try: 
+    import project.generate
+except Exception:
+    import random, string
+    def generatePassword(n):
+        return ''.join(random.choice(string.ascii_letters + string.digits + string.punctuation) for num in range(n))
+    generate = type('G', (), {'generatePassword': staticmethod(generatePassword)})
+
 
