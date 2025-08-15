@@ -80,5 +80,18 @@ def detect_schema() -> Optional[str]:
         db.close()
         return None
     
-    
+def read_secrets(schema_str) -> Tuple[str, str]:
+    #Return (master_hash, device_secret)
+    db=get_db()
+    cur=db.cursor()
+    cur.execute(f"SELECT * FROM {schema}.secrets")
+    row=cur.fetchall()
+    db.close()
+    if not row:
+        raise RuntimeError("Secrets table empty. Run configuration")
+    #expect order: masterpassword_hash, device_secret
+    r= row[0]
+    master_hash, device_secret = r[0], r[1]
+    return master_hash, device_secret
+
 
