@@ -42,4 +42,9 @@ except Exception:
     def computeMasterKey(mp, ds):
         return PBKDF2(mp.encode(), ds.encode(), 32, count=1_000_000, hmac_hash_module=SHA256)
     
+try:
+    import project.AES256util
+except Exception as e:
+    raise SystemExit("AES256util.py not found or import error: " + str(e))
+
 
