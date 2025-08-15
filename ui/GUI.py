@@ -26,3 +26,9 @@ from tkinter import StringVar, IntVar
 import ttkbootstrap as tb
 from ttkbootstrap.constants import *
 
+#back-end imports for the project
+try:
+    from project.dbconfig import dbconfig
+except Exception as e: 
+    raise SystemExit("dbconfig.py not found or import error: " +str(e))
+
