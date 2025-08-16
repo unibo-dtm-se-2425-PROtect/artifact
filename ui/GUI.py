@@ -170,3 +170,11 @@ def import_json(schema:str, path:str):
         )
         db.commit()
         db.close()
+
+#GUI visual set up
+
+class Loginframe(tb.Frame):
+    def __init__(self, master, on_succes):
+        super().__init__(master, padding=30)
+        self.on_success=on_succes
+        tb.Label(self, text="Unlock Vault", font=("Helvetica",20)).pack(pady=(0,15))
