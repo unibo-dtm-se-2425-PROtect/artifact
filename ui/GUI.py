@@ -94,4 +94,14 @@ def read_secrets(schema_str) -> Tuple[str, str]:
     master_hash, device_secret = r[0], r[1]
     return master_hash, device_secret
 
+def verify_master(schema: str, mp: str) -> Tuple[bool, Optional[str]]:
+    import hashlib
+    try:
+        master_hash, device_secret = read_secrets(schema)
+    except Exception as e:
+        return False, None
+    hashed=hashlib.sha256(mp.encode()).hexdigest()
+    return(hashed==master_hash, device_secret if hashed==master_hash else None)
+
+
 
