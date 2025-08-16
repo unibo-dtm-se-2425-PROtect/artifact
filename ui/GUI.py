@@ -260,6 +260,13 @@ class MainFrame(tb.Frame):
         if messagebox.askyesno("Lock", "Do you want to lock the vault?"):
             self.on_lock()
     
-
+    def refresh(self):
+        for i in self.tree.get_children():
+            self.tree.delete(i)
+        self._rows_cache=list_entries(self.schema)
+        for r in self._rows_cache:
+            self.tree.insert('', 'end', values=r[:4])
+    
+    
         
 
