@@ -243,7 +243,19 @@ class MainFrame(tb.Frame):
         tb.Button(bar, text="Show (10s)", bootstyle=WARNING, command=self.show_password).pack(side=LEFT, padx=4)
         tb.Separator(bar, orient=VERTICAL).pack(side=LEFT, fill=Y, padx=8)
         tb.Button(bar, text="Generate", command=self.generate_password).pack(side=LEFT, padx=4)
+
+        #Table
+        cols=("site", "URL", "Email", "Username")
+        self.tree=tb.Treeview(self, columns=cols, show="headings", height=14, bootstyle=INFO)
+        for c in cols:
+            self.tree.heading(c, text=c)
+            self.tree.column(c, width=180 if c=="URL" else 140)
+        self.tree.pack(fill=BOTH, expand=True)
+        self.tree.bind('<Double-1>', lambda e: self.copy_password())
+
+        self._rows_cache=[]     # parallels tree items; holds full tuples including encrypted password
+        self.refresh()
+
         
-          
         
 
