@@ -179,22 +179,30 @@ class SetupDialog(tb.Toplevel):
         self.on_done = on_done
 
 class PromptPassword(tb.Toplevel):
-    def __init__(self, master, prompt="Enter master password"):
+    def __init__(self, master, prompt="Master password"):
         super().__init__(master)
+        self.title("Confirm")
         self.value = None
-        self.title("Authentication")
+        frm = tb.Frame(self, padding=15)
+        frm.pack(fill=BOTH, expand=True)
+        tb.Label(frm, text=prompt).pack(anchor=W)
+        self.ent = tb.Entry(frm, show='•', width=32)
+        self.ent.pack(pady=6)
+        self.ent.focus_set()
+        btns = tb.Frame(frm)
+        btns.pack(anchor=E)
+        tb.Button(btns, text="OK", bootstyle=PRIMARY, command=self.ok).pack(side=LEFT, padx=4)
+        tb.Button(btns, text="Cancel", command=self.destroy).pack(side=LEFT)
+        self.bind('<Return>', lambda e: self.ok())
 
-        tb.Label(self, text=prompt).pack(pady=5)
-        self.entry = tb.Entry(self, show="•", width=30)
-        self.entry.pack(pady=5)
-        self.entry.focus_set()
-
-        tb.Button(self, text="OK", command=self.on_ok).pack(pady=5)
+    def ok(self):
+        self.value = self.ent.get()
+        self.destroy()
 
     def on_ok(self):
         self.value = self.entry.get()
         self.destroy()
-        
+
 class Loginframe(tb.Frame):
     def __init__(self, master, on_succes):
         super().__init__(master, padding=30)
@@ -303,6 +311,7 @@ class MainFrame(tb.Frame):
             return False
         return True
     
+
 
 
 
