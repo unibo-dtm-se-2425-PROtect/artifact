@@ -122,3 +122,13 @@ def insert_entry(schema:str, mp:str, ds:str, sitename:str, siteurl:str, email:st
     )
     db.commit()
     db.close()
+
+def delete_entry(schema:str, row):
+    db=get_db()
+    cur=db.cursor()
+    cur.execute(
+        f"DELETE FROM {schema}.entries WHERE sitename=%s AND siteurl=%s AND email=%s AND username=%s AND password=%s LIMIT 1",
+        row,
+    )
+    db.commit()
+    db.close()
