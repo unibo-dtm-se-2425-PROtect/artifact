@@ -195,4 +195,7 @@ class Loginframe(tb.Frame):
 
         self.blind_all('<Return>', lambda e: self.try_login())
     
+    def open_setup(self):
+        SetupDialog(self, on_done=self.after_setup)
+    
     
