@@ -111,3 +111,14 @@ def list_entries(schema:str):
     db.close()
     return rows
 
+def insert_entry(schema:str, mp:str, ds:str, sitename:str, siteurl:str, email:str, username:str, password_plain:str):
+    mk=computeMasterKey(mp,ds)
+    enc=project.AES256util.encrypt(key=mk, source=password_plain, keyType='bytes')
+    db=get_db()
+    cur=db.cursor()
+    cur.execute(
+        f"INSERT INTO {schema}.entries (sitename, siteurl, email, username, password) VALUES (%s,%s,%s,%s,%s)",
+        (sitename, siteurl, email, username, enc),
+    )
+    db.commit()
+    db.close()
