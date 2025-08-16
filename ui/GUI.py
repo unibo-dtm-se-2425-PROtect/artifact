@@ -267,6 +267,13 @@ class MainFrame(tb.Frame):
         for r in self._rows_cache:
             self.tree.insert('', 'end', values=r[:4])
     
+    def selected_rows(self) -> Optional[Tuple]:
+        sel=self.tree.selection()
+        if not sel:
+            messagebox.showinfo("Select", "Please select a row.")
+            return None
+        idx=self.tree.index(sel[0])
+        return self._rows_cache[idx]
     
         
 
