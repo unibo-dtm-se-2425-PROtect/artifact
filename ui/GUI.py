@@ -103,5 +103,11 @@ def verify_master(schema: str, mp: str) -> Tuple[bool, Optional[str]]:
     hashed=hashlib.sha256(mp.encode()).hexdigest()
     return(hashed==master_hash, device_secret if hashed==master_hash else None)
 
-
+def list_entries(schema:str):
+    db=get_db()
+    cur=db.cursor()
+    cur.execute(f"SELECT sitename, siteurl, email, username, password FROM {schema}.entries")
+    rows=cur.fetchall()
+    db.close()
+    return rows
 
