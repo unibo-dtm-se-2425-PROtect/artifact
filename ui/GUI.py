@@ -208,5 +208,15 @@ class Loginframe(tb.Frame):
             self.schema=detect_schema()
             messagebox.showinfo("SetUp", "Configuration completed.")
     
+    def try_login(self):
+        if not self.schema:
+            messagebox.showerror("Error", "Please run setup first")
+            return
+        mp=self.pw.get()
+        ok, ds=verify_master(self.schema, mp)
+        if ok:
+            self.on_success(self.schema, mp, ds)
+        else:
+            messagebox.showerror("Error", "Wrong master password.")
     
 
