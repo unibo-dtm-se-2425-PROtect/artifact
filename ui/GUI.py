@@ -203,4 +203,10 @@ class Loginframe(tb.Frame):
     def open_setup(self):
         SetupDialog(self, on_done=self.after_setup)
     
+    def after_setup(self, ok:bool):
+        if ok:
+            self.schema=detect_schema()
+            messagebox.showinfo("SetUp", "Configuration completed.")
+    
+    
 
