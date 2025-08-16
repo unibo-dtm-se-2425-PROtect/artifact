@@ -232,6 +232,18 @@ class MainFrame(tb.Frame):
         tb.Button(header, text="Export", command=self.do_export).pack(side=RIGHT, padx=5)
         tb.Button(header, text="Import", command=self.do_import).pack(side=RIGHT, padx=5)
         
+        #Toolbar
+        bar=tb.Frame(self)
+        bar.pack(fill=X, pady=8)
+        tb.Button(bar, text="Add", bootstyle=SUCCESS, command=self.add_entry).pack(side=LEFT, padx=4)
+        tb.Button(bar, text="Edit", command=self.edit_entry).pack(side=LEFT, padx=4)
+        tb.Button(bar, text="Delete", bootstyle=DANGER, command=self.delete_entry).pack(side=LEFT, padx=4)
+        tb.Separator(bar, orient=VERTICAL).pack(side=LEFT, fill=Y, padx=8)
+        tb.Button(bar, text="Copy", command=self.copy_password).pack(side=LEFT, padx=4)
+        tb.Button(bar, text="Show (10s)", bootstyle=WARNING, command=self.show_password).pack(side=LEFT, padx=4)
+        tb.Separator(bar, orient=VERTICAL).pack(side=LEFT, fill=Y, padx=8)
+        tb.Button(bar, text="Generate", command=self.generate_password).pack(side=LEFT, padx=4)
         
+          
         
 
