@@ -178,6 +178,23 @@ class SetupDialog(tb.Toplevel):
         super().__init__(master)
         self.on_done = on_done
 
+class PromptPassword(tb.Toplevel):
+    def __init__(self, master, prompt="Enter master password"):
+        super().__init__(master)
+        self.value = None
+        self.title("Authentication")
+
+        tb.Label(self, text=prompt).pack(pady=5)
+        self.entry = tb.Entry(self, show="•", width=30)
+        self.entry.pack(pady=5)
+        self.entry.focus_set()
+
+        tb.Button(self, text="OK", command=self.on_ok).pack(pady=5)
+
+    def on_ok(self):
+        self.value = self.entry.get()
+        self.destroy()
+        
 class Loginframe(tb.Frame):
     def __init__(self, master, on_succes):
         super().__init__(master, padding=30)
@@ -286,6 +303,6 @@ class MainFrame(tb.Frame):
             return False
         return True
     
-    
+
 
 
