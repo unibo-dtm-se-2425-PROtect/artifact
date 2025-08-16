@@ -150,4 +150,11 @@ def update_entry(schema:str, old_row, new_values, mp:str, ds:str):
     db.commit()
     db.close()
 
+def export_json(schema:str, path:str):
+    rows=list_entries(schema)
+    data=[
+        {"sitename": r[0], "siteurl": r[1], "email": r[2], "username": r[3], "password": r[4]} for r in rows
+    ]
+    with open(path, 'w', encoding='utf-8') as f:
+        json.dump(data, f, indent=2)
 
