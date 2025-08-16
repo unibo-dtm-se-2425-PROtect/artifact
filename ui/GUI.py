@@ -311,7 +311,18 @@ class MainFrame(tb.Frame):
             return False
         return True
     
-
+    def add_entry(self):
+        if not self.require_master("Enter master password to add"):
+            return
+        d=EditDialog(self, title="Add Entry")
+        self.wait_window(d)
+        if d.result:
+            s,u,e,l,p=d.result
+            try:
+                insert_entry(self.schema, self.mp, self.ds, s,u,e,l,p)
+                self.refresh()
+            except Exception as ex:
+                messagebox.showerror("DB Error", str(ex))
 
 
 
