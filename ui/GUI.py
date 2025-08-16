@@ -218,5 +218,20 @@ class Loginframe(tb.Frame):
             self.on_success(self.schema, mp, ds)
         else:
             messagebox.showerror("Error", "Wrong master password.")
-    
+
+class MainFrame(tb.Frame):
+    def __init__(self, master, schema:str, mp:str, ds:str, on_lock):
+        super().__init__(master, padding=15)
+        self.schema, self.mp, self.ds = schema, mp, ds
+        self.on_lock=on_lock
+
+        header=tb.Frame(self)
+        header.pack(fill=X)
+        tb.Label(header, text="Password Manager", font=("Helvetica", 18)).pack(side=LEFT)
+        tb.Button(header, text="Lock", bootstyle=DANGER, command=self.lock).pack(side=RIGHT, padx=5)
+        tb.Button(header, text="Export", command=self.do_export).pack(side=RIGHT, padx=5)
+        tb.Button(header, text="Import", command=self.do_import).pack(side=RIGHT, padx=5)
+        
+        
+        
 
