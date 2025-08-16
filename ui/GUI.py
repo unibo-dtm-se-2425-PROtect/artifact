@@ -317,9 +317,9 @@ class MainFrame(tb.Frame):
         d=EditDialog(self, title="Add Entry")
         self.wait_window(d)
         if d.result:
-            s,u,e,l,p=d.result
+            site,url,email,user,password=d.result
             try:
-                insert_entry(self.schema, self.mp, self.ds, s,u,e,l,p)
+                insert_entry(self.schema, self.mp, self.ds, site,url,email,user,password)
                 self.refresh()
             except Exception as ex:
                 messagebox.showerror("DB Error", str(ex))
