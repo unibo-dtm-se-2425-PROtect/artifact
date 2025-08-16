@@ -323,6 +323,22 @@ class MainFrame(tb.Frame):
                 self.refresh()
             except Exception as ex:
                 messagebox.showerror("DB Error", str(ex))
-
-
-
+    
+    def edit_entry(self):
+        row=self.selected_row()
+        if not row:
+            return
+        if not self.require_master("Master Password to edit"):
+            return
+        d=EditDialog(self, title="Edit Entry", initial=row)
+        self.wait_window(d)
+        if d.result:
+            site,url,email,user,password=d.result
+            nplain=None if (p=='' or p is None) else p
+            try:
+                update_entry(self.schema, row, (site,url,email,user,nplain), self.mp, self.ds)
+                self.refresh()
+            except Exception as ex:
+                messagebox.showerror("DB Error", str(ex))
+    
+    
