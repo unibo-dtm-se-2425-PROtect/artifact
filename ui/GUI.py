@@ -173,6 +173,11 @@ def import_json(schema:str, path:str):
 
 #GUI visual set up
 
+class SetupDialog(tb.Toplevel):
+    def __init__(self, master, on_done=None):
+        super().__init__(master)
+        self.on_done = on_done
+
 class Loginframe(tb.Frame):
     def __init__(self, master, on_succes):
         super().__init__(master, padding=30)
@@ -198,4 +203,4 @@ class Loginframe(tb.Frame):
     def open_setup(self):
         SetupDialog(self, on_done=self.after_setup)
     
-    
+
