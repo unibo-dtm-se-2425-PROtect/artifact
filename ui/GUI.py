@@ -178,3 +178,12 @@ class Loginframe(tb.Frame):
         super().__init__(master, padding=30)
         self.on_success=on_succes
         tb.Label(self, text="Unlock Vault", font=("Helvetica",20)).pack(pady=(0,15))
+
+        self.schema=detect_schema()
+        if not self.schema:
+            tb.Label(self, text="No vault found.", bootstyle=WARNING).pack(pady=(0,5))
+            tb.Button(self, text="Run First-Time SetUp", bootstyle=SUCCESS, command=self.open_setup).pack(pady=(0,20))
+        else:
+            tb.Label(self, text=f"Using schema: {self.schema}").pack(pady=(0,10))
+    
+    
