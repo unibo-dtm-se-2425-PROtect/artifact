@@ -158,3 +158,15 @@ def export_json(schema:str, path:str):
     with open(path, 'w', encoding='utf-8') as f:
         json.dump(data, f, indent=2)
 
+def import_json(schema:str, path:str):
+    with open(path, 'r', encoding='utf-8') as f:
+        data=json.load(f)
+    db=get_db()
+    cur=db.cursor()
+    for r in data:
+        cur.execute(
+            f"INSERT INTO {schema}.entries (sitename, siteurl, email, username, password) VALUES (%s,%s,%s,%s,%s)",
+            (r['sitename'], r['siteurl'], r.get('email', ''), r.get('username', ''), r['password'])
+        )
+        db.commit()
+        db.close()
