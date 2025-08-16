@@ -275,5 +275,17 @@ class MainFrame(tb.Frame):
         idx=self.tree.index(sel[0])
         return self._rows_cache[idx]
     
-        
+    def require_master(self, prompt="Confirm master password") -> bool:
+        d=PromptPassword(self, prompt)
+        self.wait_window(d)
+        if not d.value:
+            return False
+        ok, _=verify_master(self.schema, d.value)
+        if not ok:
+            messagebox.showerror("Error", "Wrong Master Password.")
+            return False
+        return True
+    
+    
+
 
