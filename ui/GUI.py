@@ -292,7 +292,7 @@ class MainFrame(tb.Frame):
         for r in self._rows_cache:
             self.tree.insert('', 'end', values=r[:4])
     
-    def selected_rows(self) -> Optional[Tuple]:
+    def selected_row(self) -> Optional[Tuple]:
         sel=self.tree.selection()
         if not sel:
             messagebox.showinfo("Select", "Please select a row.")
@@ -340,5 +340,19 @@ class MainFrame(tb.Frame):
                 self.refresh()
             except Exception as ex:
                 messagebox.showerror("DB Error", str(ex))
+    
+    def delete_entry(self):
+        row=self.selected_row()
+        if not row:
+            return
+        if not self.require_master("Master Password to delete"):
+            return
+        if not messagebox.askyesno("Delete", f"Delete entry for {row[0]}?"):
+            return
+        try:
+            delete_entry(self.schema, row)
+            self.refresh()
+        except Exception as ex:
+            messagebox.showerror("DB Error", str(ex))
     
     
