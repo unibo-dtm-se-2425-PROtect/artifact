@@ -132,3 +132,22 @@ def delete_entry(schema:str, row):
     )
     db.commit()
     db.close()
+
+def update_entry(schema:str, old_row, new_values, mp:str, ds:str):
+    ns, nu, ne, nl, nplain = new_values
+    if nplain is None: 
+        nenc=old_row[]
+    else: 
+        mk=computeMasterKey(mp, ds)
+        nenc=project.AES256util.encrypt(key=mk, source=nplain, keyType='bytes')
+    db=get_db()
+    cur=db.cursor()
+    cur.execute(
+        f"UPDATE {schema}.entries SET sitename=%s, siteurl=%s, email=%s, username=%s, password=%s "
+        f"WHERE sitename=%s AND siteurl=%s AND email=%s AND username=%s AND password=%s LIMIT 1",
+        (ns, nu, ne, nl, nenc, old_row),
+    )
+    db.commit()
+    db.close()
+
+
