@@ -186,4 +186,13 @@ class Loginframe(tb.Frame):
         else:
             tb.Label(self, text=f"Using schema: {self.schema}").pack(pady=(0,10))
     
+        self.pw=tb.Entry(self, show="•", width=30)
+        self.pw.pack()
+        self.pw.focus_set()
+        tb.Button(self, text="Unlock", bootstyle=PRIMARY, command=self.try_login).pack(pady=12)
+
+        tb.Button(self, text="Configure...", command=self.open_setup).pack()
+
+        self.blind_all('<Return>', lambda e: self.try_login())
+    
     
