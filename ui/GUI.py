@@ -256,6 +256,10 @@ class MainFrame(tb.Frame):
         self._rows_cache=[]     # parallels tree items; holds full tuples including encrypted password
         self.refresh()
 
-        
+    def lock(self):
+        if messagebox.askyesno("Lock", "Do you want to lock the vault?"):
+            self.on_lock()
+    
+
         
 
