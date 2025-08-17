@@ -582,5 +582,9 @@ class App(tb.Window):
     def after_login(self, schema:str, mp:str, ds: str):
         self.clear()
         MainFrame(self.container, schema, mp, ds, on_lock=self.show_login).pack(fill=BOTH, expand=True)
+
+if __name__=='__main__':
+    app=App()
+    app.mainloop()
     
-    
+
