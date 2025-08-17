@@ -362,7 +362,12 @@ class SetupDialog (tb.Toplevel):
         tb.Label(srow, text="Device Secret Length", width=20, anchor=E).pack(side=LEFT)
         tb.Scale(srow, from_=8, to=32, orient=HORIZONTAL, variable=self.device_len).pack(side=LEFT, fill=X, expand=True)
 
-        
+        btns=tb.Frame(frm)
+        btns.pack(anchor=E, pady=(8,0))
+        tb.Button(btns, text="Create", bootstyle=SUCCESS, command=self.create).pack(side=LEFT, padx=5)
+        tb.Button(btns, text="Cancel", command=self.destroy).pack(side=LEFT)
+
+
 
 class MainFrame(tb.Frame):
     def __init__(self, master, schema:str, mp:str, ds:str, on_lock):
