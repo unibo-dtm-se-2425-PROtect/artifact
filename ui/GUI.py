@@ -349,7 +349,13 @@ class SetupDialog (tb.Toplevel):
         self.mp2=tb.Entry(frm, show="•", width=36)
         self.device_len=IntVar(value=10)
 
-
+        def row(lbl, w):
+            r=tb.Frame(frm)
+            r.pack(fill=X, pady=4)
+            tb.Label(r, text=lbl, width=20, anchor=E).pack(side=LEFT)
+            w.pack(side=LEFT, fill=X, expand=True)
+        
+        
 
 class MainFrame(tb.Frame):
     def __init__(self, master, schema:str, mp:str, ds:str, on_lock):
