@@ -355,4 +355,21 @@ class MainFrame(tb.Frame):
         except Exception as ex:
             messagebox.showerror("DB Error", str(ex))
     
+    def copy_password(self):
+        if pyperclip is None: 
+            messagebox.showwarning("clipboard", "pyperclip not installed.")
+            return
+        row=self.selected_row()
+        if not row:
+            return
+        if not self.require_master("Master Password to correctly copy."):
+            return
+        try:
+            mk=computeMasterKey(self.mp, self.ds)
+            dec=project.AES256util.decrypt(key=mk, source=row[4], keyType='bytes')
+            pyperclip.copy(dec.decode())
+            messagebox.showinfo("copied", "Password copied to clipboard.")
+        except Exception as ex: 
+            messagebox.showerror("Decrypt Error", str(ex))
     
+        
