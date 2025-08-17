@@ -263,6 +263,14 @@ class EditDialog(tb.Toplevel):
             r.pack(fill=X, pady=4)
             tb.Label(r, text=lbl, width=14, anchor=E).pack(side=LEFT)
             widget.pack(side=LEFT, fill=X, expand=True)
+        
+        row("Site Name", self.sitename)
+        row("Site URL", self.siteurl)
+        row("Email", self.email)
+        row("Username", self.username)
+        row("Password", self.password)
+        tb.Label(frm, text="(leave password blank to keep the existing one)", bootstyle=INFO).pack(anchor=w, pay=(0,8))
+        
 
 
 class MainFrame(tb.Frame):
