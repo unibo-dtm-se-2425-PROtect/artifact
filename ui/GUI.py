@@ -382,7 +382,17 @@ class SetupDialog (tb.Toplevel):
             cur.execute("CREATE TABLE IF NOT EXISTS PROtect.entries (sitename TEXT NOT NULL, siteurl TEXT NOT NULL, email TEXT, username TEXT, password TEXT NOT NULL)")
             hashed=hashlib.sha256(mp1.encode()).hexdigest()
             ds=''.join(random.choices(string.ascii_uppercase + string.digits, k=self.device_len.get()))
-            
+            #clear any existing
+            cur.execute("DELETE FROM PROtect.secrets")
+            cur.execute("INSERT INTO PROtect.secrets (masterpassword_hash, device_secret) VALUES (%s, %s)", (hashed, ds))
+            db.commit()
+            db.close()
+            messagebox.showinfo("SetUp", "Database Configured")
+            if self.on_done:
+                self.on_done(True)
+            self.destroy()
+        except Exception as ex:
+            messagebox.showerror("SetUp Error", str(ex))
 
 
 class MainFrame(tb.Frame):
