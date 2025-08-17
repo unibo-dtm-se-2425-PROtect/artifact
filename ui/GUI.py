@@ -276,6 +276,17 @@ class EditDialog(tb.Toplevel):
         tb.Button(btns, text="Save", bootstyle=SUCCESS, command=self.ok).pack(side=LEFT, padx=4)
         tb.Button(btns, text="Cancel", command=self.destroy).pack(side=LEFT)
 
+        if initial:
+            self.sitename.insert(0, initial[0])
+            self.siteurl.insert(0, initial[1])
+            self.email.insert(0, initial[2])
+            self.username.insert(0, initial[3])
+            #don't prefill password
+
+        self.sitename.focus_set()
+        self.bind('<Return>', lambda e: self.ok())
+
+    
 
 
 class MainFrame(tb.Frame):
