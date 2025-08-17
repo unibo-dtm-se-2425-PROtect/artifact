@@ -313,7 +313,18 @@ class RevealDialog(tb.Toplevel):
     def hide(self):
         self.lbl.configure(text="••••••••••")
 
+class GenDialog(tb.Toplevel):
+    def __init__(self, master):
+        super().__init__(master)
+        self.title("Generate Password")
+        frm=tb.Frame(self, padding=15)
+        frm.pack(fill=BOTH, expand=True)
+        tb.Label(frm, text="Length").pack(anchor=W)
+        self.var=IntVar(value=16)
+        tb.Scale(frm, from_=8, to=64, orient=HORIZONTAL, variable=self.var).pack(fill=X, pady=6)
+        tb.Button(frm, text="Generate & Copy", bootstyle=SUCCESS, command=self.gen).pack(anchor=E)
 
+    
 
 class MainFrame(tb.Frame):
     def __init__(self, master, schema:str, mp:str, ds:str, on_lock):
