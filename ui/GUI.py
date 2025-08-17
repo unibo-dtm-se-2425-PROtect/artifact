@@ -286,7 +286,18 @@ class EditDialog(tb.Toplevel):
         self.sitename.focus_set()
         self.bind('<Return>', lambda e: self.ok())
 
-    
+    def ok(self):
+        site=self.sitename.get().strip()
+        url=self.siteurl.get().strip()
+        email=self.email.get().strip()
+        user=self.username.get().strip()
+        password=self.password.get()
+        if not site or not url or not user:
+            messagebox.showerror("Validation Error", "Site, URL and Username are required.")
+            return
+        self.result=(site, url, email, user, password)
+        self.destroy() 
+
 
 
 class MainFrame(tb.Frame):
