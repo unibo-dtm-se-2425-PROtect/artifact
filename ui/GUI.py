@@ -372,4 +372,18 @@ class MainFrame(tb.Frame):
         except Exception as ex: 
             messagebox.showerror("Decrypt Error", str(ex))
     
-        
+    def show_password(self):
+        row=self.selected_row()
+        if not row:
+            return
+        if not self.require_master("Master Password to show user's password."):
+            return
+        try:
+            mk=computeMasterKey(self.mp, self.ds)
+            dec=project.AES256util.decrypt(key=mk, source=row[4], keyType='bytes').decode()
+        except Exception as ex:
+            messagebox.showerror("Decrypt Error", str(ex))
+            return
+        RevealDialog(self, dec)
+    
+    
