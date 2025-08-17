@@ -332,7 +332,24 @@ class GenDialog(tb.Toplevel):
             messagebox.showinfo("Generated", "Password copied to clipboard")
         else:
             messagebox.showinfo("Generated", pwd)
-        self.destroy()  
+        self.destroy()
+
+class SetupDialog (tb.Toplevel):
+    #For first time configuration mirroring config.py behavior in the UI
+    def __init__(self, master, on_done=None):
+        super().__init__(master)
+        self.title("First-Time SetUp")
+        self.on_done=on_done
+        frm=tb.Frame(self, padding=15)
+        frm.pack(fill=BOTH, expand=True)
+
+        tb.Label(frm, text="This will create the PROtect database and tables", bootstyle=INFO).pack(anchor=W)
+
+        self.mp1=tb.Entry(frm, show="•", width=36)
+        self.mp2=tb.Entry(frm, show="•", width=36)
+        self.device_len=IntVar(value=10)
+
+
 
 class MainFrame(tb.Frame):
     def __init__(self, master, schema:str, mp:str, ds:str, on_lock):
