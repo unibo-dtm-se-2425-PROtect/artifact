@@ -593,7 +593,7 @@ if __name__=='__main__':
     demo_mode=True
     if demo_mode:
         #It initializes only the GUI with fake data
-        app=MyGUI(data:{"username": "Demo", "password": "*****"})
+        app=MyGUI(data={"username": "Demo", "password": "*****"})
         app.mainloop()
     else:
         #Normal Initialization with SetUp
