@@ -570,4 +570,9 @@ class App(tb.Window):
         self.container=tb.Frame(self)
         self.container.pack(fill=BOTH, expand=True)
         self.show_login()
-        
+
+    def clear(self):
+        for w in self.container.winfo_children():
+            w.destroy()
+    
+      
