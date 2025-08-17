@@ -136,7 +136,7 @@ def delete_entry(schema:str, row):
 def update_entry(schema:str, old_row, new_values, mp:str, ds:str):
     ns, nu, ne, nl, nplain = new_values
     if nplain is None: 
-        nenc=old_row[]
+        nenc=old_row[4] #keeps the same cipher
     else: 
         mk=computeMasterKey(mp, ds)
         nenc=project.AES256util.encrypt(key=mk, source=nplain, keyType='bytes')
