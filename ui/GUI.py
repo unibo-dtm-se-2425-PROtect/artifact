@@ -485,7 +485,7 @@ class MainFrame(tb.Frame):
         self.wait_window(d)
         if d.result:
             site,url,email,user,password=d.result
-            nplain=None if (p=='' or p is None) else p
+            nplain=None if (password == '' or password is None) else password
             try:
                 update_entry(self.schema, row, (site,url,email,user,nplain), self.mp, self.ds)
                 self.refresh()
