@@ -84,7 +84,7 @@ def read_secrets(schema_str) -> Tuple[str, str]:
     #Return (master_hash, device_secret)
     db=get_db()
     cur=db.cursor()
-    cur.execute(f"SELECT * FROM {schema}.secrets")
+    cur.execute(f"SELECT * FROM {schema_str}.secrets")
     row=cur.fetchall()
     db.close()
     if not row:
