@@ -355,6 +355,13 @@ class SetupDialog (tb.Toplevel):
             tb.Label(r, text=lbl, width=20, anchor=E).pack(side=LEFT)
             w.pack(side=LEFT, fill=X, expand=True)
         
+        row("Master Password", self.mp1)
+        row("Confirm Password", self.mp2)
+        srow=tb.Frame(frm)
+        srow.pack(fill=X, pady=4)
+        tb.Label(srow, text="Device Secret Length", width=20, anchor=E).pack(side=LEFT)
+        tb.Scale(srow, from_=8, to=32, orient=HORIZONTAL, variable=self.device_len).pack(side=LEFT, fill=X, expand=True)
+
         
 
 class MainFrame(tb.Frame):
