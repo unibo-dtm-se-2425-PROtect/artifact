@@ -399,4 +399,16 @@ class MainFrame(tb.Frame):
         except Exception as ex:
             messagebox.showerror("Export Error", str(ex))
         
+    def do_import(self):
+        path=filedialog.askopenfilename(filetypes=[('JSON', '*.json')])
+        if not path:
+            return
+        if not messagebox.askyesno("Import", "Importing will add entries to your vault. Continue?"):
+            return
+        try:
+            import_json(self.schema, path)
+            self.refresh()
+        except Exception as ex:
+            messagebox.showerror("Import Error", str(ex))
+    
     
