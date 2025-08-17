@@ -367,6 +367,13 @@ class SetupDialog (tb.Toplevel):
         tb.Button(btns, text="Create", bootstyle=SUCCESS, command=self.create).pack(side=LEFT, padx=5)
         tb.Button(btns, text="Cancel", command=self.destroy).pack(side=LEFT)
 
+    def create(self):
+        import hashlib, random, string
+        mp1, mp2 = self.mp1.get(), self.mp2.get()
+        if not mp1 or mp1!=mp2:
+            messagebox.showerror("Setup", "Passwords do not match.")
+            return
+        
 
 
 class MainFrame(tb.Frame):
