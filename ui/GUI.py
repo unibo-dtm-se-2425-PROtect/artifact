@@ -310,7 +310,10 @@ class RevealDialog(tb.Toplevel):
         tb.Label(frm, text="This will hide in 10 seconds", bootstyle=WARNING).pack()
         self.after(10_000, self.hide)
 
-    
+    def hide(self):
+        self.lbl.configure(text="••••••••••")
+
+
 
 class MainFrame(tb.Frame):
     def __init__(self, master, schema:str, mp:str, ds:str, on_lock):
