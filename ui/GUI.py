@@ -244,6 +244,20 @@ class Loginframe(tb.Frame):
         else:
             messagebox.showerror("Error", "Wrong master password.")
 
+class EditDialog(tb.Toplevel):
+    def __init__(self, master, title="Edit Entry", initial:Optional[Tuple]=None):
+        super().__init__(master)
+        self.title(title)
+        self.result=None
+        frm=tb.Frame(self, padding=15)
+        frm.pack(fill=BOTH, expand=True)
+
+        self.sitename=tb.Entry(frm, width=40)
+        self.siteurl=tb.Entry(frm, width=40)
+        self.email=tb.Entry(frm, width=40)
+        self.username=tb.Entry(frm, width=40)
+        self.password=tb.Entry(frm, width=40)
+
 class MainFrame(tb.Frame):
     def __init__(self, master, schema:str, mp:str, ds:str, on_lock):
         super().__init__(master, padding=15)
@@ -410,5 +424,4 @@ class MainFrame(tb.Frame):
             self.refresh()
         except Exception as ex:
             messagebox.showerror("Import Error", str(ex))
-    
     
