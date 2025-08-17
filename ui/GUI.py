@@ -373,7 +373,16 @@ class SetupDialog (tb.Toplevel):
         if not mp1 or mp1!=mp2:
             messagebox.showerror("Setup", "Passwords do not match.")
             return
-        
+        #Create DB and tables as in config.py
+        try:
+            db=get_db()
+            cur=db.cursor()
+            cur.execute("CREATE DATABASE IF NOT EXISTS PROtect")
+            cur.execute("CREATE TABLE IF NOT EXISTS PROtect.secrets (masterpassword_hash TEXT NOT NULL, device_secret TEXT NOT NULL)")
+            cur.execute("CREATE TABLE IF NOT EXISTS PROtect.entries (sitename TEXT NOT NULL, siteurl TEXT NOT NULL, email TEXT, username TEXT, password TEXT NOT NULL)")
+            hashed=hashlib.sha256(mp1.encode()).hexdigest()
+            ds=''.join(random.choices(string.ascii_uppercase + string.digits, k=self.device_len.get()))
+            
 
 
 class MainFrame(tb.Frame):
