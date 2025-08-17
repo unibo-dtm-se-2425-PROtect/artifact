@@ -561,4 +561,13 @@ class MainFrame(tb.Frame):
             self.refresh()
         except Exception as ex:
             messagebox.showerror("Import Error", str(ex))
-    
+
+class App(tb.Window):
+    def __init__(self):
+        super().__init__(title="PROtect - Password Manager", themename='vapor')
+        self.geometry("900x560")
+        self.resizable(True, True)
+        self.container=tb.Frame(self)
+        self.container.pack(fill=BOTH, expand=True)
+        self.show_login()
+        
