@@ -389,4 +389,14 @@ class MainFrame(tb.Frame):
     def generate_password(self): 
         GenDialog(self)
 
+    def do_export(self):
+        path=filedialog.asksaveasfilename(defaultextension='.json', filetypes=[("Json","*.json")])
+        if not path:
+            return
+        try:
+            export_json(self.schema, path)
+            messagebox.showinfo("Export", f"Exported to {path}")
+        except Exception as ex:
+            messagebox.showerror("Export Error", str(ex))
+        
     
