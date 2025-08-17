@@ -324,7 +324,15 @@ class GenDialog(tb.Toplevel):
         tb.Scale(frm, from_=8, to=64, orient=HORIZONTAL, variable=self.var).pack(fill=X, pady=6)
         tb.Button(frm, text="Generate & Copy", bootstyle=SUCCESS, command=self.gen).pack(anchor=E)
 
-    
+    def gen(self):
+        length=self.var.get()
+        pwd=generate.generatepassword(length)
+        if pyperclip:
+            pyperclip.copy(pwd)
+            messagebox.showinfo("Generated", "Password copied to clipboard")
+        else:
+            messagebox.showinfo("Generated", pwd)
+        self.destroy()  
 
 class MainFrame(tb.Frame):
     def __init__(self, master, schema:str, mp:str, ds:str, on_lock):
