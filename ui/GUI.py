@@ -258,6 +258,13 @@ class EditDialog(tb.Toplevel):
         self.username=tb.Entry(frm, width=40)
         self.password=tb.Entry(frm, width=40)
 
+        def row(lbl, widget):
+            r=tb.Frame(frm)
+            r.pack(fill=X, pady=4)
+            tb.Label(r, text=lbl, width=14, anchor=E).pack(side=LEFT)
+            widget.pack(side=LEFT, fill=X, expand=True)
+
+
 class MainFrame(tb.Frame):
     def __init__(self, master, schema:str, mp:str, ds:str, on_lock):
         super().__init__(master, padding=15)
