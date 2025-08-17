@@ -584,5 +584,13 @@ class App(tb.Window):
         MainFrame(self.container, schema, mp, ds, on_lock=self.show_login).pack(fill=BOTH, expand=True)
 
 if __name__=='__main__':
-    app=App()
-    app.mainloop()
+    #DEMO-MODE: does not connect real DB to test the GUI without initial configuration 
+    demo_mode=True
+    if demo_mode:
+        #It initializes only the GUI with fake data
+        app=MyGUI(data:{"username": "Demo", "password": "*****"})
+        app.mainloop()
+    else:
+        #Normal Initialization with SetUp
+        app=MyGUI()
+        app.mainloop()
