@@ -386,4 +386,7 @@ class MainFrame(tb.Frame):
             return
         RevealDialog(self, dec)
     
+    def generate_password(self): 
+        GenDialog(self)
+
     
