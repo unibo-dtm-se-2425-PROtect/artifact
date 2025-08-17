@@ -298,7 +298,19 @@ class EditDialog(tb.Toplevel):
         self.result=(site, url, email, user, password)
         self.destroy() 
 
+class RevealDialog(tb.Toplevel):
+    def __init__(self, master, password_text: str):
+        super().__init__(master)
+        self.title("Password (auto-hides)")
+        self.geometry("420x120")
+        frm=tb.Frame(self, padding=15)
+        frm.pack(fill=BOTH, expand=True)
+        self.lbl=tb.Label(frm, text=password_text, font=("Consolas", 14, "bold"))
+        self.lbl.pack(pady=6)
+        tb.Label(frm, text="This will hide in 10 seconds", bootstyle=WARNING).pack()
+        self.after(10_000, self.hide)
 
+    
 
 class MainFrame(tb.Frame):
     def __init__(self, master, schema:str, mp:str, ds:str, on_lock):
