@@ -583,6 +583,11 @@ class App(tb.Window):
         self.clear()
         MainFrame(self.container, schema, mp, ds, on_lock=self.show_login).pack(fill=BOTH, expand=True)
 
+class MyGUI:
+    def __init__(self, data):
+        self.data=data
+        print("GUI initilized with:", self.data)
+
 if __name__=='__main__':
     #DEMO-MODE: does not connect real DB to test the GUI without initial configuration 
     demo_mode=True
