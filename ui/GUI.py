@@ -269,13 +269,13 @@ class EditDialog(tb.Toplevel):
         row("Email", self.email)
         row("Username", self.username)
         row("Password", self.password)
-        tb.Label(frm, text="(leave password blank to keep the existing one)", bootstyle=INFO).pack(anchor=w, pay=(0,8))
+        tb.Label(frm, text="(leave password blank to keep the existing one)", bootstyle=INFO).pack(anchor=W, pady=(0,8))
 
         btns=tb.Frame(frm)
         btns.pack(anchor=E)
         tb.Button(btns, text="Save", bootstyle=SUCCESS, command=self.ok).pack(side=LEFT, padx=4)
         tb.Button(btns, text="Cancel", command=self.destroy).pack(side=LEFT)
-        
+
 
 
 class MainFrame(tb.Frame):
