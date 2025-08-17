@@ -574,5 +574,9 @@ class App(tb.Window):
     def clear(self):
         for w in self.container.winfo_children():
             w.destroy()
+
+    def show_login(self):
+        self.clear()
+        Loginframe(self.container, on_succes=self.after_login).pack(fill=BOTH, expand=True)
+
     
-      
