@@ -16,6 +16,10 @@ class PasswordManagerController:
         self.view.on_import=self.import_
         self.view.lock=self.lock
 
+        #Mock Data for Demonstration
+        self.data:List[Tuple[str,str,str,str]] = [
+            "ExSite", "https://ExURL.com", "Ex@mail.com", "ExUser"
+        ]
+        self.view.set_entries(self.data)
+
         
-
-
