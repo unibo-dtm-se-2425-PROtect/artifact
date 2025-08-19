@@ -52,19 +52,25 @@ class DemoController:
     
 if __name__=="__main__":
     app=tb.Window(themename="vapor")
-    view=PasswordManagerView(
+
+    controller_placeholder={}  # temp dict to hold real controller after creation
+    def make_view():
+        view=PasswordManagerView(
         app,
-        on_add=lambda:ctrl.add(),
-        on_edit=lambda:ctrl.edit(),
-        on_delete=lambda:ctrl.delete(),
-        on_copy=lambda:ctrl.copy(),
-        on_show=lambda:ctrl.show(),
-        on_generate=lambda:ctrl.generate(),
-        on_export=lambda:ctrl.export(),
-        on_import=lambda:ctrl.import_(),
-        on_lock=lambda:ctrl.lock()
+        on_add=lambda:controller_placeholder["ctrl"].add(),
+        on_edit=lambda:controller_placeholder["ctrl"].edit(),
+        on_delete=lambda:controller_placeholder["ctrl"].delete(),
+        on_copy=lambda:controller_placeholder ["ctrl"].copy(),
+        on_show=lambda:controller_placeholder ["ctrl"].show(),
+        on_generate=lambda: controller_placeholder ["ctrl"].generate(),
+        on_export=lambda:controller_placeholder ["ctrl"].export(),
+        on_import=lambda:controller_placeholder ["ctrl"].import_(),
+        on_lock=lambda:controller_placeholder ["ctrl"].lock()
         )
-    ctrl = DemoController(view) 
+        return view
+    view=make_view()
+    ctrl = DemoController(view)
+    controller_placeholder["ctrl"]=ctrl #injects the real controller
     view.pack(fill="both", expand=True)
 
     app.mainloop
