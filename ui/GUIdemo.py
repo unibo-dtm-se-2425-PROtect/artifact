@@ -13,4 +13,7 @@ class DemoController:
         ]
         self.refresh()
     
+    def refresh(self):
+        self.view.set_entries(self.entries)
+    
     
