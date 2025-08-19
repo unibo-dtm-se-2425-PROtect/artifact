@@ -22,4 +22,12 @@ class PasswordManagerController:
         ]
         self.view.set_entries(self.data)
 
-        
+    #Controller Methods
+    def add(self):
+        print("Add clicked")
+        # Example: add a dummy entry
+        new_entry = ("NewSite", "https://new.com", "new@mail.com", "newuser")
+        self.data.append(new_entry)
+        self.view.set_entries(self.data)
+
+    
