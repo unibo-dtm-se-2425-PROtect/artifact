@@ -54,8 +54,8 @@ if __name__=="__main__":
     from VIEW.GUIview import PasswordManagerView
     view=PasswordManagerView(
         app,
-        on_add=lambda:ctrl.add,
-        on_edit=lambda:ctrl.edit,
+        on_add=lambda:ctrl.add(),
+        on_edit=lambda:ctrl.edit(),
         on_delete=lambda:ctrl.delete(),
         on_copy=lambda:ctrl.copy(),
         on_show=lambda:ctrl.show(),
