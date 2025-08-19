@@ -39,4 +39,11 @@ class PasswordManagerController:
             self.data[idx]=(selected[0], selected[1], selected[2], "editedUser")
             self.view.set_entries(self.data)
     
+    def delete(self):
+        selected=self.view.get_selected_entry()
+        if selected:
+            print(f"Delete clicked on {selected}")
+            self.data.remove(tuple(selected))
+            self.view.set_entries(self.data)
+
     
