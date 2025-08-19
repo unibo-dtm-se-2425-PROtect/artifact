@@ -8,15 +8,15 @@ class PasswordManagerView (tb.Frame):
     def __init__(
         self,
         master=None,
-        on_add: callable[[], None] = lambda: None,
-        on_edit: callable[[], None] = lambda: None,
-        on_delete: callable[[], None] = lambda: None,
-        on_copy: callable[[], None] = lambda: None,
-        on_show: callable[[], None] = lambda: None,
-        on_generate: callable[[], None] = lambda: None,
-        on_export: callable[[], None] = lambda: None,
-        on_import: callable[[], None] = lambda: None,
-        on_lock: callable[[], None] = lambda: None,
+        on_add: Callable[[], None] = lambda: None,
+        on_edit: Callable[[], None] = lambda: None,
+        on_delete: Callable[[], None] = lambda: None,
+        on_copy: Callable[[], None] = lambda: None,
+        on_show: Callable[[], None] = lambda: None,
+        on_generate: Callable[[], None] = lambda: None,
+        on_export: Callable[[], None] = lambda: None,
+        on_import: Callable[[], None] = lambda: None,
+        on_lock: Callable[[], None] = lambda: None,
         **kwargs
     ):
         super().__init__(master, padding=15, **kwargs)
