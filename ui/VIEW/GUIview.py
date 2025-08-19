@@ -7,16 +7,16 @@ class PasswordManagerView (tb.Frame):
     #It only defines the GUI, doesn't consider db, crypto etc. The controller must be passed in to handle actions
     def __init__(
         self,
-        master,
-        on_add: callable[[], None],
-        on_edit: callable[[], None],
-        on_delete: callable[[], None],
-        on_copy: callable[[], None],
-        on_show: callable[[], None],
-        on_generate: callable[[], None],
-        on_export: callable[[], None],
-        on_import: callable[[], None],
-        on_lock: callable[[], None],
+        master=None,
+        on_add: callable[[], None] = lambda: None,
+        on_edit: callable[[], None] = lambda: None,
+        on_delete: callable[[], None] = lambda: None,
+        on_copy: callable[[], None] = lambda: None,
+        on_show: callable[[], None] = lambda: None,
+        on_generate: callable[[], None] = lambda: None,
+        on_export: callable[[], None] = lambda: None,
+        on_import: callable[[], None] = lambda: None,
+        on_lock: callable[[], None] = lambda: None,
         **kwargs
     ):
         super().__init__(master, padding=15, **kwargs)
