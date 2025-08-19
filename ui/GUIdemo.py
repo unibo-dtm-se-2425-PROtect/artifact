@@ -52,9 +52,8 @@ class DemoController:
 if __name__=="__main__":
     app=tb.Window(themename="vapor")
     from VIEW.GUIview import PasswordManagerView
-    view=PasswordManagerView(app)
-    ctrl = DemoController(view) 
-    view.set_callbacks(
+    view=PasswordManagerView(
+        app,
         on_add=lambda:ctrl.add,
         on_edit=lambda:ctrl.edit,
         on_delete=lambda:ctrl.delete(),
@@ -64,7 +63,8 @@ if __name__=="__main__":
         on_export=lambda:ctrl.export(),
         on_import=lambda:ctrl.import_(),
         on_lock=lambda:ctrl.lock()
-    )
+        )
+    ctrl = DemoController(view) 
     view.pack(fill="both", expand=True)
 
     app.mainloop
