@@ -12,5 +12,9 @@ class PasswordManagerModel:
     def add_entry(self, site:str, URL:str, email:str, username:str, password:str):
         self.entries.append((site, URL, email, username, password))
     
+    def edit_entry(self, index:int, site:str, url:str, email:str, username:str, password:str):
+        if 0<=index<len(self.entries):
+            self.entries[index]=(site,url,email,username,password)
+    
     
 
