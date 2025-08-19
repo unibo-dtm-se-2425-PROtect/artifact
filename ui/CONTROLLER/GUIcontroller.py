@@ -83,6 +83,9 @@ class PasswordManagerController:
         self.data.append(("ImportedSite", "https://import.com", "import@mail.com", "importUser"))
         self.view.set_entries(self.data)
 
+    def lock(self):
+        print("Lock clicked")
+        #Mock
     
 
     
