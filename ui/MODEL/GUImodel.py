@@ -26,5 +26,14 @@ class PasswordManagerModel:
             chars += string.punctuation
         return ''.join(random.choices(chars, k=length))
     
+    def export_to_file(self, filepath:str):
+        #Export entries to a simple CSV file (demo purpose)
+        import csv
+        with open(filepath, "w", newline="", encoding="utf-8") as f:
+            writer = csv.writer(f)
+            writer.writerow(["Site", "URL", "Email", "Username", "Password"])
+            writer.writerows(self.entries)
     
+    
+
 
