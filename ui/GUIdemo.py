@@ -65,7 +65,8 @@ class DemoController:
         #   on_import=lambda:ctrl.import_(),
         #   on_lock=lambda:ctrl.lock()
         #)
-        view = view.PasswordManagerView(
+        from ui.VIEW.GUIview import PasswordManagerView
+        view = PasswordManagerView(
             on_add=dummy,
             on_edit=dummy,
             on_delete=dummy,
