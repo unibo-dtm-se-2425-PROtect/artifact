@@ -20,3 +20,13 @@ class PasswordManagerView (tb.Frame):
             **kwargs
     ):
         super().__init__(master, padding=15, **kwargs)
+    
+        #HEADER
+        header=tb.Frame(self)
+        header.pack(fill=X)
+        tb.Label(header, text="Password Manager", font=('Helvetica', 18)).pack(side=LEFT)
+        tb.Button(header, text="Lock", bootstyle=DANGER, command=on_lock).pack(side=RIGHT, padx=5)
+        tb.Button(header, text="Export", command=on_export).pack(side=RIGHT, padx=5)
+        tb.Button(header, text="Import", command=on_import).pack(side=RIGHT, padx=5)
+
+        
