@@ -40,4 +40,11 @@ class DemoController:
     def generate(self):
         self.view.show_message("Generate", "GenPassword!#")
     
+    def export(self):
+        self.view.show_message("Export", "Exported to demo.json")
+    
+    def import_(self):
+        self.view.show_message("import", "Imported from demo.json")
+    
+    
     
