@@ -54,7 +54,7 @@ class PasswordManagerView (tb.Frame):
         for i in self.tree.get_children():
             self.tree.delete(i)
     
-    def set_entries(self, rows:List[Tuple[str,str,str,str]]):
+    def set_entries(self, rows:List[Tuple[str,str,str,str,str]]):
         #rows is the list of tuple with site, URL, email, username, so they are all strings
         self.clear_entries()
         for r in rows:
