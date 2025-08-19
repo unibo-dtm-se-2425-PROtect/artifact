@@ -60,7 +60,16 @@ class PasswordManagerView (tb.Frame):
         for r in rows:
             self.tree.insert("", "end", values=r)
 
+    def get_selected_entry(self) -> Optional[Tuple[str,str,str,str]]:
+        sel=self.tree.selection()
+        if not sel:
+            messagebox.showinfo("Select", "Please select a row.")
+            return None
+        return self.tree.item(sel[0])["values"]
     
+    
+
+
 
 
 
