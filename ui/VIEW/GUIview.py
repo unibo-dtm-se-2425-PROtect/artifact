@@ -49,6 +49,11 @@ class PasswordManagerView (tb.Frame):
             self.tree.column(c, width=180 if c=="URL" else 140)
         self.tree.pack(fill=BOTH, expand=True)
 
-        
+    #Public Methods to update UI
+    def clear_entries(self):
+        for i in self.tree.get_children():
+            self.tree.delete(i)
+    
+    
 
 
