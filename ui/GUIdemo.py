@@ -6,7 +6,7 @@ import ttkbootstrap as tb
 from ui.VIEW.GUIview import PasswordManagerView
 
 class DemoController:
-    def __init__(self, view):
+    def __init__(self, view: PasswordManagerView):
         self.view=view
         self.entries=[
             ("GitHub", "https://github.com", "git@mail.com", "myuser"),
