@@ -46,5 +46,7 @@ class DemoController:
     def import_(self):
         self.view.show_message("import", "Imported from demo.json")
     
+    def lock(self):
+        self.view.show_message("Lock", "Vault locked")
     
     
