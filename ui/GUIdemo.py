@@ -4,3 +4,13 @@
 
 import ttkbootstrap as tb
 
+class DemoController:
+    def __init__(self, view):
+        self.view=view
+        self.entries=[
+            ("GitHub", "https://github.com", "git@mail.com", "myuser"),
+            ("Gmail", "https://gmail.com", "me@mail.com", "me"),
+        ]
+        self.refresh()
+    
+    
