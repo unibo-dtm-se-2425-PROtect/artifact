@@ -30,4 +30,13 @@ class PasswordManagerController:
         self.data.append(new_entry)
         self.view.set_entries(self.data)
 
+    def edit(self):
+        selected=self.view.get_selected_entry()
+        if selected:
+            print(f"Edit clicked on {selected}")
+            #Mocking: change username
+            idx=self.data.index(tuple(selected))
+            self.data[idx]=(selected[0], selected[1], selected[2], "editedUser")
+            self.view.set_entries(self.data)
+    
     
