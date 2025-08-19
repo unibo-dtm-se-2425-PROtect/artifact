@@ -42,7 +42,7 @@ class PasswordManagerView (tb.Frame):
         tb.Button(bar, text="Generate", command=on_generate).pack(side=LEFT, padx=4)
 
         #TABLE
-        cols=("Site", "URL", "Email", "Username")
+        cols=("Site", "URL", "Email", "Username", "Password")
         self.tree=tb.Treeview(self, columns=cols, show="headings", height=14, bootstyle=INFO)
         for c in cols:
             self.tree.heading(c, text=c)
