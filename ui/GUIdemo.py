@@ -31,4 +31,6 @@ class DemoController:
             self.entries=[r for r in self.entries if r[0]!=sel[0]]
             self.refresh()
     
+    def copy(self): 
+        self.view.show_message("Copy", "Password copied (mock)")
     
