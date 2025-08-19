@@ -25,4 +25,10 @@ class DemoController:
         if sel:
             self.view.show_message("Edit", f"Would you edit {sel[0]}")
     
+    def delete(self):
+        sel=self.view.get_selected_entry()
+        if sel:
+            self.entries=[r for r in self.entries if r[0]!=sel[0]]
+            self.refresh()
+    
     
