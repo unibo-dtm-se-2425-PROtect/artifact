@@ -34,6 +34,15 @@ class PasswordManagerModel:
             writer.writerow(["Site", "URL", "Email", "Username", "Password"])
             writer.writerows(self.entries)
     
+    def import_from_file(self, filepath:str):
+        import csv
+        with open(filepath, "r", encoding="utf-8") as f:
+            reader = csv.reader(f)
+            next(reader, None)  # skip header
+            for row in reader:
+                if len(row) == 5:
+                    self.entries.append(tuple(row))
+    
     
 
 
