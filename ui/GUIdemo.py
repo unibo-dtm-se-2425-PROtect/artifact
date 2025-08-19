@@ -37,4 +37,7 @@ class DemoController:
     def show(self):
         self.view.show_message("Show", "Password123", kind="warning")
     
+    def generate(self):
+        self.view.show_message("Generate", "GenPassword!#")
+    
     
