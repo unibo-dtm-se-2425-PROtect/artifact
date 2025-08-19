@@ -52,17 +52,31 @@ class DemoController:
     if __name__=="__main__":
         app=tb.Window(themename="vapor")
         view=view.PasswordManagerView(app)
-        ctrl = view.DemoController(view) #We jave to define a controller yet
-        view.set_callbacks(
-            on_add=lambda:ctrl.add,
-            on_edit=lambda:ctrl.edit,
-            on_delete=lambda:ctrl.delete(),
-            on_copy=lambda:ctrl.copy(),
-            on_show=lambda:ctrl.show(),
-            on_generate=lambda:ctrl.generate(),
-            on_export=lambda:ctrl.export(),
-            on_import=lambda:ctrl.import_(),
-            on_lock=lambda:ctrl.lock()
+        def dummy():pass
+        #ctrl = view.DemoController(view) We jave to define a controller yet
+        #view.set_callbacks(
+        #    on_add=lambda:ctrl.add,
+        #   on_edit=lambda:ctrl.edit,
+        #   on_delete=lambda:ctrl.delete(),
+        #   on_copy=lambda:ctrl.copy(),
+        #   on_show=lambda:ctrl.show(),
+        #   on_generate=lambda:ctrl.generate(),
+        #   on_export=lambda:ctrl.export(),
+        #   on_import=lambda:ctrl.import_(),
+        #   on_lock=lambda:ctrl.lock()
+        #)
+        view = view.PasswordManagerView(
+            on_add=dummy,
+            on_edit=dummy,
+            on_delete=dummy,
+            on_copy=dummy,
+            on_show=dummy,
+            on_generate=dummy,
+            on_export=dummy,
+            on_import=dummy,
+            on_lock=dummy,
+            on_search=dummy,
+            on_clear=dummy
         )
         view.pack(fill="both", expand=True)
 
