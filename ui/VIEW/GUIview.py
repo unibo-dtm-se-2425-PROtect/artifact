@@ -67,9 +67,12 @@ class PasswordManagerView (tb.Frame):
             return None
         return self.tree.item(sel[0])["values"]
     
+    def show_message(self, title:str, msg:str, kind="info"):
+        if kind=="info":
+            messagebox.showinfo(title, msg)
+        elif kind=="error":
+            messagebox.showerror(title, msg)
+        elif kind=="warning":
+            messagebox.showwarning(title,msg)
     
-
-
-
-
-
+    
