@@ -9,8 +9,8 @@ class DemoController:
     def __init__(self, view: PasswordManagerView):
         self.view=view
         self.entries=[
-            ("GitHub", "https://github.com", "git@mail.com", "myuser"),
-            ("Gmail", "https://gmail.com", "me@mail.com", "me"),
+            ("GitHub", "https://github.com", "git@mail.com", "myuser", "password123"),
+            ("Gmail", "https://gmail.com", "me@mail.com", "me", "secret456"),
         ]
         self.refresh()
     
@@ -18,7 +18,7 @@ class DemoController:
         self.view.set_entries(self.entries)
     
     def add(self): 
-        self.entries.append(("NewSite", "https://new.com", "newuser@mail.com", "newuser"))
+        self.entries.append(("NewSite", "https://new.com", "newuser@mail.com", "newuser", "mockpass"))
         self.refresh()
     
     def edit(self):
