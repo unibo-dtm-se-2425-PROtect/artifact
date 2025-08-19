@@ -38,7 +38,7 @@ def test_generateDeviceSecret_length():
     secret=generateDeviceSecret(15)
     assert len(secret)==15
 
-def test_generateDeviceSecret_defaukt_length():
+def test_generateDeviceSecret_default_length():
     secret=generateDeviceSecret()
     assert len(secret)==10
 
