@@ -49,8 +49,8 @@ class PasswordManagerController:
     def copy(self):
         selected=self.view.get_selected_entry()
         if selected:
-            print(f"Show clicked on {selected}")
-            #Temporarily show password [MOCK]
+            print(f"Copy clicked on {selected}")
+            
     
     
 
