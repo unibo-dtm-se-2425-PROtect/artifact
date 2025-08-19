@@ -56,6 +56,22 @@ class PasswordManagerController:
         if selected:
             print(f"Show clicked on {selected}")
             #Temporarily show password [MOCK]
-            
+
+    def generate(self):
+        import random, string
+        #Gen random password
+        password=''.join(random.choices(string.ascii_letters + string.digits + string.punctuation, k=12))
+        print(f"[MOCK] Generated password: {password}")
+        #optional
+        selected=self.view.get_selected_entry()
+        if selected:
+            #Modify existing row with new generated password, so edit last column
+            update_row=(selected[0], selected[1], selected[2], selected[3], password)
+            self.view.clear_entries()
+            self.view.set_entries([update_row])
+            #Add a row of entries with the new generated password
+            new_row=("New Site", "https://newURL.com", "new@mail.com", "newuser", password)
+            self.view.set_entries([new_row])
+
     
 
