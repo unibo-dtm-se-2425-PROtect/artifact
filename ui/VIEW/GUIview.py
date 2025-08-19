@@ -29,4 +29,17 @@ class PasswordManagerView (tb.Frame):
         tb.Button(header, text="Export", command=on_export).pack(side=RIGHT, padx=5)
         tb.Button(header, text="Import", command=on_import).pack(side=RIGHT, padx=5)
 
+        #TOOLBAR
+        bar=tb.Frame(self)
+        bar.pack(fill=X, pady=8)
+        tb.Button(bar, text="Add", bootstyle=SUCCESS, command=on_add).pack(side=LEFT, padx=4)
+        tb.Button(bar, text="Edit", command=on_edit).pack(side=LEFT, padx=4)
+        tb.Button(bar, text="Delete", bootstyle=DANGER, command=on_delete).pack(side=LEFT, padx=4)
+        tb.Separator(bar, orient=VERTICAL).pack(side=LEFT, fill=Y, padx=8)
+        tb.Button(bar, text="Copy", command=on_copy).pack(side=LEFT, padx=4)
+        tb.Button(bar, text="Show (10s)", bootstyle=WARNING, command=on_show).pack(side=LEFT, padx=4)
+        tb.Separator(bar, orient=VERTICAL).pack(side=LEFT, fill=Y, padx=8)
+        tb.Button(bar, text="Generate", command=on_generate).pack(side=LEFT, padx=4)
+
         
+
