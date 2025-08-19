@@ -16,5 +16,9 @@ class PasswordManagerModel:
         if 0<=index<len(self.entries):
             self.entries[index]=(site,url,email,username,password)
     
+    def delete_entry(self, index:int):
+        if 0<=index<len(self.entries):
+            del self.entries[index]
+    
     
 
