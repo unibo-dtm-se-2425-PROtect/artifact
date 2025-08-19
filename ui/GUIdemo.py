@@ -49,4 +49,21 @@ class DemoController:
     def lock(self):
         self.view.show_message("Lock", "Vault locked")
     
-    
+    if __name__=="__main__":
+        app=tb.Window(themename="vapor")
+        view=view.PasswordManagerView(app)
+        ctrl = view.DemoController(view) #We jave to define a controller yet
+        view.set_callbacks(
+            on_add=lambda:ctrl.add,
+            on_edit=lambda:ctrl.edit,
+            on_delete=lambda:ctrl.delete(),
+            on_copy=lambda:ctrl.copy(),
+            on_show=lambda:ctrl.show(),
+            on_generate=lambda:ctrl.generate(),
+            on_export=lambda:ctrl.export(),
+            on_import=lambda:ctrl.import_(),
+            on_lock=lambda:ctrl.lock()
+        )
+        view.pack(fill="both", expand=True)
+
+        app.mainloop
