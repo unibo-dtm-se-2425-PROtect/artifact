@@ -16,4 +16,8 @@ class DemoController:
     def refresh(self):
         self.view.set_entries(self.entries)
     
+    def add(self): 
+        self.entries.append(("NewSite", "https://new.com", "newuser@mail.com", "newuser"))
+        self.refresh()
+    
     
