@@ -34,3 +34,7 @@ class DemoController:
     def copy(self): 
         self.view.show_message("Copy", "Password copied (mock)")
     
+    def show(self):
+        self.view.show_message("Show", "Password123", kind="warning")
+    
+    
