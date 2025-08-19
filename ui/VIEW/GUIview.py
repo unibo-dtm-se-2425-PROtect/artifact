@@ -41,5 +41,14 @@ class PasswordManagerView (tb.Frame):
         tb.Separator(bar, orient=VERTICAL).pack(side=LEFT, fill=Y, padx=8)
         tb.Button(bar, text="Generate", command=on_generate).pack(side=LEFT, padx=4)
 
+        #TABLE
+        cols=("Site", "URL", "Email", "Username")
+        self.tree=tb.Treeview(self, columns=cols, show="headings", height=14, bootstyle=INFO)
+        for c in cols:
+            self.tree.heading(c, text=c)
+            self.tree.column(c, width=180 if c=="URL" else 140)
+        self.tree.pack(fill=BOTH, expand=True)
+
         
+
 
