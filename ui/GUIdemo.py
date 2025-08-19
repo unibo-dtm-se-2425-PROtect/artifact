@@ -51,7 +51,7 @@ class DemoController:
     
     if __name__=="__main__":
         app=tb.Window(themename="vapor")
-        view=view.GUIview.PasswordManagerView(app)
+        #view=view.GUIview.PasswordManagerView(app)
         def dummy():pass
         #ctrl = view.DemoController(view) We jave to define a controller yet
         #view.set_callbacks(
