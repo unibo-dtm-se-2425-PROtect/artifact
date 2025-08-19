@@ -72,6 +72,12 @@ class PasswordManagerController:
             #Add a row of entries with the new generated password
             new_row=("New Site", "https://newURL.com", "new@mail.com", "newuser", password)
             self.view.set_entries([new_row])
+    
+    def export(self):
+        print("Export clicked")
+        #Mock
+
+    
 
     
 
