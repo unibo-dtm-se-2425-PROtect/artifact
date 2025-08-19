@@ -20,4 +20,9 @@ class DemoController:
         self.entries.append(("NewSite", "https://new.com", "newuser@mail.com", "newuser"))
         self.refresh()
     
+    def edit(self):
+        sel=self.view.get_selected_entry()
+        if sel:
+            self.view.show_message("Edit", f"Would you edit {sel[0]}")
+    
     
