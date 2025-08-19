@@ -3,6 +3,7 @@
 #demo does not need to be tested, we directly test the MVC in the tests package 
 
 import ttkbootstrap as tb
+from ui.VIEW.GUIview import PasswordManagerView
 
 class DemoController:
     def __init__(self, view):
@@ -51,7 +52,6 @@ class DemoController:
     
 if __name__=="__main__":
     app=tb.Window(themename="vapor")
-    from VIEW.GUIview import PasswordManagerView
     view=PasswordManagerView(
         app,
         on_add=lambda:ctrl.add(),
