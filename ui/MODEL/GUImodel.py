@@ -20,5 +20,11 @@ class PasswordManagerModel:
         if 0<=index<len(self.entries):
             del self.entries[index]
     
+    def generate_password(self, length: int=12, use_symbols:bool=True) -> str:
+        chars = string.ascii_letters + string.digits
+        if use_symbols:
+            chars += string.punctuation
+        return ''.join(random.choices(chars, k=length))
+    
     
 
