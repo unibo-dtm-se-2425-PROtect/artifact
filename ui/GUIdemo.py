@@ -51,7 +51,7 @@ class DemoController:
     
 if __name__=="__main__":
     app=tb.Window(themename="vapor")
-    from ui.VIEW.GUIview import PasswordManagerView
+    from VIEW.GUIview import PasswordManagerView
     view=PasswordManagerView(app)
     ctrl = DemoController(view) 
     view.set_callbacks(
