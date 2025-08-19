@@ -77,6 +77,12 @@ class PasswordManagerController:
         print("Export clicked")
         #Mock
 
+    def import_(self):
+        print("Import clicked")
+        # Example: load data from file (mock)
+        self.data.append(("ImportedSite", "https://import.com", "import@mail.com", "importUser"))
+        self.view.set_entries(self.data)
+
     
 
     
