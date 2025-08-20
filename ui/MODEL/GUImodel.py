@@ -49,7 +49,7 @@ class PasswordManagerModel:
         self.cursor.close()
         self.db.close()
 
-    
+    #Password utils
     def generate_password(self, length: int=12, use_symbols:bool=True) -> str:
         chars = string.ascii_letters + string.digits
         if use_symbols:
