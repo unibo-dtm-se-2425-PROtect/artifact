@@ -34,9 +34,9 @@ class PasswordManagerModel:
         self.cursor.execute("UPDATE passwords SET Site=%s, URL=%s, Email=%s, Username=%s, password=%s WHERE ID=%s", (Site, URL, Email, Username, enc_pass, ID))
         self.db.commit()
     
-    def delete_entry(self, index:int):
-        if 0<=index<len(self.entries):
-            del self.entries[index]
+    def delete_entry(self, ID):
+        self.cursor.execute("DELETE FROM PROtect.entries WHERE ID=%s", (ID,))
+        self.db.commit()
     
     def generate_password(self, length: int=12, use_symbols:bool=True) -> str:
         chars = string.ascii_letters + string.digits
