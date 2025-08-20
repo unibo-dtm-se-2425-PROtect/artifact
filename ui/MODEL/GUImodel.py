@@ -21,8 +21,9 @@ class PasswordManagerModel:
         self.db.close()
     
     #CRUD OPERATIONS - Create, Read, Update, Delete
-    def get_entries(self) -> List[Tuple[str,str,str,str,str]]:
-        return self.entries #returns all stored entries
+    def get_entries(self) -> List[Tuple[str,str,str,str]]: #returns all sotred entires w/out password for security aims
+        self.cursor.execute("SELECT Site, URL, Email, Username FROM PROtect.entries")
+        return self.cursor.fetchall() 
     
     def add_entry(self, site:str, URL:str, email:str, username:str, password:str):
         self.entries.append((site, URL, email, username, password))
