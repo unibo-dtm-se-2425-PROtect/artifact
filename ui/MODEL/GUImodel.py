@@ -1,5 +1,9 @@
 import random, string
 from typing import Tuple, List, Optional
+import mysql.connector
+from project.dbconfig import dbconfig
+from project import AES256util
+from project.add import computeMasterKey
 
 class PasswordManagerModel:
     #Model to manage password entries (tuples)
