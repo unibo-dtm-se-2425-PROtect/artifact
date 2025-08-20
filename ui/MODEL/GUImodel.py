@@ -57,13 +57,17 @@ class PasswordManagerModel:
         return ''.join(random.choices(chars, k=length))
     
     #Import/Export operations 
-    def export_to_file(self, filepath:str):
-        #Export entries to a simple CSV file (demo purpose)
+    def export_to_file(self, filepath:str, masterkey=bytes):
+        #Export entries to a simple CSV file (Comma-Separated Values) decrypting passwords first
         import csv
+        self.cursor.execute("SELECT ID, Site, URL, Email, Username, password FROM PROtect.entries")
+        rows=self.cursor.fetchall()
         with open(filepath, "w", newline="", encoding="utf-8") as f:
             writer = csv.writer(f)
-            writer.writerow(["Site", "URL", "Email", "Username", "Password"])
-            writer.writerows(self.entries)
+            writer.writerow(["ID", "Site", "URL", "Email", "Username", "password"])
+            for r in rows:
+                plain=decrypt(masterkey, r[5]) if r[5] else ""
+                writer.writerows([r[0],r[1],r[2],r[3],r[4],plain])
     
     def import_from_file(self, filepath:str):
         import csv
