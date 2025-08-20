@@ -2,7 +2,7 @@ import random, string
 from typing import Tuple, List, Optional
 import mysql.connector
 from project.dbconfig import dbconfig
-from project import AES256util
+from project.AES256util import encrypt, decrypt
 from project.add import computeMasterKey
 
 class PasswordManagerModel:
@@ -25,12 +25,12 @@ class PasswordManagerModel:
         return self.cursor.fetchall() 
     
     def add_entry(self, Site, URL, Email, Username, password, masterkey):
-        enc_pass=AES256util.encrypt(password, masterkey)
+        enc_pass=encrypt(password, masterkey)
         self.cursor.execute("INSERT INTO PROtect.entries (Site, URL, Email, Username, password) VALUES (%s,%s,%s,%s,%s)", (Site, URL, Email, Username, enc_pass))
         self.db.commit()
     
     def edit_entry(self, ID, Site, URL, Email, Username, password, masterkey): #Update entry (and/or encrypt new password)
-        enc_pass=AES256util.encrypt(password, masterkey)
+        enc_pass=encrypt(password, masterkey)
         self.cursor.execute("UPDATE passwords SET Site=%s, URL=%s, Email=%s, Username=%s, password=%s WHERE ID=%s", (Site, URL, Email, Username, enc_pass, ID))
         self.db.commit()
     
