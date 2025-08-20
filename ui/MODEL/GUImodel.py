@@ -15,13 +15,13 @@ class PasswordManagerModel:
     def __init__schema(self):
         #Create DB/tables if they don't exist yet (first-time configuration)
         self.cursor.execute("CREATE DATABASE IF NOT EXISTS PROtect")
-        self.cursor.execute("CREATE TABLE IF NOT EXISTS PROtect.entries (Site VARCHAR(255), URL VARCHAR(225), email VARCHAR(225), username VARCHAR(225), password VARBINARY(225) -- encrypted)")    
+        self.cursor.execute("CREATE TABLE IF NOT EXISTS PROtect.entries (ID int AUTO_INCREMENT PRIMARY KEY, Site VARCHAR(255), URL VARCHAR(225), email VARCHAR(225), username VARCHAR(225), password VARBINARY(225) -- encrypted)")    
         self.cursor.execute("CREATE TABLE IF NOT EXISTS PROtect.secrets (mp VARCHAR(225), ds VARCHAR(225))")
         self.db.commit()
     
     #CRUD OPERATIONS - Create, Read, Update, Delete
-    def get_entries(self) -> List[Tuple[str,str,str,str]]: #returns all sotred entires w/out password for security aims
-        self.cursor.execute("SELECT Site, URL, Email, Username FROM PROtect.entries")
+    def get_entries(self) -> List[Tuple[int,str,str,str,str]]: #returns all sotred entires w/out password for security aims
+        self.cursor.execute("SELECT ID, Site, URL, Email, Username FROM PROtect.entries")
         return self.cursor.fetchall() 
     
     def add_entry(self, Site, URL, Email, Username, password, masterkey):
