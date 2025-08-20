@@ -19,10 +19,6 @@ class PasswordManagerModel:
         self.cursor.execute("CREATE TABLE IF NOT EXISTS PROtect.secrets (mp VARCHAR(225), ds VARCHAR(225))")
         self.db.commit()
         self.db.close()
-        
-    #Model to manage password entries (tuples)
-    def __init__(self):
-        self.entries:List[Tuple[str,str,str,str,str]]=[]
     
     def get_entries(self) -> List[Tuple[str,str,str,str,str]]:
         return self.entries #returns all stored entries
