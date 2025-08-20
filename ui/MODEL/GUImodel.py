@@ -11,6 +11,14 @@ class PasswordManagerModel:
         self.db = dbconfig()
         self.cursor = self.db.cursor()
         self.__init__schema()
+
+    def __init__schema(self):
+        #Create DB/tables if they don't exist yet (first-time configuration)
+        self.cursor.execute("CREATE DATABASE IF NOT EXISTS PROtect")
+        self.cursor.execute("CREATE TABLE IF NOT EXISTS PROtect.entries (Site VARCHAR(255), URL VARCHAR(225), email VARCHAR(225), username VARCHAR(225), password VARBINARY(225) -- encrypted)")    
+        self.cursor.execute("CREATE TABLE IF NOT EXISTS PROtect.secrets (mp VARCHAR(225), ds VARCHAR(225))")
+        self.db.commit()
+        self.db.close()
         
     #Model to manage password entries (tuples)
     def __init__(self):
