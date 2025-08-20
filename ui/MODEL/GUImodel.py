@@ -20,6 +20,7 @@ class PasswordManagerModel:
         self.db.commit()
         self.db.close()
     
+    #CRUD OPERATIONS - Create, Read, Update, Delete
     def get_entries(self) -> List[Tuple[str,str,str,str,str]]:
         return self.entries #returns all stored entries
     
