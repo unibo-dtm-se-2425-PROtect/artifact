@@ -45,6 +45,11 @@ class PasswordManagerModel:
             return decrypt(result[0], masterkey)
         return None
     
+    def close(self):
+        self.cursor.close()
+        self.db.close()
+
+    
     def generate_password(self, length: int=12, use_symbols:bool=True) -> str:
         chars = string.ascii_letters + string.digits
         if use_symbols:
