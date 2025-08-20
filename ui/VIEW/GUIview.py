@@ -42,7 +42,7 @@ class PasswordManagerView (tb.Frame):
         tb.Button(bar, text="Generate", command=on_generate).pack(side=LEFT, padx=4)
 
         #TABLE
-        cols=("Site", "URL", "Email", "Username", "Password")
+        cols=("Site", "URL", "Email", "Username")
         self.tree=tb.Treeview(self, columns=cols, show="headings", height=14, bootstyle=INFO)
         for c in cols:
             self.tree.heading(c, text=c)
@@ -54,13 +54,13 @@ class PasswordManagerView (tb.Frame):
         for i in self.tree.get_children():
             self.tree.delete(i)
     
-    def set_entries(self, rows:List[Tuple[str,str,str,str,str]]):
+    def set_entries(self, rows:List[Tuple[str,str,str,str]]):
         #rows is the list of tuple with site, URL, email, username, so they are all strings
         self.clear_entries()
         for r in rows:
             self.tree.insert("", "end", values=r)
 
-    def get_selected_entry(self) -> Optional[Tuple[str,str,str,str,str]]:
+    def get_selected_entry(self) -> Optional[Tuple[str,str,str,str]]:
         sel=self.tree.selection()
         if not sel:
             messagebox.showinfo("Select", "Please select a row.")
