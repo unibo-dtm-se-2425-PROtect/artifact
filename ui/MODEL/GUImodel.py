@@ -18,7 +18,6 @@ class PasswordManagerModel:
         self.cursor.execute("CREATE TABLE IF NOT EXISTS PROtect.entries (Site VARCHAR(255), URL VARCHAR(225), email VARCHAR(225), username VARCHAR(225), password VARBINARY(225) -- encrypted)")    
         self.cursor.execute("CREATE TABLE IF NOT EXISTS PROtect.secrets (mp VARCHAR(225), ds VARCHAR(225))")
         self.db.commit()
-        self.db.close()
     
     #CRUD OPERATIONS - Create, Read, Update, Delete
     def get_entries(self) -> List[Tuple[str,str,str,str]]: #returns all sotred entires w/out password for security aims
@@ -29,7 +28,6 @@ class PasswordManagerModel:
         enc_pass=AES256util.encrypt(password, masterkey)
         self.cursor.execute("INSERT INTO PROtect.entries (Site, URL, Email, Username, password) VALUES (%s,%s,%s,%s,%s)", (Site, URL, Email, Username, enc_pass))
         self.db.commit()
-        self.db.close()
     
     def edit_entry(self, ID, Site, URL, Email, Username, password, masterkey): #Update entry (and/or encrypt new password)
         enc_pass=AES256util.encrypt(password, masterkey)
