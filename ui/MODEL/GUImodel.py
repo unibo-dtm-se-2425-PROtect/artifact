@@ -31,9 +31,10 @@ class PasswordManagerModel:
         self.db.commit()
         self.db.close()
     
-    def edit_entry(self, index:int, site:str, url:str, email:str, username:str, password:str):
-        if 0<=index<len(self.entries):
-            self.entries[index]=(site,url,email,username,password)
+    def edit_entry(self, ID, Site, URL, Email, Username, password, masterkey): #Update entry (and/or encrypt new password)
+        enc_pass=AES256util.encrypt(password, masterkey)
+        self.cursor.execute("UPDATE passwords SET Site=%s, URL=%s, Email=%s, Username=%s, password=%s WHERE ID=%s", (Site, URL, Email, Username, enc_pass, ID))
+        self.db.commit()
     
     def delete_entry(self, index:int):
         if 0<=index<len(self.entries):
