@@ -56,6 +56,7 @@ class PasswordManagerModel:
             chars += string.punctuation
         return ''.join(random.choices(chars, k=length))
     
+    #Import/Export operations 
     def export_to_file(self, filepath:str):
         #Export entries to a simple CSV file (demo purpose)
         import csv
