@@ -1,5 +1,6 @@
 from ui.VIEW.GUIview import PasswordManagerView
-from typing import List, Tuple
+from typing import List, Tuple, Optional
+from ui.MODEL.GUImodel import PasswordManagerModel
 
 class PasswordManagerController:
     def __init__(self, view:PasswordManagerView):
