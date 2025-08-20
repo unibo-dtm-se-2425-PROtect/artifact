@@ -25,8 +25,11 @@ class PasswordManagerModel:
         self.cursor.execute("SELECT Site, URL, Email, Username FROM PROtect.entries")
         return self.cursor.fetchall() 
     
-    def add_entry(self, site:str, URL:str, email:str, username:str, password:str):
-        self.entries.append((site, URL, email, username, password))
+    def add_entry(self, Site, URL, Email, Username, password, masterkey):
+        enc_pass=AES256util.encrypt(password, masterkey)
+        self.cursor.execute("INSERT INTO PROtect.entries (Site, URL, Email, Username, password) VALUES (%s,%s,%s,%s,%s)", (Site, URL, Email, Username, enc_pass))
+        self.db.commit()
+        self.db.close()
     
     def edit_entry(self, index:int, site:str, url:str, email:str, username:str, password:str):
         if 0<=index<len(self.entries):
