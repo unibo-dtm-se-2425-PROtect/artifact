@@ -6,6 +6,12 @@ from project import AES256util
 from project.add import computeMasterKey
 
 class PasswordManagerModel:
+    #Establish DB connection
+    def __init__(self):
+        self.db = dbconfig()
+        self.cursor = self.db.cursor()
+        self.__init__schema()
+        
     #Model to manage password entries (tuples)
     def __init__(self):
         self.entries:List[Tuple[str,str,str,str,str]]=[]
