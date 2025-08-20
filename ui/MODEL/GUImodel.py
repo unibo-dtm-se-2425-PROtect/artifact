@@ -38,6 +38,13 @@ class PasswordManagerModel:
         self.cursor.execute("DELETE FROM PROtect.entries WHERE ID=%s", (ID,))
         self.db.commit()
     
+    def get_password(self, ID, masterkey) -> Optional[str]:
+        self.cursor.execute("SELECT password FROM PROtect.entries WHERE ID=%s", (ID,))
+        result=self.cursor.fetchone()
+        if result:
+            return decrypt(result[0], masterkey)
+        return None
+    
     def generate_password(self, length: int=12, use_symbols:bool=True) -> str:
         chars = string.ascii_letters + string.digits
         if use_symbols:
