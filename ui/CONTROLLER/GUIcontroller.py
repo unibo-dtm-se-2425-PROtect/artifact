@@ -28,6 +28,10 @@ class PasswordManagerController:
         self.view.pack(fill=tk.BOTH, expand=True)
         self.refresh_entries()
 
+    def refresh_entries(self):
+        entries=self.model.get_entries()
+        self.view.set_entries(entries)
+
         #Mock Data for Demonstration
         self.data:List[Tuple[str,str,str,str]] = [
             "ExSite", "https://ExURL.com", "Ex@mail.com", "ExUser"
