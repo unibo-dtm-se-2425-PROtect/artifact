@@ -13,15 +13,20 @@ class PasswordManagerController:
         self.masterkey=computeMasterKey(master_password)
 
         #Bind view callbacks to controller methods
-        self.view.on_add=self.add
-        self.view.on_edit=self.edit
-        self.view.on_delete=self.delete
-        self.view.on_copy=self.copy
-        self.view.on_generate=self.generate
-        self.view.on_show=self.show
-        self.view.on_export=self.export
-        self.view.on_import=self.import_
-        self.view.lock=self.lock
+        self.view=PasswordManagerView(
+            root,
+            on_add=self.add_entry,
+            on_edit=self.edit_entry,
+            on_delete=self.delete_entry,
+            on_copy=self.copy,
+            on_generate=self.generate_password,
+            on_show=self.show_message,
+            on_export=self.export_to_file,
+            on_import=self.import_from_file,
+            on_lock=self.lock,
+        )
+        self.view.pack(fill=tk.BOTH, expand=True)
+        self.refresh_entries()
 
         #Mock Data for Demonstration
         self.data:List[Tuple[str,str,str,str]] = [
