@@ -99,6 +99,13 @@ class PasswordManagerController:
         self.root.clipboard_clear()
         self.root.clipboard_append(pwd)
         self.view.show_message("Generated", "Random Password generated and copied to clipboard!")
+
+    #IMPORT/EXPORT
+    def export_to_file(self):
+        filepath=filedialog.asksaveasfilename(defaultextension=".cvs")
+        if filepath:
+            self.model.export_to_file(filepath,self.masterkey)
+            self.view.show_message("Export", f"Entries exported to {filepath}")
     
         
 
