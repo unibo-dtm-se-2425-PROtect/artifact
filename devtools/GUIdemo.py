@@ -73,4 +73,4 @@ if __name__=="__main__":
     controller_placeholder["ctrl"]=ctrl #injects the real controller
     view.pack(fill="both", expand=True)
 
-    app.mainloop
+    app.mainloop()
