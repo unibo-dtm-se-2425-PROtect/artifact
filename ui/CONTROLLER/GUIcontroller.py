@@ -23,7 +23,7 @@ class PasswordManagerController:
             on_show=self.show_message,
             on_export=self.export_to_file,
             on_import=self.import_from_file,
-            on_lock=self.lock,
+            on_lock=self.lock_app,
         )
         self.view.pack(fill=tk.BOTH, expand=True)
         self.refresh_entries()
@@ -113,8 +113,13 @@ class PasswordManagerController:
             self.model.import_from_file(filepath, self.masterkey)
             self.view.show_message("Import", f"Entries imported from {filepath}")
     
+    #LOCK
+    def lock_app(self):
+        self.model.close()
+        self.masterkey=None
+        self.view.clear_entries()
+        self.view.show_message("Locked", "Password Manager Locked. Re-run to Unlock.")
     
-
 
         #Mock Data for Demonstration
         self.data:List[Tuple[str,str,str,str]] = [
