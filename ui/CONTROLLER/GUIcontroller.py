@@ -18,7 +18,7 @@ class PasswordManagerController:
             on_add=self.add_entry,
             on_edit=self.edit_entry,
             on_delete=self.delete_entry,
-            on_copy=self.copy,
+            on_copy=self.copy_password,
             on_generate=self.generate_password,
             on_show=self.show_message,
             on_export=self.export_to_file,
@@ -68,6 +68,18 @@ class PasswordManagerController:
         self.model.delete_entry[ID]
         self.refresh_entries()
 
+    #PASSWORD METHODS
+    def copy_password(self):
+        selected=self.view.get_selected_entry()
+        if not selected:
+            return
+        ID=selected[0]
+        pwd=self.model.get_password(ID, self.masterkey)
+        if pwd:
+            self.root.clipboard_clear()
+            self.root.clipboard_append(pwd)
+            self.view.show_message("Success", "Password copied to clipboard!")
+    
     
 
 
