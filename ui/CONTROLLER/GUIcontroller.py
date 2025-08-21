@@ -60,6 +60,14 @@ class PasswordManagerController:
         self.model.edit_entry(ID, new_site, new_url, new_email, new_username, new_password, self.masterkey)
         self.refresh_entries()
 
+    def delete_entry(self):
+        selected=self.view.get_selected_entry()
+        if not selected:
+            return
+        ID=selected[0]
+        self.model.delete_entry[ID]
+        self.refresh_entries()
+
     
 
 
