@@ -69,14 +69,16 @@ class PasswordManagerModel:
                 plain=decrypt(masterkey, r[5]) if r[5] else ""
                 writer.writerows([r[0],r[1],r[2],r[3],r[4],plain])
     
-    def import_from_file(self, filepath:str):
+    def import_from_file(self, filepath:str, masterkey=bytes):
         import csv
         with open(filepath, "r", encoding="utf-8") as f:
             reader = csv.reader(f)
             next(reader, None)  # skip header
             for row in reader:
-                if len(row) == 5:
-                    self.entries.append(tuple(row))
+                if len(row) == 6:
+                    enc_pass=encrypt(masterkey, row[5])
+                    self.cursor.execute("INSERT INTO PROtect.entries (ID, Site, URL, Email, Username, password) VALUES (%s,%s,%s,%s,%s,%s)", (row[0],row[1],row[2],row[3],row[4],enc_pass))
+                    self.db.commit()
     
     
 
