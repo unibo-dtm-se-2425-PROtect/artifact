@@ -44,7 +44,25 @@ class PasswordManagerController:
             self.model.add_entry(site, url, email, username, password, self.masterkey)
             self.refresh_entries()
 
+    def edit_entry(self):
+        selected=self.view.get_selected_entry()
+        if not selected:
+            return
+        ID, Site, url, email, username, password = selected
+        from tkinter.simpledialog import askstring
+        new_site=askstring("Edit Site", "Site: ", initialvalue=Site)
+        new_url=askstring("Edit URL", "URL: ", initialvalue=url)
+        new_email=askstring("Edit Email", "Email: ", initialvalue=email)
+        new_username=askstring("Edit Username", "Username: ", initialvalue=username)
+        new_password=askstring("Edit Password", "Password (keep it empty to keep the current one): ")
+        if not new_password:
+            new_password=self.model.get_password(ID, self.masterkey)
+        self.model.edit_entry(ID, new_site, new_url, new_email, new_username, new_password, self.masterkey)
+        self.refresh_entries()
+
     
+
+
         #Mock Data for Demonstration
         self.data:List[Tuple[str,str,str,str]] = [
             "ExSite", "https://ExURL.com", "Ex@mail.com", "ExUser"
