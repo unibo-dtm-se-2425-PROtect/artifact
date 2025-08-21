@@ -80,6 +80,20 @@ class PasswordManagerController:
             self.root.clipboard_append(pwd)
             self.view.show_message("Success", "Password copied to clipboard!")
     
+    def show_password(self):
+        selected=self.view.get_selected_entry()
+        if not selected:
+            return
+        ID=selected[0]
+        pwd=self.model.get_password(ID, self.masterkey)
+        if pwd:
+            top=tk.Toplevel(self.root)
+            top.title("Password (10s)")
+            lbl=tk.Label(top,text=pwd, font=("Helvetica", 14))
+            lbl.pack(padx=20, pady=20)
+            #Auto-close after 10 seconds for extra safety
+            self.root.after(10000, top.destroy)
+    
     
 
 
