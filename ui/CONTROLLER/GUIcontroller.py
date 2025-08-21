@@ -94,7 +94,13 @@ class PasswordManagerController:
             #Auto-close after 10 seconds for extra safety
             self.root.after(10000, top.destroy)
     
+    def generate_password(self):
+        pwd=self.model.generate_password()
+        self.root.clipboard_clear()
+        self.root.clipboard_append(pwd)
+        self.view.show_message("Generated", "Random Password generated and copied to clipboard!")
     
+        
 
 
         #Mock Data for Demonstration
