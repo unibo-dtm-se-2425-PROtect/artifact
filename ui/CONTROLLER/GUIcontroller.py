@@ -7,8 +7,10 @@ from tkinter import simpledialog, filedialog
 from project.add import computeMasterKey
 
 class PasswordManagerController:
-    def __init__(self, view:PasswordManagerView):
-        self.view=view
+    def __init__(self, root, master_password=str):
+        self.root=root
+        self.model=PasswordManagerModel()
+        self.masterkey=computeMasterKey(master_password)
 
         #Bind view callbacks to controller methods
         self.view.on_add=self.add
