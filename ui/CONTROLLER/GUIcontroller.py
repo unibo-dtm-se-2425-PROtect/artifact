@@ -32,6 +32,19 @@ class PasswordManagerController:
         entries=self.model.get_entries()
         self.view.set_entries(entries)
 
+    #CRUD METHODS
+    def add_entry(self):
+        from tkinter.simpledialog import askstring
+        site=askstring("Site", "Enter site name: ")
+        url = askstring("URL", "Enter URL: ")
+        email = askstring("Email", "Enter Email: ")
+        username = askstring("Username", "Enter Username: ")
+        password = askstring("Password", "Enter Password: ")
+        if all([site, url, email, username, password]):
+            self.model.add_entry(site, url, email, username, password, self.masterkey)
+            self.refresh_entries()
+
+    
         #Mock Data for Demonstration
         self.data:List[Tuple[str,str,str,str]] = [
             "ExSite", "https://ExURL.com", "Ex@mail.com", "ExUser"
