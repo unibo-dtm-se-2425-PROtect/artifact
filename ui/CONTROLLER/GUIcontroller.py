@@ -7,14 +7,12 @@ from tkinter import simpledialog, filedialog
 from project.add import computeMasterKey
 
 class PasswordManagerController:
-    def __init__(self, root, master_password=str):
-        self.root=root
+    def __init__(self, master_password=str):
         self.model=PasswordManagerModel()
-        self.masterkey=computeMasterKey(master_password)
+        self.masterkey=computeMasterKey(master_password, "1")
 
         #Bind view callbacks to controller methods
         self.view=PasswordManagerView(
-            root,
             on_add=self.add_entry,
             on_edit=self.edit_entry,
             on_delete=self.delete_entry,
@@ -76,8 +74,8 @@ class PasswordManagerController:
         ID=selected[0]
         pwd=self.model.get_password(ID, self.masterkey)
         if pwd:
-            self.root.clipboard_clear()
-            self.root.clipboard_append(pwd)
+            self.view.clipboard_clear()
+            self.view.clipboard_append(pwd)
             self.view.show_message("Success", "Password copied to clipboard!")
     
     def show_password(self):
@@ -87,17 +85,17 @@ class PasswordManagerController:
         ID=selected[0]
         pwd=self.model.get_password(ID, self.masterkey)
         if pwd:
-            top=tk.Toplevel(self.root)
+            top=tk.Toplevel(self.view)
             top.title("Password (10s)")
             lbl=tk.Label(top,text=pwd, font=("Helvetica", 14))
             lbl.pack(padx=20, pady=20)
             #Auto-close after 10 seconds for extra safety
-            self.root.after(10000, top.destroy)
+            self.view.after(10000, top.destroy)
     
     def generate_password(self):
         pwd=self.model.generate_password()
-        self.root.clipboard_clear()
-        self.root.clipboard_append(pwd)
+        self.view.clipboard_clear()
+        self.view.clipboard_append(pwd)
         self.view.show_message("Generated", "Random Password generated and copied to clipboard!")
 
     #IMPORT/EXPORT
@@ -120,7 +118,5 @@ class PasswordManagerController:
         self.view.clear_entries()
         self.view.show_message("Locked", "Password Manager Locked. Re-run to Unlock.")
 
-    
-
-    
-
+    def show_message(self):
+        pass
