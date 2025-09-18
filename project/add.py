@@ -1,13 +1,10 @@
 from getpass import getpass
-from dbconfig import dbconfig
+from project.dbconfig import dbconfig
 from Crypto.Protocol.KDF import PBKDF2
 from Crypto.Hash import SHA512
-from Crypto.Random import get_random_bytes
 from rich import print as printc
-from rich.console import console
-import base64
 
-import AES256util
+from project import AES256util
 
 #function to comupute the masterkey from the masterPassword (mp) and the the deviceSecret (ds)
 def computeMasterKey(mp,ds): 
