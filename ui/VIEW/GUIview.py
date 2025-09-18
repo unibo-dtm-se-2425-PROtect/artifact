@@ -7,7 +7,6 @@ class PasswordManagerView (tb.Frame):
     #It only defines the GUI, doesn't consider db, crypto etc. The controller must be passed in to handle actions
     def __init__(
         self,
-        master=None,
         on_add: Callable[[], None] = lambda: None,
         on_edit: Callable[[], None] = lambda: None,
         on_delete: Callable[[], None] = lambda: None,
@@ -19,7 +18,7 @@ class PasswordManagerView (tb.Frame):
         on_lock: Callable[[], None] = lambda: None,
         **kwargs
     ):
-        super().__init__(master, padding=15, **kwargs)
+        super().__init__(padding=15, **kwargs)
     
         #HEADER
         header=tb.Frame(self)
