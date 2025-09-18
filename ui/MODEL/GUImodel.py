@@ -5,6 +5,33 @@ from project.dbconfig import dbconfig
 from project.AES256util import encrypt, decrypt
 from project.add import computeMasterKey
 
+import os
+
+test_mode = os.environ.get("TEST", "").lower() == "true"
+
+
+QUERY_CREATE_DB = """
+CREATE DATABASE IF NOT EXISTS PROtect
+"""
+
+QUERY_CREATE_TABLE_ENTRIES = """
+CREATE TABLE IF NOT EXISTS PROtect.entries (
+    ID int AUTO_INCREMENT PRIMARY KEY, 
+    Site VARCHAR(255), 
+    URL VARCHAR(225), 
+    email VARCHAR(225), 
+    username VARCHAR(225), 
+    password VARBINARY(225) -- encrypted
+)
+"""
+
+QUERY_CREATE_TABLE_SECRETS = """
+CREATE TABLE IF NOT EXISTS PROtect.secrets (
+    mp VARCHAR(225), 
+    ds VARCHAR(225)
+)
+"""
+
 class PasswordManagerModel:
     #Establish DB connection
     def __init__(self):
@@ -13,10 +40,13 @@ class PasswordManagerModel:
         self.__init__schema()
 
     def __init__schema(self):
+        if test_mode:
+            print("Test mode: cleaning up database PROtect")
+            self.cursor.execute("DROP DATABASE PROtect;")
         #Create DB/tables if they don't exist yet (first-time configuration)
-        self.cursor.execute("CREATE DATABASE IF NOT EXISTS PROtect")
-        self.cursor.execute("CREATE TABLE IF NOT EXISTS PROtect.entries (ID int AUTO_INCREMENT PRIMARY KEY, Site VARCHAR(255), URL VARCHAR(225), email VARCHAR(225), username VARCHAR(225), password VARBINARY(225) -- encrypted)")    
-        self.cursor.execute("CREATE TABLE IF NOT EXISTS PROtect.secrets (mp VARCHAR(225), ds VARCHAR(225))")
+        self.cursor.execute(QUERY_CREATE_DB)
+        self.cursor.execute(QUERY_CREATE_TABLE_ENTRIES)    
+        self.cursor.execute(QUERY_CREATE_TABLE_SECRETS)
         self.db.commit()
     
     #CRUD OPERATIONS - Create, Read, Update, Delete
