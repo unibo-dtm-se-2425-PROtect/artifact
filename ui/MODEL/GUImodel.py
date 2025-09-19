@@ -21,7 +21,7 @@ CREATE TABLE IF NOT EXISTS PROtect.entries (
     URL VARCHAR(225), 
     email VARCHAR(225), 
     username VARCHAR(225), 
-    password VARBINARY(225) -- encrypted
+    password VARBINARY(225)
 )
 """
 
