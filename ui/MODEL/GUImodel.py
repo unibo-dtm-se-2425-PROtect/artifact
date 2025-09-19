@@ -50,7 +50,7 @@ class PasswordManagerModel:
         self.db.commit()
     
     #CRUD OPERATIONS - Create, Read, Update, Delete
-    def get_entries(self) -> List[Tuple[int,str,str,str,str]]: #returns all sotred entires w/out password for security aims
+    def get_entries(self) -> List[Tuple[int,str,str,str,str]]: #returns all stored entries w/out password for security aims
         self.cursor.execute("SELECT ID, Site, URL, Email, Username FROM PROtect.entries")
         return self.cursor.fetchall() 
     
