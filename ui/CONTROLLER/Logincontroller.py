@@ -32,14 +32,12 @@ class Logincontroller:
         #Depending on the secrets table layout, mp may store derived_key_hex and ds the salt (we'll try to be flexible)
         stored_mp, stored_ds = row  #stored_mp: derived_key_hex or username
 
-        #If the secrets table uses columns differently, we assume stored_ds is the salt.
-        salt = stored_ds if stored_ds else ""
         # Compute derived key from entered password and salt
-        derived = computeMasterKey(password, salt)
-        derived_hex = derived.hex() if isinstance(derived, (bytes, bytearray)) else str(derived)
+        derived = computeMasterKey(password, stored_ds)
+        derived_hex = derived.hex()
 
         # Compare with stored_mp
-        if stored_mp and derived_hex == stored_mp:
+        if derived_hex == stored_mp:
             # Success
             self.view.pack_forget()
             self.view.destroy()
