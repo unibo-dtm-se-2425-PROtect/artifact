@@ -12,7 +12,6 @@ class PasswordManagerView (tb.Frame):
         on_delete: Callable[[], None] = lambda: None,
         on_copy: Callable[[], None] = lambda: None,
         on_show: Callable[[], None] = lambda: None,
-        on_generate: Callable[[], None] = lambda: None,
         on_export: Callable[[], None] = lambda: None,
         on_import: Callable[[], None] = lambda: None,
         on_lock: Callable[[], None] = lambda: None,
@@ -38,7 +37,6 @@ class PasswordManagerView (tb.Frame):
         tb.Button(bar, text="Copy", command=on_copy).pack(side=LEFT, padx=4)
         tb.Button(bar, text="Show (10s)", bootstyle=WARNING, command=on_show).pack(side=LEFT, padx=4)
         tb.Separator(bar, orient=VERTICAL).pack(side=LEFT, fill=Y, padx=8)
-        tb.Button(bar, text="Generate", command=on_generate).pack(side=LEFT, padx=4)
 
         #TABLE
         cols=("Site", "URL", "Email", "Username")
