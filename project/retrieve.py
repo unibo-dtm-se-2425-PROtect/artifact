@@ -14,6 +14,12 @@ from Crypto.Random import get_random_bytes
 import AES256util
 import pyperclip
 
+def computeMasterKey(mp,ds):
+    password=mp.encode()
+    salt=ds.encode()
+    key=PBKDF2(password, salt, 32, count=1000000, hmac_hash_module=SHA512)
+    return key
+
 def retrieveEntries(mp, ds, search, decryptPassword = False):
     #search will contain the search fields that are inputted by the user and that we want to search in the database
     #decryptPassword is set to False for security reasons: it will be set to True only if the user explicitly wants it
