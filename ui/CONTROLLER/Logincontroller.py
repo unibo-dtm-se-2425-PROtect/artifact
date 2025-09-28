@@ -84,4 +84,13 @@ class Logincontroller:
         # Immediately log in
         self.verify_login(username, password)
 
-    
+    def _secrets_has_username_col(self) -> bool:
+        #Helper: try to detect whether secrets table contains a username column (username).
+        #Returns True if column exists, False otherwise.
+        try:
+            self.model.cursor.execute("SHOW COLUMNS FROM PROtect.secrets")
+            cols = [r[0] for r in self.model.cursor.fetchall()]
+            # common candidate column name to hold username
+            return "username" in cols
+        except Exception:
+            return False
