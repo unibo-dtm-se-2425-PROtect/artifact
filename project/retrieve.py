@@ -45,6 +45,8 @@ def retrieveEntries(mp, ds, search, decryptPassword = False):
         return
 
     if (decryptPassword and len(results)>1) or (not decryptPassword):
+        if decryptPassword:
+            printc("[yellow][-][/yellow] More than one result found from the search, therefore not extracting the password. Please, be more specific")
         #handling the columns of the results table
         table = Table(title="Results")
         table.add_column("Site Name")
