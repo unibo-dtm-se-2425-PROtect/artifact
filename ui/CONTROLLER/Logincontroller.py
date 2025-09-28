@@ -19,7 +19,7 @@ class Logincontroller:
         #Verify username + master password against the stored derived key (PBKDF2 result stored as hex).
         cur = self.model.cursor
         # Query secrets for this username
-        cur.execute("SELECT mp, ds FROM PROtect.secrets WHERE mp_username=%s" if self._secrets_has_username_col() else "SELECT mp, ds FROM PROtect.secrets WHERE mp=%s", (username,))
+        cur.execute("SELECT mp, ds FROM PROtect.secrets WHERE username=%s", (username,))
         row = cur.fetchone()
         if not row: #No such user
             res = messagebox.askyesno("User not found", f"User '{username}' not found. Do you want to create a new account?")
@@ -56,7 +56,7 @@ class Logincontroller:
         cur = self.model.cursor
 
         # Check if user exists already
-        cur.execute("SELECT mp FROM PROtect.secrets WHERE mp_username=%s" if self._secrets_has_username_col() else "SELECT mp FROM PROtect.secrets WHERE mp=%s", (username,))
+        cur.execute("SELECT mp FROM PROtect.secrets WHERE username=%s", (username,))
         if cur.fetchone():
             messagebox.showinfo("Exists", f"User '{username}' already exists. Please login instead.")
             self.view.clear_password()
