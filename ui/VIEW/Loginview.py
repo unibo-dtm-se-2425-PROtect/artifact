@@ -32,4 +32,13 @@ class Loginview(tb.Frame):
         self.master.bind("<Return>", lambda e: self._try_login()) #allow ENTER to submit login via keyboard
 
         self.username_entry.focus()
+
+    def _try_login(self):
+        username = self.username_entry.get().strip()
+        password = self.password_entry.get()
+        if not username or not password:
+            messagebox.showwarning("Input required", "Please enter both username and master password.")
+            return
+        self.on_login(username, password)
+    
     
