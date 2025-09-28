@@ -1,4 +1,3 @@
-import random, string
 from typing import Tuple, List, Optional
 import mysql.connector
 from project.dbconfig import dbconfig

@@ -10,7 +10,6 @@ from rich import print as printc
 import add
 import string
 import retrieve
-import generate
 from dbconfig import dbconfig
 
 parser = argparse.ArgumentParser(description='Description')

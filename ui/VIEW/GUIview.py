@@ -1,6 +1,6 @@
 import ttkbootstrap as tb
 from ttkbootstrap.constants import *
-from tkinter import BOTH, X, Y, LEFT, RIGHT, END, messagebox, filedialog
+from tkinter import BOTH, X, Y, LEFT, RIGHT, messagebox
 from typing import Callable, Optional, List, Tuple
 
 class PasswordManagerView (tb.Frame):
