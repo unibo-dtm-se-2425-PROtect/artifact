@@ -49,4 +49,5 @@ class Loginview(tb.Frame):
             return
         self.on_signup(username, password)
 
-    
+    def clear_password(self):
+        self.password_entry.delete(0, tk.END)
