@@ -41,4 +41,12 @@ class Loginview(tb.Frame):
             return
         self.on_login(username, password)
     
+    def _try_signup(self):
+        username = self.username_entry.get().strip()
+        password = self.password_entry.get()
+        if not username or not password:
+            messagebox.showwarning("Input required", "Please provide a username and a master password to sign up.")
+            return
+        self.on_signup(username, password)
+
     
