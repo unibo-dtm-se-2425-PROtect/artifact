@@ -94,10 +94,9 @@ class PasswordManagerModel:
         rows=self.cursor.fetchall()
         with open(filepath, "w", newline="", encoding="utf-8") as f:
             writer = csv.writer(f)
-            writer.writerow(["ID", "Site", "URL", "Email", "Username", "password"])
+            writer.writerow(["ID", "Site", "URL", "Email", "Username", "password_encrypted"])
             for r in rows:
-                plain=decrypt(masterkey, r[5]) if r[5] else ""
-                writer.writerows([r[0],r[1],r[2],r[3],r[4],plain])
+                writer.writerows([r[0],r[1],r[2],r[3],r[4],r[5]])
     
     def import_from_file(self, filepath:str, masterkey=bytes):
         import csv
