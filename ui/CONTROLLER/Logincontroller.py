@@ -65,14 +65,9 @@ class Logincontroller:
         derived = computeMasterKey(password, salt)
         derived_hex = derived.hex() if isinstance(derived, (bytes, bytearray)) else str(derived)
 
-        #Try to insert into secrets table. We'll attempt to insert columns (username, mp, ds) if available,
-        #otherwise fall back to (mp, ds) and store derived_key in mp and salt in ds.
+        #Insert new user into secrets table
         try:
-            # prefer storing username explicitly if table has that column
-            if self._secrets_has_username_col():
-                cur.execute("INSERT INTO PROtect.secrets (username, mp, ds) VALUES (%s,%s,%s)", (username, derived_hex, salt))
-            else:
-                cur.execute("INSERT INTO PROtect.secrets (mp, ds) VALUES (%s,%s)", (derived_hex, salt))
+            cur.execute("INSERT INTO PROtect.secrets (username, mp, ds) VALUES (%s,%s,%s)", (username, derived_hex, salt))
             self.model.db.commit()
         except Exception as e:
             messagebox.showerror("Error", f"Unable to create user: {e}")
