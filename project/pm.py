@@ -97,14 +97,5 @@ def main():
 			retrieve.retrieveEntries(res[0],res[1],search,decryptPassword = args.copy)
 
 
-	if args.option in ["generate","g"]:
-		if args.length == None:
-			printc("[red][+][/red] Specify length of the password to generate (--length)")
-			return
-		password = generate.generatePassword(args.length)
-		pyperclip.copy(password)
-		printc("[green][+][/green] Password generated and copied to clipboard")
-
-
 
 main()
