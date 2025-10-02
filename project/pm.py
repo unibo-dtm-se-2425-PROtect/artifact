@@ -64,7 +64,7 @@ def main():
 			if args.url == None:
 				printc("[red][!][/red] Site URL (-u) required ")
 			if args.login == None:
-				printc("[red][!][/red] Site Login (-l) required ")
+				printc("[red][!][/red] Site Username (-l) required ")
 			return
 
 		if args.email == None:
