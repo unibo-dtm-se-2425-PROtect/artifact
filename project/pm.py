@@ -59,15 +59,17 @@ def inputAndValidateMasterPassword():
 
 def main():
 	if args.option in ["add","a"]:
-		if args.name == None or args.url == None or args.login == None:
-			if args.name == None:
-				printc("[red][!][/red] Site Name (-s) required ")
-			if args.url == None:
-				printc("[red][!][/red] Site URL (-u) required ")
-			if args.login == None:
-				printc("[red][!][/red] Site Username (-l) required ")
-			return
-
+		missing=[]
+		if args.name == None:
+			missing.append("Site Name (-s)")
+		if args.url == None:
+			missing.append("Site URL (-u)")
+		if args.login == None:
+			missing.append("Site Username (-l)")
+		if missing:
+			for m in missing:
+				printc(f"[red][!][/red] {m} is required!")
+        #optional field
 		if args.email == None:
 			args.email = ""
 
@@ -76,26 +78,28 @@ def main():
 			add.addEntry(res[0],res[1],args.name,args.url,args.email,args.login)
 
 
-	if args.option in ["extract","e"]:
-		# if args.name == None and args.url == None and args.email == None and args.login == None:
-		# 	# retrieve all
-		# 	printc("[red][!][/red] Please enter at least one search field (sitename/url/email/username)")
-		# 	return
+	elif args.option in ["extract","e"]:
 		res = inputAndValidateMasterPassword()
-
-		search = {}
-		if args.name is not None:
-			search["sitename"] = args.name
-		if args.url is not None:
-			search["siteurl"] = args.url
-		if args.email is not None:
-			search["email"] = args.email
-		if args.login is not None:
-			search["username"] = args.login
-
-		if res is not None:
-			retrieve.retrieveEntries(res[0],res[1],search,decryptPassword = args.copy)
-
-
+		if res is None: 
+			return
+        
+		search={}
+		if not args.all:
+			if args.name is not None:
+				search["sitename"] = args.name
+			if args.url is not None:
+				search["siteurl"] = args.url
+			if args.email is not None:
+				search["email"] = args.email
+			if args.login is not None:
+				search ["username"] = args.login
+		
+		#if no fields provided and --all not used, show warning
+		if len(search) == 0:
+			printc("[red][!][/red] Please enter at least one search field (sitename/url/email/username) or use --all")
+			return
+		
+		#if --all is used, search[] stays empty to retrieve all entries 
+		retrieve.retrieveEntries(res[0], res[1], search, decryptPassword=args.copy)
 
 main()
