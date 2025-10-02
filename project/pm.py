@@ -13,14 +13,13 @@ from dbconfig import dbconfig
 
 parser = argparse.ArgumentParser(description='Password Manager CLI')
 
-parser.add_argument('option', help='(a)dd / (e)xtract') #those are the type of operation that the user is able to perform
+parser.add_argument('option', help='(a)dd / (e)xtract' / "(con)figure" / "(del)ete" / "(recon)figure") #those are the type of operation that the user is able to perform
 parser.add_argument("-s", "--name", help="Site name")
 parser.add_argument("-u", "--url", help="Site URL")
 parser.add_argument("-e", "--email", help="Email")
 parser.add_argument("-l", "--login", help="Username")
 parser.add_argument("-c", "--copy", action='store_true', help='Copy password to clipboard')
 parser.add_argument("--all", action="store_true", help="Retrieve all stored entries (not the default, it must be specified for conscious choice)" )
-
 
 args = parser.parse_args()
 
