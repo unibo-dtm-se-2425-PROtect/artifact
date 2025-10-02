@@ -50,6 +50,12 @@ def config(master_password=None):
     printc("[green][+][/green] Table 'entries' created")
 
     mp=""
+    printc("[green][+] A [bold]MASTER PASSWORD[/bold] is the only password you will need to remember in-order to access all " \
+    "your other passwords. Choosing a strong [bold]MASTER PASSWORD[/bold] is essential because all your other passwords will be " \
+    "[bold]encrypted[/bold] with a key that is derived from your [bold]MASTER PASSWORD[/bold]. Therefore, please choose a strong " \
+    "one that has upper and lower case characters, numbers and also special characters. " \
+    "Remember your [bold]MASTER PASSWORD[/bold] because it won't be stored anywhere by this program, and you also cannot " \
+    "change it once chosen. [/green]\n")
     while 1:
         mp=getpass("Choose a MASTER PASSWORD: ")
         if mp==getpass("Write the password again: ") and mp!="":
