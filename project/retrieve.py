@@ -6,10 +6,8 @@ from rich import print as printc
 from rich.console import Console
 from rich.table import Table
 
-from getpass import getpass
 from Crypto.Protocol.KDF import PBKDF2
 from Crypto.Hash import SHA512
-from Crypto.Random import get_random_bytes
 
 import AES256util
 import pyperclip
