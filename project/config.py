@@ -61,16 +61,6 @@ def config(master_password=None):
         if mp==getpass("Write the password again: ") and mp!="":
             break
         printc("[yellow][-] Please try again [/yellow]") 
-
-    #Password Selection 
-    if master_password is None:
-        while True:
-            mp=getpass("Choose a MASTER PASSWORD: ")
-            if mp==getpass("Write the password again: ") and mp!="":
-                break
-            printc("[yellow][-] Please try again [/yellow]")
-    else: 
-        mp=master_password
         
     #Hash the MASTER PASSWORD
     hashed_mp = hashlib.sha256(mp.encode()).hexdigest()
