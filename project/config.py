@@ -2,6 +2,7 @@ from getpass import getpass
 import string
 import random
 import hashlib
+import sys
 
 from project.dbconfig import dbconfig 
 
@@ -79,11 +80,35 @@ def config(master_password=None):
     printc("[green][+] Configuration completed! [/green]")
 
     db.close()
-    
+
 def delete():
     printc("[red][-] Deleting a config clears the device secret and all your entries from the database. " \
     "This means you will loose access to all your passwords that you have added into the password manager until now. " \
     "Only do this if you truly want to 'destroy' all your entries. This action cannot be undone. [/red]")
+
+    while 1:
+        op = input("Are you sure you want to continue? (y/N): ")
+        if op.upper() == "Y":
+          break
+        if op.upper() == "N" or op.upper == "":
+          sys.exit(0)
+        else:
+          continue
+
+    printc("[green][-][/green] Deleting config")
+    
+    if not checkConfig():
+        printc("[yellow][-][/yellow] No configuration exists to delete!")
+        return
+    
+    db = dbconfig()
+    cursor = db.cursor()
+    query="DROP DATABASE PROtect"
+    cursor.execute(query)
+    db.commit()
+    db.close()
+    printc("[green][+] Configuration Successfully Deleted![/green]")
+
 
 if __name__=="__main__":
     config()
