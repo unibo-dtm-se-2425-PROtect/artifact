@@ -29,7 +29,7 @@ def config(master_password=None):
         printc("[red][!] Already Configured! [/red]")
         return 
     printc("[green][+] Creating new config [/green]")
-    
+
     #Create Database
     db=dbconfig() 
     cursor=db.cursor()
@@ -42,11 +42,11 @@ def config(master_password=None):
 
     #create tables
     query = "CREATE TABLE PROtect.secrets (masterpassword_hash TEXT NOT NULL, device_secret TEXT NOT NULL)" 
-    res = cursor.execute(query) 
+    cursor.execute(query) 
     printc("[green][+][/green] Table 'secrets' created")
 
     query = "CREATE TABLE PROtect.entries (sitename TEXT NOT NULL, siteurl TEXT NOT NULL, email TEXT, username TEXT, password TEXT NOT NULL)" 
-    res = cursor.execute(query) 
+    cursor.execute(query) 
     printc("[green][+][/green] Table 'entries' created")
 
     mp=""
