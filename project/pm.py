@@ -12,7 +12,7 @@ import string
 import retrieve
 from dbconfig import dbconfig
 
-parser = argparse.ArgumentParser(description='Description')
+parser = argparse.ArgumentParser(description='Password Manager CLI')
 
 parser.add_argument('option', help='(a)dd / (e)xtract') #those are the type of operation that the user is able to perform
 parser.add_argument("-s", "--name", help="Site name")
