@@ -26,14 +26,11 @@ jobs:
         with:
           python-version: ${{ steps.get-python-version.outputs.version }}
 
-      - name: install Poetry
-        run: pip install poetry
-
-      - name: Install dependencies
-        run: poetry install --no-interaction --no-root
+      - name: Restore Python dependencies
+        run: pip install -r requirements-dev.txt
 
       - name: Change default logging level
-        run: sed -i -e 's/DEBUG/WARN/g' my_project/__init__.py
+        run: sed -i -e 's/DEBUG/WARN/g' project/__init__.py
 
       - name: Get Node Version
         id: get-node-version
@@ -51,4 +48,4 @@ jobs:
           TWINE_USERNAME: ${{ secrets.PYPI_USERNAME }}
           TWINE_PASSWORD: ${{ secrets.PYPI_PASSWORD }}
           GITHUB_TOKEN: ${{ secrets.RELEASE_TOKEN }}
-          RELEASE_DRY_RUN: ${{ contains(github.repository, 'template') && 'true' || 'false' }}
+          RELEASE_DRY_RUN: ${{ contains(github.repository, 'template') }}

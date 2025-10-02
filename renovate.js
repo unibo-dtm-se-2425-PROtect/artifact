@@ -1,0 +1,36 @@
+{
+  "extends": [
+    "config:base",
+    ":rebaseStalePrs",
+    ":semanticCommits"
+  ],
+  "assignees": [
+    "Francesca9933",
+    "Filippo7206",
+    "albertoantonello"
+  ],
+  "automerge": true,
+  "dependencyDashboard": true,
+  "git-submodules": {
+    "enabled": true
+  },
+  "includeForks": true,
+  "ignorePaths": [
+    ".python-version"
+  ],
+  "packageRules": [
+    {
+      "description": "Updates to GitHub Actions should be tagged as 'ci'",
+      "matchPaths": [
+        ".github/workflows/*.yml",
+        ".github/workflows/*.yaml"
+      ],
+      "semanticCommitType": "ci"
+    }
+  ],
+  "prConcurrentLimit": 25,
+  "prHourlyLimit": 0,
+  "separateMajorMinor": true,
+  "separateMinorPatch": true,
+  "separateMultipleMajor": true
+}
