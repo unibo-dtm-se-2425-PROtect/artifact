@@ -3,7 +3,6 @@
 import argparse
 from getpass import getpass
 import hashlib
-import pyperclip
 
 from rich import print as printc
 
