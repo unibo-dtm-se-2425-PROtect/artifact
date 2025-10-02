@@ -28,6 +28,7 @@ def config(master_password=None):
     if checkConfig():
         printc("[red][!] Already Configured! [/red]")
         return 
+    printc("[green][+] Creating new config [/green]")
     
     #Create Database
     db=dbconfig() 
