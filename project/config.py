@@ -109,6 +109,25 @@ def delete():
     db.close()
     printc("[green][+] Configuration Successfully Deleted![/green]")
 
+def reconfig():
+    printc("[green][+][/green] Remaking config")
+    try:
+        # Attempt to delete existing configuration
+        delete()
+        printc("[green][+][/green] Old configuration deleted successfully.")
+    except Exception as e:
+        printc("[red][!][/red] Failed to delete existing configuration.")
+        console.print_exception(show_locals=True)
+        return  # Stop if deletion failed to avoid inconsistent state
+
+    try:
+        # Attempt to create a fresh configuration
+        config()
+        printc("[green][+][/green] New configuration created successfully.")
+    except Exception as e:
+        printc("[red][!][/red] Failed to create new configuration.")
+        console.print_exception(show_locals=True)
+        return  # Stop to avoid partially configured state
 
 if __name__=="__main__":
     config()
