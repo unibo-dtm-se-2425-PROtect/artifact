@@ -7,6 +7,7 @@ import hashlib
 from rich import print as printc
 
 import add
+from config import config, delete, reconfig
 import string
 import retrieve
 from dbconfig import dbconfig
@@ -99,5 +100,12 @@ def main():
 		
 		#if --all is used, search[] stays empty to retrieve all entries 
 		retrieve.retrieveEntries(res[0], res[1], search, decryptPassword=args.copy)
+    
+	elif args.option in ["configure", "con"]:
+		config()
+	elif args.option in ["delete", "del"]:
+		delete()
+	elif args.option in ["reconfigure", "recon"]:
+		reconfig()
 
 main()
