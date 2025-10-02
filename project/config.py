@@ -79,6 +79,11 @@ def config(master_password=None):
     printc("[green][+] Configuration completed! [/green]")
 
     db.close()
+    
+def delete():
+    printc("[red][-] Deleting a config clears the device secret and all your entries from the database. " \
+    "This means you will loose access to all your passwords that you have added into the password manager until now. " \
+    "Only do this if you truly want to 'destroy' all your entries. This action cannot be undone. [/red]")
 
 if __name__=="__main__":
     config()
