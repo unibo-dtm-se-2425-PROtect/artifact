@@ -22,8 +22,8 @@
     {
       "description": "Updates to GitHub Actions should be tagged as 'ci'",
       "matchPaths": [
-        ".github/*.yml",
-        ".github/*.yaml"
+        ".github/workflows/*.yml",
+        ".github/workflows/*.yaml"
       ],
       "semanticCommitType": "ci"
     }
