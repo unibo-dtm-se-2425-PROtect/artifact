@@ -10,8 +10,7 @@ on:
       - 'LICENSE'
       - 'README.md'
       - 'renovate.json'
-  pull_request: {}
-  
+  pull_request:
   workflow_dispatch:
 jobs:
  test:
@@ -49,8 +48,6 @@ jobs:
       - name: Test
         run: python -m unittest discover -s test -t .
   deploy:
-    permissions:
-      contents: write
     needs:
       - test
     uses: ./.github/workflows/deploy.yml
