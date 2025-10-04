@@ -53,6 +53,6 @@ jobs:
       contents: write
     needs:
       - test
-    uses: ./.github/deploy.yml
+    uses: ./.github/workflows/deploy.yml
     if: github.ref_name == 'master' || github.ref_name == 'main'
     secrets: inherit
