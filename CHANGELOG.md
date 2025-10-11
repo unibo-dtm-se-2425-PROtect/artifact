@@ -1,3 +1,10 @@
+## [1.0.1](https://github.com/unibo-dtm-se-2425-PROtect/artifact/compare/1.0.0...1.0.1) (2025-10-11)
+
+
+### Bug Fixes
+
+* missing comma ([d4cd7a9](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/d4cd7a98074d824ae4e88deb8016dc0b4021aefe))
+
 ## 1.0.0 (2025-10-11)
 
 
