@@ -1,1 +1,1 @@
-***PROtect - Password Manager***
+# PROtect - Password Manager
