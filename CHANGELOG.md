@@ -1,3 +1,10 @@
+## [1.0.2](https://github.com/unibo-dtm-se-2425-PROtect/artifact/compare/1.0.1...1.0.2) (2025-10-11)
+
+
+### Bug Fixes
+
+* typo ([0cb4f33](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/0cb4f3398acee695669dd0371ed531d0efb49532))
+
 ## [1.0.1](https://github.com/unibo-dtm-se-2425-PROtect/artifact/compare/1.0.0...1.0.1) (2025-10-11)
 
 
