@@ -1,3 +1,15 @@
+## [1.0.3](https://github.com/unibo-dtm-se-2425-PROtect/artifact/compare/1.0.2...1.0.3) (2025-10-11)
+
+
+### Bug Fixes
+
+* title config ([765d98b](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/765d98bcf7777bed6018e3df2b775b74c91a1e4a))
+
+
+### General maintenance
+
+* create README file ([a2abd64](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/a2abd647e72590d93f977bda52d26ac133e0b9f4))
+
 ## [1.0.2](https://github.com/unibo-dtm-se-2425-PROtect/artifact/compare/1.0.1...1.0.2) (2025-10-11)
 
 
