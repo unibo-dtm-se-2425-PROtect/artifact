@@ -109,7 +109,7 @@ setup(
     python_requires=python_version,
     install_requires=dependencies,
     zip_safe=False,
-    platforms="Independant",
+    platforms="Independent",
     project_urls={  # Optional
         'Bug Reports': f'{url}/issues',
         # 'Funding': 'https://donate.pypi.org',
