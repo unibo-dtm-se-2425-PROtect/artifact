@@ -22,6 +22,9 @@ def checkConfig():
         return True
     return False
 
+def generateDeviceSecret(length=10):
+    return ''.join(random.choices(string.ascii_uppercase + string.digits, k = length))
+
 def config(master_password=None):
     if checkConfig():
         printc("[red][!] Already Configured! [/red]")
