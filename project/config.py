@@ -46,7 +46,7 @@ def config(master_password=None):
     cursor.execute(query) 
     printc("[green][+][/green] Table 'secrets' created")
 
-    query = "CREATE TABLE PROtect.entries (sitename TEXT NOT NULL, siteurl TEXT NOT NULL, email TEXT, username TEXT, password TEXT NOT NULL)" 
+    query = "CREATE TABLE PROtect.entries (ID INT AUTO_INCREMENT PRIMARY KEY, sitename TEXT NOT NULL, siteurl TEXT NOT NULL, email TEXT, username TEXT, password TEXT NOT NULL)" 
     cursor.execute(query) 
     printc("[green][+][/green] Table 'entries' created")
 
@@ -70,7 +70,7 @@ def config(master_password=None):
     #Generation of DEVICE SECRET 
     ds = generateDeviceSecret() 
     printc("[green][+][/green] Device Secret generated")
-    
+
     #Add values into the database in the secrets table
     query = "INSERT INTO PROtect.secrets (masterpassword_hash, device_secret) values (%s, %s)"
     val = (hashed_mp, ds)
