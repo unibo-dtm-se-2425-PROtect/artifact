@@ -1,3 +1,10 @@
+## [1.0.7](https://github.com/unibo-dtm-se-2425-PROtect/artifact/compare/1.0.6...1.0.7) (2025-10-12)
+
+
+### Bug Fixes
+
+* restore generateDeviceSecret function ([142d563](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/142d5635725d3322d03304b757b76b624630733b))
+
 ## [1.0.6](https://github.com/unibo-dtm-se-2425-PROtect/artifact/compare/1.0.5...1.0.6) (2025-10-12)
 
 
