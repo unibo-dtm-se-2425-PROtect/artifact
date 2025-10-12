@@ -1,3 +1,15 @@
+## [1.0.6](https://github.com/unibo-dtm-se-2425-PROtect/artifact/compare/1.0.5...1.0.6) (2025-10-12)
+
+
+### Bug Fixes
+
+* delete unused function (generate password) ([1a08df6](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/1a08df62dbca54c75b8139b09244f09aa3e9d1d8))
+
+
+### General maintenance
+
+* rename package to "PROtect - UniBo" ([a260112](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/a260112e2046f07f0cdb714c4795045999c72d47))
+
 ## [1.0.5](https://github.com/unibo-dtm-se-2425-PROtect/artifact/compare/1.0.4...1.0.5) (2025-10-12)
 
 
