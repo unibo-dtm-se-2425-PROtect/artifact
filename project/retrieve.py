@@ -28,9 +28,9 @@ def retrieveEntries(mp, ds, search, decryptPassword = False):
     query = "" #two cases to be considered: the user might either query the database without specifying any search field, or doing it instead.
 
     if len(search) == 0: 
-        query = "SELECT * FROM pm.entries"
+        query = "SELECT * FROM PROtect.entries"
     else: 
-        query = "SELECT * FROM pm.entries WHERE "
+        query = "SELECT * FROM PROtect.entries WHERE "
         for i in search: #in case the user specifies queries, this loop will create a dictionary that will include all conditions desired by the user
             query+= f"{i} = '{search[i]}' AND "
         query = query[:-5] #this will output the ultimate query, eliminating the repeating AND conjunction, that would otherwise yield a sql syntax error

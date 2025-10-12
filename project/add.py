@@ -43,7 +43,7 @@ def addEntry(mp, ds, sitename, siteurl, email, username):
     #add the new password to the database
     db = dbconfig()
     cursor = db.cursor()
-    query = "INSERT INTO pm.entries (sitename, siteurl, email, username, password) values (%s, %s, %s, %s, %s)"
+    query = "INSERT INTO PROtect.entries (sitename, siteurl, email, username, password) values (%s, %s, %s, %s, %s)"
     val = (sitename,siteurl,email,username,encrypted)
     cursor.execute(query, val)
     db.commit()

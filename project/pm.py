@@ -46,7 +46,7 @@ def inputAndValidateMasterPassword():
 
 	db = dbconfig()
 	cursor = db.cursor()
-	query = "SELECT * FROM pm.secrets"
+	query = "SELECT * FROM PROtect.secrets"
 	cursor.execute(query)
 	result = cursor.fetchall()[0]
 	if hashed_mp != result[0]:
