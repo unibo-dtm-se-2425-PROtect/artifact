@@ -1,3 +1,15 @@
+## [1.1.1](https://github.com/unibo-dtm-se-2425-PROtect/artifact/compare/1.1.0...1.1.1) (2025-10-12)
+
+
+### Bug Fixes
+
+* spaces in name ([0a4617b](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/0a4617b89d081a88865eeba4fd0446be5d8fd526))
+
+
+### General maintenance
+
+* deleting temporary configuration for not running tests ([272733f](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/272733fcdd3258e9f12dbef6706dca4e5f5884fb))
+
 ## [1.1.0](https://github.com/unibo-dtm-se-2425-PROtect/artifact/compare/1.0.9...1.1.0) (2025-10-12)
 
 
