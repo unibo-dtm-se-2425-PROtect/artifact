@@ -6,17 +6,8 @@ from rich import print as printc
 from rich.console import Console
 from rich.table import Table
 
-from Crypto.Protocol.KDF import PBKDF2
-from Crypto.Hash import SHA512
-
 import AES256util
 import pyperclip
-
-def computeMasterKey(mp,ds):
-    password=mp.encode()
-    salt=ds.encode()
-    key=PBKDF2(password, salt, 32, count=1000000, hmac_hash_module=SHA512)
-    return key
 
 def retrieveEntries(mp, ds, search, decryptPassword = False):
     #search will contain the search fields that are inputted by the user and that we want to search in the database
