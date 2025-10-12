@@ -84,7 +84,7 @@ url = 'https://github.com/unibo-dtm-se-2425-PROtect/artifact'
 
 
 setup(
-    name='PROtect - UniBo',
+    name='PROtect-UniBo',
     version=version,
     description='PROtect is a GUI-CLI desktop application providing basic features to manage passwords (add/edit/delete entry, import/export...), safely isolating accounts of more users accessing it',
     license='Apache 2.0 License',
