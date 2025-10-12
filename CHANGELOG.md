@@ -1,3 +1,22 @@
+## [1.1.0](https://github.com/unibo-dtm-se-2425-PROtect/artifact/compare/1.0.9...1.1.0) (2025-10-12)
+
+
+### Features
+
+* command to modify an entry (a single or multiple fields) + various errors handling ([5881068](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/5881068f09aad0281b4c1005d362399deeea9033))
+
+
+### General maintenance
+
+* add primary key ID to ENTRIES tables ([568b936](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/568b936239c4b47ea8783c89fb087f6935888eae))
+* **cli:** improve error handling in add.py ([2c844de](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/2c844ded96b01860828bace1f40da7da6b3e3bac))
+* create new file for command to edit entries + imports ([705ade4](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/705ade44c0cb2dffa249a9f26532e406414d079b))
+
+
+### Refactoring
+
+* delete repetition of ComputeMasterKey (already imported from add.py) + delete useless import crypto libraries for its computation ([067eef2](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/067eef2f06ea0c49124b5946f2c3e6290a941480))
+
 ## [1.0.9](https://github.com/unibo-dtm-se-2425-PROtect/artifact/compare/1.0.8...1.0.9) (2025-10-12)
 
 
