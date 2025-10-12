@@ -1,3 +1,10 @@
+## [1.0.5](https://github.com/unibo-dtm-se-2425-PROtect/artifact/compare/1.0.4...1.0.5) (2025-10-12)
+
+
+### Bug Fixes
+
+* concatenation error ([163f452](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/163f452367481ad369b2f8e68b46784f34680370))
+
 ## [1.0.4](https://github.com/unibo-dtm-se-2425-PROtect/artifact/compare/1.0.3...1.0.4) (2025-10-12)
 
 
