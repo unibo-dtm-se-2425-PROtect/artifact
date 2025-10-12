@@ -1,3 +1,10 @@
+## [1.0.9](https://github.com/unibo-dtm-se-2425-PROtect/artifact/compare/1.0.8...1.0.9) (2025-10-12)
+
+
+### Bug Fixes
+
+* restore generation of the device secret ([920749e](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/920749ee37889028247cc430c5a4d78762012cf1))
+
 ## [1.0.8](https://github.com/unibo-dtm-se-2425-PROtect/artifact/compare/1.0.7...1.0.8) (2025-10-12)
 
 
