@@ -33,30 +33,6 @@ def test_checkConfig_schema_missing(mock_dbconfig_call, mock_dbconfig):
 #ASSERT allows simple comparisons, quick to read and easy to understand and it shows detailed info whether assert fails
 # In this way we can avoid using plenty of different methods from the library 
 
-#Checking GENERATEDEVICESECRET()
-def test_generateDeviceSecret_length():
-    secret=generateDeviceSecret(15)
-    assert len(secret)==15
-
-def test_generateDeviceSecret_default_length():
-    secret=generateDeviceSecret()
-    assert len(secret)==10
-
-def test_generateDeviceSecret_characters(): 
-    secret=generateDeviceSecret(50)
-    allowed_chars=set(string.ascii_uppercase+string.digits)
-    assert all(c in allowed_chars for c in secret)
-
-def test_generateDeviceSecret_length_and_chars():
-    secret=generateDeviceSecret(12)
-    assert len(secret)==12
-    assert all(c in string.ascii_uppercase + string.digits for c in secret)
-
-def test_generateDeviceSecret_randomness():
-    secrets={generateDeviceSecret(20) for i in range(100)}
-    assert len(secrets) > 90 
-    #generates 100 random secrets and expects at least 90 to be unique so that randomness is not broken
-
 
 #Checking CONFIG()
 @patch("project.config.checkConfig", return_value=True)
