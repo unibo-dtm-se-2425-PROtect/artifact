@@ -1,3 +1,21 @@
+## [1.0.4](https://github.com/unibo-dtm-se-2425-PROtect/artifact/compare/1.0.3...1.0.4) (2025-10-12)
+
+
+### Bug Fixes
+
+* delete import about generate device secret ([3289050](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/32890507d045f5ba170edb3038c5e3377b8f1f44))
+* remove tests on deleted function "generate device secret" ([5836a1e](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/5836a1ea5072c6daa98359a4b667d5c84fdba494))
+* typos ([9414713](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/9414713dbfac3271956cb7e1987e2055c2c09aca))
+
+
+### General maintenance
+
+* create README for artifact ([319cb69](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/319cb698eba9e01a726bd84fb3a88546061f3723))
+* delete unused function ([411dc52](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/411dc52c27ba18e26282ca1fea977551b5a5edfd))
+* delete wrong README ([69e1a8a](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/69e1a8a56523999fcd61feba84a0bcbb685e81f9))
+* release bump version 1.0.3 ([f88bcfc](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/f88bcfcdc20f7e771682ca79164e595bc92c1e20))
+* temporary configuration to skip tests ([e7ef4ce](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/e7ef4ce3e3ac133b2690c8fe180a55436479cf89))
+
 ## [1.0.3](https://github.com/unibo-dtm-se-2425-PROtect/artifact/compare/1.0.2...1.0.3) (2025-10-11)
 
 
