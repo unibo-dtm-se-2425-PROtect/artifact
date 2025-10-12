@@ -1,3 +1,10 @@
+## [1.0.8](https://github.com/unibo-dtm-se-2425-PROtect/artifact/compare/1.0.7...1.0.8) (2025-10-12)
+
+
+### Bug Fixes
+
+* restore parser command for help to the user about length of password ([6b16937](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/6b16937faa4aebc090032c62c9445d0620531125))
+
 ## [1.0.7](https://github.com/unibo-dtm-se-2425-PROtect/artifact/compare/1.0.6...1.0.7) (2025-10-12)
 
 
