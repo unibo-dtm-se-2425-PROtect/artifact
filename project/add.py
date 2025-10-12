@@ -27,25 +27,30 @@ def checkEntry(sitename, siteurl, email, username):
 
 def addEntry(mp, ds, sitename, siteurl, email, username): 
     #check if the entry already exists
-    if checkEntry(sitename, siteurl, email, username):
-        printc("[yellow][-][/yellow] This entry already exists")
-        return
+    try:
+        if checkEntry(sitename, siteurl, email, username):
+            printc("[yellow][-][/yellow] This entry already exists")
+            return
     
-    #get the password
-    password = getpass("Password: ")
+        #get the password
+        password = getpass("Password: ")
 
-    mk = computeMasterKey(mp,ds) #to compute the master key
+        mk = computeMasterKey(mp,ds) #to compute the master key
 
-    #using imported aesutil function to encrypt the mk 
-    #this should return the encrypted password in base 64 encoded format
-    encrypted = AES256util.encrypt(key=mk, source=password, keyType="bytes")
+        #using imported aesutil function to encrypt the mk 
+        #this should return the encrypted password in base 64 encoded format
+        encrypted = AES256util.encrypt(key=mk, source=password, keyType="bytes")
 
-    #add the new password to the database
-    db = dbconfig()
-    cursor = db.cursor()
-    query = "INSERT INTO PROtect.entries (sitename, siteurl, email, username, password) values (%s, %s, %s, %s, %s)"
-    val = (sitename,siteurl,email,username,encrypted)
-    cursor.execute(query, val)
-    db.commit()
-
-    printc("[green][+][/green] Added entry ")
+        #add the new password to the database
+        db = dbconfig()
+        if db is None:
+            printc("[red][!] Cannot connect to database[/red]")
+            return
+        cursor = db.cursor()
+        query = "INSERT INTO PROtect.entries (sitename, siteurl, email, username, password) VALUES (%s, %s, %s, %s, %s)"
+        val = (sitename,siteurl,email,username,encrypted)
+        cursor.execute(query, val)
+        db.commit()
+        printc("[green][+][/green] Added entry ")
+    except Exception as e:
+        printc(f"[red][!][/red] Failed to add entry: {e}")
