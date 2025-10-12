@@ -3,7 +3,7 @@ from unittest.mock import patch, MagicMock
 import string
 import hashlib
 
-from project.config import checkConfig, config, generateDeviceSecret
+from project.config import checkConfig, config
 
 # Using FIXTURES to build a reusable setup to avoid repetitions 
 @pytest.fixture
