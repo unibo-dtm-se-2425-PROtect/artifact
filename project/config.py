@@ -64,12 +64,8 @@ def config(master_password=None):
     hashed_mp = hashlib.sha256(mp.encode()).hexdigest()
     printc("[green][+][/green] Generated hash of the Master Password")
 
-    #Generation of DEVICE SECRET
-    ds = generateDeviceSecret()
-    printc("[green][+][/green] Device Secret generated")
-
     #Add values into the database in the secrets table
-    query = "INSERT INTO PROtect.secrets (masterpassword_hash, device_secret) values (?, ?)"
+    query = "INSERT INTO PROtect.secrets (masterpassword_hash, device_secret) values (%s, %s)"
     val = (hashed_mp, ds)
     cursor.execute(query, val) 
     db.commit()
