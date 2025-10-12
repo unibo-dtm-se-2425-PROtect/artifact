@@ -27,13 +27,17 @@ def retrieveEntries(mp, ds, search, decryptPassword = False):
 
     query = "" #two cases to be considered: the user might either query the database without specifying any search field, or doing it instead.
 
-    if len(search) == 0: 
+    if not search:
         query = "SELECT * FROM PROtect.entries"
+        cursor.execute(query)
     else: 
-        query = "SELECT * FROM PROtect.entries WHERE "
-        for i in search: #in case the user specifies queries, this loop will create a dictionary that will include all conditions desired by the user
-            query+= f"{i} = '{search[i]}' AND "
-        query = query[:-5] #this will output the ultimate query, eliminating the repeating AND conjunction, that would otherwise yield a sql syntax error
+        conditions=[]
+        values=[]
+        for field, value in search.items():
+            conditions.append(f"{field}=%s")
+            values.append(value)
+        query=f"SELECT * FROM PROtect.entries WHERE {' AND '.join(conditions)}"
+        cursor.execute(query, tuple(values))
 
     cursor.execute(query)
     results = cursor.fetchall()
@@ -59,7 +63,7 @@ def retrieveEntries(mp, ds, search, decryptPassword = False):
 
         console = Console()
         console.print(table)
-
+        db.close()
         return
 
     if len(results)==1 and decryptPassword:

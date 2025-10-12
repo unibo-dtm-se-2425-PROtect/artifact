@@ -17,8 +17,8 @@ def computeMasterKey(mp,ds):
 def checkEntry(sitename, siteurl, email, username):
     db = dbconfig()
     cursor = db.cursor()
-    query = f"SELECT * FROM PROtect.entries where sitename = '{sitename}' and siteurl = '{siteurl}' AND email = '{email}' AND username = '{username}'"
-    cursor.execute(query)
+    query = "SELECT * FROM PROtect.entries WHERE sitename=%s AND siteurl=%s AND email=%s AND username=%s"
+    cursor.execute(query, (sitename, siteurl, email, username))
     results = cursor.fetchall()
 
     if len(results)!=0:
