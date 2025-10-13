@@ -1,37 +1,12 @@
 from getpass import getpass
 from rich import print as printc
 from dbconfig import dbconfig
-import hashlib
+from AES256util import verify_master_password
 
-def delete_entry(ID, mp, ds):
-    #deletes and entry by its ID after confirming and verifying master password
+def delete_entry(ID):
+    #deletes an entry by its ID after confirming and verifying master password
     db = dbconfig()
     cursor = db.cursor()
-
-    #Retrieve the stored hash and device secret from database
-    cursor.execute("SELECT masterpassword_hash, device_secret FROM PROtect.secrets")
-    result = cursor.fetchone()
-
-    if not result:
-        printc("[red][!] No master password configuration found.[/red]")
-        db.close()
-        return
-
-    stored_hash, stored_ds = result
-
-    #Check if the device secret matches
-    if ds != stored_ds:
-        printc("[red][!] Device secret mismatch. Operation aborted.[/red]")
-        db.close()
-        return
-
-    #Hash provided master password and compare
-    hashed_mp = hashlib.sha256(mp.encode()).hexdigest()
-
-    if hashed_mp != stored_hash:
-        printc("[red][!] Wrong master password. Deletion not authorized.[/red]")
-        db.close()
-        return
 
     #Confirm deletion
     confirm = input(f"Are you sure you want to delete entry with ID {ID}? (y/N): ").strip().lower()
@@ -63,22 +38,13 @@ def delete_entry_cli():
 
         # Ask for master password before proceeding
         mp = getpass("Enter your MASTER PASSWORD: ")
-        ds = get_device_secret()  # Get from DB
+        if not verify_master_password(mp):
+            return
 
-        delete_entry(ID, mp, ds)
+        delete_entry(ID)
 
     except Exception as e:
         printc(f"[red][!] Error during deletion: {e}[/red]")
-
-
-def get_device_secret():
-    #Helper to fetch device secret from the PROtect.secrets table.
-    db = dbconfig()
-    cursor = db.cursor()
-    cursor.execute("SELECT device_secret FROM PROtect.secrets")
-    result = cursor.fetchone()
-    db.close()
-    return result[0] if result else None
 
 
 if __name__ == "__main__":

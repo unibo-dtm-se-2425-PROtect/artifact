@@ -21,6 +21,9 @@ from Crypto.Cipher import AES
 from Crypto.Hash import SHA256
 from Crypto import Random
 import sys
+from dbconfig import dbconfig
+import hashlib
+from rich import print as printc
 
 def encrypt(key, source, encode=True, keyType = 'hex'):
 	'''
@@ -99,3 +102,23 @@ if __name__ == "__main__":
 		keyType = sys.argv[4]
 		msg = decrypt(key,cipher,keyType=keyType)
 		print(msg)
+
+def verify_master_password(master_password):
+	#verify if the provided mp matches the one stored in secrets
+	db=dbconfig()
+	cursor=db.cursor()
+	cursor.execute("SELECT masterpassword_hash FROM PROtect.secrets")
+	result=cursor.fetchone()
+	db.close()
+
+	if not result:
+		printc("[red][!] No masterpassword configuration found[/red]")
+		return False
+	
+	stored_hash=result[0]
+	hashed_input=hashlib.sha256(master_password.encode()).hexdigest()
+
+	if hashed_input != stored_hash:
+		printc("[red][!] Wrong Master Password![/red]")
+		return False
+	return True
