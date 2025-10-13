@@ -20,7 +20,8 @@ def export_entries(filepath, masterkey):
             writer = csv.writer(f)
             writer.writerow(["ID", "Site", "URL", "Email", "Username", "password (decrypted)"])
             for r in rows:
-                writer.writerow([r[0], r[1], r[2], r[3], r[4], r[5]])
+                dec_pass=decrypt(r[5], masterkey)
+                writer.writerow([r[0], r[1], r[2], r[3], r[4], dec_pass])
 
         printc(f"[green][+][/green] Entries exported to [cyan]{filepath}[/cyan]")
 
