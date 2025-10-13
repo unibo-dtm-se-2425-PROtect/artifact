@@ -1,3 +1,15 @@
+## [1.5.0](https://github.com/unibo-dtm-se-2425-PROtect/artifact/compare/1.4.0...1.5.0) (2025-10-13)
+
+
+### Features
+
+* **cli:** add command-line interface for modifying entries ([6722315](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/6722315c9c6374b88fa540090868b8c6eda2fe5d))
+
+
+### General maintenance
+
+* updated version ([6ade650](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/6ade65039b88adfdd5eab1969d841f9054fb7091))
+
 ## [1.4.0](https://github.com/unibo-dtm-se-2425-PROtect/artifact/compare/1.3.0...1.4.0) (2025-10-13)
 
 
