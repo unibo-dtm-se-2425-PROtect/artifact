@@ -1,3 +1,16 @@
+## [1.4.0](https://github.com/unibo-dtm-se-2425-PROtect/artifact/compare/1.3.0...1.4.0) (2025-10-13)
+
+
+### Features
+
+* **cli:** add import functionality via CLI ([e9ee9bc](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/e9ee9bca8a9c207e779347d71bdcc51a3a207ef9))
+
+
+### General maintenance
+
+* automatic version update ([892bf20](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/892bf2094e6122e998d462d86dd0a2b9ffc3212a))
+* decrypting password ([9553534](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/9553534e99d47a0bce7232e840db9d192f55fcee))
+
 ## [1.3.0](https://github.com/unibo-dtm-se-2425-PROtect/artifact/compare/1.2.0...1.3.0) (2025-10-13)
 
 
