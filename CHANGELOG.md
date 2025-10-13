@@ -1,3 +1,10 @@
+## [1.2.0](https://github.com/unibo-dtm-se-2425-PROtect/artifact/compare/1.1.1...1.2.0) (2025-10-13)
+
+
+### Features
+
+* **cli:** add "delete" command to delete a row via ID ([871b277](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/871b277b14b1efee96e0fd6ecaed8408a23cfa8c))
+
 ## [1.1.1](https://github.com/unibo-dtm-se-2425-PROtect/artifact/compare/1.1.0...1.1.1) (2025-10-12)
 
 
