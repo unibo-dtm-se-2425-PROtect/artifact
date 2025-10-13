@@ -1,3 +1,19 @@
+## [2.0.0](https://github.com/unibo-dtm-se-2425-PROtect/artifact/compare/1.3.0...2.0.0) (2025-10-13)
+
+
+### ⚠ BREAKING CHANGES
+
+* prova per release su PyPi
+
+### Features
+
+* prova per release su PyPi ([f4c2f07](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/f4c2f075c4647148c23bf158009ddb91b6f8393c))
+
+
+### General maintenance
+
+* decrypting password ([9553534](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/9553534e99d47a0bce7232e840db9d192f55fcee))
+
 ## [1.3.0](https://github.com/unibo-dtm-se-2425-PROtect/artifact/compare/1.2.0...1.3.0) (2025-10-13)
 
 
