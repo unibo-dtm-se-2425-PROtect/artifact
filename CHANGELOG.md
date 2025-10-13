@@ -1,3 +1,15 @@
+## [1.3.0](https://github.com/unibo-dtm-se-2425-PROtect/artifact/compare/1.2.0...1.3.0) (2025-10-13)
+
+
+### Features
+
+* **cli:** add export functionality from the CLI ([d8c26e8](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/d8c26e8148e4d707d3c3281f91417e728d316625))
+
+
+### Refactoring
+
+* defining the verify_master_password function inside AES256util so that it is tied to encryption/decryption and security logic and it can be accessed easily and quicker by all the files that need it (consequently revising delete.py since the check on the mp can be done from the outside now + deletion of control on ds) ([9ca2c88](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/9ca2c884894c8a5dfeae00d856008e95e1e27b3c))
+
 ## [1.2.0](https://github.com/unibo-dtm-se-2425-PROtect/artifact/compare/1.1.1...1.2.0) (2025-10-13)
 
 
