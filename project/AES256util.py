@@ -103,11 +103,11 @@ if __name__ == "__main__":
 		msg = decrypt(key,cipher,keyType=keyType)
 		print(msg)
 
-def verify_master_password(master_password):
+def verify_master_password(username, master_password):
 	#verify if the provided mp matches the one stored in secrets
-	db=dbconfig()
+	db=dbconfig(dictionary=True)
 	cursor=db.cursor()
-	cursor.execute("SELECT masterpassword_hash FROM PROtect.secrets")
+	cursor.execute("SELECT masterpassword_hash, device_secret FROM PROtect.secrets WHERE username=%s", (username,))
 	result=cursor.fetchone()
 	db.close()
 
