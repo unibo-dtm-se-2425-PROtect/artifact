@@ -42,7 +42,7 @@ def config(master_password=None):
     printc("[green][+][/green] Database 'PROtect' created")
 
     #create tables
-    query = "CREATE TABLE PROtect.secrets (masterpassword_hash TEXT NOT NULL, device_secret TEXT NOT NULL)" 
+    query = "CREATE TABLE PROtect.secrets (ID INT AUTO_INCREMENT PRIMARY KEY, username VARCHAR(100) UNIQUE NOT NULL, masterpassword_hash TEXT NOT NULL, device_secret TEXT NOT NULL)" 
     cursor.execute(query) 
     printc("[green][+][/green] Table 'secrets' created")
 
