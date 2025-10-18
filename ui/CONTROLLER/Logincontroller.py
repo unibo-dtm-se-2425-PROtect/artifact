@@ -1,6 +1,6 @@
 import tkinter as tk
 from tkinter import messagebox
-from ui.VIEW.Loginview import LoginView
+from ui.VIEW.Loginview import Loginview
 from ui.MODEL.GUImodel import PasswordManagerModel
 from project.add import computeMasterKey
 import os
@@ -12,7 +12,7 @@ class Logincontroller:
         self.on_success = on_success
         #we use a model instance to access the secrets table for authentication
         self.model = PasswordManagerModel()
-        self.view = LoginView(root, on_login=self.verify_login, on_signup=self.try_signup)
+        self.view = Loginview(root, on_login=self.verify_login, on_signup=self.try_signup)
         self.view.pack(expand=True, fill="both")
     
     def verify_login(self, username: str, password: str):
