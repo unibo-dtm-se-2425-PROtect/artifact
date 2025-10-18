@@ -1,3 +1,10 @@
+## [1.5.2](https://github.com/unibo-dtm-se-2425-PROtect/artifact/compare/1.5.1...1.5.2) (2025-10-18)
+
+
+### Bug Fixes
+
+* typos and wrong parameters to make the GUI work ([f8faf26](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/f8faf2639e15e79b5f8af33e3dc2080f0da449d6))
+
 ## [1.5.1](https://github.com/unibo-dtm-se-2425-PROtect/artifact/compare/1.5.0...1.5.1) (2025-10-18)
 
 
