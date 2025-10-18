@@ -1,6 +1,6 @@
 import tkinter as tk
 from ttkbootstrap import Style
-from ui.CONTROLLER.Logincontroller import LoginController
+from ui.CONTROLLER.Logincontroller import Logincontroller
 from ui.CONTROLLER.GUIcontroller import PasswordManagerController
 import sys
 
@@ -23,6 +23,6 @@ if __name__ == "__main__":
         #skips login and launches password manager directly with a test user
         PasswordManagerController(master_password="password")
     else:
-        LoginController(root, on_success=lambda r,u,p: start_main_app(r,u,p))
+        Logincontroller(root, on_success=lambda r,u,p: start_main_app(r,u,p))
     root.mainloop()
 

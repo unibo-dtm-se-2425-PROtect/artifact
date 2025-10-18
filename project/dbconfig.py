@@ -4,7 +4,6 @@ from rich import print as printc
 console = Console()
 
 def dbconfig(): 
-    db=None
     try: 
         db = mysql.connector.connect(
           host="localhost",
@@ -12,10 +11,10 @@ def dbconfig():
           password="password"
         )
         printc("[green][+][/green] Connected to db")
+        return db
     except Exception as e:
         printc("[red][!] An error occurred while trying to connect to the database [/red]")
         console.print_exception(show_locals=True)
 
-    return db
 
 

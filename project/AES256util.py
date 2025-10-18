@@ -21,7 +21,7 @@ from Crypto.Cipher import AES
 from Crypto.Hash import SHA256
 from Crypto import Random
 import sys
-from dbconfig import dbconfig
+from project.dbconfig import dbconfig
 import hashlib
 from rich import print as printc
 

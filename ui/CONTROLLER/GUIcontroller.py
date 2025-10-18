@@ -16,7 +16,6 @@ class PasswordManagerController:
             on_edit=self.edit_entry,
             on_delete=self.delete_entry,
             on_copy=self.copy_password,
-            on_generate=self.generate_password,
             on_show=self.show_message,
             on_export=self.export_to_file,
             on_import=self.import_from_file,
