@@ -31,3 +31,15 @@ def test_deterministicOutput_and_uniqueness(mp, ds):
         assert key1 == key2
         key_other = add.computeMasterKey(mp+"x", ds+"y")
         assert key1 != key_other
+
+#testing edge cases with empty strings, long strings, and unicode, ensuring the 
+#output is still valid and consistent
+@pytest.mark.parametrize("mp, ds", [
+    ("", ""),                      # empty strings
+    ("a" * 10000, "b" * 10000),    # very long inputs
+    ("パスワード", "秘密"),          # unicode inputs
+])
+def test_fast_computeMasterKey_edge_cases(mp, ds):
+    key = fast_computeMasterKey(mp, ds)
+    assert isinstance(key, bytes)
+    assert len(key) == 32
