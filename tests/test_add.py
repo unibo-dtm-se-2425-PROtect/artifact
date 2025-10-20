@@ -133,4 +133,17 @@ def test_add_entry_happy_path(mock_checkentry, mock_dbconfig, mock_aes, mock_get
 def test_add_entry_empty_password(mock_getpass):
     with pytest.raises(ValueError): #verify that ValueError is raised for empty password
         add.addEntry("mp", "ds", "site", "url", "email", "user")
+#simulate encryption failure during addEntry
+@patch("project.add.getpass")
+@patch("project.add.AES256util")
+@patch("project.add.dbconfig")
+@patch("project.add.checkEntry", return_value=False)
+def test_add_entry_encrypt_failure(mock_checkentry, mock_dbconfig, mock_aes, mock_getpass):
+    mock_getpass.return_value = "plain" #simulate user input password
+    mock_aes.encrypt.side_effect = Exception("encrypt failure") #simulate encryption failure
+    mock_db = MagicMock()
+    mock_dbconfig.return_value = mock_db
 
+    with patch.object(add, "computeMasterKey", return_value=b"\x00"*32):
+        with pytest.raises(Exception):
+            add.addEntry("mp", "ds", "s", "u", "e", "n")
