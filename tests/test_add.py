@@ -64,3 +64,15 @@ def test_check_entry_exists(mock_dbconfig):
     #check that the query contains the right keywords
     assert "SELECT" in called_query.upper()
     assert "site" in called_query
+
+#mocking the DB to test the checkEntry function for a non-existing entry
+@patch("project.add.dbconfig")
+def test_check_entry_not_exists(mock_dbconfig):
+    mock_db = MagicMock()
+    mock_cursor = mock_db.cursor.return_value
+    mock_cursor.fetchall.return_value = [] 
+    mock_dbconfig.return_value = mock_db
+
+    result = add.checkEntry("site", "url", "email", "user")
+    assert result is False
+    assert mock_cursor.execute.called
