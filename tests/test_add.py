@@ -43,3 +43,8 @@ def test_fast_computeMasterKey_edge_cases(mp, ds):
     key = fast_computeMasterKey(mp, ds)
     assert isinstance(key, bytes)
     assert len(key) == 32
+
+def test_compute_master_key_invalid_types():
+    # Expect a TypeError when non-str types are passed
+    with pytest.raises(TypeError):
+        add.computeMasterKey(None, None)
