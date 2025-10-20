@@ -104,6 +104,20 @@ def test_check_entry_execute_raises(mock_dbconfig):
     with pytest.raises(Exception):
         add.checkEntry("s", "u", "e", "n")
 
+#simulate special characters in inputs to check for SQL injection vulnerability
+@patch("project.add.dbconfig")
+def test_check_entry_with_special_chars(mock_dbconfig):
+    mock_db = MagicMock()
+    mock_cursor = mock_db.cursor.return_value
+    mock_cursor.fetchall.return_value = []
+    mock_dbconfig.return_value = mock_db
+
+    # Inputs with SQL-sensitive characters
+    result = add.checkEntry("site'; DROP TABLE entries;--", "url", "email", "user") #attempted SQL injection
+    assert result is False
+    called_query = mock_cursor.execute.call_args[0][0] #get the executed query
+    assert "DROP TABLE" not in called_query.upper() #verify no SQL injection occurred
+
 
 #addEntry unit tests
 
