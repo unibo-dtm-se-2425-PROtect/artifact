@@ -127,3 +127,9 @@ def test_add_entry_happy_path(mock_checkentry, mock_dbconfig, mock_aes, mock_get
     mock_aes.encrypt.assert_called_once() #verify encryption succeeded
     mock_cursor.execute.assert_called_once() #verify DB insert was attempted
     mock_db.commit.assert_called_once() #verify DB commit was called
+
+#simulate the user entering an empty password
+@patch("project.add.getpass", return_value="")
+def test_add_entry_empty_password(mock_getpass):
+    with pytest.raises(ValueError): #verify that ValueError is raised for empty password
+        add.addEntry("mp", "ds", "site", "url", "email", "user")
