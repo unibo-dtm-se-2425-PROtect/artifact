@@ -133,3 +133,4 @@ def test_add_entry_happy_path(mock_checkentry, mock_dbconfig, mock_aes, mock_get
 def test_add_entry_empty_password(mock_getpass):
     with pytest.raises(ValueError): #verify that ValueError is raised for empty password
         add.addEntry("mp", "ds", "site", "url", "email", "user")
+
