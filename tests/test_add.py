@@ -139,6 +139,24 @@ def test_add_entry_happy_path(mock_checkentry, mock_dbconfig, mock_aes, mock_get
     mock_cursor.execute.assert_called_once() #verify DB insert was attempted
     mock_db.commit.assert_called_once() #verify DB commit was called
 
+#simulate a DB commit failure during addEntry
+@patch("project.add.getpass")
+@patch("project.add.AES256util")
+@patch("project.add.dbconfig")
+@patch("project.add.checkEntry", return_value=False)
+def test_add_entry_commit_failure(mock_checkentry, mock_dbconfig, mock_aes, mock_getpass):
+    mock_getpass.return_value = "plainpassword"
+    mock_aes.encrypt.return_value = "encrypted_blob"
+    
+    mock_db = MagicMock()
+    mock_cursor = mock_db.cursor.return_value
+    mock_db.commit.side_effect = Exception("commit failed") #simulate DB commit failure
+    mock_dbconfig.return_value = mock_db
+
+    with patch.object(add, "computeMasterKey", return_value=b"\x00" * 32):
+        with pytest.raises(Exception): #verify that Exception is raised on commit failure
+            add.addEntry("mp", "ds", "site", "url", "email", "user")
+
 #simulate the user entering an empty password
 @patch("project.add.getpass", return_value="")
 def test_add_entry_empty_password(mock_getpass):
