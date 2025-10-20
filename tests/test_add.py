@@ -48,3 +48,19 @@ def test_compute_master_key_invalid_types():
     # Expect a TypeError when non-str types are passed
     with pytest.raises(TypeError):
         add.computeMasterKey(None, None)
+
+#mocking the DB to test the checkEntry function for an existing entry
+@patch("project.add.dbconfig")
+def test_check_entry_exists(mock_dbconfig):
+    # Mock DB cursor
+    mock_db = MagicMock()
+    mock_cursor = mock_db.cursor.return_value
+    mock_cursor.fetchall.return_value = [("row1",)] 
+    mock_dbconfig.return_value = mock_db
+    result = add.checkEntry("site", "url", "email", "user")
+    assert result is True
+    assert mock_cursor.execute.called
+    called_query = mock_cursor.execute.call_args[0][0]
+    #check that the query contains the right keywords
+    assert "SELECT" in called_query.upper()
+    assert "site" in called_query
