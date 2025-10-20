@@ -49,6 +49,10 @@ def test_compute_master_key_invalid_types():
     with pytest.raises(TypeError):
         add.computeMasterKey(None, None)
 
+
+#checkEntry unit tests
+
+
 #mocking the DB to test the checkEntry function for an existing entry
 @patch("project.add.dbconfig")
 def test_check_entry_exists(mock_dbconfig):
@@ -76,3 +80,31 @@ def test_check_entry_not_exists(mock_dbconfig):
     result = add.checkEntry("site", "url", "email", "user")
     assert result is False
     assert mock_cursor.execute.called
+
+#simulating a DB error during query execution
+#asserting that checkEntry raises and exception in this case
+@patch("project.add.dbconfig")
+def test_check_entry_execute_raises(mock_dbconfig):
+    mock_db = MagicMock()
+    mock_cursor = mock_db.cursor.return_value
+    mock_cursor.execute.side_effect = Exception("db error")
+    mock_dbconfig.return_value = mock_db
+    
+    with pytest.raises(Exception):
+        add.checkEntry("s", "u", "e", "n")
+
+
+#addEntry unit tests
+
+
+#simulate a case where the entry already exists
+#verify that addEntry does not attempt to get the password or add to DB
+@patch("project.add.printc")
+@patch("project.add.checkEntry", return_value=True)
+def test_add_entry_when_exists(mock_checkentry, mock_printc):
+    with patch("project.add.getpass") as mock_getpass:
+        add.addEntry("mp", "ds", "site", "url", "email", "user")
+    
+    mock_getpass.assert_not_called()
+    mock_printc.assert_called_once()
+    
