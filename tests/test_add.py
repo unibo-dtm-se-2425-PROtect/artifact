@@ -176,3 +176,19 @@ def test_add_entry_encrypt_failure(mock_checkentry, mock_dbconfig, mock_aes, moc
     with patch.object(add, "computeMasterKey", return_value=b"\x00"*32):
         with pytest.raises(Exception):
             add.addEntry("mp", "ds", "s", "u", "e", "n")
+
+#simulate invalid key type during encryption
+@patch("project.add.getpass")
+@patch("project.add.AES256util")
+@patch("project.add.dbconfig")
+@patch("project.add.checkEntry", return_value=False)
+def test_add_entry_invalid_key_type(mock_checkentry, mock_dbconfig, mock_aes, mock_getpass):
+    mock_getpass.return_value = "plainpassword"
+    mock_aes.encrypt.side_effect = TypeError("invalid key type") #simulate invalid key type error
+    
+    mock_db = MagicMock()
+    mock_dbconfig.return_value = mock_db
+
+    with patch.object(add, "computeMasterKey", return_value="not_bytes"):
+        with pytest.raises(TypeError): #verify that TypeError is raised for invalid key type
+            add.addEntry("mp", "ds", "site", "url", "email", "user")
