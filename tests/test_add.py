@@ -17,3 +17,17 @@ def test_computeMasterKey_return_type_and_length():
     k = fast_computeMasterKey(mp, ds)
     assert isinstance(k, (bytes,bytearray))
     assert len(k) == 32
+
+#verifying that the output is deterministic and unique for different inputs
+@pytest.mark.parametrize("mp, ds", [
+    ("masterPassword", "deviceSecret"),
+    ("anotherPass", "anotherSecret"),
+])
+def test_deterministicOutput_and_uniqueness(mp, ds):
+    # Use a fast computeMasterKey to avoid expensive PBKDF2
+    with patch.object(add, "computeMasterKey", side_effect=fast_computeMasterKey):
+        key1 = add.computeMasterKey(mp, ds)
+        key2 = add.computeMasterKey(mp, ds)
+        assert key1 == key2
+        key_other = add.computeMasterKey(mp+"x", ds+"y")
+        assert key1 != key_other
