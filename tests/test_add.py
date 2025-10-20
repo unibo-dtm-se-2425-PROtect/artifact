@@ -32,6 +32,17 @@ def test_deterministicOutput_and_uniqueness(mp, ds):
         key_other = add.computeMasterKey(mp+"x", ds+"y")
         assert key1 != key_other
 
+#testing type errors for non-string inputs
+@pytest.mark.parametrize("mp, ds", [
+    (None, "deviceSecret"),       # mp is None
+    ("masterPassword", None),     # ds is None
+    (123, "deviceSecret"),        # mp is int
+    ("masterPassword", 456),      # ds is int
+])
+def test_computeMasterKey_type_errors(mp, ds):
+    with pytest.raises((TypeError, AttributeError)):
+        fast_computeMasterKey(mp, ds)
+
 #testing edge cases with empty strings, long strings, and unicode, ensuring the 
 #output is still valid and consistent
 @pytest.mark.parametrize("mp, ds", [
