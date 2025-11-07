@@ -33,6 +33,16 @@ def test_query_without_search_executes_select(fake_db, fake_cursor):
     assert any("SELECT * FROM PROtect.entries" in call[0][0] for call in fake_cursor.execute.call_args_list)
     fake_db.close.assert_called_once()
 
+def test_query_with_search_builds_where_clause(fake_db, fake_cursor):
+    with patch('project.retrieve.dbconfig', return_value=fake_db):
+        retrieve.retrieveEntries(b'mp', b'ds', search={'site':'example','username':'alice'}, decryptPassword=False)
+    # verify the SELECT with WHERE clause was executed at least once
+    expected = "SELECT * FROM PROtect.entries WHERE site=%s AND username=%s"
+    assert any(call_args[0][0] == expected or expected in call_args[0][0] for call_args in fake_cursor.execute.call_args_list)
+    # assert that the tuple below was used as parameters to an execute call
+    assert any(call_args[0][1] == ('example','alice') for call_args in fake_cursor.execute.call_args_list if len(call_args[0]) > 1)
+    fake_db.close.assert_called_once()
+
 
 
 
