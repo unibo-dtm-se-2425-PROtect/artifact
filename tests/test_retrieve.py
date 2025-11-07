@@ -82,7 +82,27 @@ ef test_multiple_results_decrypt_true_warns_and_does_not_decrypt(fake_db, fake_c
     fake_db.close.assert_called_once()
 
 
+def test_single_result_decrypts_and_copies(fake_db, fake_cursor):
+    fake_cursor.fetchall.return_value = [
+        ('site','url','email','user', b'ENCRYPTEDBLOB')
+    ]
 
+    #these patches mock dbconfig, computeMasterKey, AES256util.decrypt, pyperclip.copy and printc
+    # we want to ensure that decrypt and copy are called with correct parameters
+    #the master key, in this test, is simulated as the deterministic byte string b'mkbytes' 
+    with patch('project.retrieve.dbconfig', return_value=fake_db), \
+         patch('project.retrieve.computeMasterKey', return_value=b'mkbytes') as mock_mk, \
+         patch('project.retrieve.AES256util.decrypt', return_value=b'secretpwd') as mock_decrypt, \
+         patch('project.retrieve.pyperclip.copy') as mock_copy, \
+         patch('project.retrieve.printc') as mock_printc:
+        retrieve.retrieveEntries(b'mp', b'ds', search={'site':'site'}, decryptPassword=True)
+        #retrieveEntries is called to exercise the "single result with decryption" path
+    mock_mk.assert_called_once_with(b'mp', b'ds')
+    mock_decrypt.assert_called_once_with(key=b'mkbytes', source=b'ENCRYPTEDBLOB', keyType="bytes")
+    mock_copy.assert_called_once_with('secretpwd') #ensuring bytes are decoded to string before copying
+    mock_printc.assert_any_call("[green][+][/green] Password copied to clipboard") #ensuring success message is printed
+    #confirms the password was copied
+    fake_db.close.assert_called_once()
 
 
 
