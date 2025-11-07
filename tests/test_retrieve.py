@@ -62,6 +62,27 @@ def test_multiple_results_shows_table_and_hides_password(fake_db, fake_cursor):
     fake_console_instance.print.assert_called_once()
     fake_db.close.assert_called_once()
 
+ef test_multiple_results_decrypt_true_warns_and_does_not_decrypt(fake_db, fake_cursor):
+    fake_cursor.fetchall.return_value = [
+        ('s','u','e','n', b'e1'),
+        ('s2','u2','e2','n2', b'e2'),
+    ]
+    #these patches mock dbconfig, printc, AES256util.decrypt and pyperclip.copy
+    # we want to ensure that decrypt and copy are NOT called in this scenario
+    with patch('project.retrieve.dbconfig', return_value=fake_db), \
+         patch('project.retrieve.printc') as mock_printc, \
+         patch('project.retrieve.AES256util.decrypt') as mock_decrypt, \
+         patch('project.retrieve.pyperclip.copy') as mock_copy:
+        retrieve.retrieveEntries(b'mp', b'ds', search={'site':'s'}, decryptPassword=True)
+
+    mock_printc.assert_any_call("[yellow][-][/yellow] More than one result found from the search, therefore not extracting the password. Please, be more specific")
+    #ensure that printc was called with the warning message specific to multiple results, and that the password decryption and clipboard copy were NOT attempted
+    mock_decrypt.assert_not_called() #assert decryption was not attempted
+    mock_copy.assert_not_called() #assert clipboard copy was not attempted
+    fake_db.close.assert_called_once()
+
+
+
 
 
 
