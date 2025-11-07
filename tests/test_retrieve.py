@@ -24,3 +24,7 @@ def test_no_results_returns_and_closes_db(fake_db, fake_cursor):
         retrieve.retrieveEntries(b'mp', b'ds', search=None, decryptPassword=False) 
     mock_printc.assert_called_once_with("[yellow][-][/yellow] No results for the search")
     fake_db.close.assert_called_once() #ensure DB connection was closed
+
+
+
+
