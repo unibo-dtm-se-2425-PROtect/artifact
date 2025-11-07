@@ -104,5 +104,13 @@ def test_single_result_decrypts_and_copies(fake_db, fake_cursor):
     #confirms the password was copied
     fake_db.close.assert_called_once()
 
+def test_result_with_missing_columns_raises(fake_db, fake_cursor):
+    # row missing password field (only 4 columns)
+    fake_cursor.fetchall.return_value = [('only','four','cols','here')] 
 
+    with patch('project.retrieve.dbconfig', return_value=fake_db):
+        with pytest.raises(IndexError): #the function, once invoked, should raise an IndexError when trying to access the missing password column
+            retrieve.retrieveEntries(b'mp', b'ds', search=None, decryptPassword=True)
+
+    fake_db.close.assert_called_once()
 
