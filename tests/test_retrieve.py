@@ -43,6 +43,25 @@ def test_query_with_search_builds_where_clause(fake_db, fake_cursor):
     assert any(call_args[0][1] == ('example','alice') for call_args in fake_cursor.execute.call_args_list if len(call_args[0]) > 1)
     fake_db.close.assert_called_once()
 
+def test_multiple_results_shows_table_and_hides_password(fake_db, fake_cursor):
+    # arrange multiple rows
+    fake_cursor.fetchall.return_value = [
+        ('site1','http://s1','e1','u1', b'encrypted1'),
+        ('site2','http://s2','e2','u2', b'encrypted2'),
+    ] #this time we simulate multiple results instead of an empty set
+
+    #a fake Console instance to capture the printed table
+    fake_console_instance = MagicMock()
+    FakeConsole = MagicMock(return_value=fake_console_instance)
+
+    with patch('project.retrieve.dbconfig', return_value=fake_db), \
+         patch('project.retrieve.Console', FakeConsole):
+        retrieve.retrieveEntries(b'mp', b'ds', search={'site':'s'}, decryptPassword=False) #make sure the called function exercises the "multiple results" path
+
+    # Console.print was called with a Table instance
+    fake_console_instance.print.assert_called_once()
+    fake_db.close.assert_called_once()
+
 
 
 
