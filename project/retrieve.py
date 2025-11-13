@@ -1,4 +1,4 @@
-from dbconfig import dbconfig #needed to establish connection with the database
+from project.dbconfig import dbconfig #needed to establish connection with the database
 from add import computeMasterKey
 
 #modules to be used in order to display the search results in a table-shaped format to the user
