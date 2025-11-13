@@ -62,7 +62,7 @@ def test_multiple_results_shows_table_and_hides_password(fake_db, fake_cursor):
     fake_console_instance.print.assert_called_once()
     fake_db.close.assert_called_once()
 
-ef test_multiple_results_decrypt_true_warns_and_does_not_decrypt(fake_db, fake_cursor):
+def test_multiple_results_decrypt_true_warns_and_does_not_decrypt(fake_db, fake_cursor):
     fake_cursor.fetchall.return_value = [
         ('s','u','e','n', b'e1'),
         ('s2','u2','e2','n2', b'e2'),
