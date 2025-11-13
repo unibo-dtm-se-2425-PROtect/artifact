@@ -1,5 +1,5 @@
 from project.dbconfig import dbconfig #needed to establish connection with the database
-from add import computeMasterKey
+from project.add import computeMasterKey
 
 #modules to be used in order to display the search results in a table-shaped format to the user
 from rich import print as printc
