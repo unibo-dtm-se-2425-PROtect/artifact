@@ -1,7 +1,7 @@
 from getpass import getpass
 from rich import print as printc
-from dbconfig import dbconfig
-from AES256util import verify_master_password
+from project.dbconfig import dbconfig
+from project.AES256util import verify_master_password
 
 def delete_entry(ID):
     #deletes an entry by its ID after confirming and verifying master password
