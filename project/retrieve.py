@@ -30,42 +30,30 @@ def retrieveEntries(mp, ds, search, decryptPassword = False):
         query=f"SELECT * FROM PROtect.entries WHERE {' AND '.join(conditions)}"
         cursor.execute(query, tuple(values))
 
-    cursor.execute(query)
     results = cursor.fetchall()
-
-    if len(results) == 0: 
+    if not results:
         printc("[yellow][-][/yellow] No results for the search")
-        return
-
-    if (decryptPassword and len(results)>1) or (not decryptPassword):
-        if decryptPassword:
-            printc("[yellow][-][/yellow] More than one result found from the search, therefore not extracting the password. Please, be more specific")
-        #handling the columns of the results table
-        table = Table(title="Results")
-        table.add_column("Site")
-        table.add_column("URL")
-        table.add_column("Email")
-        table.add_column("Username")
-        table.add_column("Password")
-
-        #handling the rows of the results table
-        for i in results: 
-            table.add_row(i[0],i[1],i[2],i[3], "{hidden}") #the final field for the password is kept hidden because we don't want to show the password immediately, not even in its encrypted form
-
-        console = Console()
-        console.print(table)
         db.close()
         return
 
-    if len(results)==1 and decryptPassword:
-        #handling the case in which the user wants to access or copy the password to the clipboard
-        #since the user also wants to see the password as decrypted, we would also have to actually decrypt the retrieved password 
-        #in order to do this, we need the mp, the ds, and the mk. Since we've already included the values for mp and ds as arguments to our function,
-        #we would just have to compute the mk and hence decrypt the password. This is done vie the same function that are used in the add.py file. 
-        mk = computeMasterKey(mp,ds)
-        decrypted = AES256util.decrypt(key=mk, source=results[0][4], keyType = "hex")
-
-        pyperclip.copy(decrypted.decode()) #this module is used to copy the decrypted password to the clipboard, after it has been decrypted and decoded
+    #handling the columns of the results table
+    table = Table(title="Results")
+    table.add_column("Site")
+    table.add_column("URL")
+    table.add_column("Email")
+    table.add_column("Username")
+    table.add_column("Password") #never show plaintext by default
+    
+    if decryptPassword and len(results)==1:
+        mk=computeMasterKey(mp,ds)
+        decrypted=AES256util.decrypt(mk, results[0]["password"], keyType="hex").decode()
+        pyperclip.copy(decrypted)
         printc("[green][+][/green] Password copied to clipboard")
+    
+    #Fill the table with masked passwords
+    for row in results: 
+        table.add_row(str(row["ID"]), row["Site"], row["URL"], row.get["Email", ""], row.get["Username", ""], "{hidden}")
 
+    Console().print(table)
     db.close()
+    return
