@@ -35,3 +35,9 @@ class FakeDB:
 
     def close(self):
         self.closed = True #flips the closed flag when close() is called
+
+#lightweight factory to create a FakeDB with a FakeCursor
+def make_fake_db(rowcount=1, raise_on_execute=False):
+    cur = FakeCursor(raise_on_execute=raise_on_execute, rowcount=rowcount) #create the FakeCursor with configurable rowcount and error behavior
+    db = FakeDB(cur) #create the FakeDB with the FakeCursor
+    return db, cur #return the paired objects for use in tests
