@@ -6,7 +6,7 @@ from AES256util import verify_master_password
 
 def modify_entry(ID, site, url, email, username, password, mp, ds):
     #Modify one or more fields of an existing entry
-    if not verify_master_password(mp):
+    if not verify_master_password(username, mp, ds):
         return
     
     try:
@@ -28,6 +28,8 @@ def modify_entry(ID, site, url, email, username, password, mp, ds):
     except Exception as e:
         printc(f"[red][!] Error updating entry: {e}[/red]")
     
+    db.close()
+    
 def modify_entry_cli():
     #CLI handler for modifying an entry.
     #Asks for ID, fields to update, and master password.
@@ -43,9 +45,12 @@ def modify_entry_cli():
         username = input("Username: ").strip()
         password = input("Password: ").strip()
 
-        mp = getpass("Enter your MASTER PASSWORD: ")
+        mp_ds = AES256util.verify_master_password(getpass("Enter your MASTER PASSWORD: "))
+        if not mp_ds:
+            return
+        mp, ds = mp_ds
 
-        modify_entry(ID, site, url, email, username, password, mp)
+        modify_entry(ID, site, url, email, username, password, mp, ds)
 
     except Exception as e:
         printc(f"[red][!] Error during CLI modification: {e}[/red]")

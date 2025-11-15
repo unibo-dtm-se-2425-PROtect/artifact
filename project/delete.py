@@ -1,7 +1,7 @@
 from getpass import getpass
 from rich import print as printc
 from project.dbconfig import dbconfig
-from project.AES256util import verify_master_password
+import AES256util
 
 def delete_entry(ID):
     #deletes an entry by its ID after confirming and verifying master password
@@ -37,11 +37,12 @@ def delete_entry_cli():
             return
 
         # Ask for master password before proceeding
-        mp = getpass("Enter your MASTER PASSWORD: ")
-        if not verify_master_password(mp):
+        mp_ds = AES256util.verify_master_password(getpass("Enter your MASTER PASSWORD: "))
+        if not mp_ds:
             return
+        mp, ds = mp_ds
 
-        delete_entry(ID)
+        delete_entry(ID, mp, ds)
 
     except Exception as e:
         printc(f"[red][!] Error during deletion: {e}[/red]")

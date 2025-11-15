@@ -40,11 +40,12 @@ def export_entries_cli():
             printc("[red][!] File path cannot be empty.[/red]")
             return
 
-        master_password = getpass("Enter your MASTER PASSWORD: ")
-        if not verify_master_password(master_password):
-            return 
+        mp_ds = AES256util.verify_master_password(getpass("Enter your MASTER PASSWORD: "))
+        if not mp_ds:
+            return
+        mp, ds = mp_ds
 
-        export_entries(filepath, master_password)
+        export_entries(filepath, mp, ds)
 
     except Exception as e:
         printc(f"[red][!] Export error: {e}[/red]")
