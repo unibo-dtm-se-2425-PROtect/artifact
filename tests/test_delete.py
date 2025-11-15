@@ -124,3 +124,18 @@ def test_delete_entry_cli_master_password_fail(capsys):
 
     # verify that delete_entry was not called
     fake_delete.assert_not_called()
+
+def test_delete_entry_cli_master_password_ok_calls_delete():
+    # Valid numeric ID and password OK => delete_entry should be called with same ID string
+    called = {}
+
+    def fake_delete(ID):
+        called["ID"] = ID
+
+    with patch.object(builtins, "input", lambda prompt="": "5"), \
+         patch("getpass.getpass", lambda prompt="": "right"), \
+         patch.object(delete_mod, "verify_master_password", lambda p: True), \
+         patch.object(delete_mod, "delete_entry", fake_delete):
+        delete_mod.delete_entry_cli()
+
+    assert called.get("ID") == "5"
