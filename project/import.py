@@ -4,7 +4,6 @@ from rich import print as printc
 from dbconfig import dbconfig
 from add import computeMasterKey
 import AES256util
-from AES256util import verify_master_password
 
 
 def import_entries(filepath, mp, ds):

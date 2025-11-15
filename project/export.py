@@ -3,7 +3,6 @@ from getpass import getpass
 from rich import print as printc
 from dbconfig import dbconfig
 import AES256util
-from AES256util import verify_master_password
 from add import computeMasterKey
 
 def export_entries(filepath, mp, ds):
