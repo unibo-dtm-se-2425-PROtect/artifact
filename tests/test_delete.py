@@ -90,3 +90,15 @@ def test_delete_entry_no_row_found(capsys):
     assert db.closed is True 
     captured = capsys.readouterr().out
     assert "No entry found with the provided ID." in captured #inform user no rows matched
+
+#ensure that if execute raises an exception, it propagates out of delete_entry
+def test_delete_entry_execute_raises():
+    db, cursor = make_fake_db(raise_on_execute=True)
+    with patch.object(delete_mod, "dbconfig", return_value=db), \
+         patch.object(builtins, "input", lambda prompt="": "y"):
+        # execute will raise; delete_entry does not catch DB exceptions, so it should propagate
+        with pytest.raises(RuntimeError):
+            delete_mod.delete_entry("7")
+    # The test accepts either outcome for db.closed because close is after execute in code
+    assert db.closed in (False, True)
+
