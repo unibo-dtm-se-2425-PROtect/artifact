@@ -139,3 +139,15 @@ def test_delete_entry_cli_master_password_ok_calls_delete():
         delete_mod.delete_entry_cli()
 
     assert called.get("ID") == "5"
+
+def test_delete_entry_cli_exception_prints(capsys):
+    # Make input raise to simulate unexpected exception and ensure CLI catches and prints it
+    def bad_input(prompt=""):
+        raise ValueError("boom")
+
+    with patch.object(builtins, "input", bad_input):
+        delete_mod.delete_entry_cli()
+
+    captured = capsys.readouterr().out
+    assert "Error during deletion" in captured
+    assert "boom" in captured
