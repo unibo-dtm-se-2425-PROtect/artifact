@@ -1,8 +1,8 @@
 from getpass import getpass
 import string
-import random
 import hashlib
 import sys
+import secrets
 
 from project.dbconfig import dbconfig 
 
@@ -23,7 +23,9 @@ def checkConfig():
     return False
 
 def generateDeviceSecret(length=10):
-    return ''.join(random.choices(string.ascii_uppercase + string.digits, k = length))
+    #Generate a cryptographically secure device secret (uppercase + digits)
+    alphabet=string.ascii_uppercase+string.digits
+    return ''.join(secrets.choice(alphabet) for _ in range(length))
 
 def config(master_password=None):
     if checkConfig():
