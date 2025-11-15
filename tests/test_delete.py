@@ -5,7 +5,7 @@ import pytest
 #import module under test (adjust import path if needed)
 import project.delete as delete_mod
 
- --- Test doubles for DB and Cursor ---
+# --- Test doubles for DB and Cursor ---
 
 #creating the FakeCursor object to simulate the minimal interface needed for testing
 class FakeCursor:
@@ -19,3 +19,19 @@ class FakeCursor:
             raise RuntimeError("execute error") #simulate a database error
         # record exactly as the real code would receive
         self.queries.append((sql, params)) #store the executed query and parameters if no error
+
+#emulate the DB connection object returned by dbconfig()
+class FakeDB:
+    def __init__(self, cursor_obj):
+        self._cursor = cursor_obj 
+        self.committed = False 
+        self.closed = False 
+
+    def cursor(self):
+        return self._cursor #returns the injected FakeCursor
+
+    def commit(self):
+        self.committed = True #flips the committed flag when commit() is called
+
+    def close(self):
+        self.closed = True #flips the closed flag when close() is called
