@@ -103,7 +103,7 @@ if __name__ == "__main__":
 		msg = decrypt(key,cipher,keyType=keyType)
 		print(msg)
 
-def verify_master_password(username, master_password):
+def verify_master_password(username, mp):
 	#verify if the provided mp matches the one stored in secrets
 	db=dbconfig(dictionary=True)
 	cursor=db.cursor()
@@ -115,10 +115,10 @@ def verify_master_password(username, master_password):
 		printc("[red][!] No masterpassword configuration found[/red]")
 		return False
 	
-	stored_hash=result[0]
-	hashed_input=hashlib.sha256(master_password.encode()).hexdigest()
+	stored_hash, ds = result
+	hashed_input=hashlib.sha256(mp.encode()).hexdigest()
 
 	if hashed_input != stored_hash:
 		printc("[red][!] Wrong Master Password![/red]")
-		return False
-	return True
+		return None
+	return mp, ds
