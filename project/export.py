@@ -15,12 +15,12 @@ def export_entries(filepath, mp, ds):
             return
 
         cursor = db.cursor()
-        cursor.execute("SELECT ID, Site, URL, Email, Username, password FROM PROtect.entries")
+        cursor.execute("SELECT ID, Site, URL, Email, Username, Password FROM PROtect.entries")
         rows = cursor.fetchall()
 
         with open(filepath, "w", newline="", encoding="utf-8") as f:
             writer = csv.writer(f)
-            writer.writerow(["ID", "Site", "URL", "Email", "Username", "password (decrypted)"])
+            writer.writerow(["ID", "Site", "URL", "Email", "Username", "Password (decrypted)"])
             for r in rows:
                 mk=computeMasterKey(mp,ds)
                 dec_pass=AES256util.decrypt(r[5], mk, keyType="hex")

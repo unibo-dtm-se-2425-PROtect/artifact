@@ -20,7 +20,7 @@ def modify_entry(ID, site, url, email, username, password, mp, ds):
         mk = computeMasterKey(mp, ds)
         enc_pass = AES256util.encrypt(mk, password, keyType="hex")
 
-        query = "UPDATE PROtect.entries SET Site=%s, URL=%s, Email=%s, Username=%s, password=%s WHERE ID=%s"
+        query = "UPDATE PROtect.entries SET Site=%s, URL=%s, Email=%s, Username=%s, Password=%s WHERE ID=%s"
         cursor.execute(query, (site, url, email, username, enc_pass, ID))
         db.commit()
         printc(f"[green][+][/green] Entry with ID {ID} updated successfully")

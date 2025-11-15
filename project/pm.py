@@ -86,17 +86,17 @@ def main():
 		search={}
 		if not args.all:
 			if args.name is not None:
-				search["sitename"] = args.name
+				search["Site"] = args.name
 			if args.url is not None:
-				search["siteurl"] = args.url
+				search["URL"] = args.url
 			if args.email is not None:
-				search["email"] = args.email
+				search["Email"] = args.email
 			if args.login is not None:
-				search ["username"] = args.login
+				search ["Username"] = args.login
 		
 		#if no fields provided and --all not used, show warning
 		if len(search) == 0:
-			printc("[red][!][/red] Please enter at least one search field (sitename/url/email/username) or use --all")
+			printc("[red][!][/red] Please enter at least one search field (Site/URL/Email/Username) or use --all")
 			return
 		
 		#if --all is used, search[] stays empty to retrieve all entries 

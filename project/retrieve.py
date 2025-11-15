@@ -42,7 +42,7 @@ def retrieveEntries(mp, ds, search, decryptPassword = False):
             printc("[yellow][-][/yellow] More than one result found from the search, therefore not extracting the password. Please, be more specific")
         #handling the columns of the results table
         table = Table(title="Results")
-        table.add_column("Site Name")
+        table.add_column("Site")
         table.add_column("URL")
         table.add_column("Email")
         table.add_column("Username")
