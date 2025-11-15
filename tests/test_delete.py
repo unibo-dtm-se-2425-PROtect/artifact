@@ -62,3 +62,17 @@ def test_delete_entry_cancel_confirmation(capsys):
     #assert the output mandatorily includes the cancellation message
     captured = capsys.readouterr().out #capture stdout
     assert "Deletion cancelled." in captured
+
+#test the happy path where deletion is confirmed and successful
+def test_delete_entry_successful_delete(capsys):
+    db, cursor = make_fake_db(rowcount=1)
+    with patch.object(delete_mod, "dbconfig", return_value=db), \
+         patch.object(builtins, "input", lambda prompt="": "y"):
+        delete_mod.delete_entry("42")
+
+    # SQL executed with ID param as string (code passes ID unchanged)
+    assert cursor.queries == [("DELETE FROM PROtect.entries WHERE ID=%s", ("42",))]
+    assert db.committed is True
+    assert db.closed is True
+    captured = capsys.readouterr().out
+    assert "Entry with ID 42 successfully deleted." in captured
