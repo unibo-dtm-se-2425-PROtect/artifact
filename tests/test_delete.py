@@ -102,3 +102,13 @@ def test_delete_entry_execute_raises():
     # The test accepts either outcome for db.closed because close is after execute in code
     assert db.closed in (False, True)
 
+def test_delete_entry_cli_invalid_id(capsys):
+    # Input returns non-digit ID; should print invalid message and not call getpass or delete_entry
+    # We'll assert delete_entry is not called by patching it and checking call count
+    with patch.object(builtins, "input", lambda prompt="": "abc"), \
+         patch.object(delete_mod, "delete_entry", MagicMock()) as fake_delete: 
+        delete_mod.delete_entry_cli() #function is invoked
+
+    captured = capsys.readouterr().out
+    assert "Invalid ID. Must be a number." in captured #CLI should print invalidation error
+    fake_delete.assert_not_called() #ensure delete_entry was not called
