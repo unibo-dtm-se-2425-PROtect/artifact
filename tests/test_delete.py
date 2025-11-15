@@ -76,3 +76,17 @@ def test_delete_entry_successful_delete(capsys):
     assert db.closed is True
     captured = capsys.readouterr().out
     assert "Entry with ID 42 successfully deleted." in captured
+
+#test the scenario where the deletion SQL raises an exception 
+#exception should be raised since DELETE affects no rows
+def test_delete_entry_no_row_found(capsys):
+    db, cursor = make_fake_db(rowcount=0) #rowcount=0 simulates no rows affected
+    #after execute, delete_entry inspects cursor.rowcount to decide what to print out to the user
+    with patch.object(delete_mod, "dbconfig", return_value=db), \
+         patch.object(builtins, "input", lambda prompt="": "y"):
+        delete_mod.delete_entry("99") 
+
+    assert db.committed is True #commit should be called also in this case
+    assert db.closed is True 
+    captured = capsys.readouterr().out
+    assert "No entry found with the provided ID." in captured #inform user no rows matched
