@@ -41,3 +41,24 @@ def make_fake_db(rowcount=1, raise_on_execute=False):
     cur = FakeCursor(raise_on_execute=raise_on_execute, rowcount=rowcount) #create the FakeCursor with configurable rowcount and error behavior
     db = FakeDB(cur) #create the FakeDB with the FakeCursor
     return db, cur #return the paired objects for use in tests
+
+# --- Tests ---
+
+#exercise the branch where the user does not confirm deletion
+def test_delete_entry_cancel_confirmation(capsys):
+    #capsys is a pytest fixture to capture stdout/stderr output during the test
+    db, cursor = make_fake_db(rowcount=1)
+
+    # patch dbconfig to return our fake DB
+    with patch.object(delete_mod, "dbconfig", return_value=db), \
+         patch.object(builtins, "input", lambda prompt="": "n"): #builtins.input patched to simulate user cancelling
+        delete_mod.delete_entry("123") #invoke the function under test
+
+    # assert that no SQL was executed
+    assert cursor.queries == []
+    # assert that the DB was closed and not committed
+    assert db.closed is True
+    assert db.committed is False
+    #assert the output mandatorily includes the cancellation message
+    captured = capsys.readouterr().out #capture stdout
+    assert "Deletion cancelled." in captured
