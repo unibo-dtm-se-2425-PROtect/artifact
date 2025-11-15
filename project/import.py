@@ -2,10 +2,12 @@ import csv
 from getpass import getpass
 from rich import print as printc
 from dbconfig import dbconfig
-from AES256util import verify_master_password, encrypt
+from add import computeMasterKey
+import AES256util
+from AES256util import verify_master_password
 
 
-def import_entries(filepath, masterkey):
+def import_entries(filepath, mp, ds):
     #Import entries from a CSV file into the PROtect.entries table
     db = dbconfig()
     cursor = db.cursor()
@@ -21,7 +23,8 @@ def import_entries(filepath, masterkey):
                     continue  #skips incomplete rows
 
                 ID, site, url, email, username, password_plain = row
-                enc_pass = encrypt(password_plain, masterkey)
+                mk = computeMasterKey(mp, ds)
+                enc_pass = AES256util.encrypt(mk, password_plain, keyType="hex")
 
                 cursor.execute(
                     "INSERT INTO PROtect.entries (ID, Site, URL, Email, Username, password) VALUES (%s,%s,%s,%s,%s,%s)",

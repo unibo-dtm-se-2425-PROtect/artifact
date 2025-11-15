@@ -18,7 +18,7 @@ def modify_entry(ID, site, url, email, username, password, mp, ds):
         cursor = db.cursor()
 
         mk = computeMasterKey(mp, ds)
-        enc_pass = AES256util(password, mk)
+        enc_pass = AES256util.encrypt(mk, password, keyType="hex")
 
         query = "UPDATE PROtect.entries SET Site=%s, URL=%s, Email=%s, Username=%s, password=%s WHERE ID=%s"
         cursor.execute(query, (site, url, email, username, enc_pass, ID))

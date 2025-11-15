@@ -6,7 +6,7 @@ from rich import print as printc
 from rich.console import Console
 from rich.table import Table
 
-import project.AES256util
+import AES256util
 import pyperclip
 
 def retrieveEntries(mp, ds, search, decryptPassword = False):
@@ -63,7 +63,7 @@ def retrieveEntries(mp, ds, search, decryptPassword = False):
         #in order to do this, we need the mp, the ds, and the mk. Since we've already included the values for mp and ds as arguments to our function,
         #we would just have to compute the mk and hence decrypt the password. This is done vie the same function that are used in the add.py file. 
         mk = computeMasterKey(mp,ds)
-        decrypted = AES256util.decrypt(key=mk, source=results[0][4], keyType = "bytes")
+        decrypted = AES256util.decrypt(key=mk, source=results[0][4], keyType = "hex")
 
         pyperclip.copy(decrypted.decode()) #this module is used to copy the decrypted password to the clipboard, after it has been decrypted and decoded
         printc("[green][+][/green] Password copied to clipboard")

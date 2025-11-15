@@ -2,9 +2,11 @@ import csv
 from getpass import getpass
 from rich import print as printc
 from dbconfig import dbconfig
-from AES256util import verify_master_password, decrypt
+import AES256util
+from AES256util import verify_master_password
+from add import computeMasterKey
 
-def export_entries(filepath, masterkey):
+def export_entries(filepath, mp, ds):
     #Export entries to a CSV file decrypting password
     try:
         db = dbconfig()
@@ -20,7 +22,8 @@ def export_entries(filepath, masterkey):
             writer = csv.writer(f)
             writer.writerow(["ID", "Site", "URL", "Email", "Username", "password (decrypted)"])
             for r in rows:
-                dec_pass=decrypt(r[5], masterkey)
+                mk=computeMasterKey(mp,ds)
+                dec_pass=AES256util.decrypt(r[5], mk, keyType="hex")
                 writer.writerow([r[0], r[1], r[2], r[3], r[4], dec_pass])
 
         printc(f"[green][+][/green] Entries exported to [cyan]{filepath}[/cyan]")

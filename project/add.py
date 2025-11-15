@@ -5,14 +5,12 @@ from Crypto.Hash import SHA512
 from rich import print as printc
 
 from project import AES256util
+import hashlib 
 
-#function to comupute the masterkey from the masterPassword (mp) and the the deviceSecret (ds)
+#function to compute the masterkey from the masterPassword (mp) and the the deviceSecret (ds)
 def computeMasterKey(mp,ds): 
-    password = mp.encode() #encoding the mp and save it as password
-    salt = ds.encode() #encoding the ds and save it as salt
-    #using the PBDKF2 function from the Crypto.protocol module to derive a strong key from the two input values
-    key = PBKDF2(password, salt, 32, count=1000000, hmac_hash_module=SHA512) #(mp, ds, length_key, nrRoundsforAESstrengthening, hashFunctionSpecification)
-    return key
+    combined= (mp + ds).encode()
+    return hashlib.sha256(combined).hexdigest()
 
 def checkEntry(sitename, siteurl, email, username):
     db = dbconfig()
@@ -36,6 +34,7 @@ def addEntry(mp, ds, sitename, siteurl, email, username):
         password = getpass("Password: ")
 
         mk = computeMasterKey(mp,ds) #to compute the master key
+        enc_pass=AES256util.encrypt(mk, password, keyType=hex)
 
         #using imported aesutil function to encrypt the mk 
         #this should return the encrypted password in base 64 encoded format
@@ -48,7 +47,7 @@ def addEntry(mp, ds, sitename, siteurl, email, username):
             return
         cursor = db.cursor()
         query = "INSERT INTO PROtect.entries (sitename, siteurl, email, username, password) VALUES (%s, %s, %s, %s, %s)"
-        val = (sitename,siteurl,email,username,encrypted)
+        val = (sitename,siteurl,email,username,enc_pass)
         cursor.execute(query, val)
         db.commit()
         printc("[green][+][/green] Added entry ")
