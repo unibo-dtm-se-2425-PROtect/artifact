@@ -20,10 +20,11 @@ from importf import import_entries
 parser = argparse.ArgumentParser(description='Password Manager CLI')
 
 parser.add_argument('option', help='(a)dd / (e)xtract / (con)figure / (del)ete / (recon)figure / (imp)ort / (exp)ort / (mod)ify') #these are the type of operation that the user is able to perform
-parser.add_argument("-s", "--name", help="Site name")
+parser.add_argument("-s", "--name", help="Site Name")
 parser.add_argument("-u", "--url", help="Site URL")
 parser.add_argument("-e", "--email", help="Email")
 parser.add_argument("-l", "--login", help="Username")
+parser.add_argument("-p", "--password", help="Password")
 parser.add_argument("--length", help="Length of the password to generate",type=int)
 parser.add_argument("-c", "--copy", action='store_true', help='Copy password to clipboard')
 parser.add_argument("--all", action="store_true", help="Retrieve all stored entries (not the default, it must be specified for conscious choice)" )
@@ -68,20 +69,22 @@ def main():
 		missing=[]
 		if args.name == None:
 			missing.append("Site Name (-s)")
-		if args.url == None:
-			missing.append("Site URL (-u)")
 		if args.login == None:
-			missing.append("Site Username (-l)")
+			missing.append("Username (-l)")
+		if args.password == None:
+			missing.append("Password (-p)")
 		if missing:
 			for m in missing:
 				printc(f"[red][!][/red] {m} is required!")
         #optional field
 		if args.email == None:
 			args.email = ""
-
+		if args.url == None:
+			args.url = ""
+        
 		res = inputAndValidateMasterPassword()
 		if res is not None:
-			add.addEntry(res[0],res[1],args.name,args.url,args.email,args.login)
+			add.addEntry(res[0],res[1],args.name,args.url,args.email,args.login, args.password)
 
 
 	elif args.option in ["extract","e"]:
