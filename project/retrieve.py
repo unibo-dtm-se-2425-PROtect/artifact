@@ -38,6 +38,7 @@ def retrieveEntries(mp, ds, search, decryptPassword = False):
 
     #handling the columns of the results table
     table = Table(title="Results")
+    table.add_column("ID")
     table.add_column("Site")
     table.add_column("URL")
     table.add_column("Email")
