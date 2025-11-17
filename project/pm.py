@@ -11,10 +11,15 @@ from config import config, delete, reconfig
 import string
 import retrieve
 from dbconfig import dbconfig
+from delete import delete_entry
+from modify import modify_entry
+from export import export_entries
+from importf import import_entries
+
 
 parser = argparse.ArgumentParser(description='Password Manager CLI')
 
-parser.add_argument('option', help='(a)dd / (e)xtract / (con)figure / (del)ete / (recon)figure') #those are the type of operation that the user is able to perform
+parser.add_argument('option', help='(a)dd / (e)xtract / (con)figure / (del)ete / (recon)figure / (imp)ort / (exp)ort / (mod)ify') #these are the type of operation that the user is able to perform
 parser.add_argument("-s", "--name", help="Site name")
 parser.add_argument("-u", "--url", help="Site URL")
 parser.add_argument("-e", "--email", help="Email")
@@ -22,7 +27,8 @@ parser.add_argument("-l", "--login", help="Username")
 parser.add_argument("--length", help="Length of the password to generate",type=int)
 parser.add_argument("-c", "--copy", action='store_true', help='Copy password to clipboard')
 parser.add_argument("--all", action="store_true", help="Retrieve all stored entries (not the default, it must be specified for conscious choice)" )
-
+parser.add_argument("--id", help="ID of the entry to modify/delete (for 'modify' and 'delete' options)")
+parser.add_argument("--f", "--file", help="path to file to 'import' or 'export' operations")
 args = parser.parse_args()
 
 
@@ -101,6 +107,33 @@ def main():
 		
 		#if --all is used, search[] stays empty to retrieve all entries 
 		retrieve.retrieveEntries(res[0], res[1], search, decryptPassword=args.copy)
+
+	elif args.option in ["delete", "del"]:
+		res=inputAndValidateMasterPassword()
+		if res is not None:
+			if args.id is None:
+				printc("[red][!][/red] Entry ID (--id) is required for deletion!")
+				return
+			delete_entry(args.id, res[0], res[1]) #mp and ds
+	
+	elif args.option in ["modify", "mod"]:
+		pass
+
+	elif args.option in ["import", "imp"]:
+		res=inputAndValidateMasterPassword()
+		if res is not None:
+			if args.file is None:
+				printc("[red][!][/red] File path (-f/--file) is required for import!")
+				return
+			import_entries(args.file, res[0], res[1])
+	
+	elif args.option in ["export", "exp"]:
+		res=inputAndValidateMasterPassword()
+		if res is not None:
+			if args.file is None:
+				printc("[red][!][/red] File path (-f/--file) is required for export!")
+				return
+			export_entries(args.file, res[0], res[1])
     
 	elif args.option in ["configure", "con"]:
 		config()
