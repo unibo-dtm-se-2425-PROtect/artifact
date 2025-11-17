@@ -19,7 +19,7 @@ from importf import import_entries
 
 parser = argparse.ArgumentParser(description='Password Manager CLI')
 
-parser.add_argument('option', help='(a)dd / (e)xtract / (con)figure / (del)ete / (recon)figure / (imp)ort / (exp)ort / (mod)ify') #these are the type of operation that the user is able to perform
+parser.add_argument('option', help='(a)dd / (e)xtract / (con)figure / (del)ete configuration / (recon)figure / (imp)ort / (exp)ort / (mod)ify / (rem)ove an entry by ID') #these are the type of operation that the user is able to perform
 parser.add_argument("-s", "--name", help="Site Name")
 parser.add_argument("-u", "--url", help="Site URL")
 parser.add_argument("-e", "--email", help="Email")
@@ -111,7 +111,7 @@ def main():
 		#if --all is used, search[] stays empty to retrieve all entries 
 		retrieve.retrieveEntries(res[0], res[1], search, decryptPassword=args.copy)
 
-	elif args.option in ["delete", "del"]:
+	elif args.option in ["remove", "rem"]:
 		res=inputAndValidateMasterPassword()
 		if res is not None:
 			if args.id is None:
@@ -140,7 +140,7 @@ def main():
     
 	elif args.option in ["configure", "con"]:
 		config()
-	elif args.option in ["delete", "del"]:
+	elif args.option in ["delete configuration", "del"]:
 		delete()
 	elif args.option in ["reconfigure", "recon"]:
 		reconfig()
