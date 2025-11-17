@@ -16,7 +16,7 @@ class PasswordManagerController:
             on_edit=self.edit_entry,
             on_delete=self.delete_entry,
             on_copy=self.copy_password,
-            on_show=self.show_message,
+            on_show=self.show_password,
             on_export=self.export_to_file,
             on_import=self.import_from_file,
             on_lock=self.lock_app,
@@ -110,6 +110,3 @@ class PasswordManagerController:
         self.masterkey=None
         self.view.clear_entries()
         self.view.show_message("Locked", "Password Manager Locked. Re-run to Unlock.")
-
-    def show_message(self):
-        pass
