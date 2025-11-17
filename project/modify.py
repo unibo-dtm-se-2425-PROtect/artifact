@@ -1,7 +1,7 @@
 from rich import print as printc
 from dbconfig import dbconfig
 from add import computeMasterKey, req_fields
-import AES256util
+from project import AES256util
 from AES256util import verify_master_password
 
 def modify_entry(ID, Site, URL, Email, Username, Password, mp, ds):

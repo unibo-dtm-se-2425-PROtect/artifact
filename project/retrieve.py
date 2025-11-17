@@ -6,7 +6,7 @@ from rich import print as printc
 from rich.console import Console
 from rich.table import Table
 
-import AES256util
+from project import AES256util
 import pyperclip
 
 def retrieveEntries(mp, ds, search, decryptPassword = False):
