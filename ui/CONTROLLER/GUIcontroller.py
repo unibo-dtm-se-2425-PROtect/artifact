@@ -61,7 +61,7 @@ class PasswordManagerController:
         if not selected:
             return
         ID=selected[0]
-        self.model.delete_entry[ID]
+        self.model.delete_entry(ID)
         self.refresh_entries()
 
     #PASSWORD METHODS
