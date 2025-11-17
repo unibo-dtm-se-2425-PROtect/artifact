@@ -6,9 +6,9 @@ from tkinter import filedialog
 from project.add import computeMasterKey
 
 class PasswordManagerController:
-    def __init__(self, master_password=str):
+    def __init__(self, master_password:str, device_secret:str):
         self.model=PasswordManagerModel()
-        self.masterkey=computeMasterKey(master_password, "1")
+        self.masterkey=computeMasterKey(master_password, device_secret)
 
         #Bind view callbacks to controller methods
         self.view=PasswordManagerView(
