@@ -48,7 +48,7 @@ def config(master_password=None):
     cursor.execute(query) 
     printc("[green][+][/green] Table 'secrets' created")
 
-    query = "CREATE TABLE PROtect.entries (ID INT AUTO_INCREMENT PRIMARY KEY, Site TEXT NOT NULL, URL TEXT NOT NULL, Email TEXT, Username TEXT, Password TEXT NOT NULL)" 
+    query = "CREATE TABLE PROtect.entries (ID INT AUTO_INCREMENT PRIMARY KEY, Site TEXT NOT NULL, URL TEXT NOT NULL, Email TEXT, Username TEXT, Password VARBINARY NOT NULL)" 
     cursor.execute(query) 
     printc("[green][+][/green] Table 'entries' created")
 
