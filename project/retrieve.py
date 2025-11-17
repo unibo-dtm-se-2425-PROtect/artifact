@@ -54,7 +54,7 @@ def retrieveEntries(mp, ds, search, decryptPassword = False):
     
     #Fill the table with masked passwords
     for row in results: 
-        table.add_row(str(row["ID"]), row["Site"], row["URL"], row.get["Email", ""], row.get["Username", ""], "{hidden}")
+        table.add_row(str(row["ID"]), row["Site"], row("URL", ""), row.get("Email", ""), row.get["Username"], "{hidden}")
 
     Console().print(table)
     db.close()
