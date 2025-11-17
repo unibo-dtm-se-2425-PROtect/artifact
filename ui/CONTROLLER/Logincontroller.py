@@ -15,7 +15,7 @@ class Logincontroller:
         self.view = Loginview(root, on_login=self.verify_login, on_signup=self.try_signup)
         self.view.pack(expand=True, fill="both")
     
-    def verify_login(self, username: str, password: str):
+    def verify_login(self, username: str, password: str, stored_ds:str):
         #Verify username + master password against the stored derived key (PBKDF2 result stored as hex).
         cur = self.model.cursor
         # Query secrets for this username
