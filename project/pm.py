@@ -120,7 +120,12 @@ def main():
 			delete_entry(args.id, res[0], res[1]) #mp and ds
 	
 	elif args.option in ["modify", "mod"]:
-		pass
+		res=inputAndValidateMasterPassword()
+		if res is not None:
+			if args.id is None: 
+				printc("[red][!][/red] Entry ID (--id) is required for modification!")
+				return
+			modify_entry(args.id, res[0], res[1]) 
 
 	elif args.option in ["import", "imp"]:
 		res=inputAndValidateMasterPassword()
