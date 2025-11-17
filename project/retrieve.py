@@ -14,7 +14,7 @@ def retrieveEntries(mp, ds, search, decryptPassword = False):
     #decryptPassword is set to False for security reasons: it will be set to True only if the user explicitly wants it
     #if True, it will initiate the decryption operation on the needed password
     db = dbconfig()
-    cursor = db.cursor()
+    cursor = db.cursor(dictionary=True)
 
     query = "" #two cases to be considered: the user might either query the database without specifying any search field, or doing it instead.
 
