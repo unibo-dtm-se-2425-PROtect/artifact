@@ -39,11 +39,16 @@ class PasswordManagerView (tb.Frame):
         tb.Separator(bar, orient=VERTICAL).pack(side=LEFT, fill=Y, padx=8)
 
         #TABLE
-        cols=("Site", "URL", "Email", "Username")
+        cols=("ID", "Site", "URL", "Email", "Username")
         self.tree=tb.Treeview(self, columns=cols, show="headings", height=14, bootstyle=INFO)
         for c in cols:
             self.tree.heading(c, text=c)
-            self.tree.column(c, width=180 if c=="URL" else 140)
+            if c=="ID":
+                self.tree.column(c, width=0, stretch=NO)
+            elif c=="URL":
+                self.tree.column(c, width=180)
+            else:
+                self.tree.column(c, width=140)
         self.tree.pack(fill=BOTH, expand=True)
 
     #Public Methods to update UI
