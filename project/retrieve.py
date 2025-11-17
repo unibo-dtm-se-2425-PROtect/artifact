@@ -47,7 +47,8 @@ def retrieveEntries(mp, ds, search, decryptPassword = False):
     
     if decryptPassword and len(results)==1:
         mk=computeMasterKey(mp,ds)
-        decrypted=AES256util.decrypt(mk, results[0]["password"], keyType="hex").decode()
+        mk_hex=mk.hex()
+        decrypted=AES256util.decrypt(mk_hex, results[0]["Password"], keyType="hex").decode()
         pyperclip.copy(decrypted)
         printc("[green][+][/green] Password copied to clipboard")
     
