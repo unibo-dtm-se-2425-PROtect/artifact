@@ -1,3 +1,118 @@
+## [1.6.0](https://github.com/unibo-dtm-se-2425-PROtect/artifact/compare/1.5.2...1.6.0) (2025-11-17)
+
+
+### Features
+
+* add function to check whether an entry field has not been inserted (among the required ones) ([1a15359](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/1a153594c9a82ee7c20f54256b719284869553fc))
+* **cli:** integrate delete, import, export, and modify commands via pm.py ([0aa458f](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/0aa458f4c05cd126e3054e27391f6f2ec8009a5d))
+* **crypto:** add device secret usage in master password verification and update all dependent operations ([5270a4f](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/5270a4f09c69a02f57d645b9a21327ca72f344ff))
+* implementation of the modification of an entry in the CLI logic ([86d1fe1](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/86d1fe1380bf361e978487413def3e7766be4fc7))
+
+
+### Bug Fixes
+
+* adjust import syntax (to make import of AES256util work in tests) ([047665a](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/047665a944974e32180c83d3792ac416aa0fe5ea))
+* brackets ([79f6fb9](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/79f6fb99a0934095ad6f95834c7ba34957673a5c))
+* **crypto:** use cryptographically secure Random Number Generator for device secret ([38986fa](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/38986fa00a247a52283b5dfed7a4e08d6bb5c418))
+* insert into secrets table the mandatory username column (to recognize which password identifies which user) ([ad58e6b](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/ad58e6b38d1566486452ea6bcd6cfb88bfd00cf7))
+* propagating username parameter and passing username and ds into main and test mode for entry point for GUI ([c393e03](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/c393e03212e0d504c4db28679d5a791071de54c2))
+* renaming delete configuration and remove an entry by ID to avoid misunderstanding between the purposes for two deletion operations ([9bb4edb](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/9bb4edba104ac11d7fd10637013f9e8e27f148c3))
+* secure password retrieval and mask in results table ([94266ac](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/94266ac5b2c6a768f82b6cea8b260b245b2f145e))
+* values to return to edit entry ([52fbd76](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/52fbd76163570d6339955a5baafd239764ccff48))
+
+
+### Tests
+
+* add imports for pytest and mocking in tests ([2f7498e](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/2f7498e3c6ec2655b42928ea5411ed6ed820c641))
+* add test for addEntry when the entry already exists ([860b26b](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/860b26b4e0874e98ddae18d92ab4419d999436ae))
+* add test for checkEntry with mocked database ([d2a42f1](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/d2a42f154305aecb74cee9f6a97a91fe19e47624))
+* Add test for fast_computeMasterKey function ([e82e92e](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/e82e92ec90a78c01725453cb45ac4aceda8289cb))
+* add test for multiple results handling in retrieve ([06a1f6b](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/06a1f6ba14a9171c7198cbc6dfaed158f14889b7))
+* add test for query without search  ([1738238](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/173823891de2e19f73b99b4ea1afccc4b5ea4077))
+* create fake_cursor fixture for DB tests ([87c8070](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/87c8070617cca68c5f0c907482d96b979833b463))
+* create fake_db fixture for testing database interactions ([542f2fb](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/542f2fb32654d1a9a4f6382d136c3a717b7131fc))
+* creating function for quick master key computation ([f70b26a](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/f70b26afac032cb2f74a195334811d289f26823e))
+* enhance test for addEntry with None encryption ([c771803](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/c771803ff36fab5288c58ddfb1b55e70e647bdcf))
+* enhance tests for computeMasterKey with edge cases ([64dd952](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/64dd952d52a7815e80faea441b238ad50e95351a))
+* implement SQL injection test for checkEntry ([12b10d2](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/12b10d222b6f8039b66992178504949eca259a5e))
+* implement test for addEntry commit failure ([54d7bc2](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/54d7bc24902d5afdb6cef2dcdd6d27208af49361))
+* implement test for addEntry with invalid key type ([b636d45](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/b636d45561caa268372d6d0e888dc0a6b18234b7))
+* implement test for computeMasterKey function ([93ddc2c](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/93ddc2c3784e3d1181ce3cbcbcbf1426066b1b7c))
+* implement test for empty password in addEntry ([125056c](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/125056c856f8e6ecd86ab5a59e1091dafbd12f71))
+* implement test for empty password scenario ([2293432](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/22934320d060c7d877f427f9012c7197527c32bc))
+* implement test for encryption failure ([cfe95ab](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/cfe95aba046eec63b93f6433001fde8f4c7dccbc))
+* implement test for happy path of addEntry function ([ce977ed](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/ce977ed1f27150f5c3a848f76d5a5648ed7f9b01))
+* implement test for invalid input types in computeMasterKey ([5c4f6e8](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/5c4f6e8e393e8a3b73f432efc8a9b88b97bb2578))
+* implement test for missing password column in retrieveEntries ([c6cbfb6](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/c6cbfb6099c84aed04b70d1b7e1a56185823eb94))
+* implement test for multiple results display ([cdcfc87](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/cdcfc87a6166e9e330e67d17eedc2e77b6c9c922))
+* Implement test for no results in retrieveEntries ([d87b86c](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/d87b86c8d5e41afe130c782bf4991338f14040df))
+* implement test for non-existing entry in checkEntry ([dbb05d2](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/dbb05d26e90656038c9366a1abe0389fa370eaf1))
+* implement test for retrieveEntries with search ([6b9d995](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/6b9d995b0220900dbcb7171c1e5eeeb26db695b5))
+* implement test for single result decryption and copy ([ecb466e](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/ecb466ed5211fde7ee29ddb3ad0d9abc8eea320b))
+* implement type error tests for computeMasterKey ([2752408](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/27524083be023a59af0dd9a4a5055f5333c16f84))
+* update test for no results in retrieveEntries ([87308e9](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/87308e9b8b70888b05b571653860102cf16aa3e5))
+* update test to use fast_computeMasterKey function ([ecf5b79](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/ecf5b79209e5fac5a9dd18e869e45f626108a11e))
+
+
+### Build and continuous integration
+
+* updated version 1.5.2 for new PyPi release ([2e33a1e](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/2e33a1e7a31584c242445708bfe609cf41694a7d))
+
+
+### General maintenance
+
+* add ID and username into secrets table to connect a password to the right user ([f7e6e23](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/f7e6e23f61c1ac5177fec293273e496b3f736d72))
+* add make_fake_db function for test setup ([024a610](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/024a610dc4ff3e053c33efb68d6dc48e1249c2ae))
+* add PYTHONPATH environment variable to test job ([fb783f3](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/fb783f394aacf42f753295cf5d44b408185e8a53))
+* add test for successful entry deletion ([076e0f3](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/076e0f3874121f3fb004d293ca2a9806fa2df837))
+* adding missing column for ID ([44d639d](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/44d639dab26fd23b88145256aadb69e0b8788aa1))
+* adding user reference to verify master password ([6a76edd](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/6a76edd403b6f17212576f200b7dc8426c32ef53))
+* adjust constraints to fill the result table when retrieving entries ([c0a9273](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/c0a927320e870dafb962ad5f9b459203a1c4fc1c))
+* adjust encryption logic with hex ([78c4606](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/78c4606ad1325ed51115295b7d9bc46b537ab870))
+* adjusting add_entry logic concerning password field management ([836f54e](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/836f54ee98c9e01e4cf66d26a94cecb652cd9a9a))
+* adjusting DB access ([a71a050](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/a71a050be627fffec54a806c5e258ac95ab318e6))
+* change from hexdigest to digest to return bytes ([bd2c16e](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/bd2c16e96d3207a50dc85cd9dc5d66dd20dda586))
+* change mk to hex because the function expects the hex format (and then it will change format into bytes) ([4636523](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/4636523905dd4b69b686d7dd1e9f97987d2f6628))
+* changing import syntax to let tests work ([0c8b766](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/0c8b766134db9e1eb520ca0914d6df4f736dd79e))
+* create test_delete.py ([a738238](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/a73823868c53d3717372dceacd93ce2bb7449f5d))
+* create test_retrieve.py ([d11d940](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/d11d940689c300cfd7f0d1644d1f6b81b065912e))
+* creating test_add.py file ([2d145f1](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/2d145f12c154c688bc6847d830eff001b41d3f7d))
+* delete repeated imports ([c808f58](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/c808f58441c5599b7891ac9ea7683aedd227421f))
+* enhance test for delete_entry_cli with exception case ([6c88ca3](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/6c88ca3e29dede6b26465104ead5fff08893a01c))
+* implement FakeCursor for database testing ([00f2f32](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/00f2f32f82e639ec24cf33b6006f8c9a6c4becca))
+* implement FakeDB for testing database interactions ([4446401](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/4446401f7490bfe6086be965a503ca8c8c282eaa))
+* implement test for delete entry cancellation ([87121d3](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/87121d3e1f2083353839770df7c63966369b8a4b))
+* implement test for delete_entry with no rows affected ([3c11bc4](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/3c11bc4f2c8d854e479275d22169410e8fb9eb1e))
+* implement test for exception propagation in delete_entry ([c0a0eb3](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/c0a0eb32b584793f0fb39a4f3fd046514faa771b))
+* implement test for invalid ID in delete_entry_cli ([d2055dd](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/d2055dd2914ea1f964b3ca4592e9f2ef76d9de73))
+* implement test for successful entry deletion ([6c96679](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/6c96679d1d2ac1be056edda3ecc689e6438d0bdc))
+* import necessary libraries for testing  ([306b811](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/306b811781d7ad2931d397035d38cd50ba6f37ac))
+* modifying the previous commit into: test: importing the needed modules ([3860053](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/38600536a54d1d1098b47d2ff6c9fad0c6ffb238))
+* pass the device secret (stored_ds) in verify_login ([403f5bd](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/403f5bd726ef20759f6fbc95e1c3195e2ac0b1a4))
+* passing ds into init and computation for masterkey ([e3fe8a4](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/e3fe8a4c1b09b720154d3583b48f776d9b5ac35b))
+* remove import repetition ([d4da123](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/d4da123f8a2ae4d23f9877e43055e3ddbfe2b53b))
+* removing redundant setting of the password in the new entry ([240503f](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/240503f7dd006aef43db6431e72c80bf12c62b39))
+* retrieving the dictionary ([4e6c281](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/4e6c2814cc38dfb0d5f34e7a6cf06510f320d903))
+* specification to avoid "encode" error on a source that is already in bytes ([8b810c8](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/8b810c879d8a794440b8771955f706dd1fed50a4))
+
+
+### Refactoring
+
+* fix function definition syntax in test file ([40d9671](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/40d96711a30173d0a84319d0603bcfeb25e7be94))
+* fix import path for AES256util module ([00eb43f](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/00eb43fde8064cd5c0105fd94601a659d6c85592))
+* fix import path for AES256util module in export.py ([a590094](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/a5900945cf26c20ec62ad23f6a7e6cc3c7badb7e))
+* fix import path for computeMasterKey ([e9d306e](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/e9d306ec37c6807b9f6ac3702044557ae6ba53a4))
+* modify verify_master_password to return device secret (and simplify call in all affected modules) ([72ee18c](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/72ee18cfd8fd0b25b306b0ee41c00a16e5d2be0a))
+* new name "importf" to avoid conflicts with "import" in the python library ([5f06dc2](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/5f06dc22476bf84ea8aae7709e807f2dd9513890))
+* propagate master password and device secret to function calls (with new implementation of verify_master_password) ([b6040bc](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/b6040bc6fd35adcb541ba582401373ffa771ddaa))
+* rename import.py to importf.py to avoid python module name conflict ([774ccdb](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/774ccdba2a9acf2cc1152324913ce468bf7e1b95))
+* unify naming conventions across authentication and DB ops ([fef3fa5](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/fef3fa5de299228ca0ad32626cdf8249df08332f))
+* update import path for AES256util module ([3bcb7cc](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/3bcb7cc1478c7dfbc4de9e1e1db86be1e8085617))
+* update import path for AES256util module in delete.py ([7841273](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/7841273bad3563d067613cd290429f9affe603bc))
+* update import path for dbconfig module ([82fb916](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/82fb9162c5daf55f303958eaf696f3b6dae7385f))
+* update import path for dbconfig module in delete.py ([bd4b3cc](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/bd4b3cc40655164ce969360c6fcc8d8d36e400f3))
+* update import paths for dbconfig and AES256util ([76a2864](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/76a286469f01f23d751709a8982e630265c5d3b4))
+
 ## [1.5.2](https://github.com/unibo-dtm-se-2425-PROtect/artifact/compare/1.5.1...1.5.2) (2025-10-18)
 
 
