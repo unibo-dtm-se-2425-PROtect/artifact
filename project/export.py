@@ -2,7 +2,7 @@ import csv
 from getpass import getpass
 from rich import print as printc
 from dbconfig import dbconfig
-import AES256util
+from project.AES256util import AES256util
 from add import computeMasterKey
 
 def export_entries(filepath, mp, ds):
