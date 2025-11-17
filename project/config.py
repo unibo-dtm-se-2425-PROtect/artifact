@@ -74,8 +74,8 @@ def config(master_password=None):
     printc("[green][+][/green] Device Secret generated")
 
     #Add values into the database in the secrets table
-    query = "INSERT INTO PROtect.secrets (masterpassword_hash, device_secret) values (%s, %s)"
-    val = (hashed_mp, ds)
+    query = "INSERT INTO PROtect.secrets (username, masterpassword_hash, device_secret) values (%s, %s, %s)"
+    val = ("cli_user", hashed_mp, ds)
     cursor.execute(query, val) 
     db.commit()
     printc("[green][+][/green] Added to the database PROtect")
