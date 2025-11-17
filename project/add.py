@@ -1,6 +1,5 @@
 from getpass import getpass
 from project.dbconfig import dbconfig
-from project.AES256util import AES256util
 from rich import print as printc
 
 import AES256util
