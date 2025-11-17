@@ -1,12 +1,14 @@
 from rich import print as printc
 from dbconfig import dbconfig
-from add import computeMasterKey
+from add import computeMasterKey, req_fields
 import AES256util
 from AES256util import verify_master_password
 
-def modify_entry(ID, site, url, email, username, password, mp, ds):
+def modify_entry(ID, Site, URL, Email, Username, Password, mp, ds):
     #Modify one or more fields of an existing entry
-    if not verify_master_password(username, mp, ds):
+    if not req_fields(Site, Username, Password):
+        return 
+    if not verify_master_password(Username, mp, ds):
         return
     
     try:
@@ -18,10 +20,10 @@ def modify_entry(ID, site, url, email, username, password, mp, ds):
         cursor = db.cursor()
 
         mk = computeMasterKey(mp, ds)
-        enc_pass = AES256util.encrypt(mk, password, keyType="hex")
+        enc_pass = AES256util.encrypt(mk, Password, keyType="hex")
 
         query = "UPDATE PROtect.entries SET Site=%s, URL=%s, Email=%s, Username=%s, Password=%s WHERE ID=%s"
-        cursor.execute(query, (site, url, email, username, enc_pass, ID))
+        cursor.execute(query, (Site, URL, Email, Username, enc_pass, ID))
         db.commit()
         printc(f"[green][+][/green] Entry with ID {ID} updated successfully")
 

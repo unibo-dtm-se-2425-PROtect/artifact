@@ -21,7 +21,23 @@ def checkEntry(Site, URL, Email, Username):
         return True
     return False
 
-def addEntry(mp, ds, Site, URL, Email, Username): 
+def req_fields(Site, Username, Password):
+    missing=[]
+    if not Site or Site.strip()=="":
+        missing.append("Site")
+    if not Username or Username.strip()=="":
+        missing.append("Username")
+    if not Password or Password.strip()=="":
+        missing.append("Password")
+    if missing:
+        printc(f"[red][!] The following required fields are empty: {', '.join(missing)}[/red]")
+        return False
+    return True
+
+def addEntry(mp, ds, Site, URL, Email, Username, Password): 
+    if not req_fields(Site, Username, Password):
+        return #stop if required fields are missing 
+    
     #check if the entry already exists
     try:
         if checkEntry(Site, URL, Email, Username):
