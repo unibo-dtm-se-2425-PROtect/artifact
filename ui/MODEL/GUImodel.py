@@ -55,16 +55,17 @@ class PasswordManagerModel:
         return self.cursor.fetchall() 
     
     def add_entry(self, Site, URL, Email, Username, password, masterkey):
-        enc_pass=encrypt(password, masterkey)
+        enc_pass=encrypt(key=masterkey.hex(), source=password, keyType="hex")
         self.cursor.execute("INSERT INTO PROtect.entries (Site, URL, Email, Username, password) VALUES (%s,%s,%s,%s,%s)", (Site, URL, Email, Username, enc_pass))
         self.db.commit()
     
     def edit_entry(self, ID, Site, URL, Email, Username, password, masterkey): #Update entry (and/or encrypt new password)
-        enc_pass=encrypt(password, masterkey)
-        self.cursor.execute("UPDATE passwords SET Site=%s, URL=%s, Email=%s, Username=%s, password=%s WHERE ID=%s", (Site, URL, Email, Username, enc_pass, ID))
+        enc_pass=encrypt(key=masterkey.hex(), source=password, keyType="hex")
+        self.cursor.execute("UPDATE PROtect.entries SET Site=%s, URL=%s, Email=%s, Username=%s, password=%s WHERE ID=%s", (Site, URL, Email, Username, enc_pass, ID))
         self.db.commit()
     
-    def delete_entry(self, ID):
+    def delete_entry(self, ID, password, masterkey):
+        enc_pass=encrypt(key=masterkey.hex(), source=password, keyType="hex")
         self.cursor.execute("DELETE FROM PROtect.entries WHERE ID=%s", (ID,))
         self.db.commit()
     
@@ -72,7 +73,7 @@ class PasswordManagerModel:
         self.cursor.execute("SELECT password FROM PROtect.entries WHERE ID=%s", (ID,))
         result=self.cursor.fetchone()
         if result:
-            return decrypt(result[0], masterkey)
+            return decrypt(key=masterkey.hex(), source=result[0], keyType="hex").decode()
         return None
     
     def close(self):
