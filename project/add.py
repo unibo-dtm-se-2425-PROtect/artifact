@@ -2,7 +2,7 @@ from getpass import getpass
 from project.dbconfig import dbconfig
 from rich import print as printc
 
-import AES256util
+from project import AES256util
 import hashlib 
 
 #function to compute the masterkey from the masterPassword (mp) and the the deviceSecret (ds)
