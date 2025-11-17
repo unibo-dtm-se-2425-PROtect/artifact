@@ -92,13 +92,13 @@ class PasswordManagerController:
 
     #IMPORT/EXPORT
     def export_to_file(self):
-        filepath=filedialog.asksaveasfilename(defaultextension=".cvs")
+        filepath=filedialog.asksaveasfilename(defaultextension=".csv")
         if filepath:
             self.model.export_to_file(filepath,self.masterkey)
             self.view.show_message("Export", f"Entries exported to {filepath}")
 
     def import_from_file(self):
-        filepath=filedialog.askopenfilename(filetypes=[("CVS Files", "*.cvs")])  
+        filepath=filedialog.askopenfilename(filetypes=[("CVS Files", "*.csv")])  
         if filepath:
             self.model.import_from_file(filepath, self.masterkey)
             self.view.show_message("Import", f"Entries imported from {filepath}")
