@@ -8,7 +8,7 @@ import hashlib
 #function to compute the masterkey from the masterPassword (mp) and the the deviceSecret (ds)
 def computeMasterKey(mp,ds): 
     combined= (mp + ds).encode()
-    return hashlib.sha256(combined).hexdigest()
+    return hashlib.sha256(combined).digest()
 
 def checkEntry(Site, URL, Email, Username):
     db = dbconfig()
