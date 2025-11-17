@@ -1,7 +1,6 @@
 from ui.VIEW.GUIview import PasswordManagerView
 from ui.MODEL.GUImodel import PasswordManagerModel
 import tkinter as tk
-from threading import Timer
 from tkinter import filedialog
 from project.add import computeMasterKey
 
