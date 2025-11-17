@@ -44,7 +44,7 @@ class PasswordManagerController:
         selected=self.view.get_selected_entry()
         if not selected:
             return
-        ID, Site, url, email, username, password = selected
+        ID, Site, url, email, username = selected
         from tkinter.simpledialog import askstring
         new_site=askstring("Edit Site", "Site: ", initialvalue=Site)
         new_url=askstring("Edit URL", "URL: ", initialvalue=url)
