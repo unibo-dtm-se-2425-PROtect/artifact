@@ -1,3 +1,16 @@
+## [1.6.1](https://github.com/unibo-dtm-se-2425-PROtect/artifact/compare/1.6.0...1.6.1) (2025-11-17)
+
+
+### Bug Fixes
+
+* typo in file extension csv ([6227711](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/6227711aab3c252016d23a538e8fdc08a3451601))
+
+
+### General maintenance
+
+* delete not accessed class timer from threading ([fa36377](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/fa36377a0108abb645e47ce78d8464426f6f9d01))
+* delete show_message function (an error) and point to the right show_password function for command on_show ([56e9864](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/56e98642dce2496d170b59c25f6ba2ee48efcee2))
+
 ## [1.6.0](https://github.com/unibo-dtm-se-2425-PROtect/artifact/compare/1.5.2...1.6.0) (2025-11-17)
 
 
