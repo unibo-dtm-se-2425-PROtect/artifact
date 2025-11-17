@@ -1,3 +1,10 @@
+## [1.6.2](https://github.com/unibo-dtm-se-2425-PROtect/artifact/compare/1.6.1...1.6.2) (2025-11-17)
+
+
+### Bug Fixes
+
+* adust encryption/decryption logic ([1d82a93](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/1d82a9356f28d1a74ba7605e7c96ff7bb5fdeb7c))
+
 ## [1.6.1](https://github.com/unibo-dtm-se-2425-PROtect/artifact/compare/1.6.0...1.6.1) (2025-11-17)
 
 
