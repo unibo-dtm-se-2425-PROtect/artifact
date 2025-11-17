@@ -45,7 +45,8 @@ def addEntry(mp, ds, Site, URL, Email, Username, Password):
             return
 
         mk = computeMasterKey(mp,ds) #to compute the master key
-        enc_pass=AES256util.encrypt(mk, Password, keyType=hex)
+        mk_hex=mk.hex()
+        enc_pass=AES256util.encrypt(mk_hex, Password, keyType="hex")
 
         #using imported aesutil function to encrypt the mk 
         #this should return the encrypted password in base 64 encoded format
