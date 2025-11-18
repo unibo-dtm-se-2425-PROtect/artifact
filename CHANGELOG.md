@@ -1,3 +1,16 @@
+## [1.7.1](https://github.com/unibo-dtm-se-2425-PROtect/artifact/compare/1.7.0...1.7.1) (2025-11-18)
+
+
+### Bug Fixes
+
+* try to change distutils.cmd with Command because it can give problems in some python versions (cause of the wrong release on PyPi?) ([bf371b3](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/bf371b357fd3178a8ac6e09582a2ed1b9ef40469))
+
+
+### General maintenance
+
+* create test_export.py ([a0545e8](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/a0545e825fb3bc920a69fd0c844477b2b42af288))
+* remove unused imports ([38b5dbe](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/38b5dbecfacd8c5ea838e3af20c3fca804273116))
+
 ## [1.7.0](https://github.com/unibo-dtm-se-2425-PROtect/artifact/compare/1.6.2...1.7.0) (2025-11-18)
 
 
