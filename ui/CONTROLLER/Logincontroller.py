@@ -1,8 +1,6 @@
-import tkinter as tk
 from tkinter import messagebox
 from ui.VIEW.Loginview import Loginview
 from ui.MODEL.Loginmodel import LoginModel
-from ui.MODEL.GUImodel import PasswordManagerModel
 from project.add import computeMasterKey
 import os
 

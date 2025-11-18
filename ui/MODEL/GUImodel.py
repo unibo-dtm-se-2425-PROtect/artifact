@@ -1,7 +1,6 @@
 from typing import Tuple, List, Optional
 from project.dbconfig import dbconfig
 from project.AES256util import encrypt, decrypt
-from project.add import computeMasterKey
 
 import os
 
