@@ -1,8 +1,8 @@
 import csv
 from getpass import getpass
 from rich import print as printc
-from dbconfig import dbconfig
-from add import computeMasterKey
+from project.dbconfig import dbconfig
+from project.add import computeMasterKey
 from project import AES256util
 
 
