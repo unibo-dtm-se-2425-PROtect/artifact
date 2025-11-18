@@ -1,6 +1,7 @@
 import tkinter as tk
 from tkinter import messagebox
 from ui.VIEW.Loginview import Loginview
+from ui.MODEL.Loginmodel import LoginModel
 from ui.MODEL.GUImodel import PasswordManagerModel
 from project.add import computeMasterKey
 import os
@@ -11,7 +12,7 @@ class Logincontroller:
         self.root = root
         self.on_success = on_success
         #we use a model instance to access the secrets table for authentication
-        self.model = PasswordManagerModel()
+        self.model = LoginModel()
         self.view = Loginview(root, on_login=self.verify_login, on_signup=self.try_signup)
         self.view.pack(expand=True, fill="both")
     
@@ -51,7 +52,7 @@ class Logincontroller:
         #Create new user in secrets table: generate random salt, 
         #compute derived key with computeMasterKey(password, salt), 
         #store derived_key_hex and salt along with username in secrets table
-        cur = self.model.cursor
+        cur = self.model.get_user_secrets(username)
 
         # Check if user exists already
         cur.execute("SELECT mp FROM PROtect.secrets WHERE username=%s", (username,))

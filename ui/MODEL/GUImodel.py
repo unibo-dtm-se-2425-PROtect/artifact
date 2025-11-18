@@ -1,5 +1,4 @@
 from typing import Tuple, List, Optional
-import mysql.connector
 from project.dbconfig import dbconfig
 from project.AES256util import encrypt, decrypt
 from project.add import computeMasterKey
