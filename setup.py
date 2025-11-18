@@ -1,7 +1,7 @@
-from setuptools import setup, find_packages
+from setuptools import setup, find_packages, Command
 import pathlib
 import subprocess
-import distutils.cmd
+#import distutils.cmd
 
 # current directory
 here = pathlib.Path(__file__).parent.resolve()
@@ -48,7 +48,7 @@ version = get_version_from_git()
 print(f"Detected version {version} from git describe")
 
 
-class GetVersionCommand(distutils.cmd.Command):
+class GetVersionCommand(Command):
     """A custom command to get the current project version inferred from git describe."""
 
     description = 'gets the project version from git describe'
@@ -64,7 +64,7 @@ class GetVersionCommand(distutils.cmd.Command):
         print(version)
 
 
-class GetMinimumPythonVersion(distutils.cmd.Command):
+class GetMinimumPythonVersion(Command):
     """A custom command to get the current project commands inferred from `requirements.txt`."""
 
     description = 'gets the project\'s minimum Python version from `.python-version`'
