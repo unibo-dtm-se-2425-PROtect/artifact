@@ -1,3 +1,24 @@
+## [1.7.0](https://github.com/unibo-dtm-se-2425-PROtect/artifact/compare/1.6.2...1.7.0) (2025-11-18)
+
+
+### Features
+
+* **crypto:** implement double check security mechanism in GUI controller for sensitive ops ([a40a4ed](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/a40a4edf087c6da90b67ba1c4a4e8f389e22b66c))
+
+
+### General maintenance
+
+* add column for ID in the visualization (but keep it hidden from user because he does not need to know the ID to perform operations like for  the CLI) ([c6c04f2](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/c6c04f2c4e5aeb73ca711b7f406dbda142374b4b))
+* decryption logic for password when exporting files ([20a6b82](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/20a6b824fd871cda05335cb7b9652245e7692bac))
+* switching from TEXT to VARBINARY for the password in entries table to make CLI and GUI match ([32ea990](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/32ea9901499715a0fd6a7f1c9941b99b8a882911))
+* type hint for the ID field (int) ([1451e7f](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/1451e7f838bc31ce2549af64dc283cd7d1ea42e5))
+
+
+### Refactoring
+
+* implement Login MODEL and change references and imports ([f423b32](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/f423b3296981096c54c81638125135fde39135a3))
+* implement Loginmodel.py to input in the controller ([7303d3e](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/7303d3ef9d20b9a0ef0837bd9544ff3f6736725e))
+
 ## [1.6.2](https://github.com/unibo-dtm-se-2425-PROtect/artifact/compare/1.6.1...1.6.2) (2025-11-17)
 
 
