@@ -1,6 +1,6 @@
 from rich import print as printc
-from dbconfig import dbconfig
-from add import computeMasterKey, req_fields
+from project.dbconfig import dbconfig
+from project.add import computeMasterKey, req_fields
 from project import AES256util
 from AES256util import verify_master_password
 

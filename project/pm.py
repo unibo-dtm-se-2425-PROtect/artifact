@@ -6,15 +6,15 @@ import hashlib
 
 from rich import print as printc
 
-import add
-from config import config, delete, reconfig
+from project import add
+from project.config import config, delete, reconfig
 import string
 import retrieve
-from dbconfig import dbconfig
-from delete import delete_entry
-from modify import modify_entry
-from export import export_entries
-from importf import import_entries
+from project.dbconfig import dbconfig
+from project.delete import delete_entry
+from project.modify import modify_entry
+from project.export import export_entries
+from project.importf import import_entries
 
 
 parser = argparse.ArgumentParser(description='Password Manager CLI')
