@@ -9,17 +9,14 @@ class Logincontroller:
     def __init__(self, root, on_success):
         self.root = root
         self.on_success = on_success
-        #we use a model instance to access the secrets table for authentication
+        #we use a LoginModel to access the secrets table for authentication
         self.model = LoginModel()
         self.view = Loginview(root, on_login=self.verify_login, on_signup=self.try_signup)
         self.view.pack(expand=True, fill="both")
     
-    def verify_login(self, username: str, password: str, stored_ds:str):
+    def verify_login(self, username: str, password: str): #the ds is fetched inside 
         #Verify username + master password against the stored derived key (PBKDF2 result stored as hex).
-        cur = self.model.cursor
-        # Query secrets for this username
-        cur.execute("SELECT mp, ds FROM PROtect.secrets WHERE username=%s", (username,))
-        row = cur.fetchone()
+        row = self.model.get_user_secrets(username)
         if not row: #No such user
             res = messagebox.askyesno("User not found", f"User '{username}' not found. Do you want to create a new account?")
             if res:
@@ -31,49 +28,43 @@ class Logincontroller:
         #Depending on the secrets table layout, mp may store derived_key_hex and ds the salt (we'll try to be flexible)
         stored_mp, stored_ds = row  #stored_mp: derived_key_hex or username
 
-        # Compute derived key from entered password and salt
+        #Compute derived key from entered password and salt
         derived = computeMasterKey(password, stored_ds)
         derived_hex = derived.hex()
 
-        # Compare with stored_mp
+        #Compare with stored_mp
         if derived_hex == stored_mp:
-            # Success
+            #Success
+            self.model.close()
             self.view.pack_forget()
             self.view.destroy()
-            # Pass username and password to on_success so main app can compute masterkey etc.
-            self.on_success(self.root, username, password)
+            #Pass username, password and stored_ds to on_success so main app can compute masterkey
+            self.on_success(self.root, username, password, stored_ds)
         else:
             messagebox.showerror("Authentication failed", "Invalid master password.")
             self.view.clear_password()
 
     def try_signup(self, username: str, password: str):
-        #Create new user in secrets table: generate random salt, 
-        #compute derived key with computeMasterKey(password, salt), 
-        #store derived_key_hex and salt along with username in secrets table
-        cur = self.model.get_user_secrets(username)
-
-        # Check if user exists already
-        cur.execute("SELECT mp FROM PROtect.secrets WHERE username=%s", (username,))
-        if cur.fetchone():
+        #Check if user exists already
+        if self.model.get_user_secrets(username):
             messagebox.showinfo("Exists", f"User '{username}' already exists. Please login instead.")
             self.view.clear_password()
             return
 
-        # Generate salt (hex) and derive key
+        #Generate salt (hex) and derive key
         salt = os.urandom(16).hex()
         derived = computeMasterKey(password, salt)
         derived_hex = derived.hex() if isinstance(derived, (bytes, bytearray)) else str(derived)
 
         #Insert new user into secrets table
         try:
-            cur.execute("INSERT INTO PROtect.secrets (username, mp, ds) VALUES (%s,%s,%s)", (username, derived_hex, salt))
-            self.model.db.commit()
+            self.model.create_new_user(username, derived_hex, salt)
         except Exception as e:
             messagebox.showerror("Error", f"Unable to create user: {e}")
             return
 
         messagebox.showinfo("Account created", f"User '{username}' created. You can now login.")
-        # Immediately log in
+        #Immediately log in
         self.verify_login(username, password)
 
     def _secrets_has_username_col(self) -> bool:
