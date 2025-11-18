@@ -3,11 +3,14 @@ from ui.MODEL.GUImodel import PasswordManagerModel
 import tkinter as tk
 from tkinter import filedialog
 from project.add import computeMasterKey
+from tkinter.simpledialog import askstring
 
 class PasswordManagerController:
-    def __init__(self, master_password:str, device_secret:str):
+    def __init__(self, mp:str, ds:str):
         self.model=PasswordManagerModel()
-        self.masterkey=computeMasterKey(master_password, device_secret)
+        self.ds=ds
+        self.mp_plain=mp #variable to store the mp for later double check of user's identity
+        self.masterkey=computeMasterKey(mp, ds) #the derived key for crypto ops
 
         #Bind view callbacks to controller methods
         self.view=PasswordManagerView(
@@ -27,9 +30,19 @@ class PasswordManagerController:
         entries=self.model.get_entries()
         self.view.set_entries(entries)
 
+    def verify_on_action(self) -> bool:
+        input_mp=askstring("Verification","Enter your Password to confirm action: ")
+        if not input_mp:
+            return False
+        key_check=computeMasterKey(input_mp, self.ds) #re-derive the key considering the entered pm + ds
+        if key_check==self.masterkey:
+            return True
+        else:
+            self.view.show_message("Verification Failed", "Invalid Password.", kind="error")
+            return False
+
     #CRUD METHODS
     def add_entry(self):
-        from tkinter.simpledialog import askstring
         site=askstring("Site", "Enter site name: ")
         url = askstring("URL", "Enter URL: ")
         email = askstring("Email", "Enter Email: ")
@@ -43,8 +56,9 @@ class PasswordManagerController:
         selected=self.view.get_selected_entry()
         if not selected:
             return
+        if not self.verify_on_action():
+            return
         ID, Site, url, email, username = selected
-        from tkinter.simpledialog import askstring
         new_site=askstring("Edit Site", "Site: ", initialvalue=Site)
         new_url=askstring("Edit URL", "URL: ", initialvalue=url)
         new_email=askstring("Edit Email", "Email: ", initialvalue=email)
@@ -58,6 +72,8 @@ class PasswordManagerController:
     def delete_entry(self):
         selected=self.view.get_selected_entry()
         if not selected:
+            return
+        if not self.verify_on_action():
             return
         ID=selected[0]
         self.model.delete_entry(ID)
@@ -92,6 +108,8 @@ class PasswordManagerController:
 
     #IMPORT/EXPORT
     def export_to_file(self):
+        if not self.verify_on_action():
+            return
         filepath=filedialog.asksaveasfilename(defaultextension=".csv")
         if filepath:
             self.model.export_to_file(filepath,self.masterkey)
