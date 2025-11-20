@@ -32,7 +32,7 @@ def test_export_entries_success_writes_csv(tmp_path, capsys):
     fake_db.cursor = MagicMock(return_value=fake_cursor)
     fake_db.close = MagicMock()
 
-    # Patch dbconfig to return fake_db
+    # Patch dbconfig to return fake_db, computeMasterKey and AES256util.decrypt to simulate decryption
     with patch("project.export.dbconfig", return_value=fake_db) as mock_dbconfig, \
          patch("project.export.computeMasterKey", side_effect=lambda mp, ds: "masterkey") as mock_compute, \
          patch("project.export.AES256util.decrypt", side_effect=lambda enc, mk, keyType=None: f"dec({enc})") as mock_decrypt:
@@ -65,3 +65,5 @@ def test_export_entries_success_writes_csv(tmp_path, capsys):
 
         # ensure db.close() was called
         fake_db.close.assert_called_once()
+
+
