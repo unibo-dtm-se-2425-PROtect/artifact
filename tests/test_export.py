@@ -93,3 +93,14 @@ def test_export_entries_cli_empty_filepath(capsys):
         # We just check that it was invoked at least once because the exact message may vary
         assert mock_printc.call_count >= 1
 
+def test_export_entries_cli_verify_master_password_fails():
+    # Simulate input path provided but verify_master_password returns falsy, meaning that it should not call export_entries
+    with patch("builtins.input", return_value="somepath.csv"), \
+         patch("project.export.getpass", return_value="dummy"), \
+         patch.object(export.AES256util, "verify_master_password", return_value=None) as mock_verify, \
+         patch("project.export.export_entries") as mock_export_entries:
+
+        export.export_entries_cli()
+
+        mock_verify.assert_called_once() # ensure verify_master_password was called
+        mock_export_entries.assert_not_called() # ensure export_entries was NOT called
