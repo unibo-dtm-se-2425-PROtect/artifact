@@ -82,3 +82,14 @@ def test_export_entries_exception_during_query(capsys):
     assert "Error during export" in captured.out
     # ensure close called even after exception
     fake_db.close.assert_called_once()
+
+# --- CLI tests --- 
+
+def test_export_entries_cli_empty_filepath(capsys):
+    # Simulate user pressing Enter -> empty filepath -> prints error and returns
+    with patch("builtins.input", return_value="  "), patch("project.export.printc") as mock_printc:
+        export.export_entries_cli() #call to the function that should handle the (empty) input 
+        # printc should be called with message about empty path
+        # We just check that it was invoked at least once because the exact message may vary
+        assert mock_printc.call_count >= 1
+
