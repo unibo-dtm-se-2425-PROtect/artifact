@@ -104,3 +104,15 @@ def test_export_entries_cli_verify_master_password_fails():
 
         mock_verify.assert_called_once() # ensure verify_master_password was called
         mock_export_entries.assert_not_called() # ensure export_entries was NOT called
+
+def test_export_entries_cli_success_calls_export_entries():
+    # Simulate full successful CLI flow where verify_master_password returns (mp, ds)
+    with patch("builtins.input", return_value="out.csv"), \
+         patch("project.export.getpass", return_value="thepass"), \
+         patch.object(export.AES256util, "verify_master_password", return_value=("mpv", "dsv")) as mock_verify, \
+         patch("project.export.export_entries") as mock_export_entries:
+
+        export.export_entries_cli()
+
+        mock_verify.assert_called_once()
+        mock_export_entries.assert_called_once_with("out.csv", "mpv", "dsv")
