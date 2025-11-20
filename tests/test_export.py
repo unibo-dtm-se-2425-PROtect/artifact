@@ -66,4 +66,19 @@ def test_export_entries_success_writes_csv(tmp_path, capsys):
         # ensure db.close() was called
         fake_db.close.assert_called_once()
 
+def test_export_entries_exception_during_query(capsys):
+    # Simulate an exception during cursor.execute; ensure it prints an error and db.close is called
+    fake_cursor = MagicMock()
+    fake_cursor.execute = MagicMock(side_effect=RuntimeError("boom"))
+    fake_cursor.fetchall = MagicMock()  # should not be used
+    fake_db = MagicMock()
+    fake_db.cursor = MagicMock(return_value=fake_cursor)
+    fake_db.close = MagicMock()
 
+    with patch("project.export.dbconfig", return_value=fake_db):
+        export.export_entries("does_not_matter.csv", "mp", "ds")
+
+    captured = capsys.readouterr()
+    assert "Error during export" in captured.out
+    # ensure close called even after exception
+    fake_db.close.assert_called_once()
