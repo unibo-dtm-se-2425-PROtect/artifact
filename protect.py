@@ -4,12 +4,12 @@ from ui.CONTROLLER.Logincontroller import Logincontroller
 from ui.CONTROLLER.GUIcontroller import PasswordManagerController
 import sys
 
-def start_main_app(root, username:str, master_password:str, device_secret:str):
+def start_main_app(root, username:str, mp:str, ds:str):
     #launch PasswordManagerController for the authenticated users
     #Pass the entered master password so the controller can compute the master key
     for w in root.winfo_children():
         w.destroy() #ensures clean state
-    PasswordManagerController(username=username, master_password=master_password, device_secret=device_secret)
+    PasswordManagerController(username=username, mp=mp, ds=ds)
 
 if __name__ == "__main__":
     testmode = "--test" in sys.argv #optional testmode to skip login
