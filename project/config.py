@@ -132,5 +132,8 @@ def reconfig():
         return  # Stop to avoid partially configured state
 
 if __name__=="__main__":
-    config()
-
+    #check if a command-line argument is provided
+    if len(sys.argv)>1 and sys.argv[1].lower=="reconfig":
+        reconfig()
+    else: 
+        config()
