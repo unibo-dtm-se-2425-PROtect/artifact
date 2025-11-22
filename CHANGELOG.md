@@ -1,3 +1,41 @@
+## [1.7.2](https://github.com/unibo-dtm-se-2425-PROtect/artifact/compare/1.7.1...1.7.2) (2025-11-22)
+
+
+### Bug Fixes
+
+* found VARBINARY error for MariaDB rules that made (re)configuration unaccessible (varbinary wants number of chars) ([6ffc469](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/6ffc4695980452cb244575f25a4bfce9ef09b820))
+
+
+### Tests
+
+* add imports for CSV and mocking in test_export.py ([b0a015d](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/b0a015db871d71019d0971b66bfbcc3990bb581a))
+* add test for exception handling in export_entries ([9744b9f](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/9744b9f1bc10c33e4bc7b981c3a53b17e0c041d6))
+* add test for export_entries_cli with password check ([291fe37](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/291fe37003db8c5c0322223233d53a14ede455d5))
+* add test for successful export of entries to CSV ([b0ede27](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/b0ede275af86d2109df8c94a1b2e955732eb28d9))
+* add test for the success case ([1d7a01d](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/1d7a01d4c2d9c8a5b8a4c7508acc8c8c65511014))
+* implement test for DB connection failure in export ([ad3f3b7](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/ad3f3b7ebe5cf69d16efa514e093ce994cef0510))
+* implement test for empty filepath in CLI export ([9b36396](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/9b363969683797b266f6ddd8dea7d040fd526d30))
+
+
+### General maintenance
+
+* adding right path for file imports ([1d00e5f](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/1d00e5fcfef65721ca50bf41581e93cb65567f2c))
+* change the name of test_import.py into test_importf.py  ([ebff2fc](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/ebff2fcef9cf1181de0da4aad79e19e2e1347608))
+* clarify comments in test_export.py for the test_export_entries_success_writes_ function ([5d2497c](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/5d2497ce0deb83f8ec958eb45747f57cf3b50e56))
+* correct path for import modules ([46182a2](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/46182a24eb7dee1921e8013cc4c66f73ec021c74))
+* create test_import.py ([773e179](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/773e179ba673e2d4ad2a1af44be6eadb0dd48b42))
+* naming convention for variables ([80887c9](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/80887c9b64120d0659d9d972751407b8485bbb24))
+* rename importf.py to import.py ([a3fd416](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/a3fd416a7ae6c829531cfb113c0607ae1ebb8aec))
+* right import path for modules ([4bda49e](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/4bda49ef1aa5d8e12bc1ad4351c853149a5c642c))
+* set the file name back to importf.py because of library-importing issues ([1ce9902](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/1ce990216788236edee15f4f5ea8b216f6aceb90))
+
+
+### Refactoring
+
+* allowing both options of config and reconfig DB based on selected system argument ([0b7c76f](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/0b7c76feedacc0dbd97954d83913f3adcc5ff4e8))
+* enhanced implementation of ds handled by the Login Controller and better defining linkages to Login Model ([de9c4a1](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/de9c4a1307b276a40622f0419064cfa656570dd5))
+* remove unused redundant _secrets_has_username_col function (intended to handle DB inconsistency, but is unnecessary given it is already enforced in the code structure) ([3fb2a66](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/3fb2a66a2088b503215481b55cd121895951c47c))
+
 ## [1.7.1](https://github.com/unibo-dtm-se-2425-PROtect/artifact/compare/1.7.0...1.7.1) (2025-11-18)
 
 
