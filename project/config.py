@@ -48,7 +48,7 @@ def config(master_password=None):
     cursor.execute(query) 
     printc("[green][+][/green] Table 'secrets' created")
 
-    query = "CREATE TABLE PROtect.entries (ID INT AUTO_INCREMENT PRIMARY KEY, Site TEXT NOT NULL, URL TEXT NOT NULL, Email TEXT, Username TEXT, Password VARBINARY NOT NULL)" 
+    query = "CREATE TABLE PROtect.entries (`ID` INT AUTO_INCREMENT PRIMARY KEY, `Site` TEXT NOT NULL, `URL` TEXT, `Email` TEXT, `Username` TEXT NOT NULL, `Password` VARBINARY(100) NOT NULL)" 
     cursor.execute(query) 
     printc("[green][+][/green] Table 'entries' created")
 
@@ -133,7 +133,9 @@ def reconfig():
 
 if __name__=="__main__":
     #check if a command-line argument is provided
-    if len(sys.argv)>1 and sys.argv[1].lower=="reconfig":
+    print(f"sys.argv length: {len(sys.argv)}")
+    print(f"sys.argv contents: {sys.argv}")
+    if len(sys.argv)>1 and sys.argv[1].lower()=="reconfig":
         reconfig()
     else: 
         config()
