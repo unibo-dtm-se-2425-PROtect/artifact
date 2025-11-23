@@ -6,8 +6,9 @@ from project.add import computeMasterKey
 from tkinter.simpledialog import askstring
 
 class PasswordManagerController:
-    def __init__(self, mp:str, ds:str):
+    def __init__(self, username:str, mp:str, ds:str):
         self.model=PasswordManagerModel()
+        self.username=username
         self.ds=ds
         self.mp_plain=mp #variable to store the mp for later double check of user's identity
         self.masterkey=computeMasterKey(mp, ds) #the derived key for crypto ops

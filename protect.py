@@ -21,7 +21,7 @@ if __name__ == "__main__":
 
     if testmode:
         #skips login and launches password manager directly with a test user
-        PasswordManagerController(username="testuser", master_password="password", device_secret="TEST_DEVICE_SECRET")
+        PasswordManagerController(username="testuser", mp="password", ds="TEST_DEVICE_SECRET")
     else:
         Logincontroller(root, on_success=lambda r,u,p,d: start_main_app(r,u,p,d))
     root.mainloop()
