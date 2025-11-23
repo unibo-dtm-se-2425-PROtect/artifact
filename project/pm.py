@@ -9,7 +9,7 @@ from rich import print as printc
 from project import add
 from project.config import config, delete, reconfig
 import string
-import retrieve
+from project import retrieve
 from project.dbconfig import dbconfig
 from project.delete import delete_entry
 from project.modify import modify_entry

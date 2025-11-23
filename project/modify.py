@@ -1,8 +1,8 @@
 from rich import print as printc
 from project.dbconfig import dbconfig
 from project.add import computeMasterKey, req_fields
+from project.AES256util import verify_master_password
 from project import AES256util
-from AES256util import verify_master_password
 
 def modify_entry(ID, Site, URL, Email, Username, Password, mp, ds):
     #Modify one or more fields of an existing entry
