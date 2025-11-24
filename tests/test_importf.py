@@ -34,3 +34,9 @@ class DummyDB:
 
     def close(self):
         self.closed = True
+
+def make_csv_file(tmp_path, content, name="test.csv"):
+    """Create a UTF-8 CSV file and return its path (string)."""
+    p = tmp_path / name
+    p.write_text(content, encoding="utf-8")
+    return str(p)
