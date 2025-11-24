@@ -18,3 +18,19 @@ class DummyCursor:
 
     def close(self):
         pass
+
+class DummyDB:
+    #DB stub with cursor(), commit(), close() and flags to observe side effects.
+    def __init__(self, cursor):
+        self._cursor = cursor
+        self.committed = False
+        self.closed = False
+
+    def cursor(self):
+        return self._cursor
+
+    def commit(self):
+        self.committed = True
+
+    def close(self):
+        self.closed = True
