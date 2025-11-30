@@ -29,7 +29,7 @@ parser.add_argument("--length", help="Length of the password to generate",type=i
 parser.add_argument("-c", "--copy", action='store_true', help='Copy password to clipboard')
 parser.add_argument("--all", action="store_true", help="Retrieve all stored entries (not the default, it must be specified for conscious choice)" )
 parser.add_argument("--id", help="ID of the entry to modify/delete (for 'modify' and 'delete' options)")
-parser.add_argument("--f", "--file", help="path to file to 'import' or 'export' operations")
+parser.add_argument("-f", "--file", help="path to file to 'import' or 'export' operations")
 args = parser.parse_args()
 
 
