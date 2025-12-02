@@ -4,6 +4,7 @@ from ui.MODEL.Loginmodel import LoginModel
 from project.add import computeMasterKey
 from project.AES256util import verify_master_password
 import os
+import hashlib
 
 class Logincontroller:
     #Expects the on_success callback signature: on_success(root, username, master_password)
@@ -50,12 +51,11 @@ class Logincontroller:
 
         #Generate salt (hex) and derive key
         salt = os.urandom(16).hex()
-        derived = computeMasterKey(password, salt)
-        derived_hex = derived.hex() if isinstance(derived, (bytes, bytearray)) else str(derived)
+        mp_hash=hashlib.sha256(password.encode()).hexdigest()
 
         #Insert new user into secrets table
         try:
-            self.model.create_new_user(username, derived_hex, salt)
+            self.model.create_new_user(username, mp_hash, salt)
         except Exception as e:
             messagebox.showerror("Error", f"Unable to create user: {e}")
             return

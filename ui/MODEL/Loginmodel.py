@@ -10,13 +10,13 @@ class LoginModel:
     
     def get_user_secrets(self, username:str) -> Optional[Tuple[str, str]]:
         #retrieve the stored mp hash and ds for a given username from the secrets table
-        self.cursor.execute("SELECT mp, ds FROM PROtect.secrets WHERE username=%s", (username,))
+        self.cursor.execute("SELECT masterpassword_hash, device_secret FROM PROtect.secrets WHERE username=%s", (username,))
         row=self.cursor.fetchone()
         return row #returns None if the user is not found
     
-    def create_new_user(self, username:str, derived_key_hex:str, salt:str):
+    def create_new_user(self, username:str, masterpassword_hash:str, device_secret:str):
         #insert new user's secrets into the secrets table. The hashing is done by the controller 
-        self.cursor.execute("INSERT INTO PROtect.secrets (username, pm, ds) VALUES (%s,%s,%s)", (username, derived_key_hex, salt))
+        self.cursor.execute("INSERT INTO PROtect.secrets (username, masterpassword_hash, device_secret) VALUES (%s,%s,%s)", (username, masterpassword_hash, device_secret))
         self.db.commit()
     
     def close(self):
