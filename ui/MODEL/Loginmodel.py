@@ -17,7 +17,7 @@ class LoginModel:
     def create_new_user(self, username:str, derived_key_hex:str, salt:str):
         #insert new user's secrets into the secrets table. The hashing is done by the controller 
         self.cursor.execute("INSERT INTO PROtect.secrets (username, pm, ds) VALUES (%s,%s,%s)", (username, derived_key_hex, salt))
-        self.dbcommit()
+        self.db.commit()
     
     def close(self):
         self.cursor.close()
