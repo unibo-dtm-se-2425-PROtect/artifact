@@ -1,3 +1,30 @@
+## [1.7.3](https://github.com/unibo-dtm-se-2425-PROtect/artifact/compare/1.7.2...1.7.3) (2025-12-02)
+
+
+### Bug Fixes
+
+* typo (missing dot) ([0fb5d8e](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/0fb5d8e6d9b26c41c193f2169c1cc1cf9c6d015f))
+* verification method of the hashed mp at Login ([48b17d5](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/48b17d539433c045ed02f62046b7b86ee6cdbfa0))
+
+
+### Tests
+
+* add DummyCursor class for testing SQL execution ([192484b](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/192484b1e3c263f137ab8e1a97db42604745da85))
+* add imports for CSV and mocking in test_importf ([34f3ee9](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/34f3ee9b61cfbf2a809143fee9cf621d200b7958))
+* add make_csv_file helper function ([8182e80](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/8182e80370903171b018530fc599a1a3df7ee589))
+* implement DummyDB that mocks a database for testing purposes ([5fbee02](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/5fbee02519611c8ebe7ead04e2bf787d8836dbf8))
+
+
+### General maintenance
+
+* adjusting imports to make functions work ([a0ea374](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/a0ea37426e3098b3adc307e637ff6ed854ec023e))
+
+
+### Refactoring
+
+* naming convention to let the --test mode for GUI work ([60387e4](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/60387e4604fc971d3511d07bfae41a667d791f73))
+* only one dash for maintainability ([efa417e](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/efa417e3cec68f5cb46cab706670ba4d919d0b42))
+
 ## [1.7.2](https://github.com/unibo-dtm-se-2425-PROtect/artifact/compare/1.7.1...1.7.2) (2025-11-22)
 
 
