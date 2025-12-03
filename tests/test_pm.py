@@ -289,3 +289,19 @@ def test_modify_with_id_calls_modify():
     ]
     cli = reload_cli_with_patches(patches)
     fake_modify.assert_called_once_with("99", pw, "SALT")
+
+def test_import_without_file(capsys):
+    # simulates prog import without -f.
+    argv = [ "prog", "import" ]
+    pw = "GoodPass1!"
+    hashed = hashlib.sha256(pw.encode()).hexdigest()
+
+    patches = [
+        ("sys.argv", argv),
+        ("getpass.getpass", MagicMock(return_value=pw)),
+        ("project.dbconfig.dbconfig", MagicMock(return_value=FakeDB([[hashed, "SALT"]]))),
+        ("project.importf.import_entries", MagicMock()),
+    ]
+    cli = reload_cli_with_patches(patches)
+    captured = capsys.readouterr()
+    assert "File path (-f/--file) is required for import" in captured.out
