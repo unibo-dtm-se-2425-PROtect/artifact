@@ -145,3 +145,35 @@ def test_import_entries_file_not_found(capsys):
     assert "File not found" in out
     assert missing in out
     assert db.closed is True
+
+def test_import_entries_handles_generic_exception(tmp_path, capsys):
+    """
+    Purpose:
+    - Simulate an exception during cursor.execute and check the generic exception branch prints the error.
+    Setup:
+    - CSV with one valid row; use a cursor whose execute raises.
+    Assertions:
+    - Printed message contains 'Error during import' and the exception text; DB closed.
+    """
+    csv_content = "ID,Site,URL,Email,Username,Password\n1,s,u,e,u,p\n"
+    path = make_csv_file(tmp_path, csv_content)
+
+    class ExplodingCursor(DummyCursor):
+        def execute(self, query, params):
+            raise RuntimeError("boom during execute")
+
+    db = DummyDB(ExplodingCursor())
+
+    fake_compute = MagicMock(return_value="mk")
+    AESFake = MagicMock()
+    AESFake.encrypt = staticmethod(lambda *a, **k: "enc")
+
+    with patch.object(importf_mod, "dbconfig", return_value=db), \
+         patch.object(importf_mod, "computeMasterKey", fake_compute), \
+         patch.object(importf_mod, "AES256util", AESFake):
+        importf_mod.import_entries(path, mp="m", ds="d")
+
+    out = capsys.readouterr().out
+    assert "Error during import" in out
+    assert "boom during execute" in out
+    assert db.closed is True
