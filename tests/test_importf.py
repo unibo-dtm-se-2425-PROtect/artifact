@@ -198,3 +198,26 @@ def test_import_entries_cli_empty_filepath(capsys):
     out = capsys.readouterr().out
     assert "File path cannot be empty" in out
 
+def test_import_entries_cli_master_password_falsy(capsys, tmp_path):
+    """
+    Purpose:
+    - When verify_master_password returns falsy, import_entries should not be called.
+    Setup:
+    - Patch builtins.input to return a non-empty path.
+    - Patch AES256util.verify_master_password to return False.
+    - Patch import_entries to raise if invoked.
+    Assertions:
+    - No exception; import_entries not invoked.
+    """
+    fake_path = str(tmp_path / "maybe.csv")
+
+    with patch.object(builtins, "input", return_value=fake_path), \
+         patch.object(importf_mod, "AES256util", new=MagicMock()) as AESmock, \
+         patch.object(importf_mod, "import_entries", side_effect=AssertionError("import_entries must not be called")):
+        AESmock.verify_master_password.return_value = False
+        # Should return early without raising
+        importf_mod.import_entries_cli()
+
+    out = capsys.readouterr().out
+    # No explicit text expected; ensure no AssertionError was thrown and function returned
+    assert isinstance(out, str)
