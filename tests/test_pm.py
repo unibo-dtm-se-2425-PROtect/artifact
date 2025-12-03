@@ -255,3 +255,19 @@ def test_remove_with_id_calls_delete():
     ]
     cli = reload_cli_with_patches(patches)
     fake_delete.assert_called_once_with("42", pw, "SALT")
+
+def test_modify_without_id(capsys):
+     # simulates prog modify with no --id
+    argv = [ "prog", "modify" ]
+    pw = "GoodPass1!"
+    hashed = hashlib.sha256(pw.encode()).hexdigest()
+
+    patches = [
+        ("sys.argv", argv),
+        ("getpass.getpass", MagicMock(return_value=pw)),
+        ("project.dbconfig.dbconfig", MagicMock(return_value=FakeDB([[hashed, "SALT"]]))),
+        ("project.modify.modify_entry", MagicMock()),
+    ]
+    cli = reload_cli_with_patches(patches)
+    captured = capsys.readouterr()
+    assert "Entry ID (--id) is required for modification" in captured.out
