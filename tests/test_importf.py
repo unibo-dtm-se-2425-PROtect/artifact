@@ -86,3 +86,35 @@ def test_import_entries_success(tmp_path, capsys):
     out = capsys.readouterr().out
     assert "Imported 2 entries" in out
     assert path in out
+
+def test_import_entries_skips_incomplete_rows(tmp_path, capsys):
+    """
+    Purpose:
+    - Ensure rows with fewer than 6 columns are skipped.
+    Setup:
+    - CSV with one complete row and two incomplete rows.
+    Assertions:
+    - Only one INSERT executed, commit happens, printed count is 1.
+    """
+    csv_content = "ID,Site,URL,Email,Username,Password\n" \
+                  "10,site,https://,a@b.com,user,pass\n" \
+                  "too,few,cols\n" \
+                  "also,short\n"
+    path = make_csv_file(tmp_path, csv_content)
+
+    cursor = DummyCursor()
+    db = DummyDB(cursor)
+
+    fake_compute = MagicMock(return_value="mk")
+    AESFake = MagicMock()
+    AESFake.encrypt = staticmethod(lambda mk, plaintext, keyType="hex": "E:" + plaintext)
+
+    with patch.object(importf_mod, "dbconfig", return_value=db), \
+         patch.object(importf_mod, "computeMasterKey", fake_compute), \
+         patch.object(importf_mod, "AES256util", AESFake):
+        importf_mod.import_entries(path, mp="m", ds="d")
+
+    assert len(cursor.executed) == 1
+    assert db.committed is True
+    out = capsys.readouterr().out
+    assert "Imported 1 entries" in out
