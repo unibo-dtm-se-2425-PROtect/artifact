@@ -158,3 +158,20 @@ def test_extract_no_master(capsys):
     cli = reload_cli_with_patches(patches)
     captured = capsys.readouterr()
     assert "WRONG" in captured.out or "[red][!]" in captured.out
+
+def test_extract_no_search_fields_and_no_all(capsys):
+    # Simulates prog extract with valid master but no search flags and no --all
+    argv = [ "prog", "extract" ]
+    pw = "GoodPass1!"
+    hashed = hashlib.sha256(pw.encode()).hexdigest()
+    fake_db = FakeDB([[hashed, "SALT"]])
+
+    patches = [
+        ("sys.argv", argv),
+        ("getpass.getpass", MagicMock(return_value=pw)),
+        ("project.dbconfig.dbconfig", MagicMock(return_value=fake_db)),
+        ("project.retrieve.retrieveEntries", MagicMock()),
+    ]
+    cli = reload_cli_with_patches(patches)
+    captured = capsys.readouterr()
+    assert "Please enter at least one search field" in captured.out
