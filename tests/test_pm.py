@@ -142,3 +142,19 @@ def test_add_all_fields_calls_addEntry():
     cli = reload_cli_with_patches(patches)
     # verify addEntry called with expected args
     fake_add.assert_called_once_with(pw, "SALT", "site", "url", "mail", "user", "pass")
+
+def test_extract_no_master(capsys):
+    #simulates prog extract -s site with a wrong master hash in DB.
+    argv = [ "prog", "extract", "-s", "site" ]
+    pw = "GoodPass1!"
+    fake_db = FakeDB([[hashlib.sha256("other".encode()).hexdigest(), "SALT"]])
+
+    patches = [
+        ("sys.argv", argv),
+        ("getpass.getpass", MagicMock(return_value=pw)),
+        ("project.dbconfig.dbconfig", MagicMock(return_value=fake_db)),
+        ("project.retrieve.retrieveEntries", MagicMock()),
+    ]
+    cli = reload_cli_with_patches(patches)
+    captured = capsys.readouterr()
+    assert "WRONG" in captured.out or "[red][!]" in captured.out
