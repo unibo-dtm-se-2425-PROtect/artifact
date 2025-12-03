@@ -40,3 +40,49 @@ def make_csv_file(tmp_path, content, name="test.csv"):
     p = tmp_path / name
     p.write_text(content, encoding="utf-8")
     return str(p)
+
+# ----- Tests -----
+
+def test_import_entries_success(tmp_path, capsys):
+    """
+    Purpose:
+    - Ensure import_entries inserts all complete rows, commits, closes DB and prints success.
+    Setup:
+    - Create CSV with header and two complete rows.
+    - Patch dbconfig, computeMasterKey and AES256util.encrypt with deterministic fakes using patch/MagicMock.
+    Assertions:
+    - Two INSERT calls recorded, DB committed and closed, printed message contains count and filepath.
+    """
+    csv_content = "ID,Site,URL,Email,Username,Password\n" \
+                  "1,site1,https://s1,e1@x.com,u1,plain1\n" \
+                  "2,site2,https://s2,e2@x.com,u2,plain2\n"
+    path = make_csv_file(tmp_path, csv_content)
+
+    cursor = DummyCursor()
+    db = DummyDB(cursor)
+
+    # Fake computeMasterKey and AES256util.encrypt
+    fake_compute = MagicMock(return_value="fake_master_key")
+    class AESFake:
+        @staticmethod
+        def encrypt(mk, plaintext, keyType="hex"):
+            assert mk == "fake_master_key"
+            return f"enc:{plaintext}"
+
+    with patch.object(importf_mod, "dbconfig", return_value=db), \
+         patch.object(importf_mod, "computeMasterKey", fake_compute), \
+         patch.object(importf_mod, "AES256util", AESFake):
+        importf_mod.import_entries(path, mp="m", ds="d")
+
+    # Assertions
+    assert len(cursor.executed) == 2, "Expected two INSERT operations for two complete rows"
+    q0, p0 = cursor.executed[0]
+    assert "INSERT INTO PROtect.entries" in q0
+    assert p0[0] == "1"
+    assert p0[5] == "enc:plain1"
+    assert db.committed is True
+    assert db.closed is True
+
+    out = capsys.readouterr().out
+    assert "Imported 2 entries" in out
+    assert path in out
