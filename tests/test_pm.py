@@ -271,3 +271,21 @@ def test_modify_without_id(capsys):
     cli = reload_cli_with_patches(patches)
     captured = capsys.readouterr()
     assert "Entry ID (--id) is required for modification" in captured.out
+
+def test_modify_with_id_calls_modify():
+    """Simulates prog modify --id 99.
+       Asserts modify_entry called with id, master, salt"""
+    argv = [ "prog", "modify", "--id", "99" ]
+    pw = "GoodPass1!"
+    hashed = hashlib.sha256(pw.encode()).hexdigest()
+
+    fake_modify = MagicMock()
+
+    patches = [
+        ("sys.argv", argv),
+        ("getpass.getpass", MagicMock(return_value=pw)),
+        ("project.dbconfig.dbconfig", MagicMock(return_value=FakeDB([[hashed, "SALT"]]))),
+        ("project.modify.modify_entry", fake_modify),
+    ]
+    cli = reload_cli_with_patches(patches)
+    fake_modify.assert_called_once_with("99", pw, "SALT")
