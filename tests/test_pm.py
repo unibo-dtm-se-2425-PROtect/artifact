@@ -305,3 +305,21 @@ def test_import_without_file(capsys):
     cli = reload_cli_with_patches(patches)
     captured = capsys.readouterr()
     assert "File path (-f/--file) is required for import" in captured.out
+
+def test_import_with_file_calls_import_entries():
+    """simulates prog import -f data.csv.
+       Asserts import_entries called with path, master, salt."""
+    argv = [ "prog", "import", "-f", "data.csv" ]
+    pw = "GoodPass1!"
+    hashed = hashlib.sha256(pw.encode()).hexdigest()
+
+    fake_import = MagicMock()
+
+    patches = [
+        ("sys.argv", argv),
+        ("getpass.getpass", MagicMock(return_value=pw)),
+        ("project.dbconfig.dbconfig", MagicMock(return_value=FakeDB([[hashed, "SALT"]]))),
+        ("project.importf.import_entries", fake_import),
+    ]
+    cli = reload_cli_with_patches(patches)
+    fake_import.assert_called_once_with("data.csv", pw, "SALT")
