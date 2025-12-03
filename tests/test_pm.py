@@ -124,3 +124,21 @@ def test_add_missing_fields(capsys):
     # addEntry should not have been called
     assert not sys.modules['cli'].add.addEntry.called if hasattr(sys.modules['cli'], 'add') else True
     assert "Site Name" in captured.out or "Username" in captured.out or "Password" in captured.out
+
+def test_add_all_fields_calls_addEntry():
+    argv = [ "prog", "add", "-s", "site", "-l", "user", "-p", "pass", "-e", "mail", "-u", "url" ]
+    pw = "GoodPass1!"
+    hashed = hashlib.sha256(pw.encode()).hexdigest()
+    fake_db = FakeDB([[hashed, "SALT"]])
+
+    fake_add = MagicMock()
+
+    patches = [
+        ("sys.argv", argv),
+        ("getpass.getpass", MagicMock(return_value=pw)),
+        ("project.dbconfig.dbconfig", MagicMock(return_value=fake_db)),
+        ("project.add.addEntry", fake_add),
+    ]
+    cli = reload_cli_with_patches(patches)
+    # verify addEntry called with expected args
+    fake_add.assert_called_once_with(pw, "SALT", "site", "url", "mail", "user", "pass")
