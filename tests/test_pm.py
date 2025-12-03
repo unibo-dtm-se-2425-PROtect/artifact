@@ -197,3 +197,25 @@ def test_extract_with_search_fields_calls_retrieve():
     assert called_args[0] == pw
     assert called_args[1] == "SALT"
     assert set(called_args[2].keys()) == {"Site", "URL", "Email", "Username"}
+
+def test_extract_with_all_calls_retrieve():
+    # simulates prog extract --all
+    argv = [ "prog", "extract", "--all" ]
+    pw = "GoodPass1!"
+    hashed = hashlib.sha256(pw.encode()).hexdigest()
+    fake_db = FakeDB([[hashed, "SALT"]])
+
+    fake_retrieve = MagicMock()
+
+    patches = [
+        ("sys.argv", argv),
+        ("getpass.getpass", MagicMock(return_value=pw)),
+        ("project.dbconfig.dbconfig", MagicMock(return_value=fake_db)),
+        ("project.retrieve.retrieveEntries", fake_retrieve),
+    ]
+    cli = reload_cli_with_patches(patches)
+    fake_retrieve.assert_called_once()
+    called_args = fake_retrieve.call_args[0]
+    assert called_args[2] == {}
+    # default decryptPassword is False
+    assert called_args[3] is False
