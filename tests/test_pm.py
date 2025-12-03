@@ -50,6 +50,8 @@ def reload_cli_with_patches(patches):
             m.__exit__(None, None, None)
 
 # --- Tests for inputAndValidateMasterPassword policy checks ---
+
+#parametrized tests for various password policy failures
 @pytest.mark.parametrize("pw, expected_fragment", [
     ("Short1!", "Password must be at least 8 characters long."),
     ("lowercase1!", "Password must contain at least one uppercase letter."),
