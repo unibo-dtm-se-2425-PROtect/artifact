@@ -104,3 +104,23 @@ def test_input_master_password_success():
     res = cli.inputAndValidateMasterPassword()
     #ensure plaintext password and salt returned
     assert res == [pw, "SALTVALUE"]
+
+# --- Tests for main() branches, mocking external functions ---
+
+"""sys.argv is patched per-test to simulate command-line args for each CLI option, 
+    including add, extract, remove, modify, import, 
+    export, configure, delete configuration, reconfigure."""
+
+def test_add_missing_fields(capsys):
+    # argv: program name + option 'add' (no required fields)
+    patches = [
+        ("sys.argv", [ "prog", "add" ]),
+        ("getpass.getpass", MagicMock(return_value="Ignored1!")),
+        ("project.dbconfig.dbconfig", MagicMock(return_value=FakeDB([[ "h", "s" ]]))),
+        ("project.add.addEntry", MagicMock()),  # should not be called
+    ]
+    cli = reload_cli_with_patches(patches)
+    captured = capsys.readouterr()
+    # addEntry should not have been called
+    assert not sys.modules['cli'].add.addEntry.called if hasattr(sys.modules['cli'], 'add') else True
+    assert "Site Name" in captured.out or "Username" in captured.out or "Password" in captured.out
