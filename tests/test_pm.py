@@ -175,3 +175,25 @@ def test_extract_no_search_fields_and_no_all(capsys):
     cli = reload_cli_with_patches(patches)
     captured = capsys.readouterr()
     assert "Please enter at least one search field" in captured.out
+
+def test_extract_with_search_fields_calls_retrieve():
+    argv = [ "prog", "extract", "-s", "mysite", "-l", "myuser", "-u", "myurl", "-e", "myemail" ]
+    pw = "GoodPass1!"
+    hashed = hashlib.sha256(pw.encode()).hexdigest()
+    fake_db = FakeDB([[hashed, "SALT"]])
+
+    fake_retrieve = MagicMock()
+
+    patches = [
+        ("sys.argv", argv),
+        ("getpass.getpass", MagicMock(return_value=pw)),
+        ("project.dbconfig.dbconfig", MagicMock(return_value=fake_db)),
+        ("project.retrieve.retrieveEntries", fake_retrieve),
+    ]
+    cli = reload_cli_with_patches(patches)
+    # ensure retrieveEntries called once and inspect args
+    fake_retrieve.assert_called_once()
+    called_args = fake_retrieve.call_args[0]
+    assert called_args[0] == pw
+    assert called_args[1] == "SALT"
+    assert set(called_args[2].keys()) == {"Site", "URL", "Email", "Username"}
