@@ -219,3 +219,20 @@ def test_extract_with_all_calls_retrieve():
     assert called_args[2] == {}
     # default decryptPassword is False
     assert called_args[3] is False
+
+def test_remove_without_id(capsys):
+    # simulates prog remove with no --id
+    argv = [ "prog", "remove" ]
+    pw = "GoodPass1!"
+    hashed = hashlib.sha256(pw.encode()).hexdigest()
+    fake_db = FakeDB([[hashed, "SALT"]])
+
+    patches = [
+        ("sys.argv", argv),
+        ("getpass.getpass", MagicMock(return_value=pw)),
+        ("project.dbconfig.dbconfig", MagicMock(return_value=fake_db)),
+        ("project.delete.delete_entry", MagicMock()),
+    ]
+    cli = reload_cli_with_patches(patches)
+    captured = capsys.readouterr()
+    assert "Entry ID (--id) is required for deletion" in captured.out
