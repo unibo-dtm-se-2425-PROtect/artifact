@@ -323,3 +323,19 @@ def test_import_with_file_calls_import_entries():
     ]
     cli = reload_cli_with_patches(patches)
     fake_import.assert_called_once_with("data.csv", pw, "SALT")
+
+def test_export_without_file(capsys):
+    # simulates prog export without -f.
+    argv = [ "prog", "export" ]
+    pw = "GoodPass1!"
+    hashed = hashlib.sha256(pw.encode()).hexdigest()
+
+    patches = [
+        ("sys.argv", argv),
+        ("getpass.getpass", MagicMock(return_value=pw)),
+        ("project.dbconfig.dbconfig", MagicMock(return_value=FakeDB([[hashed, "SALT"]]))),
+        ("project.export.export_entries", MagicMock()),
+    ]
+    cli = reload_cli_with_patches(patches)
+    captured = capsys.readouterr()
+    assert "File path (-f/--file) is required for export" in captured.out
