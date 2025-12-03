@@ -48,3 +48,25 @@ def reload_cli_with_patches(patches):
         # Exit in reverse order
         for m in reversed(managers):
             m.__exit__(None, None, None)
+
+# --- Tests for inputAndValidateMasterPassword policy checks ---
+@pytest.mark.parametrize("pw, expected_fragment", [
+    ("Short1!", "Password must be at least 8 characters long."),
+    ("lowercase1!", "Password must contain at least one uppercase letter."),
+    ("NoDigits!!", "Password must contain at least one number."),
+    ("NoSpecial1A", "Password must contain at least one special character."),
+])
+def test_password_policy_failures(pw, expected_fragment, capsys):
+    # Patch getpass.getpass to return pw and dbconfig to a harmless DB (not reached)
+    patches = [
+        ("getpass.getpass", MagicMock(return_value=pw)),
+        ("project.dbconfig.dbconfig", MagicMock(return_value=FakeDB([[ "dummy" ]]))),
+        # Ensure sys.argv minimal so module imports but doesn't trigger other branches
+        ("sys.argv", [ "prog", "configure" ]),
+    ]
+    # Import module to access function
+    cli = reload_cli_with_patches(patches)
+    res = cli.inputAndValidateMasterPassword()
+    captured = capsys.readouterr()
+    assert res is None
+    assert expected_fragment in captured.out
