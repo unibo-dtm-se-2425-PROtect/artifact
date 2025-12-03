@@ -89,3 +89,18 @@ def test_input_master_password_wrong_hash(capsys):
     assert res is None
     # rich.print may include color tags; check for either marker
     assert "WRONG" in captured.out or "[red][!]" in captured.out
+
+def test_input_master_password_success():
+    pw = "GoodPass1!"
+    hashed = hashlib.sha256(pw.encode()).hexdigest()
+    fake_db = FakeDB([[hashed, "SALTVALUE"]])
+
+    patches = [
+        ("getpass.getpass", MagicMock(return_value=pw)),
+        ("project.dbconfig.dbconfig", MagicMock(return_value=fake_db)),
+        ("sys.argv", [ "prog", "configure" ]),
+    ]
+    cli = reload_cli_with_patches(patches)
+    res = cli.inputAndValidateMasterPassword()
+    #ensure plaintext password and salt returned
+    assert res == [pw, "SALTVALUE"]
