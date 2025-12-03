@@ -357,3 +357,32 @@ def test_export_with_file_calls_export_entries():
     ]
     cli = reload_cli_with_patches(patches)
     fake_export.assert_called_once_with("out.csv", pw, "SALT")
+
+def test_configure_delete_reconfigure_calls():
+    # prepare MagicMocks for config, delete, reconfig
+    fake_config = MagicMock()
+    fake_delete = MagicMock()
+    fake_reconfig = MagicMock()
+
+    # running three reloads with different argv values
+     # configure
+    patches = [
+        ("sys.argv", [ "prog", "configure" ]),
+        ("getpass.getpass", MagicMock(return_value="Ignored1!")),
+        ("project.dbconfig.dbconfig", MagicMock(return_value=FakeDB([[ "h", "s" ]]))),
+        ("project.config.config", fake_config),
+        ("project.config.delete", fake_delete),
+        ("project.config.reconfig", fake_reconfig),
+    ]
+    cli = reload_cli_with_patches(patches)
+    fake_config.assert_called_once()
+
+    # delete configuration (script expects exact string "delete configuration")
+    patches[0] = ("sys.argv", [ "prog", "delete configuration" ])
+    cli = reload_cli_with_patches(patches)
+    fake_delete.assert_called_once()
+
+    # reconfigure
+    patches[0] = ("sys.argv", [ "prog", "reconfigure" ])
+    cli = reload_cli_with_patches(patches)
+    fake_reconfig.assert_called_once()
