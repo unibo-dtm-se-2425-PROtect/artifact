@@ -72,3 +72,20 @@ def test_password_policy_failures(pw, expected_fragment, capsys):
     captured = capsys.readouterr()
     assert res is None
     assert expected_fragment in captured.out
+
+def test_input_master_password_wrong_hash(capsys):
+    pw = "GoodPass1!"
+    wrong_hash = hashlib.sha256("other".encode()).hexdigest()
+    fake_db = FakeDB([[wrong_hash, "SALT"]])
+
+    patches = [
+        ("getpass.getpass", MagicMock(return_value=pw)),
+        ("project.dbconfig.dbconfig", MagicMock(return_value=fake_db)),
+        ("sys.argv", [ "prog", "configure" ]),
+    ]
+    cli = reload_cli_with_patches(patches)
+    res = cli.inputAndValidateMasterPassword()
+    captured = capsys.readouterr()
+    assert res is None
+    # rich.print may include color tags; check for either marker
+    assert "WRONG" in captured.out or "[red][!]" in captured.out
