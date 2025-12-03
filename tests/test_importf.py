@@ -118,3 +118,30 @@ def test_import_entries_skips_incomplete_rows(tmp_path, capsys):
     assert db.committed is True
     out = capsys.readouterr().out
     assert "Imported 1 entries" in out
+
+def test_import_entries_file_not_found(capsys):
+    """
+    Purpose:
+    - When CSV file doesn't exist, function prints File not found and closes DB.
+    Setup:
+    - Use a path guaranteed not to exist.
+    Assertions:
+    - Output contains 'File not found' and the path, DB closed.
+    """
+    missing = "/nonexistent/this_file_should_not_exist.csv"
+    cursor = DummyCursor()
+    db = DummyDB(cursor)
+
+    fake_compute = MagicMock(return_value="mk")
+    AESFake = MagicMock()
+    AESFake.encrypt = staticmethod(lambda *a, **k: "X")
+
+    with patch.object(importf_mod, "dbconfig", return_value=db), \
+         patch.object(importf_mod, "computeMasterKey", fake_compute), \
+         patch.object(importf_mod, "AES256util", AESFake):
+        importf_mod.import_entries(missing, mp="m", ds="d")
+
+    out = capsys.readouterr().out
+    assert "File not found" in out
+    assert missing in out
+    assert db.closed is True
