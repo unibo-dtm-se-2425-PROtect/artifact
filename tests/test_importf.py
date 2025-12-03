@@ -177,3 +177,24 @@ def test_import_entries_handles_generic_exception(tmp_path, capsys):
     assert "Error during import" in out
     assert "boom during execute" in out
     assert db.closed is True
+
+def test_import_entries_cli_empty_filepath(capsys):
+    """
+    Purpose:
+    - CLI should detect empty filepath input (after strip) and print an error without calling verify_master_password.
+    Setup:
+    - Patch builtins.input to return whitespace only.
+    - Patch AES256util.verify_master_password to raise if called.
+    Assertions:
+    - Printed message informs about empty filepath; verify_master_password not invoked.
+    """
+    # input returns whitespace -> .strip() => empty
+    with patch.object(builtins, "input", return_value="   "), \
+         patch.object(importf_mod, "AES256util", new=MagicMock()) as AESmock:
+        # Set verify_master_password to raise if called (should not be called)
+        AESmock.verify_master_password.side_effect = AssertionError("verify_master_password should not be called")
+        importf_mod.import_entries_cli()
+
+    out = capsys.readouterr().out
+    assert "File path cannot be empty" in out
+
