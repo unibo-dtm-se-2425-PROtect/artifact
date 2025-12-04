@@ -1,3 +1,67 @@
+## [1.7.4](https://github.com/unibo-dtm-se-2425-PROtect/artifact/compare/1.7.3...1.7.4) (2025-12-04)
+
+
+### Bug Fixes
+
+* indentation error with docstrings ([959d002](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/959d002f92706ea1bd7b5ddffa1a0e6e607feca2))
+
+
+### Tests
+
+* add FakeFrame class  ([66f6790](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/66f6790676382c4a4e59bf53a8c228d6d4edc83e))
+* add FakeLabel class ([70ab9c9](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/70ab9c972a0e271421ba160e999cc8166e5c1345))
+* add get method to FakeEntry class ([8b6ab3f](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/8b6ab3fa2e489f6e9e99efef070bfde7eeda2e7b))
+* add imports for pytest and mocking ([4e4297f](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/4e4297fb0466e4ce38f884d2527fd38c79ab03a4))
+* add necessary imports for tkinter tests ([c0400d1](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/c0400d1d5ae194d358caff5037efed0298d89204))
+* add pack method to FakeWidget class ([f2556a4](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/f2556a46d2bb0a78c1ef6ccb10086ad8fd443eb9))
+* add reload_cli_with_patches utility function ([5df1f8f](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/5df1f8f1cdcd60e1b63b3b85749412453731631c))
+* add set_value method to FakeEntry class ([b8bfd82](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/b8bfd827e949012fdf88b8439baba639b0d14406))
+* add test for remove command with ID ([0bd3a11](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/0bd3a118f1e746ec68b310e54cd49341b6f98831))
+* add test for successful import of entries ([bda1efc](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/bda1efcbfee3a0496ecab2388bb61bcbf4896250))
+* comment addition for explainability ([ce4ce11](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/ce4ce11fb42ec48a2cad4070ec19009cc6f71a98))
+* create FakeEntry class  ([83282cc](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/83282cc3101276438e18a341317faa145ae80ed0))
+* implement delete method in mock Entry class ([6fb3da4](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/6fb3da4d484a2a776aba87bdd4bcf8287a6f3492))
+* implement FakeDB and FakeCursor for tests ([15b7edc](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/15b7edc4933f1538accaf3bb9ad225955c503657))
+* implement FakeWidget class for unit tests ([3ed6902](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/3ed69022ed7164dbe224c7d1c6b676a4211532a2))
+* implement test for add command with missing fields ([2b56812](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/2b568128db7d95228825309fdde14fc0f6125aa8))
+* implement test for addEntry function call ([484f415](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/484f41581928e8cecb03f6eb5e47dd6aa23d26dc))
+* implement test for empty filepath error handling ([d40d743](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/d40d743efe7937a8e30833db5f835dba08501b4b))
+* implement test for export with file argument ([23e13a5](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/23e13a5bbde55ac9a4f178188e2e7d327e55b146))
+* implement test for extract with --all option ([7e2892a](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/7e2892ada560f1dbf7518e0a8f594d4a9e37826a))
+* implement test for extract with search fields ([7ab79c5](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/7ab79c57942138cb5f30d691625e6a559648a86e))
+* implement test for falsy master password scenario ([8991ddd](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/8991dddd18081847499982fdf6bc6d76ef97945e))
+* implement test for file not found scenario ([d642b44](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/d642b44879f7b892b48840667fadcc5653f79e24))
+* implement test for generic exception handling ([9f789ae](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/9f789ae98e9e1c0101b1f0b61f0e85eba117a6ca))
+* implement test for import with file input ([7938af4](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/7938af43bf9d1d31f41e3a7dc25c83bd412c5b68))
+* implement test for input master password success ([70f1a0c](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/70f1a0cecabe575a8d178946f1063d325c36283c))
+* implement test for missing file in export command ([54af73e](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/54af73eda39e7660a151fc348036d77037bd5b77))
+* implement test for missing file in import command ([4537928](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/45379284eef2dc18ad075e65ca5f9bef5dd52736))
+* implement test for missing ID in modify command ([c6b1ab6](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/c6b1ab6dd648de3a945a5b78424dbeb2c81faa24))
+* implement test for modify command with ID ([538cdb8](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/538cdb829935d487698dfda540d90a5666a7d447))
+* implement test for no search fields in extract ([34e2f94](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/34e2f947c9fccd3ad9a3660ab2a87c5b675b292c))
+* implement test for remove command without ID ([97477ec](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/97477ec3ec68eb9824fccf86e6936dbe9602b9e1))
+* implement test for skipping incomplete CSV rows ([873b43e](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/873b43e14e9328a56c9dd4a4d0552f64e4113879))
+* implement test for wrong master password hash ([8e99d25](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/8e99d25f196952676256206298524ea4b40bc4d9))
+* implement test_extract_no_master function ([0bc6efa](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/0bc6efa936d34b8111527c1e4d80ad626a67c1d5))
+* implement tests for configuration commands ([ff9312e](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/ff9312e1099591ca85255553bc79efdcfeca4010))
+* implement tests for password policy checks ([7cfc149](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/7cfc149d644c3d1ce17ff81adde5ca59c504592b))
+
+
+### General maintenance
+
+* create test_pm.py ([b0297b2](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/b0297b2c0f352157585c6bfb0c947d8362c270c6))
+* create test_tkinter_bootstrap_sample.py ([6c03fdb](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/6c03fdb331b9fde48b3c8b895918edd65d702ce9))
+
+
+### Style improvements
+
+* define docstring for FakeEntry class ([3bc5b50](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/3bc5b5063783f28419227fc9fbe545e420aa8b35))
+
+
+### Refactoring
+
+* change in "secrets" table's columns' semantics and hashing method to make the SignUp and LogIn work (only the SignUp worked, problem with stored master password hash) ([b1b79d7](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/b1b79d7e61539d1e9dbd22db05d691684af5a6dc))
+
 ## [1.7.3](https://github.com/unibo-dtm-se-2425-PROtect/artifact/compare/1.7.2...1.7.3) (2025-12-02)
 
 
