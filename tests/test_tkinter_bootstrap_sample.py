@@ -27,13 +27,13 @@ class FakeLabel(FakeWidget):
     pass
 
 class FakeEntry(FakeWidget):
-     """
+    """
     Stand-in for ttk.Entry with minimal stateful behavior:
     - _value stores the text content.
     - get() returns the current value.
     - set_value(v) is a test helper to simulate user typing.
     - delete(start, end) records calls and clears the stored value.
-     """
+    """
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self._value = ""
