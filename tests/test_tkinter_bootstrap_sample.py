@@ -10,7 +10,13 @@ class FakeWidget:
     """
     Base fake widget.
     - Records init kwargs in _config for possible assertions.
+    - Records whether pack() was called via _packed.
     """
     def __init__(self, *args, **kwargs):
         self._config = kwargs
         self._packed = False
+
+    def pack(self, *args, **kwargs):
+        # Simulate packing the widget into a layout manager.
+        self._packed = True
+   
