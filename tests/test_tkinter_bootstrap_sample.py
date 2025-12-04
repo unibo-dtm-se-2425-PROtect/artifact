@@ -25,3 +25,12 @@ class FakeFrame(FakeWidget):
 
 class FakeLabel(FakeWidget):
     pass
+
+class FakeEntry(FakeWidget):
+ """Stand-in for ttk.Entry with minimal stateful behavior:
+ """
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self._value = ""
+        self.deleted_calls = []  # records (start, end) tuples
+        self.focused = False
