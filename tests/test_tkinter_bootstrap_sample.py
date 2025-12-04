@@ -21,5 +21,7 @@ class FakeWidget:
         self._packed = True
    
 class FakeFrame(FakeWidget):
-    """Stand-in for ttk.Frame; no extra behavior needed for tests."""
+    pass
+
+class FakeLabel(FakeWidget):
     pass
