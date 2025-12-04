@@ -30,6 +30,7 @@ class FakeEntry(FakeWidget):
  """Stand-in for ttk.Entry with minimal stateful behavior:
     - _value stores the text content.
     - get() returns the current value.
+    - set_value(v) is a test helper to simulate user typing.
  """
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -39,3 +40,7 @@ class FakeEntry(FakeWidget):
 
     def get(self):
         return self._value
+
+    def set_value(self, v):
+        # Helper used by tests to simulate user input
+        self._value = v
