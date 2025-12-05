@@ -94,3 +94,6 @@ class FakeRoot:
 
     def title(self, text):
         self.titled = text
+
+    def geometry(self, geom):
+        self.geometry_value = geom
