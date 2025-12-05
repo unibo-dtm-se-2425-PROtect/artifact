@@ -165,3 +165,29 @@ def test_init_creates_widgets_and_binds_return():
         # The <Return> binding should be present and callable
         assert "<Return>" in root.bindings
         assert callable(root.bindings["<Return>"])
+
+def test_verify_login_success_calls_showinfo_and_clears_fields():
+    """
+    Verify the success branch of verify_login:
+    - When username == "admin" and password == "123456", messagebox.showinfo is called
+    - clear_fields is invoked to reset the form
+    """
+    patches = apply_widget_patches(app_module)
+    with patches[0], patches[1]:
+        root = FakeRoot()
+        app = app_module.LoginApp(root)
+
+        # Simulate user input of correct credentials
+        app.username_entry.set_value("admin")
+        app.password_entry.set_value("123456")
+
+        # Patch messagebox.showinfo to spy on it and patch clear_fields to assert it was called
+        with mock.patch.object(app_module.messagebox, "showinfo") as mock_info, \
+             mock.patch.object(app_module.LoginApp, "clear_fields") as mock_clear:
+
+            app.verify_login()
+
+            # showinfo should be called with the success title, message, and icon
+            mock_info.assert_called_once_with("Success", "Login successful!", icon='info')
+            # clear_fields should have been called once
+            mock_clear.assert_called_once()
