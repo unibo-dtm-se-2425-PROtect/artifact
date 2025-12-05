@@ -133,3 +133,35 @@ def apply_widget_patches(module):
 # -------------------------
 # Tests
 # -------------------------
+
+def test_init_creates_widgets_and_binds_return():
+    """
+    Verify that LoginApp.__init__:
+    - constructs the expected widget attributes (main_frame, title_label, username_entry, etc.)
+    - sets the root title and geometry
+    - binds the <Return> key to a callable callback
+    """
+    patches = apply_widget_patches(app_module)
+    # Apply both patches in a scoped context so they only affect this test
+    with patches[0], patches[1]:
+        root = FakeRoot()
+        app = app_module.LoginApp(root)
+
+        # Assert widget attributes exist and are instances of our fakes
+        assert isinstance(app.main_frame, FakeFrame)
+        assert isinstance(app.title_label, FakeLabel)
+        assert isinstance(app.username_frame, FakeFrame)
+        assert isinstance(app.username_label, FakeLabel)
+        assert isinstance(app.username_entry, FakeEntry)
+        assert isinstance(app.password_frame, FakeFrame)
+        assert isinstance(app.password_label, FakeLabel)
+        assert isinstance(app.password_entry, FakeEntry)
+        assert isinstance(app.login_button, FakeButton)
+
+        # Root title and geometry should have been set by the constructor
+        assert root.titled == "Login Application"
+        assert root.geometry_value == "450x350"
+
+        # The <Return> binding should be present and callable
+        assert "<Return>" in root.bindings
+        assert callable(root.bindings["<Return>"])
