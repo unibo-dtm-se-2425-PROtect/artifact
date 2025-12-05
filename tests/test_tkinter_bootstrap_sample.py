@@ -87,6 +87,12 @@ class FakeStyle:
 # Fake root object creation 
 
 class FakeRoot:
+     """
+    Minimal fake for tk.Tk root:
+    - title(text) stores the title string in titled.
+    - geometry(geom) stores the geometry string in geometry_value.
+    - bind(sequence, callback) records event bindings in bindings dict.
+    """
     def __init__(self):
         self.titled = None
         self.geometry_value = None
