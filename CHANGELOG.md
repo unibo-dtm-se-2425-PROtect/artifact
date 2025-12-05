@@ -1,3 +1,28 @@
+## [1.7.5](https://github.com/unibo-dtm-se-2425-PROtect/artifact/compare/1.7.4...1.7.5) (2025-12-05)
+
+
+### Bug Fixes
+
+* docstring indentation correction  ([1f614ea](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/1f614eaba2716dfd55bbcae4d5c02c3970bee5a6))
+
+
+### Tests
+
+* added "bind" method to FakeRoot  ([2a1f4bf](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/2a1f4bf0ae56df1b7d9201788c543f5745af3de1))
+* added "geometry" method to FakeRoot  ([f7d77ab](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/f7d77ab1555fca6b5d0deb47471f334ceae93e71))
+* added "title" method to FakeRoot  ([1e57625](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/1e576255c26ce073ec9e0b8ff51eb4c3a042e5c9))
+* added FakeRoot class ([08e54c7](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/08e54c709fe9736dec936d8e65deb3706d1f026d))
+* added FakeStyle class ([37e751f](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/37e751f046d627a0f158898377835ac1c651e17b))
+* adding a patching helper to centralize the previous mock patch objects ([bb43b49](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/bb43b496456c0238a793ea66069b625d2e7b7e5d))
+* implement focus method in test widget class ([ab7351f](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/ab7351f8c3d92a505d48a9c8cf4d018387b11cc7))
+* introduce FakeButton for ttk.Button simulation ([5bae482](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/5bae4823b3b94d17f0537e52c3bedbaaf43b1fde))
+* update FakeButton class with "Invoke" functionality ([946443d](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/946443dcdf854c8176178696dc245035ee565bbd))
+
+
+### Style improvements
+
+* adding a docstring to summarize what FakeRoot is ([a408405](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/a408405d9229e355a4d49ca9f72217c0865a4096))
+
 ## [1.7.4](https://github.com/unibo-dtm-se-2425-PROtect/artifact/compare/1.7.3...1.7.4) (2025-12-04)
 
 
