@@ -82,3 +82,12 @@ class FakeStyle:
     def __init__(self, *args, **kwargs):
         # Accept either Style(theme='...') or Style('theme')
         self.theme = kwargs.get("theme", args[0] if args else None)
+
+
+# Fake root object creation 
+
+class FakeRoot:
+    def __init__(self):
+        self.titled = None
+        self.geometry_value = None
+        self.bindings = {}
