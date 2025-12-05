@@ -33,6 +33,7 @@ class FakeEntry(FakeWidget):
     - get() returns the current value.
     - set_value(v) is a test helper to simulate user typing.
     - delete(start, end) records calls and clears the stored value.
+    - focus() records that the widget received focus.
     """
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -51,3 +52,7 @@ class FakeEntry(FakeWidget):
         # Record the delete call and clear the stored value
         self.deleted_calls.append((start, end))
         self._value = ""
+
+    def focus(self):
+        # Record that focus() was called
+        self.focused = True    
