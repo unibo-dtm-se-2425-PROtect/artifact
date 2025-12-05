@@ -72,3 +72,13 @@ class FakeButton(FakeWidget):
     def invoke(self):
         if callable(self.command):
             return self.command()
+
+
+class FakeStyle:
+    """
+    Stand-in for ttkbootstrap.Style.
+    - Stores the theme argument so tests could assert it if needed.
+    """
+    def __init__(self, *args, **kwargs):
+        # Accept either Style(theme='...') or Style('theme')
+        self.theme = kwargs.get("theme", args[0] if args else None)
