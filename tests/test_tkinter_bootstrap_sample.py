@@ -62,8 +62,13 @@ class FakeButton(FakeWidget):
     """
     Stand-in for ttk.Button:
     - Captures the 'command' passed at construction so tests can invoke it.
+    - invoke() calls the stored command if callable.
     """
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         # The real ttk.Button accepts a command kwarg; store it for tests.
         self.command = kwargs.get("command")
+
+    def invoke(self):
+        if callable(self.command):
+            return self.command()
