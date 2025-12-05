@@ -4,6 +4,7 @@ import types
 
 import project.tkinter_bootstrap_sample as app_module #import module under test
 
+
 #fake widget implementations
 
 class FakeWidget:
@@ -84,7 +85,7 @@ class FakeStyle:
         self.theme = kwargs.get("theme", args[0] if args else None)
 
 
-# Fake root object creation 
+#fake root object creation 
 
 class FakeRoot:
      """
@@ -107,3 +108,23 @@ class FakeRoot:
     def bind(self, sequence, callback):
         # Store the callback so tests can assert the binding exists and is callable.
         self.bindings[sequence] = callback
+
+
+#patching helper
+
+def apply_widget_patches(module):
+    """
+    Create patch context managers that replace:
+    - module.Style with FakeStyle
+    - module.ttk with a simple namespace exposing FakeFrame, FakeLabel, FakeEntry, FakeButton
+    """
+    patches = [
+        mock.patch.object(module, "Style", new=FakeStyle),
+        mock.patch.object(module, "ttk", new=types.SimpleNamespace(
+            Frame=FakeFrame,
+            Label=FakeLabel,
+            Entry=FakeEntry,
+            Button=FakeButton
+        )),
+    ]
+    return patches #returns a list of patch context managers to be used with 'with'.
