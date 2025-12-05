@@ -221,3 +221,28 @@ def test_verify_login_failure_shows_error_and_deletes_password():
             start, end = app.password_entry.deleted_calls[0]
             assert start == 0
             assert end == tk.END
+
+def test_clear_fields_deletes_both_entries_and_focuses_username():
+    """
+    Verify clear_fields behavior:
+    - Both username and password entries are cleared
+    - username_entry.focus() is called so the username field receives focus
+    """
+    patches = apply_widget_patches(app_module)
+    with patches[0], patches[1]:
+        root = FakeRoot()
+        app = app_module.LoginApp(root)
+
+        # Populate entries with sample values
+        app.username_entry.set_value("someone")
+        app.password_entry.set_value("secret")
+
+        # Call clear_fields directly
+        app.clear_fields()
+
+        # Both entries should now be empty
+        assert app.username_entry.get() == ""
+        assert app.password_entry.get() == ""
+
+        # username_entry.focused should be True because clear_fields calls focus()
+        assert app.username_entry.focused is True
