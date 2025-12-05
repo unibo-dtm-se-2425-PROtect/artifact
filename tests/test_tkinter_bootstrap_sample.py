@@ -91,3 +91,6 @@ class FakeRoot:
         self.titled = None
         self.geometry_value = None
         self.bindings = {}
+
+    def title(self, text):
+        self.titled = text
