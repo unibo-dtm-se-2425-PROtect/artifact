@@ -97,3 +97,7 @@ class FakeRoot:
 
     def geometry(self, geom):
         self.geometry_value = geom
+
+    def bind(self, sequence, callback):
+        # Store the callback so tests can assert the binding exists and is callable.
+        self.bindings[sequence] = callback
