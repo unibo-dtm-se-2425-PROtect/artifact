@@ -191,3 +191,33 @@ def test_verify_login_success_calls_showinfo_and_clears_fields():
             mock_info.assert_called_once_with("Success", "Login successful!", icon='info')
             # clear_fields should have been called once
             mock_clear.assert_called_once()
+
+def test_verify_login_failure_shows_error_and_deletes_password():
+    """
+    Verify the failure branch of verify_login:
+    - When credentials are incorrect, messagebox.showerror is called
+    - Only the password entry is cleared (password_entry.delete called with 0, tk.END)
+    """
+    patches = apply_widget_patches(app_module)
+    with patches[0], patches[1]:
+        root = FakeRoot()
+        app = app_module.LoginApp(root)
+
+        # Simulate wrong credentials
+        app.username_entry.set_value("user")
+        app.password_entry.set_value("wrongpass")
+
+        # Patch messagebox.showerror to spy on it
+        with mock.patch.object(app_module.messagebox, "showerror") as mock_error:
+            app.verify_login()
+
+            # showerror should be called with the expected title and message
+            mock_error.assert_called_once_with("Error", "Invalid username or password")
+
+            # The password entry's delete method should have been called to clear it
+            assert app.password_entry.deleted_calls, "password_entry.delete was not called"
+
+            # Verify the delete call used start=0 and end=tk.END as in the implementation
+            start, end = app.password_entry.deleted_calls[0]
+            assert start == 0
+            assert end == tk.END
