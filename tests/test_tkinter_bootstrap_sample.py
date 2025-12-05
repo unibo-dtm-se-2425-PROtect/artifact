@@ -88,7 +88,7 @@ class FakeStyle:
 #fake root object creation 
 
 class FakeRoot:
-     """
+    """
     Minimal fake for tk.Tk root:
     - title(text) stores the title string in titled.
     - geometry(geom) stores the geometry string in geometry_value.
@@ -128,3 +128,8 @@ def apply_widget_patches(module):
         )),
     ]
     return patches #returns a list of patch context managers to be used with 'with'.
+
+
+# -------------------------
+# Tests
+# -------------------------
