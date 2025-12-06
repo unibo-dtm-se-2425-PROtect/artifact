@@ -52,3 +52,19 @@ def _inject_dbconfig_module(result):
     sys.modules["project.dbconfig"] = dbconfig_mod
     # Also attach as attribute to package module for normal import semantics
     setattr(project_mod, "dbconfig", dbconfig_mod)
+
+    def _cleanup():
+        # remove injected module and restore previous ones
+        if prev_dbconfig is not None:
+            sys.modules["project.dbconfig"] = prev_dbconfig
+            setattr(sys.modules["project"], "dbconfig", prev_dbconfig)
+        else:
+            sys.modules.pop("project.dbconfig", None)
+            if prev_project is None:
+                # remove package if we created it
+                sys.modules.pop("project", None)
+            else:
+                # restore package object
+                sys.modules["project"] = prev_project
+
+    return _cleanup
