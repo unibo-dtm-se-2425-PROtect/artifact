@@ -5,7 +5,7 @@ import base64 #used to encode and decode binary ciphertext to/from a printable A
 import hashlib #used to compute cryptographic hash digests (SHA-256) using the Python standard library
 import pytest 
 
-
+# --- Helpers to inject a fake project.dbconfig module -----------------------
 class _FakeCursor:
     def __init__(self, result):
         self._result = result
@@ -18,3 +18,14 @@ class _FakeCursor:
 
     def fetchone(self):
         return self._result
+
+class _FakeDB:
+    def __init__(self, result):
+        self._cursor = _FakeCursor(result)
+        self.closed = False
+
+    def cursor(self, dictionary=True):
+        return self._cursor
+
+    def close(self):
+        self.closed = True
