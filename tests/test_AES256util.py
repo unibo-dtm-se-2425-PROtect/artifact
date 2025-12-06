@@ -43,3 +43,12 @@ def _inject_dbconfig_module(result):
         sys.modules["project"] = project_mod
     else:
         project_mod = sys.modules["project"]
+
+    # Create dbconfig submodule
+    dbconfig_mod = types.ModuleType("project.dbconfig")
+    def dbconfig():
+        return _FakeDB(result)
+    dbconfig_mod.dbconfig = dbconfig
+    sys.modules["project.dbconfig"] = dbconfig_mod
+    # Also attach as attribute to package module for normal import semantics
+    setattr(project_mod, "dbconfig", dbconfig_mod)
