@@ -29,3 +29,17 @@ class _FakeDB:
 
     def close(self):
         self.closed = True
+
+
+def _inject_dbconfig_module(result):
+
+    # Save previous entries to restore later
+    prev_project = sys.modules.get("project")
+    prev_dbconfig = sys.modules.get("project.dbconfig")
+
+    # Ensure package module 'project' exists
+    if "project" not in sys.modules:
+        project_mod = types.ModuleType("project")
+        sys.modules["project"] = project_mod
+    else:
+        project_mod = sys.modules["project"]
