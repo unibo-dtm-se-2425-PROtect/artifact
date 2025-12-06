@@ -32,7 +32,11 @@ class _FakeDB:
 
 
 def _inject_dbconfig_module(result):
-
+    """
+    Create a temporary module named project.dbconfig in sys.modules that exposes
+    a dbconfig() function returning a fake DB object. Returns a cleanup function
+    that restores sys.modules to its previous state.
+    """
     # Save previous entries to restore later
     prev_project = sys.modules.get("project")
     prev_dbconfig = sys.modules.get("project.dbconfig")
