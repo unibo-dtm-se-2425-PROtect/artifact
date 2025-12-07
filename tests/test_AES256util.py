@@ -95,3 +95,12 @@ def test_encrypt_decrypt_with_hex_key_roundtrip():
     decrypted = aesutil.decrypt(hex_key, cipher_b64, decode=True, keyType="hex")
     assert isinstance(decrypted, (bytes, bytearray))
     assert decrypted.decode() == msg
+
+#verify encrypt and decrypt roundtrip with ascii key
+def test_encrypt_decrypt_with_ascii_key_roundtrip():
+    aesutil = _reload_aesutil()
+    msg = "Short message"
+    ascii_key = "testpassword"
+    cipher_b64 = aesutil.encrypt(ascii_key, msg, encode=True, keyType="ascii")
+    decrypted = aesutil.decrypt(ascii_key, cipher_b64, decode=True, keyType="ascii")
+    assert decrypted.decode() == msg
