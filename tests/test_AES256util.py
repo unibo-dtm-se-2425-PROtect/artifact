@@ -113,3 +113,16 @@ def test_padding_for_blocksize_multiple():
     cipher_b64 = aesutil.encrypt(key, msg, encode=True, keyType="ascii")
     decrypted = aesutil.decrypt(key, cipher_b64, decode=True, keyType="ascii")
     assert decrypted.decode() == msg
+
+#verify that tampering with ciphertext raises invalid padding or integrity error
+def test_tampered_cipher_raises_invalid_padding():
+    aesutil = _reload_aesutil()
+    msg = "Integrity test"
+    key = "testpassword"
+    cipher_b64 = aesutil.encrypt(key, msg, encode=True, keyType="ascii")
+    raw = base64.b64decode(cipher_b64)
+    tampered = bytearray(raw)
+    tampered[-1] = (tampered[-1] ^ 0xFF) & 0xFF
+    tampered_b64 = base64.b64encode(bytes(tampered)).decode()
+    with pytest.raises(ValueError):
+        aesutil.decrypt(key, tampered_b64, decode=True, keyType="ascii")
