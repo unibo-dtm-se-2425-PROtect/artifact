@@ -139,3 +139,19 @@ def test_encrypt_encode_false_returns_bytes_and_decode_false_misuse_shows_bug():
     assert isinstance(raw, (bytes, bytearray))
     with pytest.raises(AttributeError):
         aesutil.decrypt(key, raw, decode=False, keyType="ascii")
+
+#tests for verify_master_password 
+
+#check behavior when no config is found
+def test_verify_master_password_no_config(capsys):
+    # inject fake dbconfig that returns None for fetchone
+    cleanup = _inject_dbconfig_module(None)
+    try:
+        aesutil = _reload_aesutil()
+        result = aesutil.verify_master_password("alice", "whatever")
+        captured = capsys.readouterr()
+        assert result is False
+        assert "[!] No masterpassword configuration found" in captured.out
+    finally:
+        cleanup()
+        importlib.reload(sys.modules.get("aesutil"))
