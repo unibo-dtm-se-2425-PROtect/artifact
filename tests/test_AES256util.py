@@ -104,3 +104,12 @@ def test_encrypt_decrypt_with_ascii_key_roundtrip():
     cipher_b64 = aesutil.encrypt(ascii_key, msg, encode=True, keyType="ascii")
     decrypted = aesutil.decrypt(ascii_key, cipher_b64, decode=True, keyType="ascii")
     assert decrypted.decode() == msg
+
+#ensure padding is correctly handled for messages that are exact multiples of block size
+def test_padding_for_blocksize_multiple():
+    aesutil = _reload_aesutil()
+    msg = "A" * 16
+    key = "testpassword"
+    cipher_b64 = aesutil.encrypt(key, msg, encode=True, keyType="ascii")
+    decrypted = aesutil.decrypt(key, cipher_b64, decode=True, keyType="ascii")
+    assert decrypted.decode() == msg
