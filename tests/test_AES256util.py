@@ -82,3 +82,16 @@ def _reload_aesutil():
     if "aesutil" in sys.modules:
         return importlib.reload(sys.modules["aesutil"])
     return importlib.import_module("aesutil")
+
+# --- Tests for encryption / decryption -------------------------------------
+
+#verify encrypt and decrypt roundtrip with hex key
+def test_encrypt_decrypt_with_hex_key_roundtrip():
+    aesutil = _reload_aesutil()
+    msg = "Hello AES-256 CBC"
+    hex_key = "9f735e0df9a1ddc702bf0a1a7b83033f9f7153a00c29de82cedadc9957289b05"
+    cipher_b64 = aesutil.encrypt(hex_key, msg, encode=True, keyType="hex")
+    assert isinstance(cipher_b64, str)
+    decrypted = aesutil.decrypt(hex_key, cipher_b64, decode=True, keyType="hex")
+    assert isinstance(decrypted, (bytes, bytearray))
+    assert decrypted.decode() == msg
