@@ -72,3 +72,13 @@ def _inject_dbconfig_module(result):
                 sys.modules["project"] = prev_project
 
     return _cleanup
+
+# --- Import target module helper -------------------------------------------
+def _reload_aesutil():
+    """
+    Import or reload the aesutil module from the test working directory.
+    Assumes the module file is named aesutil.py and is importable.
+    """
+    if "aesutil" in sys.modules:
+        return importlib.reload(sys.modules["aesutil"])
+    return importlib.import_module("aesutil")
