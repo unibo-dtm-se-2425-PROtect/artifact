@@ -170,3 +170,17 @@ def test_verify_master_password_wrong_password(capsys):
     finally:
         cleanup()
         importlib.reload(sys.modules.get("aesutil"))
+
+#verify successful password check
+def test_verify_master_password_success():
+    mp = "my_master_password"
+    stored_hash = hashlib.sha256(mp.encode()).hexdigest()
+    device_secret = "device-secret-xyz"
+    cleanup = _inject_dbconfig_module((stored_hash, device_secret))
+    try:
+        aesutil = _reload_aesutil()
+        result = aesutil.verify_master_password("alice", mp)
+        assert result == (mp, device_secret)
+    finally:
+        cleanup()
+        importlib.reload(sys.modules.get("aesutil"))
