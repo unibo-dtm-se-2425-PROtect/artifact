@@ -49,7 +49,7 @@ def test_deterministicOutput_and_uniqueness(mp, ds):
 ])
 def test_computeMasterKey_type_errors(mp, ds):
     with pytest.raises((TypeError, AttributeError)):
-        fast_computeMasterKey(mp, ds)
+        test_computeMasterKey(mp, ds)
 
 #testing edge cases with empty strings, long strings, and unicode, ensuring the 
 #output is still valid and consistent
