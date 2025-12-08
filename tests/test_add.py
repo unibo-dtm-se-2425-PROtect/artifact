@@ -59,7 +59,7 @@ def test_computeMasterKey_type_errors(mp, ds):
     ("パスワード", "秘密"),          # unicode inputs
 ])
 def test_fast_computeMasterKey_edge_cases(mp, ds):
-    key = fast_computeMasterKey(mp, ds)
+    key = test_computeMasterKey(mp, ds)
     assert isinstance(key, bytes)
     assert len(key) == 32
 
