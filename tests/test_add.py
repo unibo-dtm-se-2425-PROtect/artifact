@@ -23,7 +23,7 @@ def test_computeMasterKey(mp: str,ds: str) -> bytes:
 def test_computeMasterKey_return_type_and_length():
     mp = "masterPassword"
     ds = "deviceSecret"
-    k = fast_computeMasterKey(mp, ds)
+    k = test_computeMasterKey(mp, ds)
     assert isinstance(k, (bytes,bytearray))
     assert len(k) == 32
 
