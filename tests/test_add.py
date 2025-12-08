@@ -66,7 +66,7 @@ def test_test_computeMasterKey_edge_cases(mp, ds):
 def test_compute_master_key_invalid_types():
     # Expect a TypeError when non-str types are passed
     with pytest.raises(TypeError):
-        fast_computeMasterKey(None, None)
+        test_computeMasterKey(None, None)
 
 
 #checkEntry unit tests
