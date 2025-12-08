@@ -33,8 +33,7 @@ def test_computeMasterKey_return_type_and_length():
     ("anotherPass", "anotherSecret"),
 ])
 def test_deterministicOutput_and_uniqueness(mp, ds):
-    # Use a fast computeMasterKey to avoid expensive PBKDF2
-    with patch.object(add, "computeMasterKey", side_effect=fast_computeMasterKey):
+    with patch.object(add, "computeMasterKey", side_effect=test_computeMasterKey):
         key1 = add.computeMasterKey(mp, ds)
         key2 = add.computeMasterKey(mp, ds)
         assert key1 == key2
