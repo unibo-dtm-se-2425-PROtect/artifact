@@ -1,9 +1,8 @@
+import hashlib
 import pytest
 from unittest.mock import patch, MagicMock
 import project.add as add
 
-from Crypto.Protocol.KDF import PBKDF2
-from Crypto.Hash import SHA512 
 
 #A faster version of computeMasterKey for testing to avoid long PBKDF2 computation
 #The iteration count is set to 100 instead of 1000000 so not to slow down the tests and performance overall
