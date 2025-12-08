@@ -1,3 +1,50 @@
+## [1.7.6](https://github.com/unibo-dtm-se-2425-PROtect/artifact/compare/1.7.5...1.7.6) (2025-12-08)
+
+
+### Bug Fixes
+
+* changing test_fast_computeMasterKey_edge_cases name into test_test_computeMasterKey_edge_cases for consistency ([398cb4e](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/398cb4e0cc9f4b2a1e20c7eb47460c26cebe9958))
+* modifying referenced function in test_compute_master_key_invalid_types ([72ac1e3](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/72ac1e361bfbe515f5097587ba2f55e0990eeb35))
+* modifying referenced function in test_computeMasterKey_return_type_and_lengt ([e2ecbd4](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/e2ecbd4bf874290ab6ad06f1cf2e310747653b22))
+* modifying referenced function in test_computeMasterKey_type_errors ([12eb102](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/12eb10296c70f28e1467c16aef62adeded9dd881))
+* modifying referenced function in test_deterministicOutput_and_uniqueness ([349c0db](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/349c0db7164922bd178c7a082670c04565dffd28))
+* modifying referenced function in test_fast_computeMasterKey_edge_casestype_and_lengt ([e256d42](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/e256d426648edd8a026e2e914982d9dc0c4a9efc))
+
+
+### Tests
+
+* add _inject_dbconfig_module function ([e2201a8](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/e2201a8831d70ac8137feab501fbdc5aa468a569))
+* add imports needed for test_AES256util.py ([a6e2022](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/a6e2022525f4802b6604b11610429c1ddc4dda8f))
+* add test for checking verify_master_password behavior when a stored hash exists but the provided master password is incorrect. ([8a1d16b](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/8a1d16bd9070bd9270bbd2131b064e96bcbbe197))
+* add test for checking verify_master_password behavior when no configuration is found ([92bfc42](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/92bfc425457919f1a17c24dabb900818a3405af4))
+* add test for checking verify_master_password behavior when the provided master password matches the stored hash ([4c8c21d](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/4c8c21db6d303bcae9f2653495735b6279292aa8))
+* Add test for computeMasterKey function ([9776cbd](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/9776cbd9e3e2cde92e713f9683c5f70323fc41aa))
+* add test for confirming that tampering with ciphertext raises padding/integrity error ([2dc43d9](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/2dc43d9ef5100e0dc6f222c76a56530e3bacdde6))
+* add test for documenting and asserting current behavior when encrypt is called with encode=False and decrypt is misused with decode=False ([a590778](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/a59077889b3cf948f919607fa45838df850ca394))
+* add test for encryption and decryption roundtrip verification with ascii key ([61aa0e8](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/61aa0e8e4f6aaeaca2306bc119736646a2a12339))
+* add test for encryption/decryption roundtrip with hexadecimal key ([331cbb9](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/331cbb924e07f6655384d9a708d628ec793cc103))
+* add test to ensure padding is correctly handled for messages that are exact multiples of block size ([23980da](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/23980dacee306b08f585d8680d2610e6720fd9ff))
+* changing the cryptography module from Crypto to hashlib ([62f32e1](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/62f32e19e84810c3e87672c701e87950c569b6e1))
+* create a dbconfig submodule  ([ee278c1](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/ee278c1647a0bd24c79d95798c8f432ddc6e95d3))
+* create the cleanup function ([3ba9e4f](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/3ba9e4f0e0ee93fdd4e8522f22ea1fa7b969c67c))
+* implement _reload_aesutil ([3308b34](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/3308b34701d11e08d443812fc80b53db35c22c16))
+* implement test ensuring clear_fields behaviour is correct ([877f84b](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/877f84bcf74853e4dfa5605da800cb491b9cc68c))
+* implement test for LoginApp functioning ([cb0767c](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/cb0767cbfc2e816258abe25cfe96e547147684ab))
+* implement test for verifying success branch of verify_login ([a2d254e](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/a2d254e818973a71ce01aaaf804a67fc0dba6384))
+* implement test for verifying the failure branch of verify_login ([d1de819](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/d1de8199e1787e07ea952dff94e826a2afe9f457))
+* implementing FakeCursor class in test_AES256util.py ([fb84748](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/fb84748095ca935ce0983627f2906c0a87e1aff9))
+* implementing FakeDB class in test_AES256util.py ([8674e22](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/8674e2252c522ca7f9899f1e1f788e7ef3e96d5a))
+
+
+### General maintenance
+
+* create test_AES256util.py ([b834da9](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/b834da901447e066debb01baa236ba45880aa5cf))
+
+
+### Style improvements
+
+* adding a docstring to summarize what _inject_dbconfig_module does ([0758873](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/0758873c12d02bf0dbcf876a5a774a06b0d44421))
+
 ## [1.7.5](https://github.com/unibo-dtm-se-2425-PROtect/artifact/compare/1.7.4...1.7.5) (2025-12-05)
 
 
