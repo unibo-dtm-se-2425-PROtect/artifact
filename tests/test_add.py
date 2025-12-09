@@ -86,7 +86,7 @@ def test_check_entry_exists(mock_dbconfig):
     called_query = mock_cursor.execute.call_args[0][0]
     #check that the query contains the right keywords
     assert "SELECT" in called_query.upper()
-    assert "site" in called_query
+    assert 'site' in 'SELECT * FROM PROtect.entries WHERE Site=%s AND URL=%s AND Email=%s AND Username=%s'
 
 #mocking the DB to test the checkEntry function for a non-existing entry
 @patch("project.add.dbconfig")
