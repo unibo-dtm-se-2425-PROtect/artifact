@@ -17,21 +17,21 @@ from project.export import export_entries
 from project.importf import import_entries
 
 
-parser = argparse.ArgumentParser(description='Password Manager CLI')
+def get_args():
+    parser = argparse.ArgumentParser(description='Password Manager CLI')
 
-parser.add_argument('option', help='(a)dd / (e)xtract / (con)figure / (del)ete configuration / (recon)figure / (imp)ort / (exp)ort / (mod)ify / (rem)ove an entry by ID') #these are the type of operation that the user is able to perform
-parser.add_argument("-s", "--name", help="Site Name")
-parser.add_argument("-u", "--url", help="Site URL")
-parser.add_argument("-e", "--email", help="Email")
-parser.add_argument("-l", "--login", help="Username")
-parser.add_argument("-p", "--password", help="Password")
-parser.add_argument("--length", help="Length of the password to generate",type=int)
-parser.add_argument("-c", "--copy", action='store_true', help='Copy password to clipboard')
-parser.add_argument("--all", action="store_true", help="Retrieve all stored entries (not the default, it must be specified for conscious choice)" )
-parser.add_argument("--id", help="ID of the entry to modify/delete (for 'modify' and 'delete' options)")
-parser.add_argument("-f", "--file", help="path to file to 'import' or 'export' operations")
-args = parser.parse_args()
-
+    parser.add_argument('option', ...)
+    parser.add_argument("-s", "--name", ...)
+    parser.add_argument("-u", "--url", ...)
+    parser.add_argument("-e", "--email", ...)
+    parser.add_argument("-l", "--login", ...)
+    parser.add_argument("-p", "--password", ...)
+    parser.add_argument("--length", ...)
+    parser.add_argument("-c", "--copy", ...)
+    parser.add_argument("--all", ...)
+    parser.add_argument("--id", ...)
+    parser.add_argument("-f", "--file", ...)
+    return parser.parse_args()
 
 def inputAndValidateMasterPassword():
 	mp = getpass("MASTER PASSWORD: ")
