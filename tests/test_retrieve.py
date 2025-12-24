@@ -46,8 +46,22 @@ def test_query_with_search_builds_where_clause(fake_db, fake_cursor):
 def test_multiple_results_shows_table_and_hides_password(fake_db, fake_cursor):
     # arrange multiple rows
     fake_cursor.fetchall.return_value = [
-        ('site1','http://s1','e1','u1', b'encrypted1'),
-        ('site2','http://s2','e2','u2', b'encrypted2'),
+        {
+            "ID": 1, 
+            "Site": "site1", 
+            "URL": "http://s1", 
+            "Email": "e1", 
+            "Username": "u1", 
+            "Password": b"encrypted1"
+        },
+        {
+            "ID": 2, 
+            "Site": "site2", 
+            "URL": "http://s2", 
+            "Email": "e2", 
+            "Username": "u2", 
+            "Password": b"encrypted2"
+        },
     ] #this time we simulate multiple results instead of an empty set
 
     #a fake Console instance to capture the printed table
