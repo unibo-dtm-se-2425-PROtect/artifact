@@ -155,7 +155,7 @@ def test_verify_master_password_no_config(capsys):
         assert "[!] No masterpassword configuration found" in captured.out
     finally:
         cleanup()
-        importlib.reload(sys.modules.get("aesutil"))
+        importlib.reload(sys.modules["project.AES256util"])
 
 #check behavior when wrong password is provided
 def test_verify_master_password_wrong_password(capsys):
@@ -170,7 +170,7 @@ def test_verify_master_password_wrong_password(capsys):
         assert "[!] Wrong Master Password!" in captured.out
     finally:
         cleanup()
-        importlib.reload(sys.modules.get("aesutil"))
+        importlib.reload(sys.modules["project.AES256util"])
 
 #verify successful password check
 def test_verify_master_password_success():
@@ -184,4 +184,4 @@ def test_verify_master_password_success():
         assert result == (mp, device_secret)
     finally:
         cleanup()
-        importlib.reload(sys.modules.get("aesutil"))
+        importlib.reload(sys.modules["project.AES256util"])
