@@ -3,6 +3,11 @@ import pytest
 from unittest.mock import patch, MagicMock
 import project.add as add
 
+@pytest.mark.parametrize("mp, ds", [
+    ("masterPassword", "deviceSecret"),
+    ("anotherPass", "anotherSecret"),
+])
+
 #define function to be used in the following test functions
 #check the MasterKey is correctly computed, using hashlib.sha256 module 
 def test_computeMasterKey(mp: str,ds: str) -> bytes:
@@ -28,10 +33,7 @@ def test_computeMasterKey_return_type_and_length():
     assert len(k) == 32
 
 #verifying that the output is deterministic and unique for different inputs
-@pytest.mark.parametrize("mp, ds", [
-    ("masterPassword", "deviceSecret"),
-    ("anotherPass", "anotherSecret"),
-])
+
 def test_deterministicOutput_and_uniqueness(mp, ds):
     with patch.object(add, "computeMasterKey", side_effect=test_computeMasterKey):
         key1 = add.computeMasterKey(mp, ds)
