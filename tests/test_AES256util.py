@@ -77,12 +77,13 @@ def _inject_dbconfig_module(result):
 # --- Import target module helper -------------------------------------------
 def _reload_aesutil():
     """
-    Import or reload the aesutil module from the test working directory.
-    Assumes the module file is named aesutil.py and is importable.
+    Import or reload the AES256util module from the test working directory.
+    Assumes the module file is named AES256util.py and is importable.
     """
-    if "aesutil" in sys.modules:
-        return importlib.reload(sys.modules["aesutil"])
-    return importlib.import_module("aesutil")
+    if "project.AES256util" in sys.modules:
+        return importlib.reload(sys.modules["project.AES256util"])
+    return importlib.import_module("project.AES256util")
+
 
 # --- Tests for encryption / decryption -------------------------------------
 
