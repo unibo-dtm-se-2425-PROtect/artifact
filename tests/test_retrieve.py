@@ -64,8 +64,14 @@ def test_multiple_results_shows_table_and_hides_password(fake_db, fake_cursor):
 
 def test_multiple_results_decrypt_true_warns_and_does_not_decrypt(fake_db, fake_cursor):
     fake_cursor.fetchall.return_value = [
-        ('s','u','e','n', b'e1'),
-        ('s2','u2','e2','n2', b'e2'),
+        {
+            "ID": 1, "Site": "s", "URL": "u", 
+            "Email": "e", "Username": "n", "Password": b"e1"
+        },
+        {
+            "ID": 2, "Site": "s2", "URL": "u2", 
+            "Email": "e2", "Username": "n2", "Password": b"e2"
+        },
     ]
     #these patches mock dbconfig, printc, AES256util.decrypt and pyperclip.copy
     # we want to ensure that decrypt and copy are NOT called in this scenario
