@@ -65,6 +65,7 @@ def inputAndValidateMasterPassword():
 
 
 def main():
+	args = get_args()
 	if args.option in ["add","a"]:
 		missing=[]
 		if args.name == None:
