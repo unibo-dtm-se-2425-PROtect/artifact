@@ -29,21 +29,24 @@ class FakeDB:
 
 # Utility to reload cli with patches applied via context managers
 def reload_cli_with_patches(patches):
+    module_name = 'pm'
     """
     patches: list of (target, value) pairs to be used with patch(target, value=value)
     Returns the imported cli module after applying patches and reloading.
     """
     # Ensure fresh import
-    if 'cli' in sys.modules: 
-        del sys.modules['cli']
+    if module_name in sys.modules: 
+        del sys.modules[module_name]
 
     # Enter all patches as context managers
     managers = [patch(target, new=value) for target, value in patches]
     contexts = [m.__enter__() for m in managers]
+    
+    # Use importlib to import by the string name
     try:
-        import cli
-        importlib.reload(cli)
-        return cli
+        module = importlib.import_module(module_name)
+        importlib.reload(module)
+        return module
     finally:
         # Exit in reverse order
         for m in reversed(managers):
