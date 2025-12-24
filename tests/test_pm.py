@@ -2,7 +2,7 @@ import sys
 import importlib
 import hashlib
 from unittest.mock import patch, MagicMock
-import project.pm as pm
+import project.pm as cli
 import pytest
 
 # --- Fake DB and cursor helpers ---
@@ -29,7 +29,7 @@ class FakeDB:
 
 # Utility to reload cli with patches applied via context managers
 def reload_cli_with_patches(patches):
-    module_name = 'pm'
+    module_name = 'project.pm'
     """
     patches: list of (target, value) pairs to be used with patch(target, value=value)
     Returns the imported cli module after applying patches and reloading.
