@@ -35,6 +35,9 @@ def req_fields(Site, Username, Password):
     return True
 
 def addEntry(mp, ds, Site, URL, Email, Username, Password): 
+    if not Password:
+        raise ValueError("Password cannot be empty")
+
     if not req_fields(Site, Username, Password):
         return #stop if required fields are missing 
     
