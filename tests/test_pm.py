@@ -2,7 +2,7 @@ import sys
 import importlib
 import hashlib
 from unittest.mock import patch, MagicMock
-
+from project.pm import pm
 import pytest
 
 # --- Fake DB and cursor helpers ---
