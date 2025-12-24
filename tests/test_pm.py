@@ -34,8 +34,8 @@ def reload_cli_with_patches(patches):
     Returns the imported cli module after applying patches and reloading.
     """
     # Ensure fresh import
-    if 'project.cli' in sys.modules: 
-        del sys.modules['project.cli']
+    if 'cli' in sys.modules: 
+        del sys.modules['cli']
 
     # Enter all patches as context managers
     managers = [patch(target, new=value) for target, value in patches]
@@ -122,7 +122,7 @@ def test_add_missing_fields(capsys):
     cli = reload_cli_with_patches(patches)
     captured = capsys.readouterr()
     # addEntry should not have been called
-    assert not sys.modules['project.cli'].add.addEntry.called if hasattr(sys.modules['project.cli'], 'add') else True
+    assert not sys.modules['cli'].add.addEntry.called if hasattr(sys.modules['cli'], 'add') else True
     assert "Site Name" in captured.out or "Username" in captured.out or "Password" in captured.out
 
 def test_add_all_fields_calls_addEntry():
