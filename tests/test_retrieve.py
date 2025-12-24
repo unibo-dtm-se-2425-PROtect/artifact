@@ -104,7 +104,14 @@ def test_multiple_results_decrypt_true_warns_and_does_not_decrypt(fake_db, fake_
 
 def test_single_result_decrypts_and_copies(fake_db, fake_cursor):
     fake_cursor.fetchall.return_value = [
-        ('site','url','email','user', b'ENCRYPTEDBLOB')
+        {
+            "ID": 1, 
+            "Site": "site", 
+            "URL": "url", 
+            "Email": "email", 
+            "Username": "user", 
+            "Password": b"ENCRYPTEDBLOB"
+        }
     ]
 
     #these patches mock dbconfig, computeMasterKey, AES256util.decrypt, pyperclip.copy and printc
