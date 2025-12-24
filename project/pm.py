@@ -150,4 +150,5 @@ def main():
 	elif args.option in ["reconfigure", "recon"]:
 		reconfig()
 
-main()
+if __name__ == "__main__":
+    main()
