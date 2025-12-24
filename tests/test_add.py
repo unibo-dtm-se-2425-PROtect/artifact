@@ -33,6 +33,10 @@ def test_computeMasterKey_return_type_and_length():
     assert len(k) == 32
 
 #verifying that the output is deterministic and unique for different inputs
+@pytest.mark.parametrize("mp, ds", [
+    ("masterPassword", "deviceSecret"),
+    ("anotherPass", "anotherSecret"),
+])
 
 def test_deterministicOutput_and_uniqueness(mp, ds):
     with patch.object(add, "computeMasterKey", side_effect=test_computeMasterKey):
