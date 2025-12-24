@@ -137,7 +137,7 @@ def test_result_with_missing_columns_raises(fake_db, fake_cursor):
 
     with patch('project.retrieve.dbconfig', return_value=fake_db):
         with pytest.raises(IndexError): #the function, once invoked, should raise an IndexError when trying to access the missing password column
-            retrieve.retrieveEntries(b'mp', b'ds', search=None, decryptPassword=True)
+            retrieve.retrieveEntries('mp', 'ds', search=None, decryptPassword=True)
 
     fake_db.close.assert_called_once()
 
