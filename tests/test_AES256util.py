@@ -4,6 +4,7 @@ import types #used to create new module objects at runtime
 import base64 #used to encode and decode binary ciphertext to/from a printable ASCII form 
 import hashlib #used to compute cryptographic hash digests (SHA-256) using the Python standard library
 import pytest 
+from project.AES256util.py import AES256util.py
 
 # --- Helpers to inject a fake project.dbconfig module -----------------------
 class _FakeCursor:
