@@ -142,7 +142,7 @@ def test_check_entry_with_special_chars(mock_dbconfig):
 @patch("project.add.checkEntry", return_value=True)
 def test_add_entry_when_exists(mock_checkentry, mock_printc):
     with patch("project.add.getpass") as mock_getpass:
-        add.addEntry("mp", "ds", "site", "url", "email", "user")
+        add.addEntry("mp", "ds", "site", "url", "email", "user", "password")
     
     mock_getpass.assert_not_called()
     mock_printc.assert_called_once()
@@ -161,7 +161,7 @@ def test_add_entry_happy_path(mock_checkentry, mock_dbconfig, mock_aes, mock_get
     mock_dbconfig.return_value = mock_db
 
     with patch.object(add, "computeMasterKey", return_value=b"\x00"*32): #simulate master key computation
-        add.addEntry("mp", "ds", "site", "url", "email", "user") #simulate adding entry
+        add.addEntry("mp", "ds", "site", "url", "email", "user", "password") #simulate adding entry
 
     mock_aes.encrypt.assert_called_once() #verify encryption succeeded
     mock_cursor.execute.assert_called_once() #verify DB insert was attempted
@@ -189,7 +189,7 @@ def test_add_entry_commit_failure(mock_checkentry, mock_dbconfig, mock_aes, mock
 @patch("project.add.getpass", return_value="")
 def test_add_entry_empty_password(mock_getpass):
     with pytest.raises(ValueError): #verify that ValueError is raised for empty password
-        add.addEntry("mp", "ds", "site", "url", "email", "user")
+        add.addEntry("mp", "ds", "site", "url", "email", "user", "password")
 #simulate encryption failure during addEntry
 @patch("project.add.getpass")
 @patch("project.add.AES256util")
@@ -220,7 +220,7 @@ def test_add_entry_encrypt_returns_none(mock_checkentry, mock_dbconfig, mock_aes
 
     with patch.object(add, "computeMasterKey", return_value=b"\x00" * 32):
         with pytest.raises(ValueError): #verify that ValueError is raised for None encrypted password
-            add.addEntry("mp", "ds", "site", "url", "email", "user")
+            add.addEntry("mp", "ds", "site", "url", "email", "user", "password")
 
 #simulate invalid key type during encryption
 @patch("project.add.getpass")
