@@ -106,8 +106,10 @@ def test_encrypt_decrypt_with_hex_key_roundtrip():
     aesutil = _reload_aesutil()
     msg = "Hello AES-256 CBC"
     hex_key = "9f735e0df9a1ddc702bf0a1a7b83033f9f7153a00c29de82cedadc9957289b05"
+    
     cipher_b64 = aesutil.encrypt(hex_key, msg, encode=True, keyType="hex")
     assert isinstance(cipher_b64, str)
+    
     decrypted = aesutil.decrypt(hex_key, cipher_b64, decode=True, keyType="hex")
     assert isinstance(decrypted, (bytes, bytearray))
     assert decrypted.decode() == msg
@@ -117,6 +119,7 @@ def test_encrypt_decrypt_with_ascii_key_roundtrip():
     aesutil = _reload_aesutil()
     msg = "Short message"
     ascii_key = "testpassword"
+    
     cipher_b64 = aesutil.encrypt(ascii_key, msg, encode=True, keyType="ascii")
     decrypted = aesutil.decrypt(ascii_key, cipher_b64, decode=True, keyType="ascii")
     assert decrypted.decode() == msg
@@ -200,3 +203,24 @@ def test_verify_master_password_success():
     finally:
         cleanup()
         importlib.reload(sys.modules["project.AES256util"])
+
+def test_cli_main_encrypt_decrypt(capsys):
+    aes = _reload_target_module()
+    msg = "CLI_Test_Message"
+    key = "testpassword"
+    
+    # 1. Test Encrypt
+    args_enc = ["AES256util.py", "encrypt", msg, key, "ascii"]
+    with patch.object(sys, "argv", args_enc):
+        aes.main()
+        captured = capsys.readouterr()
+        cipher_text = captured.out.strip()
+        assert len(cipher_text) > 0
+        assert cipher_text != msg
+    
+    # 2. Test Decrypt
+    args_dec = ["AES256util.py", "decrypt", cipher_text, key, "ascii"]
+    with patch.object(sys, "argv", args_dec):
+        aes.main()
+        captured = capsys.readouterr()
+        assert f"{msg}" in captured.out
