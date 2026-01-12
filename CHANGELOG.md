@@ -1,3 +1,22 @@
+## [1.7.12](https://github.com/unibo-dtm-se-2425-PROtect/artifact/compare/1.7.11...1.7.12) (2026-01-12)
+
+
+### Bug Fixes
+
+* correcting arguments quantity in delete_entry ([dc6fbe0](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/dc6fbe0c92d12a483eab4fc6666b335ed01d9722))
+
+
+### Tests
+
+* correcting the importing of the verify_master_password method ([904774a](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/904774a9e546405dc863bafa0d6ebff1e9fdc775))
+* correcting wording in standard output to match the code's one ([2cb1d04](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/2cb1d046fd34901b998046d5094e0f470657b45a))
+* fix the return value for test_delete_entry_cli_master_password_ok_calls_delete ([ac304b2](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/ac304b277025274b086d7770b994f7c2d6501726))
+
+
+### Style improvements
+
+* correcting wording in standard output ([6f33de7](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/6f33de7fddd1072648fdb314f9d418f3a25129b9))
+
 ## [1.7.11](https://github.com/unibo-dtm-se-2425-PROtect/artifact/compare/1.7.10...1.7.11) (2026-01-12)
 
 
