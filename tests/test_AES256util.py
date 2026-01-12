@@ -146,18 +146,20 @@ def test_tampered_cipher_raises_invalid_padding():
     with pytest.raises(ValueError):
         aesutil.decrypt(key, tampered_b64, decode=True, keyType="ascii")
 
-def test_encrypt_encode_false_returns_bytes_and_decode_false_misuse_shows_bug():
-    """ 
-    Document and assert current behavior when encrypt is called with encode=False 
-    and decrypt is misused with decode=False.
+def test_raw_bytes_handling():
     """
-    aesutil = _reload_aesutil()
-    msg = "raw bytes test"
+    Tests that the fixed decrypt() function now handles raw bytes 
+    correctly without crashing.
+    """
+    aes = _reload_target_module()
+    msg = "raw bytes check"
     key = "testpassword"
-    raw = aesutil.encrypt(key, msg, encode=False, keyType="ascii")
-    assert isinstance(raw, (bytes, bytearray))
-    with pytest.raises(AttributeError):
-        aesutil.decrypt(key, raw, decode=False, keyType="ascii")
+    
+    raw_cipher = aes.encrypt(key, msg, encode=False, keyType="ascii")
+    assert isinstance(raw_cipher, bytes)
+    
+    decrypted = aes.decrypt(key, raw_cipher, decode=False, keyType="ascii")
+    assert decrypted.decode() == msg
 
 #tests for verify_master_password 
 
