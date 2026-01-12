@@ -1,3 +1,24 @@
+## [1.7.11](https://github.com/unibo-dtm-se-2425-PROtect/artifact/compare/1.7.10...1.7.11) (2026-01-12)
+
+
+### Bug Fixes
+
+* adding missing parentheses when invoking a function ([764b09c](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/764b09c5b4d82bb80525e07f0d0f32b2fcf1d45e))
+
+
+### Tests
+
+* adding ! punctuation mark to make the assertion work in test_config_already_configured ([2a9f349](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/2a9f34953850f55e78be4a582de82c701f89bb51))
+* adding missing argument in test_add_entry_encrypt_returns_none ([30e2991](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/30e29913a545ab7b0caa6c4ea651774353ffb856))
+* correcting "schema blindness" in test_config_flow ([8d37b29](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/8d37b29a2bbfd872a850a7b1be4d6d16d40472fd))
+* enhancing test_add_entry_encrypt_returns_none so it does not crash ([adc97c8](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/adc97c88269839bf981664a3202cb1e5c77e4e55))
+* removing pytest.raises valueError from test_add_entry_encrypt_returns_none ([dce48e4](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/dce48e45820077427d403397655ee570fd7a35e9))
+
+
+### Style improvements
+
+* change the wording in a standard output message. ([44d280b](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/44d280bd0040cfacbdaa84c908f116c14728234c))
+
 ## [1.7.10](https://github.com/unibo-dtm-se-2425-PROtect/artifact/compare/1.7.9...1.7.10) (2026-01-12)
 
 
