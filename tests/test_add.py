@@ -157,7 +157,7 @@ def test_add_entry_when_exists(mock_checkentry, mock_printc):
 @patch("project.add.checkEntry", return_value=False) #simulate entry does not exist
 def test_add_entry_happy_path(mock_checkentry, mock_dbconfig, mock_aes, mock_getpass):
     mock_getpass.return_value = "plainpassword" #simulate user input password
-    mock_aes.return_value.encrypt.return_value = "encrypted_blob" #simulate successful encryption
+    mock_aes.encrypt.return_value = "encrypted_blob" #simulate successful encryption
 
     mock_db = MagicMock() #simulate DB connection
     mock_cursor = mock_db.cursor.return_value
@@ -166,7 +166,7 @@ def test_add_entry_happy_path(mock_checkentry, mock_dbconfig, mock_aes, mock_get
     with patch.object(add, "computeMasterKey", return_value=b"\x00"*32): #simulate master key computation
         add.addEntry("mp", "ds", "site", "url", "email", "user", "password") #simulate adding entry
 
-    mock_aes.return_value.encrypt.assert_called_once() #verify encryption succeeded
+    mock_aes.encrypt.assert_called_once() #verify encryption succeeded
     mock_cursor.execute.assert_called_once() #verify DB insert was attempted
     mock_db.commit.assert_called_once() #verify DB commit was called
 
