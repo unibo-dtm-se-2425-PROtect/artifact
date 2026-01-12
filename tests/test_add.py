@@ -31,7 +31,7 @@ def test_computeMasterKey_correctness(mp,ds):
 def test_computeMasterKey_return_type_and_length():
     mp = "masterPassword"
     ds = "deviceSecret"
-    k = test_computeMasterKey(mp, ds)
+    k = add.computeMasterKey(mp, ds)
     assert isinstance(k, (bytes,bytearray))
     assert len(k) == 32
 
@@ -42,7 +42,7 @@ def test_computeMasterKey_return_type_and_length():
 ])
 
 def test_deterministicOutput_and_uniqueness(mp, ds):
-    with patch.object(add, "computeMasterKey", side_effect=test_computeMasterKey):
+    with patch.object(add, "computeMasterKey", side_effect=add.computeMasterKey):
         key1 = add.computeMasterKey(mp, ds)
         key2 = add.computeMasterKey(mp, ds)
         assert key1 == key2
@@ -58,7 +58,7 @@ def test_deterministicOutput_and_uniqueness(mp, ds):
 ])
 def test_computeMasterKey_type_errors(mp, ds):
     with pytest.raises((TypeError, AttributeError)):
-        test_computeMasterKey(mp, ds)
+        add.computeMasterKey(mp, ds)
 
 #testing edge cases with empty strings, long strings, and unicode, ensuring the 
 #output is still valid and consistent
@@ -68,14 +68,14 @@ def test_computeMasterKey_type_errors(mp, ds):
     ("パスワード", "秘密"),          # unicode inputs
 ])
 def test_test_computeMasterKey_edge_cases(mp, ds):
-    key = test_computeMasterKey(mp, ds)
+    key = add.computeMasterKey(mp, ds)
     assert isinstance(key, bytes)
     assert len(key) == 32
 
 def test_compute_master_key_invalid_types():
     # Expect a TypeError when non-str types are passed
     with pytest.raises(TypeError):
-        test_computeMasterKey(None, None)
+        add.computeMasterKey(None, None)
 
 
 #checkEntry unit tests
