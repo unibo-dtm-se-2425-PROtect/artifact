@@ -55,10 +55,6 @@ def addEntry(mp, ds, Site, URL, Email, Username, Password):
         #if AES256util returns None or empty, we must stop
         if not enc_pass:
             raise ValueError("Encryption failed: Returned empty result")
-        
-        #using imported aesutil function to encrypt the mk 
-        #this should return the encrypted password in base 64 encoded format
-        enc_bytes = AES256util.encrypt(key=mk, source=Password, keyType="bytes")
 
         #add the new password to the database
         db = dbconfig()
