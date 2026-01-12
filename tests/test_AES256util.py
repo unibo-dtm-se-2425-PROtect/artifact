@@ -186,7 +186,7 @@ def test_verify_master_password_wrong_password(capsys):
         "masterpassword_hash": stored_hash,
         "device_secret": "ds"
     }
-    cleanup = _inject_dbconfig_module((stored_hash, device_secret))
+    cleanup = _inject_dbconfig_module(mock_row)
     try:
         aesutil = _reload_aesutil()
         result = aesutil.verify_master_password("alice", "wrong_mp")
