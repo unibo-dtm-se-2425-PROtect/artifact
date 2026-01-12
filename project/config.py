@@ -39,7 +39,7 @@ def config(master_password=None):
     try: 
         cursor.execute("CREATE DATABASE PROtect")
     except Exception as e: 
-        printc("[red][!] An error occurred while trying to create the Database. Maybe it already exists?")
+        printc("[red][!] An error occurred while trying to create the Database. Maybe it already exists? [/red]")
         console.print_exception(show_locals=True)
     printc("[green][+][/green] Database 'PROtect' created")
 
