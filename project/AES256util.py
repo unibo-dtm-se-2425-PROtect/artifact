@@ -115,7 +115,9 @@ def verify_master_password(username, mp):
 		printc("[red][!] No masterpassword configuration found[/red]")
 		return False
 	
-	stored_hash, ds = result
+	stored_hash = result['masterpassword_hash']
+	ds = result['device_secret']
+	
 	hashed_input=hashlib.sha256(mp.encode()).hexdigest()
 
 	if hashed_input != stored_hash:
