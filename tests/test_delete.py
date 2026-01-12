@@ -135,7 +135,7 @@ def test_delete_entry_cli_master_password_ok_calls_delete():
 
     with patch.object(builtins, "input", return_value="5"), \
          patch("project.delete.getpass", return_value="right"), \
-         patch.object(delete_mod, "verify_master_password", lambda p: True), \
+         patch("project.delete.AES256util.verify_master_password", return_value=("mock_mp", "mock_ds")), \
          patch.object(delete_mod, "delete_entry", side_effect = fake_delete):
         
         delete_mod.delete_entry_cli()
