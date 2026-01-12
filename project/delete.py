@@ -40,9 +40,8 @@ def delete_entry_cli():
         mp_ds = AES256util.verify_master_password(getpass("Enter your MASTER PASSWORD: "))
         if not mp_ds:
             return
-        mp, ds = mp_ds
 
-        delete_entry(ID, mp, ds)
+        delete_entry(ID)
 
     except Exception as e:
         printc(f"[red][!] Error during deletion: {e}[/red]")
