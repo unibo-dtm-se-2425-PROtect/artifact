@@ -101,7 +101,7 @@ def test_config_flow(mock_console, mock_printc, mock_dbconfig_call, mock_secret,
     mock_db.close.assert_called_once()
 
     #output printed indicating success
-    mock_printc.assert_any_call("[green][+] Configuration Completed! [/green]")
+    mock_printc.assert_any_call("[green][+] Configuration completed! [/green]")
 
 @patch("project.config.checkConfig", return_value=False)
 @patch("project.config.printc")
