@@ -1,3 +1,37 @@
+## [1.7.10](https://github.com/unibo-dtm-se-2425-PROtect/artifact/compare/1.7.9...1.7.10) (2026-01-12)
+
+
+### Bug Fixes
+
+* removing second encryption call in addEntry ([7e25ea8](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/7e25ea8fb54b6a65c81ee7fe44ab103a26da8f1f))
+
+
+### Tests
+
+* add helper function for hashing verification ([0f6fd1f](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/0f6fd1fe161d66bc89a9359a9fbbca5181ba5897))
+* enhance AES256 utility tests with CLI cases ([fd71cde](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/fd71cdecd9e40c45c0cc662c7aba031d49cc6663))
+* fix mock AES encryption call in test_add_entry ([028d19e](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/028d19ee90b44042e6f05d5016a356da8c07620f))
+* fix test for wrong master password assertion ([805f2a0](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/805f2a024c1cd81507d4e2bc67b1971fb66f7c42))
+* fix tests to use updated AES utility functions ([bef7a94](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/bef7a94adb4ea22acb34ca758f9e1eb346f38751))
+* mock 'rich' module in test_AES256util.py ([7cfe0e3](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/7cfe0e3c4e5ee62f9df464706c3b0291e5f67c91))
+* mock database row in verify master password test ([5979c0a](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/5979c0aaf558527858d8e044066bf46ed5f93f47))
+* modify test for addEntry to handle empty password ([9458260](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/945826045be41d93725502a9c578575c034a24f0))
+* patching modifications in test_add_entry_empty_password ([5a2fa25](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/5a2fa257188d849c02c8b558b672e7afe9f22b63))
+* refactor AES256 tests for raw bytes handling ([9efa972](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/9efa9729677019c5859264db8b561e24f4c50bec))
+* refactor rich module mocking in AES256util tests ([b78ffd7](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/b78ffd79cbf4898ef4141318bc9ca3ef13f7e2a1))
+* refactor tests to use add.computeMasterKey ([0d50443](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/0d50443d8f99f87b241cba600c08b3b8d347a6cb))
+* rename and refactor master key computation test ([3108a62](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/3108a62115fb39ef0705fc2901bde7ec12a5e3b8))
+* update function argument in test_add_entry_empty_password ([a44c365](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/a44c365c4a8ccbe5f4f6bba7c71082f49811bb4e))
+* update test cases to use aesutil instead of aes ([15475f0](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/15475f07612097652563191e83d8a8318695a54f))
+* update test to use mock_row for database config ([fdcca1f](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/fdcca1f77005576e04a0e6ab316756b5af2ab43c))
+* update test_add_entry_encrypt_returns_none to catch ValueError in the specific case ([b3d823b](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/b3d823bc51a337a3a12b575882f0509bcb95279c))
+* update variable name in test for clarity ([51dea72](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/51dea72fb7d1537f35ddce9edc447f04a48b83ab))
+
+
+### General maintenance
+
+* adding a "guard clause" to addEntry to explicitly check if encryption was successful before proceeding to the database ([d8638eb](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/d8638ebb78dbada03b79b1a40e82dd6285345b4b))
+
 ## [1.7.9](https://github.com/unibo-dtm-se-2425-PROtect/artifact/compare/1.7.8...1.7.9) (2026-01-12)
 
 
