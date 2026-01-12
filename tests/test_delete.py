@@ -116,10 +116,11 @@ def test_delete_entry_cli_invalid_id(capsys):
 #test the branch where master password verification fails
 def test_delete_entry_cli_master_password_fail(capsys):
     # Valid numeric ID, getpass returns wrong password, verify_master_password returns False
-    with patch.object(builtins, "input", lambda prompt="": "10"), \
-         patch("getpass.getpass", lambda prompt="": "wrongpass"), \
-         patch.object(delete_mod, "verify_master_password", lambda p: False), \
+    with patch.object(builtins, "input", return_value="10"), \
+         patch("project.delete.getpass", return_value="wrongpass"), \
+         patch("project.delete.AES256util.verify_master_password", return_value=False), \
          patch.object(delete_mod, "delete_entry", MagicMock()) as fake_delete:
+        
         delete_mod.delete_entry_cli()
 
     # verify that delete_entry was not called
@@ -132,10 +133,11 @@ def test_delete_entry_cli_master_password_ok_calls_delete():
     def fake_delete(ID):
         called["ID"] = ID
 
-    with patch.object(builtins, "input", lambda prompt="": "5"), \
-         patch("getpass.getpass", lambda prompt="": "right"), \
+    with patch.object(builtins, "input", return_value="5"), \
+         patch("project.delete.getpass", return_value="right"), \
          patch.object(delete_mod, "verify_master_password", lambda p: True), \
-         patch.object(delete_mod, "delete_entry", fake_delete):
+         patch.object(delete_mod, "delete_entry", side_effect = fake_delete):
+        
         delete_mod.delete_entry_cli()
 
     assert called.get("ID") == "5"
