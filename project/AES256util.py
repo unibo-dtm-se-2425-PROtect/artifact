@@ -109,26 +109,33 @@ def verify_master_password(username, mp):
 		return None
 	return mp, ds
 
-
-def main(): 
-	#wrapping in a function to enable unit testing
-	if len(sys.argv) < 5:
+#Wrapped in a function to enable unit testing
+def main():
+    # checking args
+    if len(sys.argv) < 5:
         print("Usage: aesutil.py <encrypt/decrypt> <message> <key> <keytype>")
         return
-	
-	op = sys.argv[1]
-	if op=="encrypt" or op==1:
-		msg = sys.argv[2]
-		key = sys.argv[3]
-		keyType = sys.argv[4]
-		cipher = encrypt(key,msg,keyType=keyType)
-		print(cipher)
-	elif op=="decrypt" or op==2:
-		cipher = sys.argv[2]
-		key = sys.argv[3]
-		keyType = sys.argv[4]
-		msg = decrypt(key,cipher,keyType=keyType)
-		print(msg)
+
+    op = sys.argv[1]
+    
+    if op == "encrypt" or op == "1":
+        msg = sys.argv[2]
+        key = sys.argv[3]
+        keyType = sys.argv[4]
+        cipher = encrypt(key, msg, keyType=keyType)
+        print(cipher)
+
+    elif op == "decrypt" or op == "2":
+        cipher = sys.argv[2]
+        key = sys.argv[3]
+        keyType = sys.argv[4]
+        msg_bytes = decrypt(key, cipher, keyType=keyType)
+        
+        try:
+            print(msg_bytes.decode('utf-8'))
+        except UnicodeDecodeError:
+            # If data is binary/not text, print representation
+            print(msg_bytes)
 
 if __name__ == "__main__":
     main()
