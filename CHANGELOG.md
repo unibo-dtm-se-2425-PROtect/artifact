@@ -1,3 +1,15 @@
+## [1.7.9](https://github.com/unibo-dtm-se-2425-PROtect/artifact/compare/1.7.8...1.7.9) (2026-01-12)
+
+
+### Bug Fixes
+
+* refactor main execution logic into a function ([f0510e8](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/f0510e893fdd63a1fedc20f5be91ed5e5d0561cd))
+
+
+### Refactoring
+
+* reshape main function and enhance decrypt output handling ([cc05828](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/cc05828fbce91e014ff6e92c08cf240bb1683fb6))
+
 ## [1.7.8](https://github.com/unibo-dtm-se-2425-PROtect/artifact/compare/1.7.7...1.7.8) (2026-01-12)
 
 
