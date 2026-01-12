@@ -1,3 +1,52 @@
+## [1.7.7](https://github.com/unibo-dtm-se-2425-PROtect/artifact/compare/1.7.6...1.7.7) (2026-01-12)
+
+
+### Bug Fixes
+
+* check source type before encoding in AES256util ([def0f7a](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/def0f7a27dece5da821995083f6430266c746aea))
+
+
+### Tests
+
+* add password parameter to AddEntry call ([cb78de8](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/cb78de8c6f6d09d53c87068d9aaf04c26f9a846f))
+* enhance test for computeMasterKey function ([2e19be5](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/2e19be57979a5e7df9724a17d3e327f2628195f7))
+* enhance tests with parameterization for computeMasterKey ([22c66ff](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/22c66ffd52fd6468362141ce498b862eec32ccfa))
+* fix AES mock usage in test_add.py ([b22aa16](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/b22aa16c31482a2119b030df9e598f9c56e22319))
+* fix assertion for 'site' in query check ([8f61760](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/8f61760d1bc8f9c81c4c9570f422b07d36a8f4ce))
+* fix import statement for AES256util module ([6fb3b50](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/6fb3b50e628e5d3e4494dcc57e7eca7cfd34462b))
+* fix import statement for AES256util module ([72d7b74](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/72d7b74811d4814759e71421670599b814e5e30e))
+* fix module name in test for CLI reload ([cf8f320](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/cf8f3208da526cbd80c735ab76f56c5dd49fd0a2))
+* fix type mismatch in test_result_with_missing_columns_raises ([8b59103](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/8b59103b1e0fee037ec1fe675fccd07c296da758))
+* import pm from project.pm in test_pm.py ([e0c5757](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/e0c57570f012e2e0ff46c099a7bf14d4fa19ff96))
+* modify site existence assertion in test_check_entry_exists ([cf8c4c0](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/cf8c4c07f17e26324f9bebeacc1994502be9b1a6))
+* refactor argument parsing into get_args function ([0ea001e](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/0ea001ee9f0e430770118d56960018f212077c62))
+* refactor import statement for project.pm ([30408f8](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/30408f89e4589fc6e1eab131e8739e0e79491500))
+* refactor reload_cli_with_patches for dynamic module import ([9d9f617](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/9d9f6174f268bb770e1d8a482d044228a99eba8c))
+* refactor test data to use dictionaries for clarity ([cbaf33b](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/cbaf33b6ea39c9386d3a5cf28136cdf623f0fd03))
+* refactor test_single_result_decrypts_and_copies ([b197660](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/b19766089ac2edf132e75ab4b73b6ad8e00d799c))
+* remove unused import of AES256util ([929ccd2](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/929ccd2f2e80287a49a42dd0c338573be0bdb54d))
+* rename import from pm to project.pm in tests ([cdfc83b](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/cdfc83b3c6eb763a03ed2afe162e121ef1efd810))
+* update module import to AES256util ([0727fc2](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/0727fc2eb89bdb52aad0790bb472f4793dbd7378))
+* update module reference from 'cli' to 'project.cli' ([d8d9fb5](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/d8d9fb5f00bcfd73d7d55fed913a7660f35d385f))
+* update module reloads to use AES256util ([54a2635](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/54a26353065af1307031330cb39bade882ec7edb))
+* update test to use dictionary format for results ([ddddf4f](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/ddddf4fcc6649ccf9601a92925080cf4330465d9))
+
+
+### General maintenance
+
+* import the getpass module  ([57b6ec1](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/57b6ec11ba984efbe9e198feeafdffab679e0aec))
+* raise ValueError if Password is empty in addEntry ([44344f7](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/44344f7a0db273c4fb7e6633ecdb4ebf7fc9751d))
+* rename variable enc_pass to enc_bytes  ([fc8e862](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/fc8e862f82ba96601ce1b6d9e9e6f73e23764849))
+
+
+### Refactoring
+
+* add argument parsing to main function ([502f389](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/502f389ce008b62805497f891b85c9aa6fffa163))
+* add main guard to pm.py ([ac26c5c](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/ac26c5c40e2c770ce9b73f43ecc6092452a6f9eb))
+* fix formatting of argument parser help text ([aa53f98](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/aa53f98bee744967ddce3cc3e8a929d7955ca029))
+* refactor argument parser for clarity and help text ([684d916](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/684d916ebb1c9ae292060ce504c2f5f5b3ff076c))
+* revising password table row addition for clarity ([fd7e047](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/fd7e047ad2e4acdba503b20db678153b5ef2390e))
+
 ## [1.7.6](https://github.com/unibo-dtm-se-2425-PROtect/artifact/compare/1.7.5...1.7.6) (2025-12-08)
 
 
