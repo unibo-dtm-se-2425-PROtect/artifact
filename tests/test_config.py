@@ -63,7 +63,7 @@ def test_generateDeviceSecret_randomness():
 @patch("project.config.printc")
 def test_config_already_configured(mock_printc, mock_dbconfig_call, mock_checkConfig):
     config()
-    mock_printc.assert_any_call("[red][!] Already Configured [/red]")
+    mock_printc.assert_any_call("[red][!] Already Configured! [/red]")
     mock_dbconfig_call.assert_not_called()
 
 @patch("project.config.checkConfig", return_value=False)
