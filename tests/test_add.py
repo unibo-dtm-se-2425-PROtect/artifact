@@ -213,6 +213,7 @@ def test_add_entry_encrypt_failure(mock_checkentry, mock_dbconfig, mock_aes, moc
 
 #simulate encryption returning None
 #check that addEntry raises ValueError in this case
+@patch("project.add.printc")
 @patch("project.add.AES256util")
 @patch("project.add.dbconfig")
 @patch("project.add.checkEntry", return_value=False)
@@ -226,7 +227,14 @@ def test_add_entry_encrypt_returns_none(mock_checkentry, mock_dbconfig, mock_aes
         with pytest.raises(ValueError, match="Encryption failed"): #verify that ValueError is raised for None encrypted password
             add.addEntry("mp", "ds", "site", "url", "email", "user", "password")
 
+    #ensure the database commit was never called
     mock_dbconfig.assert_not_called()
+
+    #verify the user was told exactly why it failed
+    #inspecting the arguments passed to printc
+    #the software is not required to crash anymore
+    args, _ = mock_print.call_args
+    assert "Encryption failed: Returned empty result" in str(args[0])
 
 #simulate invalid key type during encryption
 @patch("project.add.getpass")
