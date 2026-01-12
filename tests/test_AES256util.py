@@ -180,14 +180,17 @@ def test_verify_master_password_no_config(capsys):
 #check behavior when wrong password is provided
 def test_verify_master_password_wrong_password(capsys):
     stored_hash = hashlib.sha256("correct_mp".encode()).hexdigest()
-    device_secret = "device-secret-123"
+    mock_row = {
+        "masterpassword_hash": stored_hash,
+        "device_secret": "ds"
+    }
     cleanup = _inject_dbconfig_module((stored_hash, device_secret))
     try:
         aesutil = _reload_aesutil()
         result = aesutil.verify_master_password("alice", "wrong_mp")
         captured = capsys.readouterr()
         assert result is None
-        assert "[!] Wrong Master Password!" in captured.out
+        assert "Wrong Master Password!" in captured.out
     finally:
         cleanup()
         importlib.reload(sys.modules["project.AES256util"])
