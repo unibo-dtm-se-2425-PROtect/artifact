@@ -192,7 +192,10 @@ def test_add_entry_commit_failure(mock_checkentry, mock_dbconfig, mock_aes, mock
 @patch("project.add.getpass", return_value="")
 def test_add_entry_empty_password(mock_getpass):
     with pytest.raises(ValueError): #verify that ValueError is raised for empty password
-        add.addEntry("mp", "ds", "site", "url", "email", "user", "password")
+        add.addEntry("mp", "ds", "site", "url", "email", "user", "")
+
+    # Verify we never even tried to touch the database
+    mock_dbconfig.assert_not_called()
 #simulate encryption failure during addEntry
 @patch("project.add.getpass")
 @patch("project.add.AES256util")
