@@ -87,22 +87,6 @@ def decrypt(key, source, decode=True,keyType="hex"):
 	return data[:-padding]  # remove the padding
 
 
-
-if __name__ == "__main__":
-	op = sys.argv[1]
-	if op=="encrypt" or op==1:
-		msg = sys.argv[2]
-		key = sys.argv[3]
-		keyType = sys.argv[4]
-		cipher = encrypt(key,msg,keyType=keyType)
-		print(cipher)
-	elif op=="decrypt" or op==2:
-		cipher = sys.argv[2]
-		key = sys.argv[3]
-		keyType = sys.argv[4]
-		msg = decrypt(key,cipher,keyType=keyType)
-		print(msg)
-
 def verify_master_password(username, mp):
 	#verify if the provided mp matches the one stored in secrets
 	db=dbconfig()
@@ -124,3 +108,27 @@ def verify_master_password(username, mp):
 		printc("[red][!] Wrong Master Password![/red]")
 		return None
 	return mp, ds
+
+
+def main(): 
+	#wrapping in a function to enable unit testing
+	if len(sys.argv) < 5:
+        print("Usage: aesutil.py <encrypt/decrypt> <message> <key> <keytype>")
+        return
+	
+	op = sys.argv[1]
+	if op=="encrypt" or op==1:
+		msg = sys.argv[2]
+		key = sys.argv[3]
+		keyType = sys.argv[4]
+		cipher = encrypt(key,msg,keyType=keyType)
+		print(cipher)
+	elif op=="decrypt" or op==2:
+		cipher = sys.argv[2]
+		key = sys.argv[3]
+		keyType = sys.argv[4]
+		msg = decrypt(key,cipher,keyType=keyType)
+		print(msg)
+
+if __name__ == "__main__":
+    main()
