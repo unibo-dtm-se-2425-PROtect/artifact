@@ -65,8 +65,8 @@ def decrypt(key, source, decode=True,keyType="hex"):
 	Returns:
 	The decrypted data
 	'''
-
-	source = source.encode()
+	if isinstance(source, str): 
+		source = source.encode()
 	if decode:
 		source = base64.b64decode(source)
 
