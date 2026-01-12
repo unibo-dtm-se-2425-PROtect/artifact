@@ -213,20 +213,20 @@ def test_add_entry_encrypt_failure(mock_checkentry, mock_dbconfig, mock_aes, moc
 
 #simulate encryption returning None
 #check that addEntry raises ValueError in this case
-@patch("project.add.getpass")
 @patch("project.add.AES256util")
 @patch("project.add.dbconfig")
 @patch("project.add.checkEntry", return_value=False)
-def test_add_entry_encrypt_returns_none(mock_checkentry, mock_dbconfig, mock_aes, mock_getpass):
-    mock_getpass.return_value = "plainpassword"
-    mock_aes.encrypt.return_value = None #simulate encryption returning None
+def test_add_entry_encrypt_returns_none(mock_checkentry, mock_dbconfig, mock_aes):
+    mock_aes.encrypt.return_value = None #simulate encryption returning None (failure)
     
     mock_db = MagicMock()
     mock_dbconfig.return_value = mock_db
 
     with patch.object(add, "computeMasterKey", return_value=b"\x00" * 32):
-        with pytest.raises(ValueError): #verify that ValueError is raised for None encrypted password
+        with pytest.raises(ValueError, match="Encryption failed"): #verify that ValueError is raised for None encrypted password
             add.addEntry("mp", "ds", "site", "url", "email", "user", "password")
+
+    mock_dbconfig.assert_not_called()
 
 #simulate invalid key type during encryption
 @patch("project.add.getpass")
