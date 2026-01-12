@@ -26,8 +26,8 @@ def import_entries(filepath, mp, ds):
                 enc_pass = AES256util.encrypt(mk, password_plain, keyType="hex")
 
                 cursor.execute(
-                    "INSERT INTO PROtect.entries (ID, Site, URL, Email, Username, Password) VALUES (%s,%s,%s,%s,%s,%s)",
-                    (ID, site, url, email, username, enc_pass)
+                    "INSERT INTO PROtect.entries (Site, URL, Email, Username, Password) VALUES (%s,%s,%s,%s,%s,%s)",
+                    (site, url, email, username, enc_pass)
                 )
                 imported += 1
 
