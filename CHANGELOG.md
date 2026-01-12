@@ -1,3 +1,10 @@
+## [1.7.8](https://github.com/unibo-dtm-se-2425-PROtect/artifact/compare/1.7.7...1.7.8) (2026-01-12)
+
+
+### Bug Fixes
+
+* refactor password retrieval from configuration ([e976c8c](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/e976c8c01eb651f3ba1258ddc723710ceb8b6ca4))
+
 ## [1.7.7](https://github.com/unibo-dtm-se-2425-PROtect/artifact/compare/1.7.6...1.7.7) (2026-01-12)
 
 
