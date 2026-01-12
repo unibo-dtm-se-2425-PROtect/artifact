@@ -212,7 +212,7 @@ def test_cli_main_encrypt_decrypt(capsys):
     # 1. Test Encrypt
     args_enc = ["AES256util.py", "encrypt", msg, key, "ascii"]
     with patch.object(sys, "argv", args_enc):
-        aes.main()
+        aesutil.main()
         captured = capsys.readouterr()
         cipher_text = captured.out.strip()
         assert len(cipher_text) > 0
@@ -221,6 +221,6 @@ def test_cli_main_encrypt_decrypt(capsys):
     # 2. Test Decrypt
     args_dec = ["AES256util.py", "decrypt", cipher_text, key, "ascii"]
     with patch.object(sys, "argv", args_dec):
-        aes.main()
+        aesutil.main()
         captured = capsys.readouterr()
         assert f"{msg}" in captured.out
