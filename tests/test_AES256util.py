@@ -205,7 +205,7 @@ def test_verify_master_password_success():
         importlib.reload(sys.modules["project.AES256util"])
 
 def test_cli_main_encrypt_decrypt(capsys):
-    aes = _reload_target_module()
+    aesutil =  _reload_aesutil()
     msg = "CLI_Test_Message"
     key = "testpassword"
     
