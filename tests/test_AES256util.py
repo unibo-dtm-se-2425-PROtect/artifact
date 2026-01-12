@@ -197,7 +197,13 @@ def test_verify_master_password_success():
     mp = "my_master_password"
     stored_hash = hashlib.sha256(mp.encode()).hexdigest()
     device_secret = "device-secret-xyz"
-    cleanup = _inject_dbconfig_module((stored_hash, device_secret))
+    
+    mock_row = {
+        "masterpassword_hash": stored_hash,
+        "device_secret": device_secret
+    }
+    
+    cleanup = _inject_dbconfig_module(mock_row)
     try:
         aesutil = _reload_aesutil()
         result = aesutil.verify_master_password("alice", mp)
