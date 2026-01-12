@@ -21,19 +21,11 @@ def _compute_helper(mp, ds):
 
 #define function to be used in the following test functions
 #check the MasterKey is correctly computed, using hashlib.sha256 module 
-def test_computeMasterKey(mp: str,ds: str) -> bytes:
-    if not isinstance(mp, (str, bytes)) or not isinstance(ds, (str, bytes)):
-        # let invalid types raise naturally (TypeError) when trying to encode or combine
-        raise TypeError("mp and ds must be str or bytes")
-    if isinstance(mp, str):
-        mp_b = mp.encode()
-    else:
-        mp_b = mp
-    if isinstance(ds, str):
-        ds_b = ds.encode()
-    else:
-        ds_b = ds
-    return hashlib.sha256(mp_b + ds_b).digest()
+def test_computeMasterKey_correctness(mp,ds):
+    #this function's working should resonate with our known helper logic
+    result = add.computeMasterKey(mp, ds)
+    expected = _compute_helper(mp, ds)
+    assert result == expected
   
 #verifying that the output is of type bytes and length 32
 def test_computeMasterKey_return_type_and_length():
