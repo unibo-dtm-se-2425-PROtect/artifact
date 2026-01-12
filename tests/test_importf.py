@@ -87,7 +87,7 @@ def test_import_entries_success(tmp_path, capsys):
     assert "Imported 2 entries" in out
     
     clean_out = out.replace("\n", "").replace("\r", "")
-    assert path in clean_out
+    assert str(path) in clean_out
 
 def test_import_entries_skips_incomplete_rows(tmp_path, capsys):
     """
