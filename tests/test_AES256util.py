@@ -5,7 +5,17 @@ import base64 #used to encode and decode binary ciphertext to/from a printable A
 import hashlib #used to compute cryptographic hash digests (SHA-256) using the Python standard library
 import pytest 
 
+from unittest.mock import patch, MagicMock
+
+
 # --- Helpers to inject a fake project.dbconfig module -----------------------
+
+# Mock 'rich' to avoid dependency errors during test
+if "rich" not in sys.modules:
+    rich_mock = types.ModuleType("rich")
+    rich_mock.print = print  # Redirect rich.print to standard print
+    sys.modules["rich"] = rich_mock
+
 class _FakeCursor:
     def __init__(self, result):
         self._result = result
