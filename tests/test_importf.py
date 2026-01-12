@@ -78,8 +78,8 @@ def test_import_entries_success(tmp_path, capsys):
     assert len(cursor.executed) == 2, "Expected two INSERT operations for two complete rows"
     q0, p0 = cursor.executed[0]
     assert "INSERT INTO PROtect.entries" in q0
-    assert p0[0] == "1"
-    assert p0[5] == "enc:plain1"
+    assert p0[0] == "site1"
+    assert p0[4] == "enc:plain1"
     assert db.committed is True
     assert db.closed is True
 
