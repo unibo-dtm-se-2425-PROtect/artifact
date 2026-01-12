@@ -217,7 +217,7 @@ def test_add_entry_encrypt_failure(mock_checkentry, mock_dbconfig, mock_aes, moc
 @patch("project.add.AES256util")
 @patch("project.add.dbconfig")
 @patch("project.add.checkEntry", return_value=False)
-def test_add_entry_encrypt_returns_none(mock_checkentry, mock_dbconfig, mock_aes):
+def test_add_entry_encrypt_returns_none(mock_checkentry, mock_dbconfig, mock_aes, mock_print):
     mock_aes.encrypt.return_value = None #simulate encryption returning None (failure)
     
     mock_db = MagicMock()
