@@ -81,12 +81,20 @@ def test_config_flow(mock_console, mock_printc, mock_dbconfig_call, mock_secret,
 
     #check DB and tables are created
     mock_cursor.execute.assert_any_call("CREATE DATABASE PROtect")
-    mock_cursor.execute.assert_any_call("CREATE TABLE PROtect.secrets (masterpassword_hash TEXT NOT NULL, device_secret TEXT NOT NULL)")
-    mock_cursor.execute.assert_any_call("CREATE TABLE PROtect.entries (sitename TEXT NOT NULL, siteurl TEXT NOT NULL, email TEXT , username TEXT, password TEXT NOT NULL)")
-
+    
+    mock_cursor.execute.assert_any_call(
+        "CREATE TABLE PROtect.secrets (ID INT AUTO_INCREMENT PRIMARY KEY, username VARCHAR(100) UNIQUE NOT NULL, masterpassword_hash TEXT NOT NULL, device_secret TEXT NOT NULL)"
+    )
+    
+    mock_cursor.execute.assert_any_call(
+        "CREATE TABLE PROtect.entries (`ID` INT AUTO_INCREMENT PRIMARY KEY, `Site` TEXT NOT NULL, `URL` TEXT, `Email` TEXT, `Username` TEXT NOT NULL, `Password` VARBINARY(100) NOT NULL)"
+    )
     #check password hash inserted 
     hashed = hashlib.sha256("password".encode()).hexdigest()
-    mock_cursor.execute.assert_any_call("INSERT INTO PROtect.secrets (masterpassword_hash, device_secret) values (?,?)", (hashed, "SECRET12345"))
+    mock_cursor.execute.assert_any_call(
+        "INSERT INTO PROtect.secrets (username, masterpassword_hash, device_secret) values (%s, %s, %s)", 
+        ("cli_user", hashed, "SECRET12345")
+    )
 
     #commit and close called
     mock_db.commit.assert_called_once()
