@@ -92,7 +92,7 @@ def delete():
         op = input("Are you sure you want to continue? (y/N): ")
         if op.upper() == "Y":
           break
-        if op.upper() == "N" or op.upper == "":
+        if op.upper() == "N" or op.upper() == "":
           sys.exit(0)
         else:
           continue
