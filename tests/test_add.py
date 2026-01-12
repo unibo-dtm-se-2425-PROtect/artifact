@@ -3,6 +3,17 @@ import pytest
 from unittest.mock import patch, MagicMock
 import project.add as add
 
+
+# Helper function to replicate the hashing logic for verification.
+def _compute_helper(mp, ds):
+    if not isinstance(mp, (str, bytes)) or not isinstance(ds, (str, bytes)):
+        raise TypeError("mp and ds must be str or bytes")
+    
+    mp_b = mp.encode() if isinstance(mp, str) else mp
+    ds_b = ds.encode() if isinstance(ds, str) else ds
+    
+    return hashlib.sha256(mp_b + ds_b).digest()
+
 @pytest.mark.parametrize("mp, ds", [
     ("masterPassword", "deviceSecret"),
     ("anotherPass", "anotherSecret"),
