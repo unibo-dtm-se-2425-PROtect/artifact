@@ -151,14 +151,14 @@ def test_raw_bytes_handling():
     Tests that the fixed decrypt() function now handles raw bytes 
     correctly without crashing.
     """
-    aes = _reload_target_module()
+    aesutil = _reload_aesutil()
     msg = "raw bytes check"
     key = "testpassword"
     
-    raw_cipher = aes.encrypt(key, msg, encode=False, keyType="ascii")
+    raw_cipher = aesutil.encrypt(key, msg, encode=False, keyType="ascii")
     assert isinstance(raw_cipher, bytes)
     
-    decrypted = aes.decrypt(key, raw_cipher, decode=False, keyType="ascii")
+    decrypted = aesutil.decrypt(key, raw_cipher, decode=False, keyType="ascii")
     assert decrypted.decode() == msg
 
 #tests for verify_master_password 
@@ -180,6 +180,8 @@ def test_verify_master_password_no_config(capsys):
 #check behavior when wrong password is provided
 def test_verify_master_password_wrong_password(capsys):
     stored_hash = hashlib.sha256("correct_mp".encode()).hexdigest()
+    device_secret = "device-secret-xyz"
+    
     mock_row = {
         "masterpassword_hash": stored_hash,
         "device_secret": "ds"
