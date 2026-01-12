@@ -190,7 +190,7 @@ def test_add_entry_commit_failure(mock_checkentry, mock_dbconfig, mock_aes, mock
 
 #simulate the user entering an empty password
 @patch("project.add.dbconfig")
-def test_add_entry_empty_password(mock_getpass):
+def test_add_entry_empty_password(mock_dbconfig):
     with pytest.raises(ValueError): #verify that ValueError is raised for empty password
         add.addEntry("mp", "ds", "site", "url", "email", "user", "")
 
