@@ -10,11 +10,16 @@ from unittest.mock import patch, MagicMock
 
 # --- Helpers to inject a fake project.dbconfig module -----------------------
 
-# Mock 'rich' to avoid dependency errors during test
-if "rich" not in sys.modules:
-    rich_mock = types.ModuleType("rich")
-    rich_mock.print = print  # Redirect rich.print to standard print
-    sys.modules["rich"] = rich_mock
+# We use MagicMock because it automatically handles sub-imports (like rich.console)
+# preventing "is not a package" errors if pytest tries to use rich internally.
+try:
+    import rich
+except ImportError:
+    # Only mock if strictly necessary to avoid messing with pytest's own output
+    mock_rich = MagicMock()
+    # Ensure print calls go to real stdout so we can debug if needed
+    mock_rich.print = print 
+    sys.modules["rich"] = mock_rich
 
 class _FakeCursor:
     def __init__(self, result):
