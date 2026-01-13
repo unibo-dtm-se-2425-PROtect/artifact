@@ -91,3 +91,15 @@ def test_cli_extract_specific_fields(mock_retrieve, valid_auth_setup):
     # Verify search dict
     args = mock_retrieve.call_args[0]
     assert args[2] == {"Site": "Site"}
+
+@patch("project.pm.retrieve.retrieveEntries")
+def test_cli_extract_all(mock_retrieve, valid_auth_setup):
+    test_args = ["pm.py", "extract", "--all"]
+    
+    with patch.object(sys, 'argv', test_args), \
+         patch("project.pm.getpass", return_value="ValidPass1!"):
+        pm.main()
+        
+    #verify empty search dict (means all)
+    args = mock_retrieve.call_args[0]
+    assert args[2] == {}
