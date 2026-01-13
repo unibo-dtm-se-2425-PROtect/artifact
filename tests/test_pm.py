@@ -115,3 +115,16 @@ def test_cli_extract_missing_args(mock_retrieve, valid_auth_setup, capsys):
         
     mock_retrieve.assert_not_called()
     assert "Enter a search field" in capsys.readouterr().out
+
+
+#Delete tests
+
+@patch("project.pm.delete_entry")
+def test_cli_remove_success(mock_delete, valid_auth_setup):
+    test_args = ["pm.py", "rem", "--id", "5"]
+    
+    with patch.object(sys, 'argv', test_args), \
+         patch("project.pm.getpass", return_value="ValidPass1!"):
+        pm.main()
+        
+    mock_delete.assert_called_with("5")
