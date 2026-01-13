@@ -67,8 +67,9 @@ def inputAndValidateMasterPassword():
 
 	result = results[0]
     db.close()
-	
-	if hashed_mp != result[0]:
+
+	#remember the schema being: 0=ID, 1=username, 2=masterpassword_hash, 3=device_secret
+	if hashed_mp != result[2]:
 		printc("[red][!] WRONG! [/red]")
 		return None
 
