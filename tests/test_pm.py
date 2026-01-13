@@ -206,3 +206,9 @@ def test_cli_configure(mock_config):
     with patch.object(sys, 'argv', ["pm.py", "con"]):
         pm.main()
     mock_config.assert_called_once()
+
+@patch("project.pm.delete")
+def test_cli_delete_config(mock_delete):
+    with patch.object(sys, 'argv', ["pm.py", "del"]):
+        pm.main()
+    mock_delete.assert_called_once()
