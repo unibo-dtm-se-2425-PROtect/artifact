@@ -103,3 +103,15 @@ def test_cli_extract_all(mock_retrieve, valid_auth_setup):
     #verify empty search dict (means all)
     args = mock_retrieve.call_args[0]
     assert args[2] == {}
+
+@patch("project.pm.retrieve.retrieveEntries")
+def test_cli_extract_missing_args(mock_retrieve, valid_auth_setup, capsys):
+    #no search fields and no --all
+    test_args = ["pm.py", "extract"]
+    
+    with patch.object(sys, 'argv', test_args), \
+         patch("project.pm.getpass", return_value="ValidPass1!"):
+        pm.main()
+        
+    mock_retrieve.assert_not_called()
+    assert "Enter a search field" in capsys.readouterr().out
