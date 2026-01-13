@@ -35,7 +35,7 @@ def test_query_without_search_executes_select_all(fake_db, fake_cursor):
 
 def test_query_with_search_builds_where_clause(fake_db, fake_cursor):
     with patch('project.retrieve.dbconfig', return_value=fake_db):
-        retrieve.retrieveEntries('mp', 'ds', search={'site':'example','username':'alice'}, decryptPassword=False)
+        retrieve.retrieveEntries('mp', 'ds', search={'Site':'example','Username':'alice'}, decryptPassword=False)
 
     #verify dictionary cursor was requested
     fake_db.cursor.assert_called_with(dictionary=True)
@@ -47,8 +47,8 @@ def test_query_with_search_builds_where_clause(fake_db, fake_cursor):
 
     #verify that the SQL contains the expected WHERE clauses and parameters
     assert "SELECT * FROM PROtect.entries WHERE" in sql
-    assert "site=%s" in sql
-    assert "username=%s" in sql
+    assert "Site=%s" in sql
+    assert "Username=%s" in sql
     assert "example" in params
     assert "alice" in params
     fake_db.close.assert_called_once()
@@ -62,7 +62,7 @@ def test_multiple_results_shows_table_and_hides_password(fake_db, fake_cursor):
             "URL": "http://s1", 
             "Email": "e1", 
             "Username": "u1", 
-            "Password": b"encrypted1"
+            "Password": "encrypted1"
         },
         {
             "ID": 2, 
@@ -70,17 +70,16 @@ def test_multiple_results_shows_table_and_hides_password(fake_db, fake_cursor):
             "URL": "http://s2", 
             "Email": "e2", 
             "Username": "u2", 
-            "Password": b"encrypted2"
+            "Password": "encrypted2"
         },
     ] #this time we simulate multiple results instead of an empty set
 
     #a fake Console instance to capture the printed table
     fake_console_instance = MagicMock()
-    FakeConsole = MagicMock(return_value=fake_console_instance)
 
     with patch('project.retrieve.dbconfig', return_value=fake_db), \
-         patch('project.retrieve.Console', FakeConsole):
-        retrieve.retrieveEntries(b'mp', b'ds', search={'site':'s'}, decryptPassword=False) #make sure the called function exercises the "multiple results" path
+         patch('project.retrieve.Console', return_value=fake_console):
+        retrieve.retrieveEntries('mp', 'ds', search={'Site':'s'}, decryptPassword=False) #make sure the called function exercises the "multiple results" path
 
     # Console.print was called with a Table instance
     fake_console_instance.print.assert_called_once()
