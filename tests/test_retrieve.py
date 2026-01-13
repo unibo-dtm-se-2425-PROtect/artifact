@@ -22,7 +22,7 @@ def test_no_results_returns_and_closes_db(fake_db, fake_cursor):
     with patch('project.retrieve.dbconfig', return_value=fake_db), \
          patch('project.retrieve.printc') as mock_printc: #make sure the called function exercises the "no-results" path
         retrieve.retrieveEntries('mp', 'ds', search=None, decryptPassword=False) 
-    mock_printc.assert_called_once_with("[yellow][-][/yellow] No results for the search.")
+    mock_printc.assert_called_once_with("[yellow][-][/yellow] No results for the search")
     fake_db.close.assert_called_once() #ensure DB connection was closed
 
 def test_query_without_search_executes_select_all(fake_db, fake_cursor):
