@@ -22,7 +22,7 @@ def valid_auth_setup(mock_db_setup):
     #Setting up a valid password hash and device secret in the mock DB
     #Row structure: (ID, Username, Hash, DeviceSecret)
     correct_hash = hashlib.sha256("ValidPass1!".encode()).hexdigest()
-    mock_db_setup.fetchone.return_value = (1, "user", correct_hash, "valid_ds")
+    mock_db_setup.fetchall.return_value = (1, "user", correct_hash, "valid_ds")
     return correct_hash
 
 
