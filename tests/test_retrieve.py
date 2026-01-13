@@ -139,13 +139,15 @@ def test_single_result_decrypts_and_copies(fake_db, fake_cursor):
     mock_copy.assert_called_once_with('secretpwd') #ensuring bytes are decoded to string
     fake_db.close.assert_called_once()
 
-def test_result_with_missing_columns_raises(fake_db, fake_cursor):
-    # row missing password field (only 4 columns)
-    fake_cursor.fetchall.return_value = [('only','four','cols','here')] 
+def test_result_with_missing_columns_handled_gracefully(fake_db, fake_cursor):
+    # row missing 'URL' or 'Email' keys entirely
+    fake_cursor.fetchall.return_value = [{"ID": 1, "Site": "site"}] 
 
-    with patch('project.retrieve.dbconfig', return_value=fake_db):
-        with pytest.raises(IndexError): #the function, once invoked, should raise an IndexError when trying to access the missing password column
-            retrieve.retrieveEntries('mp', 'ds', search=None, decryptPassword=True)
+    with patch('project.retrieve.dbconfig', return_value=fake_db), \
+        patch('project.retrieve.Console') as mock_console:
+        
+        retrieve.retrieveEntries("mp", "ds", search=None, decryptPassword=False)
 
     fake_db.close.assert_called_once()
+    mock_console.return_value.print.assert_called_once()
 
