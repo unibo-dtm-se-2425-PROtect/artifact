@@ -163,3 +163,16 @@ def test_cli_modify_missing_id(mock_modify, valid_auth_setup, capsys):
     
     mock_modify.assert_not_called()
     assert "--id is required" in capsys.readouterr().out
+
+
+#Import/Export tests
+
+@patch("project.pm.import_entries")
+def test_cli_import_success(mock_import, valid_auth_setup):
+    test_args = ["pm.py", "imp", "-f", "in.csv"]
+    
+    with patch.object(sys, 'argv', test_args), \
+         patch("project.pm.getpass", return_value="ValidPass1!"):
+        pm.main()
+        
+    mock_import.assert_called_with("in.csv", "ValidPass1!", "valid_ds")
