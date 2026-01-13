@@ -75,7 +75,7 @@ def test_cli_add_missing_args(mock_add, capsys):
         pm.main()
     
     mock_add.assert_not_called()
-    assert "are required" in capsys.readouterr().out
+    assert "required" in capsys.readouterr().out
 
 
 #Retrieve tests 
@@ -114,7 +114,7 @@ def test_cli_extract_missing_args(mock_retrieve, valid_auth_setup, capsys):
         pm.main()
         
     mock_retrieve.assert_not_called()
-    assert "Enter a search field" in capsys.readouterr().out
+    assert "at least one search field" in capsys.readouterr().out
 
 
 #Delete tests
@@ -138,7 +138,7 @@ def test_cli_remove_missing_id(mock_delete, valid_auth_setup, capsys):
         pm.main()
         
     mock_delete.assert_not_called()
-    assert "--id is required" in capsys.readouterr().out
+    assert "(--id) is required" in capsys.readouterr().out
 
 
 #Modify tests
@@ -162,7 +162,7 @@ def test_cli_modify_missing_id(mock_modify, valid_auth_setup, capsys):
         pm.main()
     
     mock_modify.assert_not_called()
-    assert "--id is required" in capsys.readouterr().out
+    assert "(--id) is required" in capsys.readouterr().out
 
 
 #Import/Export tests
@@ -186,7 +186,7 @@ def test_cli_import_missing_file(mock_import, valid_auth_setup, capsys):
         pm.main()
         
     mock_import.assert_not_called()
-    assert "-f/--file is required" in capsys.readouterr().out
+    assert "(-f/--file) is required" in capsys.readouterr().out
 
 @patch("project.pm.export_entries")
 def test_cli_export_success(mock_export, valid_auth_setup):
