@@ -24,3 +24,13 @@ def valid_auth_setup(mock_db_setup):
     correct_hash = hashlib.sha256("ValidPass1!".encode()).hexdigest()
     mock_db_setup.fetchone.return_value = (1, "user", correct_hash, "valid_ds")
     return correct_hash
+
+
+#password policy and and authentication (auth) tests
+
+def test_password_policy_failures(capsys):
+    #test a short password to trigger policy check
+    with patch("project.pm.getpass", return_value="Short1!"):
+        res = pm.inputAndValidateMasterPassword()
+        assert res is None
+        assert "Password policy not met" in capsys.readouterr().out
