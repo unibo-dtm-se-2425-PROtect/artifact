@@ -3,12 +3,13 @@
 import argparse
 from getpass import getpass
 import hashlib
+import string
+import sys
 
 from rich import print as printc
 
 from project import add
 from project.config import config, delete, reconfig
-import string
 from project import retrieve
 from project.dbconfig import dbconfig
 from project.delete import delete_entry
