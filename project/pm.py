@@ -132,7 +132,7 @@ def main():
 			if args.id is None:
 				printc("[red][!][/red] Entry ID (--id) is required for deletion!")
 				return
-			delete_entry(args.id, res[0], res[1]) #mp and ds
+			delete_entry(args.id) #delete_entry is fixed to take only ID 
 	
 	elif args.option in ["modify", "mod"]:
 		res=inputAndValidateMasterPassword()
