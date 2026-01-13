@@ -34,3 +34,14 @@ def test_password_policy_failures(capsys):
         res = pm.inputAndValidateMasterPassword()
         assert res is None
         assert "Password policy not met" in capsys.readouterr().out
+
+def test_master_password_wrong_hash(mock_db_setup, capsys):
+    #DB has one hash, user provides a different valid-format password
+    db_hash = hashlib.sha256("RealPass1!".encode()).hexdigest()
+    mock_db_setup.fetchone.return_value = (1, "user", db_hash, "ds")
+
+    with patch("project.pm.getpass", return_value="WrongPass1!"):
+        res = pm.inputAndValidateMasterPassword()
+        
+    assert res is None
+    assert "WRONG MASTER PASSWORD" in capsys.readouterr().out
