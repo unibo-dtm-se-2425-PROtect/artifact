@@ -53,3 +53,16 @@ def test_master_password_success(valid_auth_setup):
     
     # Expect [OriginalPassword, DeviceSecret]
     assert res == ["ValidPass1!", "valid_ds"]
+
+
+#Add Entry tests
+
+@patch("project.pm.add.addEntry")
+def test_cli_add_success(mock_add, valid_auth_setup):
+    test_args = ["pm.py", "add", "-s", "Site", "-u", "url", "-e", "mail", "-l", "user", "-p", "pass"]
+    
+    with patch.object(sys, 'argv', test_args), \
+         patch("project.pm.getpass", return_value="ValidPass1!"):
+        pm.main()
+        
+    mock_add.assert_called_with("ValidPass1!", "valid_ds", "Site", "url", "mail", "user", "pass")
