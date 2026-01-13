@@ -78,7 +78,7 @@ def test_multiple_results_shows_table_and_hides_password(fake_db, fake_cursor):
     fake_console_instance = MagicMock()
 
     with patch('project.retrieve.dbconfig', return_value=fake_db), \
-         patch('project.retrieve.Console', return_value=fake_console):
+         patch('project.retrieve.Console', return_value=fake_console_instance):
         retrieve.retrieveEntries('mp', 'ds', search={'Site':'s'}, decryptPassword=False) #make sure the called function exercises the "multiple results" path
 
     # Console.print was called with a Table instance
