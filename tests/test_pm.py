@@ -128,3 +128,14 @@ def test_cli_remove_success(mock_delete, valid_auth_setup):
         pm.main()
         
     mock_delete.assert_called_with("5")
+
+@patch("project.pm.delete_entry")
+def test_cli_remove_missing_id(mock_delete, valid_auth_setup, capsys):
+    test_args = ["pm.py", "rem"]
+    
+    with patch.object(sys, 'argv', test_args), \
+         patch("project.pm.getpass", return_value="ValidPass1!"):
+        pm.main()
+        
+    mock_delete.assert_not_called()
+    assert "--id is required" in capsys.readouterr().out
