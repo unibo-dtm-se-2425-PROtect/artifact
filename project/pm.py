@@ -39,16 +39,16 @@ def inputAndValidateMasterPassword():
 	mp = getpass("MASTER PASSWORD: ")
 	#Password policy checks
 	if len(mp)<8:
-		print("[!] Password must be at least 8 characters long.")
+		print("[red][!] Password must be at least 8 characters long.[/red]")
 		return None
 	if not any(c.isupper() for c in mp):
-		print("[!] Password must contain at least one uppercase letter.")
+		print("[red][!] Password must contain at least one uppercase letter.[/red]")
 		return None
 	if not any(c.isdigit() for c in mp):
-		print("[!] Password must contain at least one number.")
+		print("[red][!] Password must contain at least one number.[/red]")
 		return None
 	if not any(c in string.punctuation for c in mp):
-		print("[!] Password must contain at least one special character.")
+		print("[red][!] Password must contain at least one special character.[/red]")
 		return None
 	
 	#If all policies are observed
