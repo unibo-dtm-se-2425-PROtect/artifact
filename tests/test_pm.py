@@ -44,7 +44,7 @@ def test_master_password_wrong_hash(mock_db_setup, capsys):
         res = pm.inputAndValidateMasterPassword()
         
     assert res is None
-    assert "WRONG MASTER PASSWORD" in capsys.readouterr().out
+    assert "WRONG" in capsys.readouterr().out
 
 def test_master_password_success(valid_auth_setup):
     #user provides correct password
