@@ -90,7 +90,8 @@ def main():
 		if missing:
 			for m in missing:
 				printc(f"[red][!][/red] {m} is required!")
-        #optional field
+        
+		#optional field
 		if args.email == None:
 			args.email = ""
 		if args.url == None:
@@ -118,7 +119,7 @@ def main():
 				search ["Username"] = args.login
 		
 		#if no fields provided and --all not used, show warning
-		if len(search) == 0:
+		if len(search) == 0 and not args.all:
 			printc("[red][!][/red] Please enter at least one search field (Site/URL/Email/Username) or use --all")
 			return
 		
