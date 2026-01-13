@@ -176,3 +176,14 @@ def test_cli_import_success(mock_import, valid_auth_setup):
         pm.main()
         
     mock_import.assert_called_with("in.csv", "ValidPass1!", "valid_ds")
+
+@patch("project.pm.import_entries")
+def test_cli_import_missing_file(mock_import, valid_auth_setup, capsys):
+    test_args = ["pm.py", "imp"]
+    
+    with patch.object(sys, 'argv', test_args), \
+         patch("project.pm.getpass", return_value="ValidPass1!"):
+        pm.main()
+        
+    mock_import.assert_not_called()
+    assert "-f/--file is required" in capsys.readouterr().out
