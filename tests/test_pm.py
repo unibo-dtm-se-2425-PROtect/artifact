@@ -33,7 +33,7 @@ def test_password_policy_failures(capsys):
     with patch("project.pm.getpass", return_value="Short1!"):
         res = pm.inputAndValidateMasterPassword()
         assert res is None
-        assert "Password policy not met" in capsys.readouterr().out
+        assert "at least 8 characters" in capsys.readouterr().out
 
 def test_master_password_wrong_hash(mock_db_setup, capsys):
     #DB has one hash, user provides a different valid-format password
