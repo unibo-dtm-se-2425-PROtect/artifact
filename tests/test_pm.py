@@ -76,3 +76,18 @@ def test_cli_add_missing_args(mock_add, capsys):
     
     mock_add.assert_not_called()
     assert "are required" in capsys.readouterr().out
+
+
+#Retrieve tests 
+
+@patch("project.pm.retrieve.retrieveEntries")
+def test_cli_extract_specific_fields(mock_retrieve, valid_auth_setup):
+    test_args = ["pm.py", "extract", "-s", "Site"]
+    
+    with patch.object(sys, 'argv', test_args), \
+         patch("project.pm.getpass", return_value="ValidPass1!"):
+        pm.main()
+        
+    # Verify search dict
+    args = mock_retrieve.call_args[0]
+    assert args[2] == {"Site": "Site"}
