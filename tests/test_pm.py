@@ -139,3 +139,16 @@ def test_cli_remove_missing_id(mock_delete, valid_auth_setup, capsys):
         
     mock_delete.assert_not_called()
     assert "--id is required" in capsys.readouterr().out
+
+
+#Modify tests
+
+@patch("project.pm.modify_entry")
+def test_cli_modify_success(mock_modify, valid_auth_setup):
+    test_args = ["pm.py", "mod", "--id", "10"]
+    
+    with patch.object(sys, 'argv', test_args), \
+         patch("project.pm.getpass", return_value="ValidPass1!"):
+        pm.main()
+        
+    mock_modify.assert_called_with("10", "ValidPass1!", "valid_ds")
