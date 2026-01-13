@@ -1,3 +1,50 @@
+## [1.7.13](https://github.com/unibo-dtm-se-2425-PROtect/artifact/compare/1.7.12...1.7.13) (2026-01-13)
+
+
+### Bug Fixes
+
+* argument quantity in delete_entry() in the remove branch of the main() function ([e65e9a0](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/e65e9a045c02451e0e1fdff54b1a96373bda97be))
+* changing indexing to allow actual hash comparison in InputAndValidatePassword() ([aeeda1c](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/aeeda1cd31d88e26ee6ec26fe569e8f4e1738c54))
+* indexing correction to retrieve the device secret ([efe0b22](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/efe0b22f287f1587fd558748081795f8c7889aae))
+* revise the codebase at InputAndValidatePassword() so to catch a potential IndexError ([2c7b59c](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/2c7b59c9053024a29c8c3300534cb39b6ef6c53d))
+* revising overall indentation levels ([a389ba3](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/a389ba3bbe3414138b13b067f3aa66cc9fbede02))
+
+
+### Tests
+
+* adjusting indexing according to the column modifications in importf.py "import_entries" function ([924475b](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/924475b8d51d4d04625ab636fe78a4c5b3c6059b))
+* check behaviour when the user retrieves all fields ([91689c3](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/91689c333f84f53f5269ad8d511cd0b6108e94cb))
+* correcting a "console wrapping " issue in test_import_entries_success ([870167f](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/870167f4c32b2cc44f72f0080cedce1f3c5620e1))
+* create mock_db_setup for mocking the database connection for password validation ([707e43b](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/707e43b746dad303ac179a0f3f8dde50a6d13493))
+* create pytest fixture that sets up a valid password hash and device secret in the mock DB ([fc55fd9](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/fc55fd9542f5d43a09ac5e4d295969353219eab8))
+* fully renewing the test suite for pm.py, starting from the imports ([a31a7c8](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/a31a7c803f9521a9dfd426a0579c84c1b7b1b130))
+* handling console wrapping in test_importf.py ([a4a6d4c](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/a4a6d4c68d3f49ba89cd160f87fbe7db71da8311))
+* implement cli test when password is successfully passed ([eb1bb98](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/eb1bb980c9591137e7c5a321a6f0fe498b51ff2e))
+* implement cli test when the query has one missing argument (password) ([eee6e5a](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/eee6e5af3f4fd5f78dce660033362480cdf1f06f))
+* implement test for triggering policy with short password input ([e6b5de3](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/e6b5de38da2806af6b4897b0bf222937e3606c3f))
+* implement test to check behaviour when the user inputs no search fields at all ([4c7b35d](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/4c7b35d77906d04e0b12d0fcfa607bac2e2f3f08))
+* implement test to check behaviour when the user provides the correct password ([e3d6724](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/e3d672445f1ced458fe4b2f7ea6fdc9d054517f0))
+* implement test to check behaviour when the user wants to retrieve specific fields ([16c63f8](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/16c63f8c4374aa622778d1b0b7b6d3d2c554403d))
+* implement test to check cli behaviour when the user attempts to import a file path but the file -f is missing  ([e27604d](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/e27604d9e52838a1d888032beac9d611555586f2))
+* implement test to check cli behaviour when the user attempts to modify fields but misses the ID  ([b8d36b2](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/b8d36b2bbfc14f4483f2c4195394efc240d23410))
+* implement test to check cli behaviour when the user attempts to remove fields, but misses one required field (ID) ([42d9141](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/42d9141ba8d9909cdf436d28216b9f1e4af2be6b))
+* implement test to check cli behaviour when the user successfully exports a file path ([e20c984](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/e20c9849126adadeacd3ba8d346f6d1ac34e28db))
+* implement test to check cli behaviour when there's successful entry deletion ([7456559](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/745655928ef3ccb33d1e98886f858a764601b3bb))
+* implement test to check cli behaviour when user successfully modifies fields ([7a2cd9a](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/7a2cd9a46d0c72c2c36e44d7de976a0a6aef596f))
+* implement test to check if pm.py con triggers the config() function ([21179cf](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/21179cffa00a014140d335e243232c01c1b7842d))
+* implement test to check if pm.py del triggers the delete() function ([b1effbe](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/b1effbe5782b3002707d9ff82dc6217cedcbff2c))
+* implement test to check if pm.py recon triggers the reconfig() function ([6c9eb9a](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/6c9eb9a6a7adb6588e043ba177fb0d3d41a07579))
+* implement test to check policy trigger when user inputs different valid-format password than the stored hash ([f8e8cd3](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/f8e8cd3a1ea12cdaea91496f133dbf62b5fab64a))
+* implement test to verify cli behaviour when the user successfully imports a valid file path ([97a43f0](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/97a43f04628a5c664f67eebb32710a990e812286))
+
+
+### Refactoring
+
+* adding imports needed to renew the codebase for pm.py ([7a55640](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/7a5564042aaed9cddbf61d9469be3ca191abdf66))
+* changing standard output messages content in inputAndValidateMasterPassword() ([adf20c5](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/adf20c5763cfba65f652807ba1cf6fc5274870ea))
+* excluding the ID column from the INSERT query in import_entries ([2543df6](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/2543df6949f62ad11ea750d765b53074334f6907))
+* safety check addition for the search dictionary in the extract branch of the main() function ([8b78743](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/8b78743d2bd2c7ca34c8ddaf6d569ab5d9be3ea9))
+
 ## [1.7.12](https://github.com/unibo-dtm-se-2425-PROtect/artifact/compare/1.7.11...1.7.12) (2026-01-12)
 
 
