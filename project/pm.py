@@ -58,7 +58,16 @@ def inputAndValidateMasterPassword():
 	cursor = db.cursor()
 	query = "SELECT * FROM PROtect.secrets"
 	cursor.execute(query)
-	result = cursor.fetchall()[0]
+	results = cursor.fetchall() #check if the database is configured
+
+	if not results:
+        printc("[red][!] Database not configured! Run 'pm.py con' first.[/red]")
+        db.close()
+        return None
+
+	result = results[0]
+    db.close()
+	
 	if hashed_mp != result[0]:
 		printc("[red][!] WRONG! [/red]")
 		return None
