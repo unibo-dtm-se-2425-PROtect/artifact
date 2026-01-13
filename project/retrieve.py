@@ -16,56 +16,65 @@ def retrieveEntries(mp, ds, search, decryptPassword = False):
     db = dbconfig()
     cursor = db.cursor(dictionary=True)
 
-    query = "" #two cases to be considered: the user might either query the database without specifying any search field, or doing it instead.
+    try: 
+        #build the query
+        if not search:
+            query = "SELECT * FROM PROtect.entries"
+            cursor.execute(query)
+        else: 
+            conditions=[]
+            values=[]
+            for field, value in search.items():
+                conditions.append(f"{field}=%s")
+                values.append(value)
+            query=f"SELECT * FROM PROtect.entries WHERE {' AND '.join(conditions)}"
+            cursor.execute(query, tuple(values))
+    
+        results = cursor.fetchall()
+        
+        if not results:
+            printc("[yellow][-][/yellow] No results for the search")
+            return
 
-    if not search:
-        query = "SELECT * FROM PROtect.entries"
-        cursor.execute(query)
-    else: 
-        conditions=[]
-        values=[]
-        for field, value in search.items():
-            conditions.append(f"{field}=%s")
-            values.append(value)
-        query=f"SELECT * FROM PROtect.entries WHERE {' AND '.join(conditions)}"
-        cursor.execute(query, tuple(values))
+        #handling decryption logic
+        if decryptPassword:
+            if len(results)==1:
+                try: 
+                    
+                    mk=computeMasterKey(mp,ds)
+                    decrypted=AES256util.decrypt(mk.hex(), results[0]["Password"], keyType="hex").decode()
+                    pyperclip.copy(decrypted)
+                    printc("[green][+][/green] Password copied to clipboard".format(results[0].get("Site", "Unknown")))
+                except Exception as e:
+                    printc("[red][!] Decryption failed. Data might be corrupted.[/red]")
+            else:
+                printc("[yellow][!] Multiple results found. Please narrow your search, like using more filters, to copy a password.[/yellow]")
+        
+        #handling the columns of the results UI table
+        table = Table(title="Results")
+        table.add_column("ID")
+        table.add_column("Site")
+        table.add_column("URL")
+        table.add_column("Email")
+        table.add_column("Username")
+        table.add_column("Password") #never show plaintext by default
+        
+        
+        #Fill the table with masked passwords   
+        for row in results: 
+            table.add_row(
+                str(row.get("ID", "")), 
+                row.get("Site", ""), 
+                row.get("URL", ""), 
+                row.get("Email", ""), 
+                row.get("Username", ""), 
+                "{hidden}"
+            )
+        
+        Console().print(table)
 
-    results = cursor.fetchall()
-    if not results:
-        printc("[yellow][-][/yellow] No results for the search")
+    finally:
+        #ensure the connection is closed even if an error occurs above
         db.close()
-        return
-
-    #handling the columns of the results table
-    table = Table(title="Results")
-    table.add_column("ID")
-    table.add_column("Site")
-    table.add_column("URL")
-    table.add_column("Email")
-    table.add_column("Username")
-    table.add_column("Password") #never show plaintext by default
-    
-    if decryptPassword and len(results)==1:
-        mk=computeMasterKey(mp,ds)
-        mk_hex=mk.hex()
-        decrypted=AES256util.decrypt(mk_hex, results[0]["Password"], keyType="hex").decode()
-        pyperclip.copy(decrypted)
-        printc("[green][+][/green] Password copied to clipboard")
-    
-    #Fill the table with masked passwords
-    #for row in results: 
-        #table.add_row(str(row["ID"]), row["Site"], row("URL", ""), row.get("Email", ""), row.get["Username"], "{hidden}")
-
-    for row in results: 
-        table.add_row(
-            str(row.get("ID", "")), 
-            row.get("Site", ""), 
-            row.get("URL", ""), 
-            row.get("Email", ""), 
-            row.get("Username", ""), 
-            "{hidden}"
-        )
-    
-    Console().print(table)
-    db.close()
+        
     return
