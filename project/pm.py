@@ -73,7 +73,8 @@ def inputAndValidateMasterPassword():
 		printc("[red][!] WRONG! [/red]")
 		return None
 
-	return [mp,result[1]]
+	#retrieve the deviceSecret, at index 3, which is needed for AES encryption/decryption
+	return [mp,result[3]]
 
 
 def main():
