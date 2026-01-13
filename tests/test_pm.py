@@ -66,3 +66,13 @@ def test_cli_add_success(mock_add, valid_auth_setup):
         pm.main()
         
     mock_add.assert_called_with("ValidPass1!", "valid_ds", "Site", "url", "mail", "user", "pass")
+
+@patch("project.pm.add.addEntry")
+def test_cli_add_missing_args(mock_add, capsys):
+    #missing password (-p)
+    test_args = ["pm.py", "add", "-s", "Site", "-l", "user"]
+    with patch.object(sys, 'argv', test_args):
+        pm.main()
+    
+    mock_add.assert_not_called()
+    assert "are required" in capsys.readouterr().out
