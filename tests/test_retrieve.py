@@ -35,12 +35,22 @@ def test_query_without_search_executes_select_all(fake_db, fake_cursor):
 
 def test_query_with_search_builds_where_clause(fake_db, fake_cursor):
     with patch('project.retrieve.dbconfig', return_value=fake_db):
-        retrieve.retrieveEntries(b'mp', b'ds', search={'site':'example','username':'alice'}, decryptPassword=False)
-    # verify the SELECT with WHERE clause was executed at least once
-    expected = "SELECT * FROM PROtect.entries WHERE site=%s AND username=%s"
-    assert any(call_args[0][0] == expected or expected in call_args[0][0] for call_args in fake_cursor.execute.call_args_list)
-    # assert that the tuple below was used as parameters to an execute call
-    assert any(call_args[0][1] == ('example','alice') for call_args in fake_cursor.execute.call_args_list if len(call_args[0]) > 1)
+        retrieve.retrieveEntries('mp', 'ds', search={'site':'example','username':'alice'}, decryptPassword=False)
+
+    #verify dictionary cursor was requested
+    fake_db.cursor.assert_called_with(dictionary=True)
+
+    #verify SQL structure (order of keys in dict might vary, so we check logic)
+    args = fake_cursor.execute.call_args
+    sql = args[0][0]
+    params = args[0][1]
+
+    #verify that the SQL contains the expected WHERE clauses and parameters
+    assert "SELECT * FROM PROtect.entries WHERE" in sql
+    assert "site=%s" in sql
+    assert "username=%s" in sql
+    assert "example" in params
+    assert "alice" in params
     fake_db.close.assert_called_once()
 
 def test_multiple_results_shows_table_and_hides_password(fake_db, fake_cursor):
