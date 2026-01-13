@@ -197,3 +197,12 @@ def test_cli_export_success(mock_export, valid_auth_setup):
         pm.main()
         
     mock_export.assert_called_with("out.csv", "ValidPass1!", "valid_ds")
+
+
+#Configuration tests
+
+@patch("project.pm.config")
+def test_cli_configure(mock_config):
+    with patch.object(sys, 'argv', ["pm.py", "con"]):
+        pm.main()
+    mock_config.assert_called_once()
