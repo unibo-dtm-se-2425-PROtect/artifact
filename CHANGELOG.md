@@ -1,3 +1,32 @@
+## [1.8.0](https://github.com/unibo-dtm-se-2425-PROtect/artifact/compare/1.7.13...1.8.0) (2026-01-19)
+
+
+### Features
+
+* random feat to see if version on PyPi updates with these changes ([a38ffef](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/a38ffef7fbbf609a6eec19ca78b487c1c26dc3ac))
+
+
+### Tests
+
+* correcting output message mismatch with pm.py in test_password_policy_failures ([e9d1275](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/e9d127566134b120a61dcccf22d5aebe6e74764f))
+* correcting various small mismatches in output messages with pm.py ([fdb50c9](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/fdb50c90ee3d8a7cfc23e15288c7cf9872ee61e3))
+* fixing cursor.fetchone vs cursor.fetchall discrepancy with pm.py in valid_auth_setup ([09460cb](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/09460cb075b4106553aad3f7a7a262d004291899))
+* fixing output message mismatch with pm.py in test_master_password_wrong_hash ([311b615](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/311b615b1a05c140d726a029b511aa2dcbc9f9b6))
+* further syntactical fix related to previous cursor.fetchall modification ([343236c](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/343236c212a652435bb068bd2741eac2aecc3e0e))
+* making some syntax and structure modifications to test_multiple_results_shows_table_and_hides_password ([9d2831e](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/9d2831e2d87b22ff41ddcd33a58291da027213a3))
+* modifying syntax and behaviour of function test_single_result_decrypts_and_copies ([1b16245](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/1b16245a8f21adb6f769b411e57f46904356a21f))
+* modifying syntax in test_query_without_search_executes_select_all ([9f01880](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/9f01880c9f963536bd56ab82d4f43e8caae6dee9))
+* modifying the structure and syntax of test_query_with_search_builds_where_clause ([9d22aba](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/9d22aba026bc5f0ac955e5fa09961a760f4f8f4f))
+* modifying the syntax and the behaviour of the test_multiple_results_decrypt_true_warns_and_does_not_decrypt function ([14382eb](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/14382eb9537ffd317aee35e0dc96599da6af3481))
+* turning test_result_with_missing_columns_raises into test_missing_data_columns_handled_gracefully to avoid app crash ([a3b2e6a](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/a3b2e6a820d699ba8ba647e8f56656b26c4341e0))
+* update message syntax in test_no_results_returns_and_closes_db ([5ffdf67](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/5ffdf6723d63599d79adc799be1f8e4696753f32))
+* updating variable name in test_multiple_results_shows_table_and_hides_password ([d3c9369](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/d3c9369a10725c2ab5295ca8e4a624ee0d181ed6))
+
+
+### Refactoring
+
+* modifying the retrieveEntries function so it handles cases where mutliple resutls are found ([5d0f718](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/5d0f7182ab22ce73035d078c88b98bb7be3fe575))
+
 ## [1.7.13](https://github.com/unibo-dtm-se-2425-PROtect/artifact/compare/1.7.12...1.7.13) (2026-01-13)
 
 
