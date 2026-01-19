@@ -29,18 +29,14 @@ def format_git_describe_version(version):
 
 
 def get_version_from_git():
+    if version_file.exists():
+        return version_file.read_text().strip()
     try:
         process = subprocess.run(["git", "describe", "--tags"], cwd=str(here), check=True, capture_output=True)
         version = process.stdout.decode('utf-8').strip()
-        version = format_git_describe_version(version)
-        with version_file.open('w') as f:
-            f.write(version)
-        return version
+        return format_git_describe_version(version)
     except subprocess.CalledProcessError:
-        if version_file.exists():
-            return version_file.read_text().strip()
-        else:
-            return '0.1.0'
+        return '0.1.0'
 
 
 version = get_version_from_git()
