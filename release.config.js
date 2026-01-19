@@ -1,6 +1,7 @@
 var dryRun = (process.env.RELEASE_DRY_RUN || "false").toLowerCase() === "true";
 
 var publishCmd = `
+rm -rf dist/
 echo \${nextRelease.version} > VERSION
 python -m build
 python -m twine upload dist/*
