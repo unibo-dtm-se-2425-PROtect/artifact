@@ -1,3 +1,11 @@
+## [1.9.1](https://github.com/unibo-dtm-se-2425-PROtect/artifact/compare/1.9.0...1.9.1) (2026-01-23)
+
+
+### Bug Fixes
+
+* add master password verification to copy_password action ([d31e926](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/d31e9266388b9b2401f31bf4af975720871cf7e2))
+* add verification of master password for show command ([40f45d0](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/40f45d00d2dbd01c7f03542334acdd16dbe758f4))
+
 ## [1.9.0](https://github.com/unibo-dtm-se-2425-PROtect/artifact/compare/1.8.0...1.9.0) (2026-01-19)
 
 
