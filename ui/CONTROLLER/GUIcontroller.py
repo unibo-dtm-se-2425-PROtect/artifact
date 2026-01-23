@@ -85,6 +85,8 @@ class PasswordManagerController:
         selected=self.view.get_selected_entry()
         if not selected:
             return
+        if not self.verify_on_action():
+            return
         ID=selected[0]
         pwd=self.model.get_password(ID, self.masterkey)
         if pwd:
