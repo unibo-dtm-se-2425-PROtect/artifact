@@ -1,3 +1,10 @@
+## [1.9.2](https://github.com/unibo-dtm-se-2425-PROtect/artifact/compare/1.9.1...1.9.2) (2026-01-23)
+
+
+### Bug Fixes
+
+* revise part of delete_entry that did not ask for master password before operation ([553a3fa](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/553a3fa385ac62628cd7a254a939bcca0081fe6a))
+
 ## [1.9.1](https://github.com/unibo-dtm-se-2425-PROtect/artifact/compare/1.9.0...1.9.1) (2026-01-23)
 
 
