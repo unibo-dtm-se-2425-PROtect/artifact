@@ -1,3 +1,10 @@
+## [1.9.0](https://github.com/unibo-dtm-se-2425-PROtect/artifact/compare/1.8.0...1.9.0) (2026-01-19)
+
+
+### Features
+
+* another fake feat to try release ([8f8eef5](https://github.com/unibo-dtm-se-2425-PROtect/artifact/commit/8f8eef5ef852cb49095f35f1a933e4a921bdf430))
+
 ## [1.8.0](https://github.com/unibo-dtm-se-2425-PROtect/artifact/compare/1.7.13...1.8.0) (2026-01-19)
 
 
