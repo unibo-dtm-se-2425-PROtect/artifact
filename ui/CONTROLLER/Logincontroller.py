@@ -31,6 +31,7 @@ class Logincontroller:
         mp_ds_pair=verify_master_password(username, password)
         if mp_ds_pair:
             #Success
+            messagebox.showinfo("Login Successful", f"Welcome back, {username}!")
             mp, ds=mp_ds_pair
             self.model.close()
             self.view.pack_forget()
